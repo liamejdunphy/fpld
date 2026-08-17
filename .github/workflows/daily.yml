@@ -42,7 +42,7 @@ jobs:
           cp -f data/players.json ~/.fpld/players.json 2>/dev/null || true
 
       - name: Run daily brief
-        run: python3 fpld_brief.py --print
+        run: python3 fpld_brief.py --print --json
 
       - name: Sync league data
         run: python3 fpld_league.py --sync --report --quiet || true
@@ -77,6 +77,7 @@ jobs:
           cp -f ~/.fpld/xpts_predictions.json data/xpts_predictions.json 2>/dev/null || true
           cp -f ~/.fpld/state.json data/state.json 2>/dev/null || true
           cp -f ~/.fpld/players.json data/players.json 2>/dev/null || true
+          cp -f ~/.fpld/brief.json data/brief.json 2>/dev/null || true
 
           git add data/
           git diff --cached --quiet || git commit -m "Daily brief $(date +%Y-%m-%d)"

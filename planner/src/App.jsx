@@ -19,22 +19,22 @@ const SANS = 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
 const POS = ["GK", "DEF", "MID", "FWD"];
 const LIMITS = { GK: 2, DEF: 5, MID: 5, FWD: 3 };
 
-const SEED_SQUAD = [
+const FALLBACK_SQUAD = [
   { id: 1, name: "Kinsky", pos: "GK", club: "TOT", price: 4.5 },
-  { id: 2, name: "Dúbravka", pos: "GK", club: "TOT", price: 4.0 },
-  { id: 3, name: "Ben White", pos: "DEF", club: "ARS", price: 5.5 },
-  { id: 4, name: "Maguire", pos: "DEF", club: "MUN", price: 5.0 },
-  { id: 5, name: "Ballard", pos: "DEF", club: "SUN", price: 5.0 },
-  { id: 6, name: "De Cuyper", pos: "DEF", club: "BHA", price: 4.5 },
-  { id: 7, name: "O'Shea", pos: "DEF", club: "IPS", price: 4.0 },
-  { id: 8, name: "Bruno Fernandes", pos: "MID", club: "MUN", price: 12.0 },
+  { id: 2, name: "Forster", pos: "GK", club: "BOU", price: 4.0 },
+  { id: 3, name: "Gabriel", pos: "DEF", club: "ARS", price: 8.0 },
+  { id: 4, name: "Shaw", pos: "DEF", club: "MUN", price: 4.5 },
+  { id: 5, name: "Kayode", pos: "DEF", club: "BRE", price: 4.5 },
+  { id: 6, name: "Thomas", pos: "DEF", club: "COV", price: 4.0 },
+  { id: 7, name: "Egan", pos: "DEF", club: "HUL", price: 4.0 },
+  { id: 8, name: "B.Fernandes", pos: "MID", club: "MUN", price: 12.0 },
   { id: 9, name: "Mbeumo", pos: "MID", club: "BRE", price: 8.0 },
-  { id: 10, name: "Tzolis", pos: "MID", club: "BRU", price: 6.5 },
+  { id: 10, name: "Dewsbury-Hall", pos: "MID", club: "EVE", price: 6.5 },
   { id: 11, name: "Ødegaard", pos: "MID", club: "ARS", price: 6.5 },
-  { id: 12, name: "D. Gómez", pos: "MID", club: "BHA", price: 5.0 },
+  { id: 12, name: "Slater", pos: "MID", club: "HUL", price: 4.5 },
   { id: 13, name: "Haaland", pos: "FWD", club: "MCI", price: 15.5 },
-  { id: 14, name: "João Pedro", pos: "FWD", club: "BHA", price: 7.5 },
-  { id: 15, name: "Calvert-Lewin", pos: "FWD", club: "LEE", price: 6.0 },
+  { id: 14, name: "João Pedro", pos: "FWD", club: "CHE", price: 7.5 },
+  { id: 15, name: "Calvert-Lewin", pos: "FWD", club: "???", price: 6.0 },
 ];
 
 const blankGW = () => ({ moves: [], captain: "", chip: "", note: "" });
@@ -90,10 +90,30 @@ export default function App() {
       setStartFT(d.startFT); setPlan(d.plan);
       setBehind(d.behind ?? 0); setLeft(d.left ?? 38);
       setStatus("Plan loaded");
+      setReady(true);
     } else {
-      setStatus("New plan \u2014 seeded with your GW1 squad");
+      // Try to auto-populate from pipeline data
+      fetch("./data/brief.json")
+        .then(r => r.ok ? r.json() : null)
+        .then(brief => {
+          if (brief && brief.squad && brief.squad.length === 15) {
+            const squad = brief.squad.map(p => ({
+              id: p.id, name: p.name, pos: p.pos,
+              club: p.club, price: p.price,
+              xpts: p.xpts_horizon ?? p.xpts ?? null,
+            }));
+            setSquad(squad);
+            setStartGW(brief.gw || 1);
+            setBehind(brief.dial?.behind ?? 0);
+            setLeft(brief.dial?.left ?? 38);
+            setStatus(`Auto-populated from brief (${brief.date})`);
+          } else {
+            setStatus("New plan — using fallback squad");
+          }
+        })
+        .catch(() => setStatus("New plan — using fallback squad"))
+        .finally(() => setReady(true));
     }
-    setReady(true);
   }, []);
 
   useEffect(() => {

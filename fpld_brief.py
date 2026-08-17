@@ -587,6 +587,7 @@ def main():
     ap.add_argument("--init", action="store_true", help="write a starter config.json")
     ap.add_argument("--print", dest="show", action="store_true", help="print the brief")
     ap.add_argument("--find", metavar="NAME", help="look up how FPL spells a player")
+    ap.add_argument("--json", action="store_true", help="write structured brief.json for the planner")
     ap.add_argument("--fixtures", action="store_true", help="full-season fixture difficulty grid")
     ap.add_argument("--home", help="override the data directory")
     a = ap.parse_args()
@@ -732,6 +733,57 @@ def main():
     print(f"Wrote {out}")
     if a.show:
         print("\n" + text)
+
+    if a.json:
+        xpts_data, xpts_mature = load_xpts()
+        H = cfg["horizon"]
+        gw = model["gw"]
+
+        def player_json(p):
+            entry = {"id": p["id"], "name": p["name"], "pos": p["pos"],
+                     "club": p["club"], "price": p["price"], "form": p["form"],
+                     "ppg": p["ppg"], "xgi90": p["xgi90"], "owned": p["owned"],
+                     "status": p["status"], "fdr": p["fdr"],
+                     "fixtures": [{"gw": f["gw"], "opp": f["opp"], "home": f["home"],
+                                   "fdr": f["fdr"]} for f in p["run"][:H]],
+                     "score": score(p, H), "captain_score": captain_score(p)}
+            if xpts_data:
+                pred = xpts_data.get(p["id"])
+                if pred:
+                    entry["xpts"] = pred.get("xpts", 0)
+                    entry["xpts_horizon"] = pred.get("xpts_horizon", 0)
+            return entry
+
+        # Risk dial
+        behind, left = 0, 38 - gw + 1
+        me = next((s for s in standings if s.get("entry") == cfg["team_id"]), None)
+        leader = standings[0] if standings else None
+        if me and leader:
+            behind = leader.get("total", 0) - me.get("total", 0)
+        mode, gloss = dial(behind, left)
+
+        # Captain shortlist
+        caps = sorted([p for p in squad if p["status"] == "a"],
+                      key=lambda x: captain_score(x), reverse=True)[:4]
+
+        brief_json = {
+            "date": datetime.now().strftime("%Y-%m-%d"),
+            "gw": gw,
+            "deadline": model.get("deadline", ""),
+            "dial": {"mode": mode, "behind": behind, "left": left, "gloss": gloss},
+            "xpts_mature": xpts_mature,
+            "squad": [player_json(p) for p in squad],
+            "captain_shortlist": [player_json(c) for c in caps],
+            "all_players": {str(p["id"]): {"name": p["name"], "pos": p["pos"],
+                            "club": p["club"], "price": p["price"],
+                            "score": score(p, H)}
+                            for p in model["players"].values()
+                            if p["status"] == "a" and p["minutes"] >= 60},
+        }
+
+        json_out = HOME / "brief.json"
+        json_out.write_text(json.dumps(brief_json, indent=1))
+        print(f"Wrote {json_out}")
 
 
 if __name__ == "__main__":

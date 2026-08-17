@@ -13,12 +13,12 @@ Tick each off as you go. Estimated total: ~15 minutes.
 python3 fpld_brief.py --print
 ```
 
-- [ ] Prints a brief with today's date
-- [ ] Shows 15/15 matched in the source line
-- [ ] Squad table shows the new squad (Gabriel, Shaw, Kayode, DWH, etc.)
-- [ ] Captaincy shortlist shows 3-4 players
-- [ ] Footer mentions xPts maturity status (immature pre-season)
-- [ ] File written to `~/.fpld/briefs/YYYY-MM-DD.md`
+- [x] Prints a brief with today's date
+- [x] Shows 15/15 matched in the source line
+- [x] Squad table shows the new squad (Gabriel, Shaw, Kayode, DWH, etc.)
+- [x] Captaincy shortlist shows 3-4 players
+- [x] Footer mentions xPts maturity status (immature pre-season)
+- [x] File written to `~/.fpld/briefs/YYYY-MM-DD.md`
 
 ### 1b. Player lookup
 
@@ -26,8 +26,8 @@ python3 fpld_brief.py --print
 python3 fpld_brief.py --find haaland
 ```
 
-- [ ] Finds Haaland in the local player map
-- [ ] Shows position, club, price
+- [x] Finds Haaland in the local player map
+- [x] Shows position, club, price
 
 ### 1c. Fixture grid
 
@@ -35,8 +35,8 @@ python3 fpld_brief.py --find haaland
 python3 fpld_brief.py --fixtures
 ```
 
-- [ ] Prints a full-season FDR grid for all 20 teams
-- [ ] Saved to `~/.fpld/fixtures.md`
+- [x] Prints a full-season FDR grid for all 20 teams
+- [x] Saved to `~/.fpld/fixtures.md`
 
 ### 1d. League
 
@@ -44,8 +44,8 @@ python3 fpld_brief.py --fixtures
 python3 fpld_league.py --peek
 ```
 
-- [ ] Shows your league name and member count
-- [ ] No errors (league data won't exist until GW1 is scored)
+- [x] Shows your league name and member count
+- [x] No errors (league data won't exist until GW1 is scored)
 
 ### 1e. xPts model
 
@@ -53,12 +53,12 @@ python3 fpld_league.py --peek
 python3 fpld_xpts.py --pull --train --predict
 ```
 
-- [ ] Pull completes (may say "All players already pulled today")
-- [ ] Training prints per-position stats (GK, DEF, MID, FWD)
-- [ ] Maturity line shows `IMMATURE` (0 real samples pre-season)
-- [ ] Predictions table prints top 20 players
-- [ ] `~/.fpld/xpts_model.json` contains a `"maturity"` key with `"mature": false`
-- [ ] `~/.fpld/xpts_predictions.json` contains a `"_maturity"` key
+- [x] Pull completes (may say "All players already pulled today")
+- [x] Training prints per-position stats (GK, DEF, MID, FWD)
+- [x] Maturity line shows `IMMATURE` (0 real samples pre-season)
+- [x] Predictions table prints top 20 players
+- [x] `~/.fpld/xpts_model.json` contains a `"maturity"` key with `"mature": false`
+- [x] `~/.fpld/xpts_predictions.json` contains a `"_maturity"` key
 
 ---
 
@@ -68,14 +68,14 @@ python3 fpld_xpts.py --pull --train --predict
 
 Go to: **Actions** → *FPL daily brief* → **Run workflow**
 
-- [ ] Workflow completes green
-- [ ] A commit appears with message "Daily brief YYYY-MM-DD"
-- [ ] `data/briefs/YYYY-MM-DD.md` exists in the commit
-- [ ] `data/xpts.db` is updated in the commit
-- [ ] `data/xpts_model.json` is updated in the commit
-- [ ] A GitHub Issue is created with label `daily-brief`
-- [ ] The Issue body contains the full brief (squad table, proposals, captain)
-- [ ] You receive a notification (check email or GitHub mobile app)
+- [x] Workflow completes green
+- [x] A commit appears with message "Daily brief YYYY-MM-DD"
+- [x] `data/briefs/YYYY-MM-DD.md` exists in the commit
+- [x] `data/xpts.db` is updated in the commit
+- [x] `data/xpts_model.json` is updated in the commit
+- [x] A GitHub Issue is created with label `daily-brief`
+- [x] The Issue body contains the full brief (squad table, proposals, captain)
+- [x] You receive a notification (check email or GitHub mobile app)
 
 ### 2b. Deadline workflow
 

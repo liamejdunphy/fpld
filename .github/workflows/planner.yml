@@ -3,7 +3,7 @@ name: Deploy planner to GitHub Pages
 on:
   push:
     branches: [main]
-    paths: [planner/**]
+    paths: [planner/**, data/brief.json]
   workflow_dispatch:
 
 permissions:
@@ -27,6 +27,12 @@ jobs:
           cache-dependency-path: planner/package-lock.json
       - run: npm ci
         working-directory: planner
+      - name: Copy pipeline data for auto-populate
+        run: |
+          mkdir -p planner/public/data
+          cp -f data/brief.json planner/public/data/ 2>/dev/null || true
+          cp -f data/xpts_predictions.json planner/public/data/ 2>/dev/null || true
+          cp -f data/players.json planner/public/data/ 2>/dev/null || true
       - run: npx vite build
         working-directory: planner
       - uses: actions/upload-pages-artifact@v3
