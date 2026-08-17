@@ -89,11 +89,11 @@ jobs:
         run: |
           # Close ALL open daily-brief issues (new one replaces them)
           gh issue list --label "daily-brief" --state open --json number --jq '.[].number' \
-            | xargs -I {} gh issue close {} --comment "Superseded by new brief." 2>/dev/null || true
+            | xargs -I {} gh issue close {} 2>/dev/null || true
           # Close deadline-pack issues older than 3 days
           gh issue list --label "deadline-pack" --state open --json number,createdAt \
             --jq '.[] | select(.createdAt < (now - 259200 | strftime("%Y-%m-%dT%H:%M:%SZ"))) | .number' \
-            | xargs -I {} gh issue close {} --comment "Deadline passed." 2>/dev/null || true
+            | xargs -I {} gh issue close {} 2>/dev/null || true
 
       - name: Create GitHub Issue with brief
         env:
