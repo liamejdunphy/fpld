@@ -5,11 +5,10 @@ const C = {
   bg: "#f8f9fa",
   card: "#ffffff",
   border: "#e2e6ea",
-  accent: "#37003c",       // PL purple
+  accent: "#37003c",
   accentLight: "#f0e6f2",
-  green: "#00ff87",        // PL green
+  green: "#00ff87",
   greenDark: "#02894e",
-  cyan: "#04f5ff",
   red: "#e63946",
   yellow: "#f4a300",
   text: "#1a1a2e",
@@ -18,82 +17,54 @@ const C = {
 
 const SANS = 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
 const MONO = 'ui-monospace, "SF Mono", Menlo, Consolas, monospace';
-
-const POS = ["GK", "DEF", "MID", "FWD"];
-const LIMITS = { GK: 2, DEF: 5, MID: 5, FWD: 3 };
 const POS_COLOR = { GK: "#f4a300", DEF: "#04f5ff", MID: "#00ff87", FWD: "#e63946" };
 
-const FALLBACK_SQUAD = [
-  { id: 1, name: "Kinsky", pos: "GK", club: "TOT", price: 4.5 },
-  { id: 2, name: "Forster", pos: "GK", club: "BOU", price: 4.0 },
-  { id: 3, name: "Gabriel", pos: "DEF", club: "ARS", price: 8.0 },
-  { id: 4, name: "Shaw", pos: "DEF", club: "MUN", price: 4.5 },
-  { id: 5, name: "Kayode", pos: "DEF", club: "BRE", price: 4.5 },
-  { id: 6, name: "Thomas", pos: "DEF", club: "COV", price: 4.0 },
-  { id: 7, name: "Egan", pos: "DEF", club: "HUL", price: 4.0 },
-  { id: 8, name: "B.Fernandes", pos: "MID", club: "MUN", price: 12.0 },
-  { id: 9, name: "Mbeumo", pos: "MID", club: "BRE", price: 8.0 },
-  { id: 10, name: "Dewsbury-Hall", pos: "MID", club: "EVE", price: 6.5 },
-  { id: 11, name: "\u00d8degaard", pos: "MID", club: "ARS", price: 6.5 },
-  { id: 12, name: "Slater", pos: "MID", club: "HUL", price: 4.5 },
-  { id: 13, name: "Haaland", pos: "FWD", club: "MCI", price: 15.5 },
-  { id: 14, name: "Jo\u00e3o Pedro", pos: "FWD", club: "CHE", price: 7.5 },
-  { id: 15, name: "Calvert-Lewin", pos: "FWD", club: "???", price: 6.0 },
-];
+const MODE_META = {
+  SHIELD: { color: "#0077b6" },
+  SAFE: { color: C.greenDark },
+  BALANCED: { color: C.yellow },
+  AGGRESSIVE: { color: "#e76f00" },
+  SWING: { color: C.red },
+  "SEASON OVER": { color: C.dim },
+};
 
-const blankGW = () => ({ moves: [], captain: "", chip: "", note: "" });
-const SEED_PLAN = [blankGW(), blankGW(), blankGW(), blankGW(), blankGW()];
+const KEY = "fpl:planner:v3";
+const TUTORIAL_KEY = "fpl:planner:tutorial_seen_v2";
 
-const KEY = "fpl:planner:v2";
-const TUTORIAL_KEY = "fpl:planner:tutorial_seen";
-
-const TUTORIAL_STEPS = [
-  {
-    title: "Your risk dial",
-    body: "Enter how many points you're behind the league leader and how many gameweeks are left. The mode tells you how aggressive to be with transfers and captaincy.",
-  },
-  {
-    title: "Set your starting position",
-    body: "Enter the first gameweek you're planning from, your bank balance, and how many free transfers you have. These carry forward through your 5-GW plan.",
-  },
-  {
-    title: "Edit your squad",
-    body: "Tap the Squad button to expand it. Your squad auto-populates from the daily brief pipeline. Edit names, clubs, and prices if anything is wrong.",
-  },
-  {
-    title: "Plan transfers",
-    body: "Each card is a gameweek. Tap '+ Add transfer' to plan a move. Pick who goes out from the dropdown, type who comes in. FTs roll automatically \u2014 extra moves cost \u22124 pts each.",
-  },
-  {
-    title: "Captain & chips",
-    body: "Set your captain and activate a chip for each GW. The planner validates budget, club limits, and position counts \u2014 errors show in red.",
-  },
-  {
-    title: "Export your plan",
-    body: "Hit 'Build summary' to get a text block you can paste into a GitHub issue comment. Claude reads it and gives you feedback.",
-  },
-];
-
-function load() {
+/* ─── persistence ─── */
+function loadState() {
   try { const raw = localStorage.getItem(KEY); return raw ? JSON.parse(raw) : null; }
   catch { return null; }
 }
-function save(data) {
+function saveState(data) {
   try { localStorage.setItem(KEY, JSON.stringify(data)); return true; }
   catch { return false; }
 }
 
-function modeCalc(behind, left) {
-  if (left <= 0) return { label: "SEASON OVER", color: C.dim, gloss: "No gameweeks left." };
-  if (behind < 0) return { label: "SHIELD", color: "#0077b6", gloss: "You lead. Mirror chasers, match their captain, avoid unique picks." };
-  const p = behind / left;
-  if (p <= 0.5) return { label: "SAFE", color: C.greenDark, gloss: "Template core, template captain, no hits." };
-  if (p <= 1.5) return { label: "BALANCED", color: C.yellow, gloss: "One calculated differential. Template captain unless gap is tiny." };
-  if (p <= 3) return { label: "AGGRESSIVE", color: "#e76f00", gloss: "Two or three sub-10% picks. Off-template captain when xPts close." };
-  return { label: "SWING", color: C.red, gloss: "Contrarian captain, low ownership, chips on max-variance weeks." };
-}
+/* ─── tutorial ─── */
+const TUTORIAL_STEPS = [
+  {
+    title: "What is this?",
+    body: "The planner shows your backroom staff's recommended transfer plans for the next 5 gameweeks. They're generated automatically from the daily brief.",
+  },
+  {
+    title: "Three paths",
+    body: "Toggle between Safe (minimal moves, no hits), Balanced (a few calculated moves), and Aggressive (more moves, hits if needed). Pick the path that matches your risk dial.",
+  },
+  {
+    title: "Review each gameweek",
+    body: "Each card shows what transfers happen that week, your FT balance, and any blanks or double gameweeks. Moves show xPts gain and the reason behind them.",
+  },
+  {
+    title: "Tweak the plan",
+    body: "Disagree with a move? Remove it, or add your own. The planner recalculates FT rollover, budget, and hit costs automatically.",
+  },
+  {
+    title: "Export and act",
+    body: "Hit 'Export plan' to get a text summary you can paste into a GitHub issue. Your backroom staff (Claude) reads it and confirms or challenges your decisions.",
+  },
+];
 
-/* ─── Tutorial overlay ─── */
 function Tutorial({ onClose }) {
   const [step, setStep] = useState(0);
   const s = TUTORIAL_STEPS[step];
@@ -118,42 +89,23 @@ function Tutorial({ onClose }) {
         <h3 style={{ fontSize: 18, fontWeight: 700, color: C.text, margin: "8px 0 8px", fontFamily: SANS }}>{s.title}</h3>
         <p style={{ fontSize: 14, color: C.dim, lineHeight: 1.6, margin: "0 0 20px" }}>{s.body}</p>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <button
-            onClick={() => setStep(Math.max(0, step - 1))}
-            disabled={step === 0}
-            style={{
-              background: "none", border: "none", color: step === 0 ? C.border : C.accent,
-              fontSize: 13, fontWeight: 600, cursor: step === 0 ? "default" : "pointer", padding: 0,
-            }}
-          >
+          <button onClick={() => setStep(Math.max(0, step - 1))} disabled={step === 0}
+            style={{ background: "none", border: "none", color: step === 0 ? C.border : C.accent, fontSize: 13, fontWeight: 600, cursor: step === 0 ? "default" : "pointer", padding: 0 }}>
             {"← Back"}
           </button>
           <div style={{ display: "flex", gap: 5 }}>
             {TUTORIAL_STEPS.map((_, i) => (
-              <div key={i} style={{
-                width: 8, height: 8, borderRadius: "50%",
-                background: i === step ? C.accent : C.border,
-              }} />
+              <div key={i} style={{ width: 8, height: 8, borderRadius: "50%", background: i === step ? C.accent : C.border }} />
             ))}
           </div>
           {step < TUTORIAL_STEPS.length - 1 ? (
-            <button
-              onClick={() => setStep(step + 1)}
-              style={{
-                background: C.accent, color: "#fff", border: "none", borderRadius: 6,
-                padding: "8px 16px", fontSize: 13, fontWeight: 600, cursor: "pointer",
-              }}
-            >
+            <button onClick={() => setStep(step + 1)}
+              style={{ background: C.accent, color: "#fff", border: "none", borderRadius: 6, padding: "8px 16px", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
               {"Next →"}
             </button>
           ) : (
-            <button
-              onClick={onClose}
-              style={{
-                background: C.greenDark, color: "#fff", border: "none", borderRadius: 6,
-                padding: "8px 16px", fontSize: 13, fontWeight: 600, cursor: "pointer",
-              }}
-            >
+            <button onClick={onClose}
+              style={{ background: C.greenDark, color: "#fff", border: "none", borderRadius: 6, padding: "8px 16px", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
               Got it
             </button>
           )}
@@ -163,24 +115,154 @@ function Tutorial({ onClose }) {
   );
 }
 
+/* ─── move card ─── */
+function MoveCard({ move, onRemove }) {
+  const posColor = POS_COLOR[move.out.pos] || C.dim;
+  const xptsGain = (move.in.xpts != null && move.out.xpts != null)
+    ? (move.in.xpts - move.out.xpts).toFixed(1) : null;
+  return (
+    <div style={{
+      background: C.bg, border: `1px solid ${C.border}`, borderRadius: 8,
+      padding: 12, marginBottom: 8, borderLeft: `3px solid ${posColor}`,
+    }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        <div style={{ flex: 1 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
+            <span style={{ fontSize: 10, fontWeight: 700, color: C.red, textTransform: "uppercase" }}>Out</span>
+            <span style={{ fontSize: 14, fontWeight: 600, color: C.text }}>{move.out.name}</span>
+            <span style={{ fontSize: 12, color: C.dim }}>({move.out.club})</span>
+            <span style={{ fontSize: 12, color: C.dim, fontFamily: MONO }}>{"£"}{move.out.price.toFixed(1)}</span>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <span style={{ fontSize: 10, fontWeight: 700, color: C.greenDark, textTransform: "uppercase" }}>In</span>
+            <span style={{ fontSize: 14, fontWeight: 600, color: C.text }}>{move.in.name}</span>
+            <span style={{ fontSize: 12, color: C.dim }}>({move.in.club})</span>
+            <span style={{ fontSize: 12, color: C.dim, fontFamily: MONO }}>{"£"}{move.in.price.toFixed(1)}</span>
+            {move.in.owned != null && <span style={{ fontSize: 11, color: C.dim }}>{move.in.owned.toFixed(0)}% owned</span>}
+          </div>
+        </div>
+        <div style={{ textAlign: "right", minWidth: 60 }}>
+          {xptsGain !== null && (
+            <div style={{ fontSize: 13, fontWeight: 700, fontFamily: MONO, color: parseFloat(xptsGain) > 0 ? C.greenDark : C.red }}>
+              {parseFloat(xptsGain) > 0 ? "+" : ""}{xptsGain}
+              <div style={{ fontSize: 9, fontWeight: 500, color: C.dim }}>xPts</div>
+            </div>
+          )}
+          {move.is_hit && <div style={{ fontSize: 10, fontWeight: 700, color: C.red, marginTop: 2 }}>HIT {"−4"}</div>}
+        </div>
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 6 }}>
+        <span style={{ fontSize: 11, color: C.dim, fontStyle: "italic" }}>{move.reason}</span>
+        {onRemove && (
+          <button onClick={onRemove} style={{ background: "none", border: "none", color: C.red, fontSize: 11, fontWeight: 600, cursor: "pointer", padding: 0 }}>
+            {"✕"}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ─── GW card ─── */
+function GWCard({ gwData, moves, edits, onEditChange }) {
+  const blanks = gwData.blanks || [];
+  const doubles = gwData.doubles || [];
+  const hasInfo = blanks.length > 0 || doubles.length > 0;
+  const hits = gwData.hits || 0;
+
+  return (
+    <div style={{
+      background: C.card, border: `1px solid ${C.border}`, borderRadius: 12,
+      padding: 16, marginBottom: 12, boxShadow: "0 1px 3px rgba(0,0,0,.06)",
+    }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: moves.length > 0 || hasInfo ? 12 : 0 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <span style={{
+            background: C.accent, color: C.green, fontFamily: MONO,
+            fontSize: 13, fontWeight: 800, padding: "3px 10px", borderRadius: 6,
+          }}>GW{gwData.gw}</span>
+          {gwData.rolled && <span style={{ fontSize: 12, color: C.greenDark, fontWeight: 600 }}>Roll FT</span>}
+        </div>
+        <div style={{ fontFamily: MONO, fontSize: 12, color: C.dim, display: "flex", gap: 6, alignItems: "center" }}>
+          <span>FT <b style={{ color: C.text }}>{gwData.ft_avail}</b></span>
+          <span>{"·"}</span>
+          <span>Using <b style={{ color: C.text }}>{gwData.used}</b></span>
+          {hits > 0 && <><span>{"·"}</span><span style={{ color: C.red, fontWeight: 700 }}>{hits * -4}pts</span></>}
+        </div>
+      </div>
+
+      {hasInfo && (
+        <div style={{ display: "flex", gap: 8, marginBottom: moves.length > 0 ? 10 : 0 }}>
+          {blanks.length > 0 && (
+            <span style={{ fontSize: 11, color: C.red, fontWeight: 600, background: "#fef2f2", padding: "2px 8px", borderRadius: 4 }}>
+              {"⚠"} Blank: {blanks.join(", ")}
+            </span>
+          )}
+          {doubles.length > 0 && (
+            <span style={{ fontSize: 11, color: C.greenDark, fontWeight: 600, background: "#ecfdf5", padding: "2px 8px", borderRadius: 4 }}>
+              DGW: {doubles.join(", ")}
+            </span>
+          )}
+        </div>
+      )}
+
+      {moves.map((m, i) => (
+        <MoveCard key={i} move={m} onRemove={edits ? () => edits.removeMove(gwData.gw, i) : null} />
+      ))}
+
+      {edits && (
+        <div style={{ display: "flex", gap: 8, marginTop: moves.length > 0 ? 4 : 0 }}>
+          <select style={{
+            flex: 1, background: C.bg, color: C.dim, border: `1px solid ${C.border}`,
+            borderRadius: 6, padding: "6px 8px", fontSize: 12, fontFamily: SANS,
+          }}
+            value="" onChange={e => { if (e.target.value) onEditChange(gwData.gw, "captain", e.target.value); }}>
+            <option value="">Captain...</option>
+            {(edits.squad || []).filter(p => p.status === "a").map(p => (
+              <option key={p.id} value={p.name}>{p.name}</option>
+            ))}
+          </select>
+          <select style={{
+            background: C.bg, color: C.dim, border: `1px solid ${C.border}`,
+            borderRadius: 6, padding: "6px 8px", fontSize: 12, fontFamily: SANS,
+          }}
+            value="" onChange={e => { if (e.target.value) onEditChange(gwData.gw, "chip", e.target.value); }}>
+            <option value="">Chip...</option>
+            {["Wildcard", "Free Hit", "Bench Boost", "Triple Captain"].map(c => <option key={c}>{c}</option>)}
+          </select>
+        </div>
+      )}
+
+      {edits?.gwEdits?.[gwData.gw]?.captain && (
+        <div style={{ marginTop: 6, fontSize: 12, color: C.accent, fontWeight: 600 }}>
+          {"Captain: "}{edits.gwEdits[gwData.gw].captain}
+          <button onClick={() => onEditChange(gwData.gw, "captain", "")}
+            style={{ background: "none", border: "none", color: C.dim, fontSize: 11, cursor: "pointer", marginLeft: 6 }}>{"✕"}</button>
+        </div>
+      )}
+      {edits?.gwEdits?.[gwData.gw]?.chip && (
+        <div style={{ marginTop: 4, fontSize: 12, color: C.yellow, fontWeight: 600 }}>
+          {"Chip: "}{edits.gwEdits[gwData.gw].chip}
+          <button onClick={() => onEditChange(gwData.gw, "chip", "")}
+            style={{ background: "none", border: "none", color: C.dim, fontSize: 11, cursor: "pointer", marginLeft: 6 }}>{"✕"}</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ─── main app ─── */
 export default function App() {
-  const [squad, setSquad] = useState(FALLBACK_SQUAD);
-  const [bank, setBank] = useState(0.5);
-  const [startGW, setStartGW] = useState(1);
-  const [startFT, setStartFT] = useState(1);
-  const [plan, setPlan] = useState(SEED_PLAN);
-  const [behind, setBehind] = useState(0);
-  const [left, setLeft] = useState(38);
-  const [showSquad, setShowSquad] = useState(false);
+  const [brief, setBrief] = useState(null);
+  const [path, setPath] = useState("balanced");
   const [status, setStatus] = useState("Loading...");
-  const [ready, setReady] = useState(false);
-  const [exportText, setExportText] = useState("");
   const [showTutorial, setShowTutorial] = useState(false);
+  const [exportText, setExportText] = useState("");
+  const [removedMoves, setRemovedMoves] = useState({});  // {path: {gw: [indices]}}
+  const [gwEdits, setGwEdits] = useState({});  // {gw: {captain, chip}}
 
   useEffect(() => {
-    if (!localStorage.getItem(TUTORIAL_KEY)) {
-      setShowTutorial(true);
-    }
+    if (!localStorage.getItem(TUTORIAL_KEY)) setShowTutorial(true);
   }, []);
 
   const closeTutorial = () => {
@@ -189,120 +271,137 @@ export default function App() {
   };
 
   useEffect(() => {
-    const d = load();
-    if (d) {
-      setSquad(d.squad); setBank(d.bank); setStartGW(d.startGW);
-      setStartFT(d.startFT); setPlan(d.plan);
-      setBehind(d.behind ?? 0); setLeft(d.left ?? 38);
-      setStatus("Plan loaded");
-      setReady(true);
-    } else {
-      fetch("./data/brief.json")
-        .then(r => r.ok ? r.json() : null)
-        .then(brief => {
-          if (brief && brief.squad && brief.squad.length === 15) {
-            const s = brief.squad.map(p => ({
-              id: p.id, name: p.name, pos: p.pos,
-              club: p.club, price: p.price,
-              xpts: p.xpts_horizon ?? p.xpts ?? null,
-            }));
-            setSquad(s);
-            setStartGW(brief.gw || 1);
-            setBehind(brief.dial?.behind ?? 0);
-            setLeft(brief.dial?.left ?? 38);
-            setStatus(`Auto-populated from brief (${brief.date})`);
-          } else {
-            setStatus("New plan — using fallback squad");
-          }
-        })
-        .catch(() => setStatus("New plan — using fallback squad"))
-        .finally(() => setReady(true));
+    // Load saved edits
+    const saved = loadState();
+    if (saved) {
+      if (saved.path) setPath(saved.path);
+      if (saved.removedMoves) setRemovedMoves(saved.removedMoves);
+      if (saved.gwEdits) setGwEdits(saved.gwEdits);
     }
+
+    // Fetch brief data
+    fetch("./data/brief.json")
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (data && data.plans) {
+          setBrief(data);
+          setStatus(`Brief from ${data.date}`);
+        } else if (data) {
+          setBrief(data);
+          setStatus("Brief loaded (no plans — pre-season)");
+        } else {
+          setStatus("No brief data available");
+        }
+      })
+      .catch(() => setStatus("Could not load brief data"));
   }, []);
 
+  // Save edits
   useEffect(() => {
-    if (!ready) return;
-    const t = setTimeout(() => {
-      const ok = save({ squad, bank, startGW, startFT, plan, behind, left });
-      setStatus(ok ? "Saved" : "Changes stay for this session only");
-    }, 600);
-    return () => clearTimeout(t);
-  }, [squad, bank, startGW, startFT, plan, behind, left, ready]);
+    saveState({ path, removedMoves, gwEdits });
+  }, [path, removedMoves, gwEdits]);
 
-  /* ─── compute plan steps ─── */
-  const steps = [];
-  let cur = squad.map(p => ({ ...p }));
-  let money = Number(bank) || 0;
-  let ft = Number(startFT) || 0;
-  let totalHits = 0;
+  const plan = brief?.plans?.[path];
+  const dial = brief?.dial || {};
+  const modeColor = MODE_META[dial.mode]?.color || C.dim;
 
-  plan.forEach((gw, i) => {
-    const avail = Math.min(5, ft);
-    const used = gw.moves.length;
-    const hits = Math.max(0, used - avail);
-    totalHits += hits;
-    const errs = [];
-    gw.moves.forEach(m => {
-      const idx = cur.findIndex(p => p.id === m.outId);
-      if (idx === -1) { errs.push(`${m.outName || "?"} not in squad`); return; }
-      const out = cur[idx];
-      const price = Number(m.inPrice) || 0;
-      money += out.price - price;
-      cur[idx] = { id: `n${i}-${idx}-${m.inName}`, name: m.inName || "?", pos: m.inPos || out.pos, club: (m.inClub || "").toUpperCase(), price };
-      if (m.inPos && m.inPos !== out.pos) errs.push(`${m.inName || "?"} is ${m.inPos}, replaces ${out.pos}`);
-    });
-    if (money < -0.001) errs.push(`Over budget by £${Math.abs(money).toFixed(1)}m`);
-    const clubs = {};
-    cur.forEach(p => { if (p.club) clubs[p.club] = (clubs[p.club] || 0) + 1; });
-    Object.entries(clubs).forEach(([c, n]) => { if (n > 3) errs.push(`${n}× ${c} (max 3)`); });
-    POS.forEach(p => {
-      const n = cur.filter(x => x.pos === p).length;
-      if (n !== LIMITS[p]) errs.push(`${n} ${p}, need ${LIMITS[p]}`);
-    });
-    steps.push({ gw: Number(startGW) + i, avail, used, hits, money, errs, snapshot: cur.map(p => ({ ...p })) });
-    ft = Math.min(5, avail - Math.min(used, avail) + 1);
-  });
-
-  const setGW = (i, patch) => setPlan(plan.map((g, j) => (j === i ? { ...g, ...patch } : g)));
-  const addMove = i => {
-    const first = squad[0];
-    setGW(i, { moves: [...plan[i].moves, { outId: first.id, outName: first.name, inName: "", inPos: first.pos, inClub: "", inPrice: first.price }] });
+  const getActiveMoves = (gw) => {
+    if (!plan) return [];
+    const removed = removedMoves[path]?.[gw] || [];
+    return plan.moves
+      .filter(m => m.gw === gw)
+      .filter((_, i) => !removed.includes(i));
   };
-  const setMove = (i, k, patch) => setGW(i, { moves: plan[i].moves.map((m, j) => (j === k ? { ...m, ...patch } : m)) });
-  const dropMove = (i, k) => setGW(i, { moves: plan[i].moves.filter((_, j) => j !== k) });
-  const md = modeCalc(Number(behind), Number(left));
+
+  const removeMove = (gw, index) => {
+    setRemovedMoves(prev => {
+      const next = { ...prev };
+      if (!next[path]) next[path] = {};
+      if (!next[path][gw]) next[path][gw] = [];
+      // Find the actual index in the original moves array
+      const gwMoves = plan.moves.filter(m => m.gw === gw);
+      const removed = prev[path]?.[gw] || [];
+      let realIndex = 0;
+      let visibleCount = 0;
+      for (let i = 0; i < gwMoves.length; i++) {
+        if (!removed.includes(i)) {
+          if (visibleCount === index) { realIndex = i; break; }
+          visibleCount++;
+        }
+      }
+      next[path][gw] = [...(next[path][gw] || []), realIndex];
+      return next;
+    });
+  };
+
+  const onEditChange = (gw, field, value) => {
+    setGwEdits(prev => ({
+      ...prev,
+      [gw]: { ...(prev[gw] || {}), [field]: value },
+    }));
+  };
+
+  const totalHits = plan ? plan.ft_sequence.reduce((sum, s) => {
+    const activeMoves = getActiveMoves(s.gw);
+    const hits = Math.max(0, activeMoves.length - s.ft_avail);
+    return sum + hits;
+  }, 0) : 0;
 
   const buildExport = () => {
+    if (!plan || !brief) return;
     const L = [];
-    L.push(`FPL PLAN — GW${startGW}–GW${Number(startGW) + 4}`);
-    L.push(`Mode: ${md.label} (${behind} behind, ${left} GWs left)`);
-    L.push(`Bank £${Number(bank).toFixed(1)}m · FTs ${startFT} · Hits ${totalHits} (${totalHits * -4} pts)`);
+    const gw1 = brief.gw;
+    L.push(`FPL PLAN — GW${gw1}–GW${gw1 + 4} (${path.toUpperCase()} path)`);
+    L.push(`Mode: ${dial.mode} (${dial.behind} behind, ${dial.left} GWs left)`);
+    L.push(`Total hits: ${totalHits} (${totalHits * -4} pts)`);
     L.push("");
+
     L.push("SQUAD");
+    const POS = ["GK", "DEF", "MID", "FWD"];
     POS.forEach(p => {
-      const l = squad.filter(x => x.pos === p).map(x => `${x.name} (${x.club}) £${x.price.toFixed(1)}`).join(" · ");
-      L.push(`${p}: ${l}`);
+      const players = (brief.squad || []).filter(x => x.pos === p);
+      if (players.length) {
+        L.push(`${p}: ${players.map(x => `${x.name} (${x.club}) £${x.price.toFixed(1)}`).join(" · ")}`);
+      }
     });
     L.push("");
-    plan.forEach((g, i) => {
-      const s = steps[i];
-      L.push(`GW${s.gw} — FT ${s.avail}, using ${s.used}${s.hits ? `, ${s.hits} hit(s)` : ""}, bank £${s.money.toFixed(1)}m`);
-      if (g.moves.length) g.moves.forEach(m => L.push(`  OUT ${m.outName} → IN ${m.inName || "?"} (${m.inClub || "?"}) £${Number(m.inPrice || 0).toFixed(1)}`));
-      else L.push("  Roll FT");
-      if (g.captain) L.push(`  Captain: ${g.captain}`);
-      if (g.chip) L.push(`  Chip: ${g.chip}`);
-      if (g.note) L.push(`  Note: ${g.note}`);
-      if (s.errs.length) L.push(`  ⚠ ${s.errs.join("; ")}`);
+
+    plan.ft_sequence.forEach(s => {
+      const moves = getActiveMoves(s.gw);
+      const edits = gwEdits[s.gw] || {};
+      const hits = Math.max(0, moves.length - s.ft_avail);
+      L.push(`GW${s.gw} — FT ${s.ft_avail}, using ${moves.length}${hits ? `, ${hits} hit(s)` : ""}`);
+      if (moves.length === 0) {
+        L.push("  Roll FT");
+      } else {
+        moves.forEach(m => {
+          const hitTag = m.is_hit ? " (HIT)" : "";
+          L.push(`  OUT ${m.out.name} (${m.out.club}, £${m.out.price.toFixed(1)}) → IN ${m.in.name} (${m.in.club}, £${m.in.price.toFixed(1)})${hitTag}`);
+          L.push(`       ${m.reason}`);
+        });
+      }
+      if (edits.captain) L.push(`  Captain: ${edits.captain}`);
+      if (edits.chip) L.push(`  Chip: ${edits.chip}`);
+      const blanks = s.blanks || [];
+      const doubles = s.doubles || [];
+      if (blanks.length) L.push(`  ⚠ Blanks: ${blanks.join(", ")}`);
+      if (doubles.length) L.push(`  DGW: ${doubles.join(", ")}`);
     });
     setExportText(L.join("\n"));
   };
 
-  const reset = () => {
-    setSquad(FALLBACK_SQUAD); setBank(0.5); setStartGW(1); setStartFT(1);
-    setPlan(SEED_PLAN.map(blankGW)); setBehind(0); setLeft(38); setExportText("");
+  const resetEdits = () => {
+    setRemovedMoves({});
+    setGwEdits({});
+    setExportText("");
   };
 
   /* ─── styles ─── */
+  const btn = {
+    background: C.accent, color: "#fff", border: "none", borderRadius: 8,
+    padding: "10px 16px", fontFamily: SANS, fontSize: 13, fontWeight: 600, cursor: "pointer",
+  };
+  const btnOutline = { ...btn, background: "transparent", color: C.accent, border: `1.5px solid ${C.accent}` };
   const inp = {
     background: C.bg, color: C.text, border: `1px solid ${C.border}`,
     borderRadius: 8, padding: "8px 10px", fontFamily: SANS, fontSize: 14,
@@ -312,15 +411,9 @@ export default function App() {
     fontFamily: SANS, fontSize: 11, fontWeight: 600, color: C.dim,
     textTransform: "uppercase", letterSpacing: "0.06em", display: "block", marginBottom: 4,
   };
-  const btn = {
-    background: C.accent, color: "#fff", border: "none", borderRadius: 8,
-    padding: "10px 16px", fontFamily: SANS, fontSize: 13, fontWeight: 600,
-    cursor: "pointer",
-  };
-  const btnOutline = {
-    ...btn, background: "transparent", color: C.accent,
-    border: `1.5px solid ${C.accent}`,
-  };
+
+  const hasPlan = plan && plan.ft_sequence && plan.ft_sequence.length > 0;
+  const preseason = plan && plan.summary && plan.summary.includes("Pre-season");
 
   return (
     <div style={{ background: C.bg, color: C.text, fontFamily: SANS, minHeight: "100vh", padding: "0 0 60px" }}>
@@ -335,7 +428,7 @@ export default function App() {
 
       {showTutorial && <Tutorial onClose={closeTutorial} />}
 
-      {/* header bar */}
+      {/* header */}
       <div style={{ background: C.accent, padding: "14px 16px", marginBottom: 20 }}>
         <div style={{ maxWidth: 540, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -343,10 +436,8 @@ export default function App() {
             <span style={{ fontSize: 14, fontWeight: 500, color: "rgba(255,255,255,.7)" }}>planner</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <button
-              onClick={() => setShowTutorial(true)}
-              style={{ background: "rgba(255,255,255,.15)", border: "none", color: "rgba(255,255,255,.7)", fontSize: 12, fontWeight: 600, cursor: "pointer", padding: "4px 10px", borderRadius: 6 }}
-            >?</button>
+            <button onClick={() => setShowTutorial(true)}
+              style={{ background: "rgba(255,255,255,.15)", border: "none", color: "rgba(255,255,255,.7)", fontSize: 12, fontWeight: 600, cursor: "pointer", padding: "4px 10px", borderRadius: 6 }}>?</button>
             <span style={{ fontSize: 11, color: "rgba(255,255,255,.5)", fontFamily: MONO }}>{status.toUpperCase()}</span>
           </div>
         </div>
@@ -354,175 +445,137 @@ export default function App() {
 
       <div style={{ maxWidth: 540, margin: "0 auto", padding: "0 16px" }}>
 
-        {/* risk dial */}
-        <div style={{
-          background: C.card, border: `1px solid ${C.border}`, borderRadius: 12,
-          padding: 16, marginBottom: 16, borderLeft: `4px solid ${md.color}`,
-          boxShadow: "0 1px 3px rgba(0,0,0,.06)",
-        }}>
-          <div style={{ display: "flex", gap: 10, marginBottom: 12 }}>
-            <div style={{ flex: 1 }}>
-              <label style={lbl}>Points behind</label>
-              <input style={inp} type="number" value={behind} onChange={e => setBehind(e.target.value)} />
-            </div>
-            <div style={{ flex: 1 }}>
-              <label style={lbl}>GWs left</label>
-              <input style={inp} type="number" value={left} onChange={e => setLeft(e.target.value)} />
+        {/* risk dial summary */}
+        {dial.mode && (
+          <div style={{
+            background: C.card, border: `1px solid ${C.border}`, borderRadius: 12,
+            padding: 16, marginBottom: 16, borderLeft: `4px solid ${modeColor}`,
+            boxShadow: "0 1px 3px rgba(0,0,0,.06)",
+          }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div>
+                <div style={{ fontSize: 20, fontWeight: 800, color: modeColor }}>{dial.mode}</div>
+                <div style={{ fontSize: 13, color: C.dim, marginTop: 2 }}>{dial.gloss}</div>
+              </div>
+              <div style={{ textAlign: "right", fontFamily: MONO, fontSize: 12, color: C.dim }}>
+                <div>{dial.behind} pts behind</div>
+                <div>{dial.left} GWs left</div>
+              </div>
             </div>
           </div>
-          <div style={{ fontSize: 20, fontWeight: 800, color: md.color, letterSpacing: "0.02em" }}>{md.label}</div>
-          <div style={{ fontSize: 13, color: C.dim, marginTop: 4, lineHeight: 1.5 }}>{md.gloss}</div>
-        </div>
+        )}
 
-        {/* settings row */}
-        <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
-          {[["First GW", startGW, setStartGW], ["Bank £m", bank, setBank], ["Free transfers", startFT, setStartFT]].map(([l, v, s]) => (
-            <div key={l} style={{ flex: 1 }}>
-              <label style={lbl}>{l}</label>
-              <input style={inp} type="number" step="0.1" value={v} onChange={e => s(e.target.value)} />
-            </div>
+        {/* path toggle */}
+        <div style={{ display: "flex", gap: 4, marginBottom: 16, background: C.card, borderRadius: 10, padding: 4, border: `1px solid ${C.border}` }}>
+          {["safe", "balanced", "aggressive"].map(p => (
+            <button key={p} onClick={() => { setPath(p); setExportText(""); }}
+              style={{
+                flex: 1, padding: "10px 0", borderRadius: 8, border: "none",
+                fontFamily: SANS, fontSize: 13, fontWeight: 700, cursor: "pointer",
+                textTransform: "uppercase", letterSpacing: "0.04em",
+                background: path === p ? C.accent : "transparent",
+                color: path === p ? "#fff" : C.dim,
+              }}>
+              {p}
+            </button>
           ))}
         </div>
 
-        {/* squad toggle */}
-        <button
-          style={{ ...btnOutline, width: "100%", marginBottom: 16, textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center" }}
-          onClick={() => setShowSquad(!showSquad)}
-        >
-          <span>{showSquad ? "▾" : "▸"} Squad ({squad.length})</span>
-          <span style={{ fontFamily: MONO, fontSize: 12, opacity: 0.7 }}>{"£"}{squad.reduce((a, p) => a + p.price, 0).toFixed(1)}m</span>
-        </button>
+        {/* plan summary */}
+        {plan && (
+          <div style={{ fontSize: 13, color: C.dim, marginBottom: 16, padding: "0 4px" }}>
+            {preseason
+              ? "Pre-season — plans will generate once GW1 has been scored."
+              : plan.summary}
+          </div>
+        )}
 
-        {showSquad && (
+        {!brief && (
           <div style={{
             background: C.card, border: `1px solid ${C.border}`, borderRadius: 12,
-            padding: 14, marginBottom: 16, boxShadow: "0 1px 3px rgba(0,0,0,.06)",
+            padding: 24, textAlign: "center", color: C.dim,
           }}>
-            {POS.map(p => (
-              <div key={p} style={{ marginBottom: 12 }}>
-                <div style={{
-                  fontSize: 11, fontWeight: 700, color: C.card, background: POS_COLOR[p],
-                  display: "inline-block", padding: "2px 8px", borderRadius: 4, marginBottom: 6,
-                  letterSpacing: "0.05em",
-                }}>{p}</div>
-                {squad.filter(x => x.pos === p).map(pl => (
-                  <div key={pl.id} style={{ display: "flex", gap: 6, marginBottom: 4 }}>
-                    <input style={{ ...inp, flex: 3, fontSize: 13 }} value={pl.name}
-                      onChange={e => setSquad(squad.map(s => s.id === pl.id ? { ...s, name: e.target.value } : s))} />
-                    <input style={{ ...inp, flex: 1, fontSize: 13, textTransform: "uppercase", textAlign: "center" }} value={pl.club}
-                      onChange={e => setSquad(squad.map(s => s.id === pl.id ? { ...s, club: e.target.value.toUpperCase() } : s))} />
-                    <input style={{ ...inp, flex: 1, fontSize: 13, textAlign: "right" }} type="number" step="0.1" value={pl.price}
-                      onChange={e => setSquad(squad.map(s => s.id === pl.id ? { ...s, price: parseFloat(e.target.value) || 0 } : s))} />
-                  </div>
-                ))}
-              </div>
-            ))}
+            <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 8 }}>No brief data</div>
+            <div style={{ fontSize: 13, lineHeight: 1.5 }}>
+              The planner needs <code>brief.json</code> from the daily pipeline.
+              Run <code>python3 fpld_brief.py --json</code> or wait for the daily GitHub Action.
+            </div>
           </div>
         )}
 
         {/* GW cards */}
-        {plan.map((g, i) => {
-          const s = steps[i];
-          const bad = s.errs.length > 0;
-          return (
-            <div key={i} style={{
-              background: C.card, border: `1px solid ${bad ? C.red : C.border}`,
-              borderRadius: 12, padding: 16, marginBottom: 12,
-              boxShadow: bad ? `0 0 0 1px ${C.red}` : "0 1px 3px rgba(0,0,0,.06)",
-            }}>
-              {/* GW header */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-                <span style={{
-                  background: C.accent, color: C.green, fontFamily: MONO,
-                  fontSize: 13, fontWeight: 800, padding: "3px 10px", borderRadius: 6,
-                }}>GW{s.gw}</span>
-                <div style={{ fontFamily: MONO, fontSize: 12, color: C.dim, display: "flex", gap: 8, alignItems: "center" }}>
-                  <span>FT <b style={{ color: C.text }}>{s.avail}</b></span>
-                  <span>{"·"}</span>
-                  <span>Using <b style={{ color: C.text }}>{s.used}</b></span>
-                  {s.hits > 0 && <><span>{"·"}</span><span style={{ color: C.red, fontWeight: 700 }}>{s.hits * -4}pts</span></>}
-                  <span>{"·"}</span>
-                  <span>{"£"}<b style={{ color: s.money < 0 ? C.red : C.greenDark }}>{s.money.toFixed(1)}</b></span>
-                </div>
-              </div>
-
-              {/* transfers */}
-              {g.moves.map((m, k) => (
-                <div key={k} style={{
-                  background: C.bg, border: `1px solid ${C.border}`, borderRadius: 8,
-                  padding: 10, marginBottom: 8,
-                }}>
-                  <label style={lbl}>Out</label>
-                  <select style={{ ...inp, marginBottom: 8 }} value={m.outId}
-                    onChange={e => {
-                      const p = s.snapshot.find(x => String(x.id) === e.target.value) || squad.find(x => String(x.id) === e.target.value);
-                      setMove(i, k, { outId: p ? p.id : e.target.value, outName: p ? p.name : "", inPos: m.inPos || (p ? p.pos : "") });
-                    }}>
-                    {s.snapshot.map(p => <option key={p.id} value={p.id}>{p.pos} {"·"} {p.name} ({p.club}) {"£"}{p.price.toFixed(1)}</option>)}
-                  </select>
-                  <label style={lbl}>In</label>
-                  <div style={{ display: "flex", gap: 6 }}>
-                    <input style={{ ...inp, flex: 3 }} placeholder="Name" value={m.inName} onChange={e => setMove(i, k, { inName: e.target.value })} />
-                    <input style={{ ...inp, flex: 1, textTransform: "uppercase", textAlign: "center" }} placeholder="CLUB" value={m.inClub}
-                      onChange={e => setMove(i, k, { inClub: e.target.value.toUpperCase() })} />
-                    <input style={{ ...inp, flex: 1, textAlign: "right" }} type="number" step="0.1" placeholder="£" value={m.inPrice}
-                      onChange={e => setMove(i, k, { inPrice: e.target.value })} />
-                  </div>
-                  <button style={{ background: "none", border: "none", color: C.red, fontSize: 11, fontWeight: 600, cursor: "pointer", marginTop: 8, padding: 0 }}
-                    onClick={() => dropMove(i, k)}>{"✕ Remove"}</button>
-                </div>
-              ))}
-
-              <button style={{ ...btnOutline, width: "100%", marginBottom: 10, fontSize: 12 }}
-                onClick={() => addMove(i)}>+ Add transfer</button>
-
-              {/* captain + chip */}
-              <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-                <div style={{ flex: 2 }}>
-                  <label style={lbl}>Captain</label>
-                  <select style={inp} value={g.captain} onChange={e => setGW(i, { captain: e.target.value })}>
-                    <option value="">{"—"}</option>
-                    {s.snapshot.map(p => <option key={p.id} value={p.name}>{p.name}</option>)}
-                  </select>
-                </div>
-                <div style={{ flex: 2 }}>
-                  <label style={lbl}>Chip</label>
-                  <select style={inp} value={g.chip} onChange={e => setGW(i, { chip: e.target.value })}>
-                    <option value="">{"—"}</option>
-                    {["Wildcard", "Free Hit", "Bench Boost", "Triple Captain"].map(c => <option key={c}>{c}</option>)}
-                  </select>
-                </div>
-              </div>
-
-              <input style={inp} placeholder="Notes..." value={g.note} onChange={e => setGW(i, { note: e.target.value })} />
-
-              {bad && (
-                <div style={{ marginTop: 10, background: "#fef2f2", borderRadius: 6, padding: 8 }}>
-                  {s.errs.map((e, j) => <div key={j} style={{ fontSize: 12, color: C.red, fontWeight: 500, marginBottom: 2 }}>{"⚠"} {e}</div>)}
-                </div>
-              )}
-            </div>
-          );
-        })}
+        {hasPlan && !preseason && plan.ft_sequence.map((gwData, i) => (
+          <GWCard
+            key={i}
+            gwData={gwData}
+            moves={getActiveMoves(gwData.gw)}
+            edits={{ removeMove, squad: brief?.squad, gwEdits }}
+            onEditChange={onEditChange}
+          />
+        ))}
 
         {/* hits summary */}
-        <div style={{ textAlign: "right", fontSize: 13, fontWeight: 600, color: totalHits ? C.red : C.greenDark, margin: "12px 0 16px", fontFamily: MONO }}>
-          Planned hits: {totalHits * -4} pts
-        </div>
-
-        {/* action buttons */}
-        <div style={{ display: "flex", gap: 8 }}>
-          <button style={{ ...btn, flex: 1, background: C.accent }} onClick={buildExport}>Build summary</button>
-          <button style={{ ...btnOutline, padding: "10px 14px" }} onClick={reset}>Reset</button>
-        </div>
-
-        {exportText && (
-          <div style={{ marginTop: 14 }}>
-            <label style={lbl}>Copy into chat before each deadline</label>
-            <textarea readOnly value={exportText}
-              style={{ ...inp, height: 240, fontSize: 12, lineHeight: 1.5, fontFamily: MONO, resize: "vertical" }}
-              onFocus={e => e.target.select()} />
+        {hasPlan && !preseason && (
+          <div style={{ textAlign: "right", fontSize: 13, fontWeight: 600, color: totalHits ? C.red : C.greenDark, margin: "8px 0 16px", fontFamily: MONO }}>
+            Total hits: {totalHits * -4} pts
           </div>
+        )}
+
+        {/* actions */}
+        {hasPlan && !preseason && (
+          <>
+            <div style={{ display: "flex", gap: 8 }}>
+              <button style={{ ...btn, flex: 1 }} onClick={buildExport}>Export plan</button>
+              <button style={{ ...btnOutline, padding: "10px 14px" }} onClick={resetEdits}>Reset edits</button>
+            </div>
+
+            {exportText && (
+              <div style={{ marginTop: 14 }}>
+                <label style={lbl}>Paste into your GitHub issue</label>
+                <textarea readOnly value={exportText}
+                  style={{ ...inp, height: 280, fontSize: 12, lineHeight: 1.5, fontFamily: MONO, resize: "vertical" }}
+                  onFocus={e => e.target.select()} />
+              </div>
+            )}
+          </>
+        )}
+
+        {/* squad (collapsed by default) */}
+        {brief?.squad && (
+          <details style={{ marginTop: 20 }}>
+            <summary style={{
+              cursor: "pointer", fontSize: 13, fontWeight: 600, color: C.accent,
+              padding: "8px 0", userSelect: "none",
+            }}>
+              Squad ({brief.squad.length}) — {"£"}{brief.squad.reduce((a, p) => a + p.price, 0).toFixed(1)}m
+            </summary>
+            <div style={{
+              background: C.card, border: `1px solid ${C.border}`, borderRadius: 12,
+              padding: 14, marginTop: 8, boxShadow: "0 1px 3px rgba(0,0,0,.06)",
+            }}>
+              {["GK", "DEF", "MID", "FWD"].map(pos => {
+                const players = brief.squad.filter(p => p.pos === pos);
+                if (!players.length) return null;
+                return (
+                  <div key={pos} style={{ marginBottom: 10 }}>
+                    <div style={{
+                      fontSize: 11, fontWeight: 700, color: "#fff", background: POS_COLOR[pos],
+                      display: "inline-block", padding: "2px 8px", borderRadius: 4, marginBottom: 4,
+                    }}>{pos}</div>
+                    {players.map(p => (
+                      <div key={p.id} style={{ display: "flex", justifyContent: "space-between", padding: "3px 0", fontSize: 13 }}>
+                        <span>
+                          {p.name} <span style={{ color: C.dim }}>({p.club})</span>
+                          {p.status !== "a" && <span style={{ color: C.red, fontWeight: 600, marginLeft: 4 }}>{"⚠"}</span>}
+                        </span>
+                        <span style={{ fontFamily: MONO, color: C.dim }}>{"£"}{p.price.toFixed(1)}</span>
+                      </div>
+                    ))}
+                  </div>
+                );
+              })}
+            </div>
+          </details>
         )}
       </div>
     </div>

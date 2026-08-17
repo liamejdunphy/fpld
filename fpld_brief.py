@@ -345,6 +345,233 @@ def dial(behind, left):
     return "SWING", "Contrarian captain, low ownership, chips on maximum-variance weeks."
 
 
+# ---------------------------------------------------------------- 5-GW plan generation
+
+def generate_plans(squad, model, cfg, xpts_data, xpts_mature, mode):
+    """Generate sequenced 5-GW transfer plans at three aggression levels.
+
+    Returns a dict with keys "safe", "balanced", "aggressive", each containing:
+      - moves: [{gw, out: {id,name,pos,club,price}, in: {id,name,pos,club,price,xpts,reason}}]
+      - ft_sequence: [{gw, ft_avail, used, rolled, hits}]
+      - summary: one-line description
+    """
+    H = cfg["horizon"]
+    gw_start = model["gw"]
+    blanks_by_gw = model.get("blanks_by_gw", {})
+    doubles = model.get("doubles", {})
+    owned = {p["id"] for p in squad}
+    pool = [p for p in model["players"].values()
+            if p["status"] == "a" and p["minutes"] >= 60 and p["id"] not in owned]
+
+    using_xpts = xpts_data is not None and xpts_mature
+    has_diff = using_xpts and any(
+        "diff_xpts_horizon" in v for v in xpts_data.values() if isinstance(v, dict))
+
+    def player_value(p):
+        """Score a player for transfer targeting."""
+        if using_xpts:
+            pred = xpts_data.get(p["id"])
+            if pred:
+                if has_diff and mode in ("AGGRESSIVE", "SWING"):
+                    return pred.get("diff_xpts_horizon", pred["xpts_horizon"])
+                return pred["xpts_horizon"]
+        return score(p, H)
+
+    def player_urgency(p):
+        """How urgently a squad player needs replacing. Higher = replace sooner."""
+        if p["status"] != "a":
+            return 100  # injured/suspended = immediate
+        v = player_value(p)
+        # Check if player has a blank in the window
+        player_club = p["club"]
+        blank_urgency = 0
+        for gw_off in range(H):
+            gw_num = gw_start + gw_off
+            blanking = blanks_by_gw.get(gw_num, [])
+            if player_club in blanking:
+                blank_urgency = max(blank_urgency, 10 - gw_off)  # sooner blank = more urgent
+        return blank_urgency + max(0, 5 - v)  # low value + upcoming blank = urgent
+
+    def best_replacement(out_player, already_used):
+        """Find the best available replacement."""
+        budget = out_player["price"] + 0.5  # allow slight stretch
+        candidates = [p for p in pool if p["pos"] == out_player["pos"]
+                      and p["price"] <= budget and p["club"] != out_player["club"]
+                      and p["id"] not in already_used]
+        if not candidates:
+            # relax budget constraint
+            candidates = [p for p in pool if p["pos"] == out_player["pos"]
+                          and p["club"] != out_player["club"]
+                          and p["id"] not in already_used][:10]
+        if not candidates:
+            return None
+        return max(candidates, key=lambda p: player_value(p))
+
+    def reason_for_move(out_p, in_p):
+        """Short reason string for the transfer."""
+        parts = []
+        if out_p["status"] != "a":
+            parts.append(f"{out_p['name']} flagged ({out_p.get('news') or out_p['status']})")
+        else:
+            parts.append(f"upgrade on {out_p['name']}")
+        out_club = out_p["club"]
+        for gw_off in range(H):
+            gw_num = gw_start + gw_off
+            if out_club in blanks_by_gw.get(gw_num, []):
+                parts.append(f"{out_club} blank GW{gw_num}")
+                break
+        in_club = in_p["club"]
+        for gw_off in range(H):
+            gw_num = gw_start + gw_off
+            if in_club in doubles.get(gw_num, []):
+                parts.append(f"{in_club} DGW{gw_num}")
+                break
+        return "; ".join(parts)
+
+    # Rank squad by urgency (most urgent = replace first)
+    ranked_weak = sorted(
+        [p for p in squad if p["minutes"] > 0 or p["status"] != "a"],
+        key=lambda p: -player_urgency(p))
+
+    # Pre-season guard: no real data, don't generate transfer plans
+    preseason = squad and all(p["form"] == 0 for p in squad)
+    if preseason:
+        empty = {"moves": [], "ft_sequence": [], "summary": "Pre-season — no data to plan from."}
+        return {"safe": empty, "balanced": empty, "aggressive": empty}
+
+    def build_plan(max_moves, allow_hits):
+        """Build a sequenced plan with up to max_moves transfers over 5 GWs."""
+        moves = []
+        used_ids = set()
+        ft = 1  # default; could be overridden from API
+        ft_sequence = []
+
+        # Decide which players to replace and when
+        targets = []
+        for p in ranked_weak[:max_moves]:
+            repl = best_replacement(p, used_ids)
+            if repl is None:
+                continue
+            used_ids.add(repl["id"])
+            # Find optimal GW to make this move
+            urgency = player_urgency(p)
+            targets.append({"out": p, "in": repl, "urgency": urgency,
+                            "reason": reason_for_move(p, repl)})
+
+        # Sort targets by urgency (most urgent first)
+        targets.sort(key=lambda t: -t["urgency"])
+
+        # Sequence: assign moves to GWs respecting FT rollover
+        gw_moves = {gw_start + i: [] for i in range(H)}
+        ft_track = ft
+
+        # First pass: assign urgent moves (injured, blanking soon) to earliest possible
+        # Second pass: spread remaining moves to maximise free transfers
+        urgent = [t for t in targets if t["urgency"] >= 10]
+        normal = [t for t in targets if t["urgency"] < 10]
+
+        # Assign urgent moves ASAP
+        for t in urgent:
+            # Find the earliest GW where we can fit this
+            assigned = False
+            for gw_off in range(H):
+                gw_num = gw_start + gw_off
+                if len(gw_moves[gw_num]) == 0 or allow_hits:
+                    gw_moves[gw_num].append(t)
+                    assigned = True
+                    break
+            if not assigned and gw_moves:
+                # Force into GW1 as a hit
+                gw_moves[gw_start].append(t)
+
+        # Assign normal moves: wait for FTs to accumulate
+        remaining = list(normal)
+        for gw_off in range(H):
+            if not remaining:
+                break
+            gw_num = gw_start + gw_off
+            # Simulate FT at this point
+            ft_at_gw = min(5, ft_track)
+            urgent_this_gw = len(gw_moves[gw_num])
+            free_slots = ft_at_gw - urgent_this_gw
+
+            if free_slots > 0 and remaining:
+                # Use a free slot if we have accumulated FTs
+                # But prefer to wait if ft_track < 2 and move isn't urgent
+                if ft_at_gw >= 2 or gw_off >= 2:
+                    to_assign = remaining.pop(0)
+                    gw_moves[gw_num].append(to_assign)
+
+            # FT rollover: used this GW = urgent + normal assigned
+            used_this_gw = len(gw_moves[gw_num])
+            ft_track = min(5, max(0, ft_at_gw - used_this_gw) + 1)
+
+        # If we still have remaining moves and hits are allowed, assign to best GW
+        if allow_hits and remaining:
+            for t in remaining:
+                # Find GW with best fixture for the incoming player
+                best_gw = gw_start
+                gw_moves[best_gw].append(t)
+
+        # Build output
+        ft_track = ft
+        for gw_off in range(H):
+            gw_num = gw_start + gw_off
+            ft_avail = min(5, ft_track)
+            gw_m = gw_moves[gw_num]
+            used = len(gw_m)
+            hits = max(0, used - ft_avail)
+
+            for t in gw_m:
+                out_p, in_p = t["out"], t["in"]
+                xpts_out = None
+                xpts_in = None
+                if xpts_data:
+                    pred_out = xpts_data.get(out_p["id"])
+                    pred_in = xpts_data.get(in_p["id"])
+                    if pred_out:
+                        xpts_out = pred_out.get("xpts_horizon", 0)
+                    if pred_in:
+                        xpts_in = pred_in.get("xpts_horizon", 0)
+
+                moves.append({
+                    "gw": gw_num,
+                    "out": {"id": out_p["id"], "name": out_p["name"], "pos": out_p["pos"],
+                            "club": out_p["club"], "price": out_p["price"],
+                            "xpts": xpts_out, "status": out_p["status"]},
+                    "in": {"id": in_p["id"], "name": in_p["name"], "pos": in_p["pos"],
+                           "club": in_p["club"], "price": in_p["price"],
+                           "xpts": xpts_in, "owned": in_p["owned"]},
+                    "reason": t["reason"],
+                    "is_hit": hits > 0 and gw_m.index(t) >= ft_avail,
+                })
+
+            ft_sequence.append({
+                "gw": gw_num,
+                "ft_avail": ft_avail,
+                "used": used,
+                "rolled": used == 0,
+                "hits": hits,
+                "blanks": blanks_by_gw.get(gw_num, []),
+                "doubles": doubles.get(gw_num, []),
+            })
+
+            ft_track = min(5, max(0, ft_avail - min(used, ft_avail)) + 1)
+
+        total_hits = sum(s["hits"] for s in ft_sequence)
+        total_moves = len(moves)
+        hit_str = f", {total_hits} hit(s) ({total_hits * -4}pts)" if total_hits else ""
+        summary = f"{total_moves} transfer(s) over {H} GWs{hit_str}"
+
+        return {"moves": moves, "ft_sequence": ft_sequence, "summary": summary}
+
+    return {
+        "safe": build_plan(max_moves=2, allow_hits=False),
+        "balanced": build_plan(max_moves=3, allow_hits=False),
+        "aggressive": build_plan(max_moves=5, allow_hits=True),
+    }
+
+
 # ---------------------------------------------------------------- output
 
 def run_str(p, n=5):
@@ -811,6 +1038,9 @@ def main():
         caps = sorted([p for p in squad if p["status"] == "a"],
                       key=lambda x: captain_score(x), reverse=True)[:4]
 
+        # Generate 5-GW transfer plans
+        plans = generate_plans(squad, model, cfg, xpts_data, xpts_mature, mode)
+
         brief_json = {
             "date": datetime.now().strftime("%Y-%m-%d"),
             "gw": gw,
@@ -819,6 +1049,7 @@ def main():
             "xpts_mature": xpts_mature,
             "squad": [player_json(p) for p in squad],
             "captain_shortlist": [player_json(c) for c in caps],
+            "plans": plans,
             "all_players": {str(p["id"]): {"name": p["name"], "pos": p["pos"],
                             "club": p["club"], "price": p["price"],
                             "score": score(p, H)}
