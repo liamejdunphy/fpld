@@ -57,7 +57,11 @@ CREATE TABLE IF NOT EXISTS players (
 CREATE TABLE IF NOT EXISTS player_gw (
   gw INTEGER, element INTEGER, points INTEGER, minutes INTEGER,
   PRIMARY KEY (gw, element));
+CREATE TABLE IF NOT EXISTS transfer_history (
+  entry_id INTEGER, gw INTEGER, element_in INTEGER, element_out INTEGER,
+  time TEXT, PRIMARY KEY (entry_id, gw, element_in, element_out));
 CREATE INDEX IF NOT EXISTS ix_picks_gw ON picks(gw);
+CREATE INDEX IF NOT EXISTS ix_transfer_history_entry ON transfer_history(entry_id, gw);
 """
 
 
@@ -91,6 +95,25 @@ def num(v, d=0.0):
         return float(v)
     except (TypeError, ValueError):
         return d
+
+
+def snoop_transfers(conn, entries, verbose=True):
+    """Fetch each rival's full transfer history from the API."""
+    have = {r[0] for r in conn.execute("SELECT DISTINCT entry_id FROM transfer_history")}
+    # Re-fetch all entries to get latest transfers (API returns full history)
+    todo = entries
+    if verbose and todo:
+        print(f"Snooping transfer history for {len(todo)} managers…")
+    for entry in todo:
+        d = get(f"entry/{entry}/transfers/", optional=True)
+        time.sleep(PAUSE)
+        if not d:
+            continue
+        for t in d:
+            conn.execute("INSERT OR REPLACE INTO transfer_history VALUES (?,?,?,?,?)",
+                         (entry, t.get("event"), t.get("element_in"), t.get("element_out"),
+                          t.get("time", "")))
+    conn.commit()
 
 
 # ------------------------------------------------------------------ sync
@@ -168,6 +191,8 @@ def sync(conn, cfg, verbose=True):
         if verbose and i % 25 == 0:
             print(f"  {i}/{len(todo)}")
         conn.commit()
+
+    snoop_transfers(conn, entries, verbose)
 
     if current:
         live = get(f"event/{current}/live/", optional=True)
@@ -310,6 +335,39 @@ def report(conn, cfg, gw):
                       f"- They have, you don't: {nm(only_them)}",
                       f"- You have, they don't: {nm(only_you)}", ""]
 
+        # Recent rival activity — transfers over last 3 GWs from transfer_history.
+        recent_gws = list(range(max(1, gw - 2), gw + 1))
+        recent = conn.execute(
+            f"SELECT entry_id, gw, element_in, element_out FROM transfer_history "
+            f"WHERE gw IN ({','.join('?' * len(recent_gws))}) ORDER BY gw DESC",
+            recent_gws).fetchall()
+        if recent:
+            by_rival = {}
+            for entry, tgw, ein, eout in recent:
+                if entry == cfg["team_id"]:
+                    continue
+                by_rival.setdefault(entry, []).append((tgw, ein, eout))
+            if by_rival:
+                L += ["## Recent rival activity", ""]
+                for r in std:
+                    entry = r[5]
+                    if entry not in by_rival:
+                        continue
+                    txns = by_rival[entry]
+                    total = len(txns)
+                    team = r[1] or f"#{entry}"
+                    L.append(f"**{team}** ({total} transfer{'s' if total != 1 else ''} in {len(recent_gws)} GWs)")
+                    for g in recent_gws:
+                        gw_txns = [(ein, eout) for tgw, ein, eout in txns if tgw == g]
+                        if not gw_txns:
+                            L.append(f"  GW{g}: (rolled)")
+                        else:
+                            for ein, eout in gw_txns:
+                                out_n = P.get(eout, {}).get("name", "?")
+                                in_n = P.get(ein, {}).get("name", "?")
+                                L.append(f"  GW{g}: OUT {out_n} → IN {in_n}")
+                    L.append("")
+
         # Rival moves — what transfers each rival made this gameweek.
         if gw > 1:
             moves = rival_moves(conn, gw)
@@ -384,6 +442,134 @@ def report(conn, cfg, gw):
             m = " ← you" if mine.get(e, {}).get("cap") else ""
             L.append(f"- **{P.get(e,{}).get('name','?')}** — {c}/{n} ({100*c/n:.0f}%){m}")
         L.append("")
+
+    # Captain recommendation — EO-aware safe/differential picks.
+    if mine:
+        gw_pts = {r[0]: r[1] for r in conn.execute(
+            "SELECT element, points FROM player_gw WHERE gw=?", (gw,))}
+        gw_mins = {r[0]: r[1] for r in conn.execute(
+            "SELECT element, minutes FROM player_gw WHERE gw=?", (gw,))}
+        candidates = []
+        for e in mine:
+            pts = gw_pts.get(e, 0)
+            mins = gw_mins.get(e, 0)
+            if mins <= 0:
+                continue
+            cap_eo = eo.get(e, {"eo": 0})["eo"]
+            # captain EO: how many captained this player (as % of league)
+            cap_pct = 100.0 * eo.get(e, {"captains": 0}).get("captains", 0) / n if n else 0
+            candidates.append((e, pts, cap_eo, cap_pct))
+        if candidates:
+            # Safe: highest points, tie-break by highest captain EO
+            safe = sorted(candidates, key=lambda x: (-x[1], -x[3]))[0]
+            # Differential: highest points, tie-break by lowest captain EO
+            diff = sorted(candidates, key=lambda x: (-x[1], x[3]))[0]
+            L += [f"## Captain recommendation", ""]
+            sp = P.get(safe[0], {})
+            dp = P.get(diff[0], {})
+            L.append(f"- **Safe captain**: {sp.get('name','?')} ({safe[1]}pts, "
+                     f"captain EO {safe[3]:.0f}%) — match the field")
+            L.append(f"- **Differential captain**: {dp.get('name','?')} ({diff[1]}pts, "
+                     f"captain EO {diff[3]:.0f}%) — low rival captaincy")
+            L.append("")
+
+    # Season tracker — captaincy accuracy, bench points, transfer ROI.
+    all_gws = [r[0] for r in conn.execute("SELECT DISTINCT gw FROM picks WHERE entry_id=? ORDER BY gw",
+               (cfg["team_id"],)).fetchall()]
+    if all_gws:
+        optimal_count = 0
+        total_captain_pts = 0
+        total_optimal_pts = 0
+        for g in all_gws:
+            squad = conn.execute("SELECT element, multiplier, is_captain FROM picks "
+                                 "WHERE gw=? AND entry_id=?", (g, cfg["team_id"])).fetchall()
+            pts_map = {r[0]: r[1] for r in conn.execute(
+                "SELECT element, points FROM player_gw WHERE gw=?", (g,))}
+            if not squad or not pts_map:
+                continue
+            cap_el = next((r[0] for r in squad if r[2]), None)
+            cap_pts = pts_map.get(cap_el, 0) if cap_el else 0
+            total_captain_pts += cap_pts
+            best_pts = max((pts_map.get(r[0], 0) for r in squad), default=0)
+            total_optimal_pts += best_pts
+            if cap_el and pts_map.get(cap_el, 0) == best_pts:
+                optimal_count += 1
+        weeks = len(all_gws)
+        pct = 100 * optimal_count / weeks if weeks else 0
+        bench_total = conn.execute("SELECT COALESCE(SUM(bench_points), 0) FROM entry_gw "
+                                   "WHERE entry_id=?", (cfg["team_id"],)).fetchone()[0]
+        gap = total_optimal_pts - total_captain_pts
+
+        # Transfer ROI
+        total_transfers = 0
+        total_in_pts = 0
+        total_out_pts = 0
+        total_hits = 0
+        for i, g in enumerate(all_gws):
+            if i == 0:
+                continue
+            prev_g = all_gws[i - 1]
+            prev_els = {r[0] for r in conn.execute(
+                "SELECT element FROM picks WHERE gw=? AND entry_id=?", (prev_g, cfg["team_id"]))}
+            curr_els = {r[0] for r in conn.execute(
+                "SELECT element FROM picks WHERE gw=? AND entry_id=?", (g, cfg["team_id"]))}
+            ins = curr_els - prev_els
+            outs = prev_els - curr_els
+            if not ins and not outs:
+                continue
+            total_transfers += len(ins)
+            # Points from transfer GW through current
+            for el in ins:
+                pts = conn.execute("SELECT COALESCE(SUM(points), 0) FROM player_gw "
+                                   "WHERE element=? AND gw >= ? AND gw <= ?", (el, g, gw)).fetchone()[0]
+                total_in_pts += pts
+            for el in outs:
+                pts = conn.execute("SELECT COALESCE(SUM(points), 0) FROM player_gw "
+                                   "WHERE element=? AND gw >= ? AND gw <= ?", (el, g, gw)).fetchone()[0]
+                total_out_pts += pts
+            hit = conn.execute("SELECT COALESCE(transfer_cost, 0) FROM entry_gw "
+                               "WHERE gw=? AND entry_id=?", (g, cfg["team_id"])).fetchone()
+            total_hits += hit[0] if hit else 0
+        net_roi = total_in_pts - total_out_pts - total_hits
+
+        L += ["## Season tracker", ""]
+        L.append(f"- Optimal captain {optimal_count}/{weeks} weeks ({pct:.0f}%)")
+        L.append(f"- Captain points: {total_captain_pts}, optimal: {total_optimal_pts}, "
+                 f"gap: {gap}")
+        L.append(f"- Bench points leaked: {bench_total}")
+        if total_transfers:
+            L.append(f"- Transfers: {total_transfers} made, net ROI {net_roi:+d} points "
+                     f"({total_hits} from hits)")
+        else:
+            L.append(f"- Transfers: 0 made")
+        L.append("")
+
+    # Chip ammunition — what chips each rival has left.
+    if std:
+        ALL_CHIPS = {"wildcard": "WC", "freehit": "FH", "bboost": "BB", "3xc": "TC"}
+        chip_set = 1 if gw <= 19 else 2
+        gw_lo = 1 if chip_set == 1 else 20
+        gw_hi = 19 if chip_set == 1 else 38
+        used_chips = {}
+        for r in conn.execute("SELECT entry_id, chip, gw FROM entry_gw WHERE chip IS NOT NULL"):
+            entry, chip, chip_gw = r
+            chip_key = chip.lower().replace(" ", "").replace("_", "")
+            if gw_lo <= chip_gw <= gw_hi:
+                used_chips.setdefault(entry, set()).add(chip_key)
+        chip_lines = []
+        for r in std:
+            entry = r[5]
+            if entry == cfg["team_id"]:
+                continue
+            team = r[1] or f"#{entry}"
+            used = used_chips.get(entry, set())
+            parts = []
+            for key, label in ALL_CHIPS.items():
+                mark = "\u2717" if key in used else "\u2713"
+                parts.append(f"{label} {mark}")
+            chip_lines.append(f"- **{team}**: {' '.join(parts)}")
+        if chip_lines:
+            L += ["## Chip ammunition", ""] + chip_lines + [""]
 
     # Chips are public. Knowing a rival has burned their wildcard is real information.
     chips = conn.execute("""SELECT m.team_name, e.gw, e.chip FROM entry_gw e

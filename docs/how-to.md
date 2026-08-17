@@ -72,6 +72,17 @@ Push the repo, then:
 2. Actions tab → *FPL daily brief* → **Run workflow** to test
 3. It runs at 07:00 UTC daily and commits output to `data/`
 
+Two workflows are included:
+
+- **`daily.yml`** — runs at 07:00 UTC. Brief + league sync + xPts. Creates a
+  GitHub Issue labelled `daily-brief`.
+- **`deadline.yml`** — runs 6 hours before typical deadlines (Fri 12:30 UTC,
+  Sat 05:00 UTC). Creates a combined brief + league report Issue labelled
+  `deadline-pack`.
+
+All databases are persisted in `data/` between runs — league history, xPts
+training data, and model weights accumulate automatically.
+
 Every run is a commit, so `git log data/` gives you a permanent history.
 
 ---
@@ -131,6 +142,66 @@ Always `--sync` first to fetch the latest data. The report includes:
 
 Run `--sync` without `--report` if you just want to collect data silently
 (e.g., from a cron job that captures history even when you don't read it).
+
+---
+
+## Set up the expected points model
+
+First-time setup (takes ~5 minutes to fetch all player histories):
+
+```bash
+python3 fpld_xpts.py --pull --train
+```
+
+This fetches per-gameweek data for every player across all available
+seasons from the FPL API, then trains a per-position linear regression.
+The model is saved to `~/.fpld/xpts_model.json`.
+
+After the initial pull, subsequent runs only fetch players not yet pulled
+today:
+
+```bash
+python3 fpld_xpts.py --pull --train --predict
+```
+
+Once a model exists, the daily brief automatically uses xPts for transfer
+proposals and captaincy rankings instead of the hand-tuned heuristic.
+
+### Predict with league context
+
+```bash
+python3 fpld_xpts.py --predict --league
+```
+
+This loads your league's effective ownership data and computes
+league-differential xPts: a player everyone in your league owns is worth
+less to you than a player nobody has. Requires `fpld_league.py --sync`
+to have been run first.
+
+### Retrain during the season
+
+Retrain weekly (or whenever you pull fresh data) to let the model learn
+from the current season:
+
+```bash
+python3 fpld_xpts.py --pull --train
+```
+
+The model prints its learned weights each time. Watch for:
+- **R²** — how much variance the model explains (0.15+ is decent for FPL)
+- **MAE** — average error in predicted points (2.0 or below is solid)
+- **Feature weights** — which factors matter most this season
+
+### View the fixture grid
+
+Full-season fixture difficulty table for all 20 teams:
+
+```bash
+python3 fpld_brief.py --fixtures
+```
+
+Saved to `~/.fpld/fixtures.md`. Use it to spot Wildcard windows, Free
+Hit targets, and long-term transfer arcs.
 
 ---
 
@@ -247,3 +318,34 @@ The dial computes: **pressure = points behind / gameweeks remaining**
 Before GW10, cap at BALANCED regardless. After GW30, shift one band
 more aggressive. See `docs/playbook.md` Section 3 for the full
 decision framework.
+
+---
+
+## Use the Claude Code agents
+
+Four agents in `.claude/agents/` act as your FPL backroom staff:
+
+| Agent | What it does | When to use |
+|---|---|---|
+| `fpl-scout` | Player research — fitness, injuries, form, community sentiment | "Is Shaw fit?" / "Best 6.5 mid?" |
+| `fpl-coach` | Gameweek decisions — starting XI, captain, transfers, chips | "Pick my team for GW3" |
+| `fpl-analyst` | Rival intelligence — EO edges, transfer patterns, league positioning | "What are my rivals doing?" |
+| `fpl-quant` | ML model management — retrain, diagnose, evaluate predictions | "Retrain and check model health" |
+
+### From Claude Code (laptop)
+
+Ask naturally and the right agent activates, or call one explicitly:
+
+```bash
+claude  # then ask "scout Shaw for me" or "pick my GW3 team"
+```
+
+### From your phone (deadline day)
+
+1. Open the **deadline-pack** GitHub Issue (arrives ~6h before deadline)
+2. Copy the brief + league report
+3. Open Claude on your phone, paste it, and ask: "Pick my team for this GW"
+
+Claude doesn't have the agent files on mobile, but the brief contains all
+the data the coach agent would read — squad, fixtures, xPts, proposals,
+captaincy, risk dial. You get the same quality advice.

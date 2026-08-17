@@ -11,6 +11,7 @@ is a proposal you apply yourself before the deadline.
 config.json                    your team_id and league_id (already filled in)
 fpld_brief.py                  daily brief: prices, injuries, fixtures, proposals
 fpld_league.py                 mini-league intelligence: rival squads, league EO
+fpld_xpts.py                   expected points model (ML, stdlib only)
 planner/                       five-gameweek transfer planner (Vite + React)
 docs/tutorial.md               first-time walkthrough, zero to first brief
 docs/how-to.md                 task-oriented recipes (automate, deploy, etc.)
@@ -34,6 +35,25 @@ python3 fpld_brief.py --print          # today's brief
 python3 fpld_brief.py --find odegaard  # check how FPL spells a name
 python3 fpld_league.py --sync --report # league tables (needs GW1 scored)
 ```
+
+## Expected points model
+
+ML-powered player scoring. Trains a per-position linear regression on
+historical FPL data (multiple seasons), then predicts expected points for
+every player. Replaces the hand-tuned heuristic in the brief when available.
+
+```bash
+python3 fpld_xpts.py --pull --train    # one-off: fetch history + train (~5 min)
+python3 fpld_xpts.py --predict         # predict next GW for all players
+python3 fpld_xpts.py --predict --league # add league-differential xPts
+```
+
+After the first pull, daily runs only fetch incremental updates. The brief
+automatically uses xPts for proposals and captaincy when a model exists.
+
+League-differential xPts adjusts predictions for your mini-league: a player
+everyone owns is worth less to you than one nobody has. This is the edge no
+public FPL tool offers.
 
 ## Transfer planner
 
@@ -62,6 +82,34 @@ on main. To enable: repo Settings → Pages → Source → **GitHub Actions**.
 Every run is a commit, so you get a permanent history. By March you can
 `git log data/` and see exactly what your squad looked like in GW12 and
 what you talked yourself into.
+
+### Two workflows
+
+| Workflow | Schedule | What it does |
+|---|---|---|
+| `daily.yml` | 07:00 UTC daily | Brief + league sync + xPts. Posts a GitHub Issue. |
+| `deadline.yml` | Fri 12:30 + Sat 05:00 UTC | Same pipeline, posts a combined brief + league report as a "deadline pack" Issue. |
+
+All databases (`league.db`, `xpts.db`, model weights) are persisted in `data/`
+and restored each run, so league history accumulates across runs.
+
+### Phone workflow (deadline day)
+
+1. Get the GitHub notification (email or GitHub mobile app)
+2. Open the **deadline-pack** Issue — brief + league report in one place
+3. Copy it into Claude on your phone and ask it to pick your team
+4. You can also trigger either workflow manually from the Actions tab
+
+### Claude Code agents
+
+Four agents in `.claude/agents/` for interactive use:
+
+| Agent | Role | Model |
+|---|---|---|
+| `fpl-scout` | Player research — fitness, form, sentiment | Sonnet |
+| `fpl-coach` | Gameweek decisions — XI, captain, transfers, chips | Opus |
+| `fpl-analyst` | Rival intelligence — EO edges, transfer patterns | Sonnet |
+| `fpl-quant` | ML pipeline — train, diagnose, improve the model | Opus |
 
 ## What you get each morning
 

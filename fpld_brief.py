@@ -30,7 +30,9 @@ API = "https://fantasy.premierleague.com/api"
 HOME = Path(os.environ.get("FPLD_HOME", Path.home() / ".fpld"))
 CONFIG = HOME / "config.json"
 STATE = HOME / "state.json"
+PLAYERS = HOME / "players.json"
 BRIEFS = HOME / "briefs"
+FIXTURES = HOME / "fixtures.md"
 UA = "Mozilla/5.0 fpld (personal use)"
 
 DEFAULT_CONFIG = {
@@ -94,6 +96,55 @@ def num(v, d=0.0):
         return float(v)
     except (TypeError, ValueError):
         return d
+
+
+# ---------------------------------------------------------------- player map
+
+def save_player_map(boot):
+    """Write a local name→id map from bootstrap data. Called on every run."""
+    teams = {t["id"]: t["short_name"] for t in boot["teams"]}
+    entries = {}
+    for e in boot["elements"]:
+        pid = e["id"]
+        web = e.get("web_name", "")
+        full = f"{e.get('first_name', '')} {e.get('second_name', '')}".strip()
+        entries[str(pid)] = {
+            "web_name": web,
+            "full_name": full,
+            "club": teams.get(e["team"], "?"),
+            "pos": POS.get(e.get("element_type"), "?"),
+            "price": num(e.get("now_cost")) / 10,
+        }
+    prev_count = 0
+    if PLAYERS.exists():
+        try:
+            prev_count = len(json.loads(PLAYERS.read_text()))
+        except Exception:
+            pass
+    PLAYERS.write_text(json.dumps(entries, ensure_ascii=False, indent=1))
+    new_count = len(entries)
+    added = new_count - prev_count if prev_count else 0
+    return added
+
+
+def load_player_map():
+    """Load the local name map. Returns None if it doesn't exist yet."""
+    if not PLAYERS.exists():
+        return None
+    try:
+        return json.loads(PLAYERS.read_text())
+    except Exception:
+        return None
+
+
+def find_in_map(pmap, query):
+    """Search the local player map by name. Returns list of matches."""
+    k = norm(query)
+    hits = []
+    for pid, info in pmap.items():
+        if k in norm(info["web_name"]) or k in norm(info["full_name"]):
+            hits.append({**info, "id": int(pid)})
+    return sorted(hits, key=lambda x: -x["price"])
 
 
 # ---------------------------------------------------------------- model
@@ -189,9 +240,26 @@ def squad_of(cfg, model):
                 hits = [p for p in model["players"].values()
                         if k and (k in norm(p["full"]) or norm(p["name"]) in k)]
                 m = hits[0] if len(hits) == 1 else None
-            (out.append(m) if m else missed.append(raw))
+            if m:
+                out.append(m)
+            else:
+                # Suggest closest matches from the player map
+                suggestions = ""
+                pmap = load_player_map()
+                if pmap:
+                    words = norm(raw).split()
+                    candidates = [info["web_name"] for info in pmap.values()
+                                  if any(w in norm(info["web_name"]) or w in norm(info["full_name"])
+                                         for w in words)][:3]
+                    if candidates:
+                        suggestions = f" Did you mean: {', '.join(candidates)}?"
+                missed.append(f"{raw}{suggestions}")
         if missed:
-            print(f"⚠ Couldn't match {len(missed)} name(s): {', '.join(missed)}", file=sys.stderr)
+            raise SystemExit(
+                f"squad_fallback: couldn't match {len(missed)} name(s):\n"
+                + "\n".join(f"  - {m}" for m in missed)
+                + "\nUse --find <name> to check FPL's spelling, then fix config.json."
+            )
         if out:
             return out, f"config.json fallback ({len(out)}/{len(names)} matched)"
     return [], "unknown"
@@ -229,6 +297,24 @@ def captain_score(p):
 
 
 # ---------------------------------------------------------------- diffing
+
+def load_xpts():
+    """Load xPts predictions if available.
+    Returns (predictions_dict, mature_bool).  When the model is immature
+    (trained mostly on historical averages, not real per-GW data),
+    mature=False and the caller should fall back to the heuristic."""
+    xpts_file = HOME / "xpts_predictions.json"
+    if not xpts_file.exists():
+        return None, False
+    try:
+        raw = json.loads(xpts_file.read_text())
+        maturity = raw.pop("_maturity", None)
+        mature = maturity.get("mature", False) if maturity else True  # old format = trust
+        # Convert string keys to int
+        return {int(k): v for k, v in raw.items()}, mature
+    except Exception:
+        return None, False
+
 
 def diff(model, prev):
     old = prev.get("players", {}) if prev else {}
@@ -296,11 +382,19 @@ def brief(cfg, model, squad, source, d, standings):
     # Alerts — the reason this runs daily
     L += ["## Overnight changes", ""]
     owned = {p["id"] for p in squad}
-    watch = [w.lower() for w in cfg.get("watchlist", [])]
+    watch = {w.lower() for w in cfg.get("watchlist", [])}
 
     def mine(p):
         return p["id"] in owned or p["name"].lower() in watch
 
+    def tag(p):
+        if p["id"] in owned:
+            return " *(squad)*"
+        if p["name"].lower() in watch:
+            return " *(watchlist)*"
+        return ""
+
+    # Your squad and watchlist flags — always show these
     hit = False
     for p in d["flags"]:
         if mine(p):
@@ -318,6 +412,19 @@ def brief(cfg, model, squad, source, d, standings):
             L.append(f"- {'📈' if delta > 0 else '📉'} **{p['name']}** {delta:+.1f} to £{p['price']:.1f}m")
     if not hit:
         L.append("- Nothing changed for your squad or watchlist.")
+
+    # Biggest price movers league-wide — surface value you weren't looking for
+    top_risers = sorted([p for p, delta in d["price"] if delta > 0 and not mine(p)],
+                        key=lambda x: x["price"], reverse=True)[:5]
+    top_fallers = sorted([p for p, delta in d["price"] if delta < 0 and not mine(p)],
+                         key=lambda x: x["price"], reverse=True)[:5]
+    if top_risers or top_fallers:
+        L.append("")
+        L.append("**Biggest movers league-wide** (outside your squad and watchlist):")
+        for p in top_risers:
+            L.append(f"- 📈 {p['name']} ({p['club']}, {p['pos']}, £{p['price']:.1f}m, {p['owned']:.1f}% owned)")
+        for p in top_fallers:
+            L.append(f"- 📉 {p['name']} ({p['club']}, {p['pos']}, £{p['price']:.1f}m, {p['owned']:.1f}% owned)")
     L.append("")
 
     # Fixture alerts — doubles and blanks in the horizon window
@@ -341,26 +448,27 @@ def brief(cfg, model, squad, source, d, standings):
         L += [f"- {p['name']}: {p['net_transfers']:+,.0f} net transfers this gameweek" for p in risky]
         L.append("")
 
-    # Price change alerts — flag players likely to rise/fall tonight
+    # Price change alerts — flag ANY player likely to rise/fall tonight
     RISE_THRESHOLD = 100000   # net transfers suggesting an imminent rise
     FALL_THRESHOLD = -100000  # net transfers suggesting an imminent fall
     risers = sorted([p for p in model["players"].values()
-                     if mine(p) and p["net_transfers"] >= RISE_THRESHOLD],
-                    key=lambda x: -x["net_transfers"])[:5]
+                     if p["net_transfers"] >= RISE_THRESHOLD],
+                    key=lambda x: -x["net_transfers"])[:10]
     fallers = sorted([p for p in model["players"].values()
-                      if mine(p) and p["net_transfers"] <= FALL_THRESHOLD],
-                     key=lambda x: x["net_transfers"])[:5]
+                      if p["net_transfers"] <= FALL_THRESHOLD],
+                     key=lambda x: x["net_transfers"])[:10]
     if risers or fallers:
         L += ["## Price watch", "",
-              "_Players on your squad or watchlist near a price change (net transfer proxy)._", ""]
+              "_Players likely to change price tonight (net transfer proxy). "
+              "Squad and watchlist players highlighted._", ""]
         for p in risers:
-            tag = "🟢 squad" if p["id"] in owned else "👀 watchlist"
-            L.append(f"- 📈 **{p['name']}** ({p['club']}, £{p['price']:.1f}m) — "
-                     f"{p['net_transfers']:+,.0f} net transfers, likely to **rise** ({tag})")
+            L.append(f"- 📈 **{p['name']}** ({p['club']}, {p['pos']}, £{p['price']:.1f}m, "
+                     f"{p['owned']:.1f}% owned) — {p['net_transfers']:+,.0f} net transfers, "
+                     f"likely to **rise**{tag(p)}")
         for p in fallers:
-            tag = "🟢 squad" if p["id"] in owned else "👀 watchlist"
-            L.append(f"- 📉 **{p['name']}** ({p['club']}, £{p['price']:.1f}m) — "
-                     f"{p['net_transfers']:+,.0f} net transfers, likely to **fall** ({tag})")
+            L.append(f"- 📉 **{p['name']}** ({p['club']}, {p['pos']}, £{p['price']:.1f}m, "
+                     f"{p['owned']:.1f}% owned) — {p['net_transfers']:+,.0f} net transfers, "
+                     f"likely to **fall**{tag(p)}")
         L.append("")
 
     # Squad over the horizon
@@ -387,7 +495,31 @@ def brief(cfg, model, squad, source, d, standings):
     L.append("")
 
     # Proposals
+    xpts_data, xpts_mature = load_xpts()
+    using_xpts = xpts_data is not None and xpts_mature
+    xpts_available = xpts_data is not None  # immature model exists but not primary
+    if using_xpts:
+        def xp(p):
+            pred = xpts_data.get(p["id"])
+            return pred["xpts_horizon"] if pred else 0.0
+        def xp_next(p):
+            pred = xpts_data.get(p["id"])
+            return pred["xpts"] if pred else 0.0
+        scoring_label = "xPts"
+    else:
+        def xp(p):
+            return score(p, H)
+        def xp_next(p):
+            return captain_score(p)
+        scoring_label = "score"
+
     L += ["## Proposed moves — nothing is applied", ""]
+    if using_xpts:
+        L.append("_Ranked by xPts (ML model trained on historical data)._")
+        L.append("")
+    elif xpts_available:
+        L.append("_Ranked by heuristic. xPts shown for reference (model immature)._")
+        L.append("")
     preseason = squad and all(p["form"] == 0 for p in squad)
     if preseason:
         L += ["_No gameweek has been scored, so form is zero across the board and the "
@@ -395,8 +527,8 @@ def brief(cfg, model, squad, source, d, standings):
               "GW1 is in — anything suggested now would be noise._", ""]
     weakest = [] if preseason else sorted(
         [p for p in squad if p["minutes"] > 0 or p["status"] != "a"],
-        key=lambda x: (x["status"] == "a", score(x, H)))[:3]
-    pool = sorted(model["players"].values(), key=lambda x: -score(x, H))
+        key=lambda x: (x["status"] == "a", xp(x)))[:3]
+    pool = sorted(model["players"].values(), key=lambda x: -xp(x))
 
     if not weakest and not preseason:
         L.append("_No squad data yet — seed `squad_fallback` in config.json, or wait for GW1 to finish._")
@@ -404,27 +536,47 @@ def brief(cfg, model, squad, source, d, standings):
         budget = w["price"] + 0.3
         opts = [p for p in pool if p["pos"] == w["pos"] and p["id"] not in owned
                 and p["price"] <= budget and p["club"] != w["club"]][:3]
+        ref_xpts_w = ""
+        if xpts_available and not using_xpts:
+            pred = xpts_data.get(w["id"])
+            if pred:
+                ref_xpts_w = f", xPts {pred['xpts_horizon']:.1f}*"
         L.append(f"**Consider replacing {w['name']}** ({w['pos']}, £{w['price']:.1f}m, "
-                 f"score {score(w, H)}, FDR {w['fdr']:.1f})")
+                 f"{scoring_label} {xp(w):.1f}{ref_xpts_w}, FDR {w['fdr']:.1f})")
         if w["status"] != "a":
             L.append(f"- Flagged: {w['news'] or STATUS.get(w['status'])}")
         for o in opts:
+            ref_xpts_o = ""
+            if xpts_available and not using_xpts:
+                pred = xpts_data.get(o["id"])
+                if pred:
+                    ref_xpts_o = f", xPts {pred['xpts_horizon']:.1f}*"
             L.append(f"- → **{o['name']}** ({o['club']}, £{o['price']:.1f}m, {o['owned']:.1f}% owned) "
-                     f"score {score(o, H)}, form {o['form']:.1f}, fixtures {run_str(o, H)}")
+                     f"{scoring_label} {xp(o):.1f}{ref_xpts_o}, form {o['form']:.1f}, fixtures {run_str(o, H)}")
         L.append("")
 
     # Captaincy
     L += [f"## Captain shortlist, GW{gw}", ""]
-    caps = sorted([p for p in squad if p["status"] == "a"], key=lambda x: -captain_score(x))[:4]
+    caps = sorted([p for p in squad if p["status"] == "a"], key=lambda x: -xp_next(x))[:4]
     for c in caps:
         first = c["run"][0] if c["run"] else None
         where = f"{'vs' if first['home'] else 'at'} {first['opp']} (FDR {first['fdr']})" if first else "no fixture"
-        L.append(f"- **{c['name']}** — {where}, ceiling score {captain_score(c)}, "
+        xpts_str = f"xPts {xp_next(c):.2f}" if using_xpts else f"ceiling {captain_score(c)}"
+        L.append(f"- **{c['name']}** — {where}, {xpts_str}, "
                  f"xGI/90 {c['xgi90']:.2f}, {c['owned']:.1f}% owned")
-    L += ["", "---", "",
-          "_Transfer scores weight value (form 32%, fixtures 28%, points per million 22%, "
-          "threat 18%). Captaincy is ranked separately on ceiling — fixture, threat and "
-          "position, with price excluded, because you're doubling points rather than buying them._"]
+    L += ["", "---", ""]
+    if using_xpts:
+        L.append("_Proposals and captaincy ranked by xPts — a per-position linear regression "
+                 "trained on historical FPL data. Run `python3 fpld_xpts.py --train` to retrain._")
+    elif xpts_available:
+        L.append("_Proposals ranked by heuristic (form 32%, fixtures 28%, value 22%, threat 18%). "
+                 "xPts model exists but is **immature** — trained mostly on historical season "
+                 "averages, not real per-GW data. It will activate automatically once enough "
+                 "gameweeks are scored. Retrain with `python3 fpld_xpts.py --pull --train`._")
+    else:
+        L.append("_Transfer scores weight form 32%, fixtures 28%, points per million 22%, "
+                 "threat 18%. Captaincy ranked by ceiling. Run `python3 fpld_xpts.py --pull --train` "
+                 "to switch to ML-based xPts._")
     return "\n".join(L)
 
 
@@ -435,27 +587,110 @@ def main():
     ap.add_argument("--init", action="store_true", help="write a starter config.json")
     ap.add_argument("--print", dest="show", action="store_true", help="print the brief")
     ap.add_argument("--find", metavar="NAME", help="look up how FPL spells a player")
+    ap.add_argument("--fixtures", action="store_true", help="full-season fixture difficulty grid")
     ap.add_argument("--home", help="override the data directory")
     a = ap.parse_args()
 
-    global HOME, CONFIG, STATE, BRIEFS
+    global HOME, CONFIG, STATE, PLAYERS, BRIEFS, FIXTURES
     if a.home:
-        HOME = Path(a.home); CONFIG = HOME / "config.json"; STATE = HOME / "state.json"; BRIEFS = HOME / "briefs"
+        HOME = Path(a.home); CONFIG = HOME / "config.json"; STATE = HOME / "state.json"
+        PLAYERS = HOME / "players.json"; BRIEFS = HOME / "briefs"; FIXTURES = HOME / "fixtures.md"
     HOME.mkdir(parents=True, exist_ok=True)
     BRIEFS.mkdir(exist_ok=True)
 
     if a.find:
+        # Try local map first, fall back to live API
+        pmap = load_player_map()
+        if pmap:
+            hits = find_in_map(pmap, a.find)
+            if not hits:
+                print(f"Nothing matching '{a.find}' in local player map ({len(pmap)} players).")
+            for h in hits[:12]:
+                print(f'  "{h["web_name"]}"  —  {h["full_name"]} '
+                      f'({h["club"]}, £{h["price"]:.1f}m)')
+            if hits:
+                print(f"\n  ({len(pmap)} players in local map. Run the brief to refresh.)")
+        else:
+            print("No local player map yet — fetching from FPL API...")
+            boot = get("bootstrap-static/")
+            save_player_map(boot)
+            teams = {t["id"]: t["short_name"] for t in boot["teams"]}
+            k = norm(a.find)
+            hits = [e for e in boot["elements"]
+                    if k in norm(e.get("web_name", "")) or k in norm(
+                        f"{e.get('first_name','')} {e.get('second_name','')}")]
+            if not hits:
+                print(f"Nothing matching '{a.find}'.")
+            for e in sorted(hits, key=lambda x: -num(x.get("now_cost")))[:12]:
+                print(f'  "{e["web_name"]}"  —  {e.get("first_name","")} {e.get("second_name","")} '
+                      f'({teams.get(e["team"],"?")}, £{num(e.get("now_cost"))/10:.1f}m)')
+            print(f"\n  Player map saved. Future --find will use it offline.")
+        return
+
+    if a.fixtures:
         boot = get("bootstrap-static/")
+        fixtures = get("fixtures/")
         teams = {t["id"]: t["short_name"] for t in boot["teams"]}
-        k = norm(a.find)
-        hits = [e for e in boot["elements"]
-                if k in norm(e.get("web_name", "")) or k in norm(
-                    f"{e.get('first_name','')} {e.get('second_name','')}")]
-        if not hits:
-            print(f"Nothing matching '{a.find}'.")
-        for e in sorted(hits, key=lambda x: -num(x.get("now_cost")))[:12]:
-            print(f'  "{e["web_name"]}"  —  {e.get("first_name","")} {e.get("second_name","")} '
-                  f'({teams.get(e["team"],"?")}, £{num(e.get("now_cost"))/10:.1f}m)')
+        events = boot.get("events", [])
+        nxt = next((e for e in events if e.get("is_next")), None)
+        cur = next((e for e in events if e.get("is_current")), None)
+        upcoming = nxt["id"] if nxt else (cur["id"] + 1 if cur else 1)
+
+        # Build fixture map: team_id -> {gw: [fixture_strings]}
+        team_fixtures = {tid: {gw: [] for gw in range(1, 39)} for tid in teams}
+        team_fdrs = {tid: {gw: [] for gw in range(1, 39)} for tid in teams}
+        for f in fixtures:
+            ev = f.get("event")
+            if ev is None or ev < 1 or ev > 38:
+                continue
+            h, a_team = f.get("team_h"), f.get("team_a")
+            if h in teams:
+                opp = teams.get(a_team, "?")
+                fdr = f.get("team_h_difficulty", 3)
+                team_fixtures[h][ev].append(f"{opp.upper()}({fdr})")
+                team_fdrs[h][ev].append(fdr)
+            if a_team in teams:
+                opp = teams.get(h, "?")
+                fdr = f.get("team_a_difficulty", 3)
+                team_fixtures[a_team][ev].append(f"{opp.lower()}({fdr})")
+                team_fdrs[a_team][ev].append(fdr)
+
+        # Sort teams alphabetically by short_name
+        sorted_teams = sorted(teams.items(), key=lambda x: x[1])
+
+        # Build Markdown table
+        header = "| Team | " + " | ".join(str(gw) for gw in range(1, 39)) + " |"
+        sep = "|---|" + "|".join("---" for _ in range(1, 39)) + "|"
+        rows = [header, sep]
+        for tid, short in sorted_teams:
+            cells = []
+            for gw in range(1, 39):
+                fx = team_fixtures[tid][gw]
+                cells.append(", ".join(fx) if fx else "-")
+            rows.append(f"| {short} | " + " | ".join(cells) + " |")
+
+        # Best runs summary
+        window = range(upcoming, min(upcoming + 10, 39))
+        avg_fdrs = []
+        for tid, short in sorted_teams:
+            fdrs = []
+            for gw in window:
+                fdrs.extend(team_fdrs[tid][gw])
+            avg = mean(fdrs) if fdrs else 3.0
+            avg_fdrs.append((short, avg))
+        best5 = sorted(avg_fdrs, key=lambda x: x[1])[:5]
+
+        lines = ["# Fixture Difficulty Grid", ""]
+        lines.extend(rows)
+        lines += ["", f"## Best runs (next 10 GWs)", "",
+                  f"_From GW{upcoming} to GW{min(upcoming + 9, 38)}, lowest average FDR:_", ""]
+        for rank, (short, avg) in enumerate(best5, 1):
+            lines.append(f"{rank}. **{short}** — avg FDR {avg:.2f}")
+
+        text = "\n".join(lines)
+        FIXTURES.write_text(text)
+        print(text)
+        print(f"\nSaved to {FIXTURES}")
         return
 
     if a.init or not CONFIG.exists():
@@ -469,6 +704,9 @@ def main():
         raise SystemExit(f"Set team_id in {CONFIG} first.")
 
     boot = get("bootstrap-static/")
+    added = save_player_map(boot)
+    if added > 0:
+        print(f"Player map updated: {added} new player(s) added to FPL.")
     fixtures = get("fixtures/")
     model = build(boot, fixtures, cfg["horizon"])
     squad, source = squad_of(cfg, model)
