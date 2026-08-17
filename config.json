@@ -1,0 +1,11 @@
+{
+  "team_id": 5201601,
+  "league_id": 1076361,
+  "horizon": 5,
+  "watchlist": ["Saka", "Palmer", "Gyökeres", "Semenyo", "Gabriel", "Raya"],
+  "squad_fallback": [
+    "Kinsky", "Dúbravka", "Ben White", "Maguire", "Ballard",
+    "De Cuyper", "O'Shea", "B.Fernandes", "Mbeumo", "Tzolis",
+    "Ødegaard", "Gómez", "Haaland", "João Pedro", "Calvert-Lewin"
+  ]
+}
