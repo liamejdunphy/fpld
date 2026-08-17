@@ -45,7 +45,8 @@ jobs:
         run: |
           python3 fpld_brief.py --print
           python3 fpld_league.py --sync --report --quiet || true
-          python3 fpld_xpts.py --pull --train --predict --league || true
+          # Predict only — pull+train happen on Monday's daily run
+          python3 fpld_xpts.py --predict --league || true
 
       - name: Persist databases and commit
         run: |

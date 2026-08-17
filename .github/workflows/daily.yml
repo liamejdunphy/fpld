@@ -47,8 +47,16 @@ jobs:
       - name: Sync league data
         run: python3 fpld_league.py --sync --report --quiet || true
 
-      - name: Update xPts model
-        run: python3 fpld_xpts.py --pull --train --predict --league || true
+      - name: Update xPts predictions
+        run: |
+          # --predict is cheap (uses existing model + fresh bootstrap data).
+          # --pull and --train only run on Mondays (after GWs are scored).
+          DOW=$(date +%u)  # 1=Monday
+          if [ "$DOW" = "1" ]; then
+            python3 fpld_xpts.py --pull --train --predict --league || true
+          else
+            python3 fpld_xpts.py --predict --league || true
+          fi
 
       - name: Persist databases and commit output
         run: |
