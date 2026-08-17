@@ -70,10 +70,7 @@ jobs:
           cp -f ~/.fpld/briefs/*.md data/briefs/ 2>/dev/null || true
           cp -f ~/.fpld/reports/*.md data/reports/ 2>/dev/null || true
 
-          # Persist databases — these must survive between runs.
-          # Only commit DB/JSON changes on Mondays (when --pull --train
-          # actually adds new data). Other days the files change trivially
-          # (ownership ticks, timestamps) and committing is noise.
+          # Persist databases — must survive between runs (runners are ephemeral)
           cp -f ~/.fpld/league.db data/league.db 2>/dev/null || true
           cp -f ~/.fpld/xpts.db data/xpts.db 2>/dev/null || true
           cp -f ~/.fpld/xpts_model.json data/xpts_model.json 2>/dev/null || true
@@ -81,12 +78,7 @@ jobs:
           cp -f ~/.fpld/state.json data/state.json 2>/dev/null || true
           cp -f ~/.fpld/players.json data/players.json 2>/dev/null || true
 
-          # Stage briefs/reports. Commit DBs on Mondays (pull+train day)
-          # or whenever league reports appear (new GW data worth preserving).
-          git add data/briefs/ data/reports/
-          if [ "$DOW" = "1" ] || ! git diff --cached --quiet -- data/reports/; then
-            git add data/
-          fi
+          git add data/
           git diff --cached --quiet || git commit -m "Daily brief $(date +%Y-%m-%d)"
           git push
 
