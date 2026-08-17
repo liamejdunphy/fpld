@@ -17,6 +17,8 @@ permissions:
 jobs:
   brief:
     runs-on: ubuntu-latest
+    outputs:
+      issue_number: ${{ steps.create_issue.outputs.issue_number }}
     steps:
       - uses: actions/checkout@v4
 
@@ -96,6 +98,7 @@ jobs:
             | xargs -I {} gh issue close {} 2>/dev/null || true
 
       - name: Create GitHub Issue with brief
+        id: create_issue
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -123,8 +126,74 @@ jobs:
             # Truncate to GitHub's 65000 char limit
             BODY=$(echo "$BODY" | head -c 65000)
 
-            gh issue create \
+            ISSUE_URL=$(gh issue create \
               --title "${LABEL}: ${TODAY}" \
               --body "$BODY" \
-              --label "$LABEL"
+              --label "$LABEL")
+            echo "issue_url=$ISSUE_URL" >> "$GITHUB_OUTPUT"
+            echo "issue_number=$(echo $ISSUE_URL | grep -o '[0-9]*$')" >> "$GITHUB_OUTPUT"
+          fi
+
+  scout:
+    needs: brief
+    if: needs.brief.outputs.issue_number != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Auto-scout flagged players
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "No ANTHROPIC_API_KEY secret — skipping auto-scout"
+            exit 0
+          fi
+
+          npm install -g @anthropic-ai/claude-code
+
+          TODAY=$(date +%Y-%m-%d)
+          BRIEF="data/briefs/${TODAY}.md"
+
+          if [ ! -f "$BRIEF" ]; then
+            echo "No brief found for today — skipping scout"
+            exit 0
+          fi
+
+          claude --print --allowedTools WebSearch,WebFetch,Read "$(cat <<PROMPT
+          You are the FPL scout (codename: Radar). Read the daily brief at data/briefs/${TODAY}.md
+          and data/brief.json (if it exists).
+
+          Identify players flagged with injuries, price changes, or proposed as transfers in the brief.
+          Pick the top 3-5 most important to scout (prioritise injury doubts and proposed transfers).
+
+          For each player, search the web for the latest news: fitness updates, press conferences,
+          training photos, expected lineups, community sentiment.
+
+          Return a single markdown comment with a structured scout report:
+
+          ## Auto-Scout Report
+
+          For each player:
+          ### Player Name (Club)
+          - **Status**: fit / doubt / injured / suspended
+          - **Detail**: what you found (1-2 sentences, cite sources)
+          - **Verdict**: BUY / HOLD / AVOID / WAIT
+          - **Confidence**: high / medium / low
+
+          Be concise — this lands on a phone. No preamble.
+          PROMPT
+          )" > scout_report.md 2>/dev/null || true
+
+          if [ -s scout_report.md ]; then
+            gh issue comment "${{ needs.brief.outputs.issue_number }}" \
+              --body "$(cat scout_report.md)"
           fi
