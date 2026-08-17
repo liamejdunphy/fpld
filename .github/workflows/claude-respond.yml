@@ -6,15 +6,11 @@ on:
 
 jobs:
   respond:
-    # Only respond to human comments on FPL issues.
-    # Filter out: bot comments, app comments, and the github-actions actor.
+    # Only respond on FPL issues. trigger_phrase: "@claude" handles bot filtering.
     if: |
-      (contains(github.event.issue.labels.*.name, 'daily-brief') ||
-       contains(github.event.issue.labels.*.name, 'deadline-pack') ||
-       contains(github.event.issue.labels.*.name, 'scout-report')) &&
-      !github.event.comment.performed_via_github_app &&
-      github.event.comment.user.type != 'Bot' &&
-      github.event.comment.user.login != 'github-actions[bot]'
+      contains(github.event.issue.labels.*.name, 'daily-brief') ||
+      contains(github.event.issue.labels.*.name, 'deadline-pack') ||
+      contains(github.event.issue.labels.*.name, 'scout-report')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -38,7 +34,7 @@ jobs:
 
       - uses: anthropics/claude-code-action@v1
         with:
-          trigger_phrase: ""
+          trigger_phrase: "@claude"
           use_bedrock: false
           claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch"
           prompt: |
