@@ -168,32 +168,20 @@ jobs:
             exit 0
           fi
 
-          claude --print --allowedTools WebSearch,WebFetch,Read "$(cat <<PROMPT
-          You are the FPL scout (codename: Radar). Read the daily brief at data/briefs/${TODAY}.md
-          and data/brief.json (if it exists).
+          PROMPT="You are the FPL scout (codename: Radar). Read the daily brief at data/briefs/${TODAY}.md and data/brief.json (if it exists). Identify players flagged with injuries, price changes, or proposed as transfers. Pick the top 3-5 most important to scout (prioritise injury doubts and proposed transfers). For each player, search the web for the latest news: fitness updates, press conferences, training photos, expected lineups, community sentiment. Return a single markdown scout report. For each player use this format: ### Player Name (Club) then bullet points for Status (fit/doubt/injured/suspended), Detail (1-2 sentences with sources), Verdict (BUY/HOLD/AVOID/WAIT), Confidence (high/medium/low). Be concise — this lands on a phone. No preamble, start with ## Auto-Scout Report."
 
-          Identify players flagged with injuries, price changes, or proposed as transfers in the brief.
-          Pick the top 3-5 most important to scout (prioritise injury doubts and proposed transfers).
+          claude -p "$PROMPT" \
+            --allowedTools Read,WebSearch,WebFetch \
+            > scout_report.md 2> scout_errors.log || true
 
-          For each player, search the web for the latest news: fitness updates, press conferences,
-          training photos, expected lineups, community sentiment.
-
-          Return a single markdown comment with a structured scout report:
-
-          ## Auto-Scout Report
-
-          For each player:
-          ### Player Name (Club)
-          - **Status**: fit / doubt / injured / suspended
-          - **Detail**: what you found (1-2 sentences, cite sources)
-          - **Verdict**: BUY / HOLD / AVOID / WAIT
-          - **Confidence**: high / medium / low
-
-          Be concise — this lands on a phone. No preamble.
-          PROMPT
-          )" > scout_report.md 2>/dev/null || true
+          echo "--- Claude exit code: $? ---"
+          echo "--- stderr ---"
+          cat scout_errors.log || true
+          echo "--- stdout length: $(wc -c < scout_report.md) bytes ---"
 
           if [ -s scout_report.md ]; then
             gh issue comment "${{ needs.brief.outputs.issue_number }}" \
               --body "$(cat scout_report.md)"
+          else
+            echo "Scout report was empty — check errors above"
           fi
