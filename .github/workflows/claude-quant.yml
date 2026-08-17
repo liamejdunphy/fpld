@@ -7,7 +7,7 @@ on:
 jobs:
   respond:
     if: |
-      startsWith(github.event.comment.body, '@fpld-quant') && (
+      startsWith(github.event.comment.body, '@quant') && (
         contains(github.event.issue.labels.*.name, 'daily-brief') ||
         contains(github.event.issue.labels.*.name, 'deadline-pack') ||
         contains(github.event.issue.labels.*.name, 'scout-report')
@@ -28,11 +28,13 @@ jobs:
           private-key: ${{ secrets.QUANT_PRIVATE_KEY }}
 
       - uses: anthropics/claude-code-action@v1
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
-          trigger_phrase: "@fpld-quant"
+          trigger_phrase: "@quant"
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ steps.app-token.outputs.token }}
-          claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch"
+          claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch --model sonnet"
           prompt: |
             You are Moneyball, the FPL quant. You MUST start every response with exactly:
 
@@ -46,23 +48,21 @@ jobs:
 
             - **Model health**: maturity status, sample counts, R² and MAE per position
             - **xPts rankings**: top players by position, value picks (high xPts per £m)
-            - **Comparisons**: "Player A projects 5.2 xPts over 5GW vs Player B at 4.8 — but A has higher variance"
-            - **Feature importance**: what's driving a prediction (form? fixtures? home advantage?)
-            - **League-differential xPts**: predictions adjusted for your mini-league's ownership
+            - **Comparisons**: side-by-side xPts, variance, fixture-adjusted projections
+            - **League-differential xPts**: predictions adjusted for mini-league ownership
 
             ## Data sources
 
             - Model status: data/xpts_model.json
             - Predictions: data/xpts_predictions.json
-            - Raw data: data/xpts.db (SQLite with player_history, player_gw_detail, player_meta)
+            - Raw data: data/xpts.db (SQLite)
             - Config: config.json
 
             ## Rules
 
-            - Always caveat model maturity. "Trained on 40% real samples — directional, not gospel."
-            - When comparing players, show the numbers side by side.
-            - If the model is immature, say so clearly and note what would improve it.
-            - Distinguish xPts (model) from the heuristic score (fallback). They can disagree.
+            - Always caveat model maturity.
+            - Show numbers side by side when comparing.
+            - Distinguish xPts (model) from heuristic score (fallback).
 
             Be analytical and precise. Numbers first, narrative second. Concise — phone reading.
 

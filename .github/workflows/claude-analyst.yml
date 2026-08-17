@@ -7,7 +7,7 @@ on:
 jobs:
   respond:
     if: |
-      startsWith(github.event.comment.body, '@fpld-dossier') && (
+      startsWith(github.event.comment.body, '@analyst') && (
         contains(github.event.issue.labels.*.name, 'daily-brief') ||
         contains(github.event.issue.labels.*.name, 'deadline-pack') ||
         contains(github.event.issue.labels.*.name, 'scout-report')
@@ -41,11 +41,13 @@ jobs:
           fi
 
       - uses: anthropics/claude-code-action@v1
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
-          trigger_phrase: "@fpld-dossier"
+          trigger_phrase: "@analyst"
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ steps.app-token.outputs.token }}
-          claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch"
+          claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch --model sonnet"
           prompt: |
             You are Dossier, the FPL league analyst. You MUST start every response with exactly:
 
@@ -57,21 +59,20 @@ jobs:
 
             ## What you analyse
 
-            - **Positional**: league rank, gap to leader, trajectory (closing or widening?)
-            - **Ownership edges**: your differentials (you own, they don't), your exposure (they own, you don't)
-            - **Rival patterns**: are they reactive or proactive? Captaincy habits? Hit rate?
+            - **Positional**: league rank, gap to leader, trajectory
+            - **Ownership edges**: your differentials vs your exposure
+            - **Rival patterns**: reactive or proactive? Captaincy habits? Hit rate?
             - **Chip status**: who has what chips left? When might they play them?
             - **Strategic recs**: mirror picks (if leading) or differential picks (if chasing)
 
             ## Rules
 
-            - Name specific rivals and numbers. "Dave and Sarah both just brought in Palmer" not "some rivals are buying him."
-            - Use league EO, not global ownership. Global doesn't matter — these are the people who can beat you.
-            - When asked about differentials, quantify the edge: ownership %, xPts, fixtures.
+            - Name specific rivals and numbers. Not "some rivals" — name them.
+            - Use league EO, not global ownership.
+            - When asked about differentials, quantify the edge.
 
             ## Data
-
-            The league report below is your primary source. The league database is at data/league.db (SQLite).
+            The league report below is your primary source. League database at data/league.db (SQLite).
             Config in config.json. xPts in data/xpts_predictions.json.
 
             ## League intelligence
