@@ -69,7 +69,7 @@
   "price": 5.5,
   "xpts": 2.04,
   "xpts_horizon": 10.13,
-  "owned": 25.0
+  "owned": 25.1
  },
  "9": {
   "name": "Hincapie",
@@ -240,7 +240,7 @@
   "price": 7.0,
   "xpts": 1.71,
   "xpts_horizon": 7.43,
-  "owned": 9.3
+  "owned": 9.2
  },
  "557": {
   "name": "Tzolis",
@@ -249,7 +249,7 @@
   "price": 6.5,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 12.8
+  "owned": 12.9
  },
  "28": {
   "name": "Martinez",
@@ -816,7 +816,7 @@
   "price": 4.5,
   "xpts": 1.0,
   "xpts_horizon": 4.96,
-  "owned": 0.3
+  "owned": 0.2
  },
  "90": {
   "name": "Hickey",
@@ -978,7 +978,7 @@
   "price": 5.5,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 1.7
+  "owned": 1.8
  },
  "109": {
   "name": "Verbruggen",
@@ -1815,7 +1815,7 @@
   "price": 5.5,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 0.9
+  "owned": 0.8
  },
  "194": {
   "name": "Thomas-Asante",
@@ -2193,7 +2193,7 @@
   "price": 4.5,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 0.1
+  "owned": 0.0
  },
  "229": {
   "name": "Tarkowski",
@@ -3210,7 +3210,7 @@
   "price": 4.5,
   "xpts": 1.5,
   "xpts_horizon": 7.54,
-  "owned": 2.4
+  "owned": 2.5
  },
  "330": {
   "name": "Bogle",
@@ -3390,7 +3390,7 @@
   "price": 5.0,
   "xpts": 1.33,
   "xpts_horizon": 6.53,
-  "owned": 2.7
+  "owned": 2.8
  },
  "350": {
   "name": "A.Becker",
@@ -3561,7 +3561,7 @@
   "price": 7.0,
   "xpts": 0.66,
   "xpts_horizon": 3.91,
-  "owned": 41.3
+  "owned": 41.2
  },
  "369": {
   "name": "Ngumoha",
@@ -3957,7 +3957,7 @@
   "price": 15.5,
   "xpts": 0.43,
   "xpts_horizon": 3.48,
-  "owned": 71.2
+  "owned": 71.1
  },
  "481": {
   "name": "Anderson",
@@ -4011,7 +4011,7 @@
   "price": 5.0,
   "xpts": 1.43,
   "xpts_horizon": 7.14,
-  "owned": 18.6
+  "owned": 18.5
  },
  "413": {
   "name": "Bayindir",
@@ -4146,7 +4146,7 @@
   "price": 8.0,
   "xpts": 0.55,
   "xpts_horizon": 3.02,
-  "owned": 29.7
+  "owned": 29.8
  },
  "428": {
   "name": "Cunha",
@@ -4497,7 +4497,7 @@
   "price": 5.0,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 0.5
+  "owned": 0.6
  },
  "467": {
   "name": "Sels",
