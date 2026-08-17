@@ -28,13 +28,11 @@ jobs:
           private-key: ${{ secrets.RADAR_PRIVATE_KEY }}
 
       - uses: anthropics/claude-code-action@v1
-        env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        id: claude
         with:
           trigger_phrase: "/scout"
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ steps.app-token.outputs.token }}
-          show_full_output: true
           claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch --model sonnet"
           prompt: |
             You are Radar, the FPL scout. You MUST start every response with exactly:
@@ -75,3 +73,29 @@ jobs:
 
             The issue body:
             ${{ github.event.issue.body }}
+
+      - name: Post comment
+        if: always()
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          # claude-code-action has a known bug where it doesn't post issue comments.
+          # Extract the result from its output file and post manually.
+          python3 -c "
+          import json, sys
+          try:
+              with open('/home/runner/work/_temp/claude-execution-output.json') as f:
+                  for line in reversed(f.read().strip().split('\n')):
+                      obj = json.loads(line)
+                      if obj.get('type') == 'result' and obj.get('result'):
+                          with open('comment.md', 'w') as out:
+                              out.write(obj['result'])
+                          sys.exit(0)
+          except Exception as e:
+              print(f'Failed to extract result: {e}')
+          sys.exit(1)
+          " || exit 0
+
+          if [ -s comment.md ]; then
+            gh issue comment ${{ github.event.issue.number }} --body-file comment.md
+          fi
