@@ -6,7 +6,7 @@
   "price": 6.0,
   "xpts": 1.9,
   "xpts_horizon": 9.63,
-  "owned": 33.5
+  "owned": 33.6
  },
  "2": {
   "name": "Arrizabalaga",
@@ -69,7 +69,7 @@
   "price": 5.5,
   "xpts": 2.04,
   "xpts_horizon": 10.13,
-  "owned": 24.9
+  "owned": 25.0
  },
  "9": {
   "name": "Hincapie",
@@ -249,7 +249,7 @@
   "price": 6.5,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 12.6
+  "owned": 12.8
  },
  "28": {
   "name": "Martinez",
@@ -285,7 +285,7 @@
   "price": 4.5,
   "xpts": 1.4,
   "xpts_horizon": 7.01,
-  "owned": 15.2
+  "owned": 15.1
  },
  "32": {
   "name": "Cash",
@@ -456,7 +456,7 @@
   "price": 6.0,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 1.1
+  "owned": 1.0
  },
  "54": {
   "name": "Gomes",
@@ -816,7 +816,7 @@
   "price": 4.5,
   "xpts": 1.0,
   "xpts_horizon": 4.96,
-  "owned": 0.2
+  "owned": 0.3
  },
  "90": {
   "name": "Hickey",
@@ -951,7 +951,7 @@
   "price": 8.0,
   "xpts": 0.48,
   "xpts_horizon": 3.91,
-  "owned": 17.3
+  "owned": 17.4
  },
  "107": {
   "name": "Furo",
@@ -1104,7 +1104,7 @@
   "price": 5.5,
   "xpts": 1.25,
   "xpts_horizon": 5.77,
-  "owned": 11.7
+  "owned": 11.8
  },
  "125": {
   "name": "Georginio",
@@ -1131,7 +1131,7 @@
   "price": 5.0,
   "xpts": 0.61,
   "xpts_horizon": 2.57,
-  "owned": 2.8
+  "owned": 2.7
  },
  "128": {
   "name": "Buonanotte",
@@ -1491,7 +1491,7 @@
   "price": 7.5,
   "xpts": 1.54,
   "xpts_horizon": 6.19,
-  "owned": 59.1
+  "owned": 59.2
  },
  "166": {
   "name": "N.Jackson",
@@ -1617,7 +1617,7 @@
   "price": 4.0,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 2.2
+  "owned": 2.1
  },
  "172": {
   "name": "Wilson",
@@ -1968,7 +1968,7 @@
   "price": 6.5,
   "xpts": 0.81,
   "xpts_horizon": 4.52,
-  "owned": 6.7
+  "owned": 6.6
  },
  "210": {
   "name": "Wharton",
@@ -2193,7 +2193,7 @@
   "price": 4.5,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 0.0
+  "owned": 0.1
  },
  "229": {
   "name": "Tarkowski",
@@ -3183,7 +3183,7 @@
   "price": 6.5,
   "xpts": 1.12,
   "xpts_horizon": 6.38,
-  "owned": 7.4
+  "owned": 7.3
  },
  "326": {
   "name": "Perri",
@@ -3354,7 +3354,7 @@
   "price": 6.0,
   "xpts": 1.13,
   "xpts_horizon": 3.19,
-  "owned": 26.6
+  "owned": 26.7
  },
  "347": {
   "name": "Nmecha",
@@ -3723,7 +3723,7 @@
   "price": 5.5,
   "xpts": 1.72,
   "xpts_horizon": 8.64,
-  "owned": 10.1
+  "owned": 10.0
  },
  "386": {
   "name": "Bettinelli",
@@ -3759,7 +3759,7 @@
   "price": 6.0,
   "xpts": 0.22,
   "xpts_horizon": 1.1,
-  "owned": 3.6
+  "owned": 3.5
  },
  "390": {
   "name": "R\u00faben",
@@ -4065,7 +4065,7 @@
   "price": 5.0,
   "xpts": 1.9,
   "xpts_horizon": 9.53,
-  "owned": 11.7
+  "owned": 11.8
  },
  "419": {
   "name": "Martinez",
@@ -4092,7 +4092,7 @@
   "price": 4.5,
   "xpts": 1.19,
   "xpts_horizon": 5.98,
-  "owned": 0.3
+  "owned": 0.4
  },
  "422": {
   "name": "Mazraoui",
@@ -4101,7 +4101,7 @@
   "price": 4.5,
   "xpts": 1.25,
   "xpts_horizon": 6.24,
-  "owned": 0.8
+  "owned": 0.7
  },
  "423": {
   "name": "Shaw",
@@ -4110,7 +4110,7 @@
   "price": 4.5,
   "xpts": 1.45,
   "xpts_horizon": 7.25,
-  "owned": 23.0
+  "owned": 22.9
  },
  "424": {
   "name": "Amass",
@@ -4686,7 +4686,7 @@
   "price": 5.0,
   "xpts": 0.71,
   "xpts_horizon": 2.74,
-  "owned": 0.7
+  "owned": 0.8
  },
  "489": {
   "name": "Yates",
@@ -4749,7 +4749,7 @@
   "price": 5.5,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 0.4
+  "owned": 0.5
  },
  "590": {
   "name": "Benda",
@@ -5073,7 +5073,7 @@
   "price": 6.0,
   "xpts": 0.7,
   "xpts_horizon": 1.41,
-  "owned": 2.4
+  "owned": 2.5
  },
  "528": {
   "name": "Scarlett",
