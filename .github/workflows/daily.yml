@@ -46,6 +46,7 @@ jobs:
 
       - name: Sync league data
         run: python3 fpld_league.py --sync --report --quiet || true
+        # || true: league sync fails pre-GW1 (no scored data yet)
 
       - name: Update xPts predictions
         run: |
@@ -53,9 +54,11 @@ jobs:
           # --pull and --train only run on Mondays (after GWs are scored).
           DOW=$(date +%u)  # 1=Monday
           if [ "$DOW" = "1" ]; then
-            python3 fpld_xpts.py --pull --train --predict --league || true
+            python3 fpld_xpts.py --pull --train --predict --league
+          elif [ -f data/xpts_model.json ]; then
+            python3 fpld_xpts.py --predict --league
           else
-            python3 fpld_xpts.py --predict --league || true
+            echo "No model yet — skipping predict (will train on Monday)"
           fi
 
       - name: Persist databases and commit output
@@ -106,7 +109,7 @@ jobs:
             gh issue create \
               --title "${LABEL}: ${TODAY}" \
               --body "$BODY" \
-              --label "$LABEL" || true
+              --label "$LABEL"
           fi
 
       - name: Close old issues

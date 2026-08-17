@@ -46,7 +46,9 @@ jobs:
           python3 fpld_brief.py --print
           python3 fpld_league.py --sync --report --quiet || true
           # Predict only — pull+train happen on Monday's daily run
-          python3 fpld_xpts.py --predict --league || true
+          if [ -f data/xpts_model.json ]; then
+            python3 fpld_xpts.py --predict --league
+          fi
 
       - name: Persist databases and commit
         run: |
@@ -96,7 +98,7 @@ jobs:
           gh issue create \
             --title "Deadline pack — ${TODAY}" \
             --body "$BODY" \
-            --label "deadline-pack" || true
+            --label "deadline-pack"
 
       - name: Close old deadline packs
         env:
