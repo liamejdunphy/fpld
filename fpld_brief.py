@@ -367,6 +367,7 @@ def brief(cfg, model, squad, source, d, standings):
             pass
 
     # Risk dial
+    mode = None
     if standings:
         me = next((r for r in standings if r["entry"] == cfg["team_id"]), None)
         top = standings[0] if standings else None
@@ -498,13 +499,42 @@ def brief(cfg, model, squad, source, d, standings):
     xpts_data, xpts_mature = load_xpts()
     using_xpts = xpts_data is not None and xpts_mature
     xpts_available = xpts_data is not None  # immature model exists but not primary
+
+    # EO-aware scoring: use differential xPts when mode demands it
+    # AGGRESSIVE/SWING → favour low-EO (diff_xpts), SHIELD → favour high-EO (template)
+    has_diff = using_xpts and any(
+        "diff_xpts_horizon" in v for v in xpts_data.values() if isinstance(v, dict))
+    use_diff = has_diff and mode in ("AGGRESSIVE", "SWING")
+    use_shield = has_diff and mode == "SHIELD"
+
     if using_xpts:
-        def xp(p):
-            pred = xpts_data.get(p["id"])
-            return pred["xpts_horizon"] if pred else 0.0
-        def xp_next(p):
-            pred = xpts_data.get(p["id"])
-            return pred["xpts"] if pred else 0.0
+        if use_diff:
+            def xp(p):
+                pred = xpts_data.get(p["id"])
+                return pred.get("diff_xpts_horizon", pred["xpts_horizon"]) if pred else 0.0
+            def xp_next(p):
+                pred = xpts_data.get(p["id"])
+                return pred.get("diff_xpts", pred["xpts"]) if pred else 0.0
+        elif use_shield:
+            # SHIELD: penalise low-EO picks — invert the differential
+            # eo_boost = xpts * (1 + league_eo/200) — high-EO picks score higher
+            def xp(p):
+                pred = xpts_data.get(p["id"])
+                if not pred: return 0.0
+                eo = pred.get("league_eo", 0.0)
+                return pred["xpts_horizon"] * (1.0 + eo / 200.0)
+            def xp_next(p):
+                pred = xpts_data.get(p["id"])
+                if not pred: return 0.0
+                eo = pred.get("league_eo", 0.0)
+                return pred["xpts"] * (1.0 + eo / 200.0)
+        else:
+            def xp(p):
+                pred = xpts_data.get(p["id"])
+                return pred["xpts_horizon"] if pred else 0.0
+            def xp_next(p):
+                pred = xpts_data.get(p["id"])
+                return pred["xpts"] if pred else 0.0
         scoring_label = "xPts"
     else:
         def xp(p):
@@ -515,7 +545,12 @@ def brief(cfg, model, squad, source, d, standings):
 
     L += ["## Proposed moves — nothing is applied", ""]
     if using_xpts:
-        L.append("_Ranked by xPts (ML model trained on historical data)._")
+        if use_diff:
+            L.append("_Ranked by differential xPts — low league EO, high ceiling._")
+        elif use_shield:
+            L.append("_Ranked by template xPts — high league EO, protect your lead._")
+        else:
+            L.append("_Ranked by xPts (ML model trained on historical data)._")
         L.append("")
     elif xpts_available:
         L.append("_Ranked by heuristic. xPts shown for reference (model immature)._")
@@ -551,7 +586,12 @@ def brief(cfg, model, squad, source, d, standings):
                 pred = xpts_data.get(o["id"])
                 if pred:
                     ref_xpts_o = f", xPts {pred['xpts_horizon']:.1f}*"
-            L.append(f"- → **{o['name']}** ({o['club']}, £{o['price']:.1f}m, {o['owned']:.1f}% owned) "
+            eo_str = ""
+            if has_diff:
+                pred = xpts_data.get(o["id"])
+                if pred and "league_eo" in pred:
+                    eo_str = f", league EO {pred['league_eo']:.0f}%"
+            L.append(f"- → **{o['name']}** ({o['club']}, £{o['price']:.1f}m, {o['owned']:.1f}% owned{eo_str}) "
                      f"{scoring_label} {xp(o):.1f}{ref_xpts_o}, form {o['form']:.1f}, fixtures {run_str(o, H)}")
         L.append("")
 
@@ -562,8 +602,13 @@ def brief(cfg, model, squad, source, d, standings):
         first = c["run"][0] if c["run"] else None
         where = f"{'vs' if first['home'] else 'at'} {first['opp']} (FDR {first['fdr']})" if first else "no fixture"
         xpts_str = f"xPts {xp_next(c):.2f}" if using_xpts else f"ceiling {captain_score(c)}"
+        eo_cap = ""
+        if has_diff:
+            pred = xpts_data.get(c["id"])
+            if pred and "league_eo" in pred:
+                eo_cap = f", league EO {pred['league_eo']:.0f}%"
         L.append(f"- **{c['name']}** — {where}, {xpts_str}, "
-                 f"xGI/90 {c['xgi90']:.2f}, {c['owned']:.1f}% owned")
+                 f"xGI/90 {c['xgi90']:.2f}, {c['owned']:.1f}% owned{eo_cap}")
     L += ["", "---", ""]
     if using_xpts:
         L.append("_Proposals and captaincy ranked by xPts — a per-position linear regression "

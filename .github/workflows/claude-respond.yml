@@ -19,6 +19,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Load latest league report
+        id: league
+        run: |
+          REPORT=$(ls -t data/reports/league-*.md 2>/dev/null | head -1)
+          if [ -n "$REPORT" ] && [ -f "$REPORT" ]; then
+            # Truncate to 15k chars to stay within prompt limits
+            BODY=$(head -c 15000 "$REPORT")
+            # Use a delimiter to safely pass multiline content
+            echo "report<<LEAGUE_EOF" >> "$GITHUB_OUTPUT"
+            echo "$BODY" >> "$GITHUB_OUTPUT"
+            echo "LEAGUE_EOF" >> "$GITHUB_OUTPUT"
+          else
+            echo "report=No league report available yet." >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: anthropics/claude-code-action@v1
         with:
           trigger_phrase: ""
@@ -39,13 +54,21 @@ jobs:
             The squad config is in config.json.
             The xPts model status is in data/xpts_model.json.
 
+            ## League intelligence
+
+            The latest league report is below. Use this for rival analysis, EO context, captaincy splits, and transfer patterns.
+            If the user asks about rivals, differentials, or "what should I do differently", this is your primary source.
+
+            ${{ steps.league.outputs.report }}
+
             ## Rules
 
             - Be concise — the user is on their phone.
             - If asked to scout, search the web and return a structured verdict.
             - If asked to pick a team, commit to a recommendation (don't hedge).
             - If asked about transfers, give a specific OUT → IN with reasoning.
-            - Always consider league context if league report data exists in data/reports/.
+            - Use the league report for rival context — don't just say "check data/reports/".
+            - When recommending differentials, consider league EO: low EO = high differential value.
 
             The user's comment:
             ${{ github.event.comment.body }}
