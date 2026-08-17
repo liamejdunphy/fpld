@@ -13,6 +13,7 @@ on:
 permissions:
   contents: write
   issues: write
+  id-token: write
 
 jobs:
   brief:
@@ -128,3 +129,69 @@ jobs:
               --body "$BODY" \
               --label "$LABEL"
           fi
+
+  scout:
+    needs: brief
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get latest issue body
+        id: issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BODY=$(gh issue list --label "daily-brief" --state open --json body --jq '.[0].body' 2>/dev/null || true)
+          if [ -z "$BODY" ]; then
+            BODY=$(gh issue list --label "deadline-pack" --state open --json body --jq '.[0].body' 2>/dev/null || true)
+          fi
+          if [ -z "$BODY" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "body<<BRIEF_EOF" >> "$GITHUB_OUTPUT"
+            echo "$BODY" | head -c 30000 >> "$GITHUB_OUTPUT"
+            echo "BRIEF_EOF" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Get issue number for comment
+        if: steps.issue.outputs.skip != 'true'
+        id: num
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          NUM=$(gh issue list --label "daily-brief" --state open --json number --jq '.[0].number' 2>/dev/null || true)
+          if [ -z "$NUM" ]; then
+            NUM=$(gh issue list --label "deadline-pack" --state open --json number --jq '.[0].number' 2>/dev/null || true)
+          fi
+          echo "number=$NUM" >> "$GITHUB_OUTPUT"
+
+      - name: Scout brief
+        if: steps.issue.outputs.skip != 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          trigger_phrase: ""
+          use_bedrock: false
+          claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch"
+          prompt: |
+            You are the FPL manager's autonomous scout. A daily brief has just been posted. Read it and decide what's worth investigating.
+
+            Look for:
+            1. **Flagged players** — anyone with an injury flag. Search the web for current status.
+            2. **Price watch** — anyone about to rise or fall. Flag urgency if rising tonight.
+            3. **Deadline proximity** — if <24h away, be thorough. If 4+ days, be brief.
+            4. **Transfer proposals** — scout the top candidate (fitness, nailed status).
+            5. **Nothing actionable** — say so in one line. Don't pad.
+
+            Rules:
+            - Be concise. Lead with the most important finding.
+            - If you search the web, cite what you found.
+            - End with **Action needed: Yes/No**.
+            - If nothing to report: "Squad clean, no flags, no urgent moves."
+
+            The playbook is in docs/playbook.md. Config is in config.json.
+
+            Post your findings as a comment on issue #${{ steps.num.outputs.number }}.
+
+            Here is the brief:
+            ${{ steps.issue.outputs.body }}
