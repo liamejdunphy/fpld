@@ -12,12 +12,16 @@ config.json                    your team_id and league_id (already filled in)
 fpld_brief.py                  daily brief: prices, injuries, fixtures, proposals
 fpld_league.py                 mini-league intelligence: rival squads, league EO
 planner/                       five-gameweek transfer planner (Vite + React)
+docs/tutorial.md               first-time walkthrough, zero to first brief
+docs/how-to.md                 task-oriented recipes (automate, deploy, etc.)
 docs/playbook.md               season strategy: risk dial, chip plan, calendar
-docs/setup.md                  detailed setup and scheduling notes
 data/                          SQLite database, briefs, daily state (committed)
 .github/workflows/daily.yml    runs it at 07:00 UTC and commits the output
 .github/workflows/planner.yml  deploys the planner to GitHub Pages on push
 ```
+
+New here? Start with the **[tutorial](docs/tutorial.md)**. Already set up?
+See the **[how-to guides](docs/how-to.md)**.
 
 ## Run it locally
 
