@@ -7,7 +7,7 @@ on:
 jobs:
   respond:
     if: |
-      startsWith(github.event.comment.body, '@analyst') && (
+      startsWith(github.event.comment.body, '@fpld-dossier') && (
         contains(github.event.issue.labels.*.name, 'daily-brief') ||
         contains(github.event.issue.labels.*.name, 'deadline-pack') ||
         contains(github.event.issue.labels.*.name, 'scout-report')
@@ -42,8 +42,8 @@ jobs:
 
       - uses: anthropics/claude-code-action@v1
         with:
-          trigger_phrase: "@analyst"
-          use_bedrock: false
+          trigger_phrase: "@fpld-dossier"
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ steps.app-token.outputs.token }}
           claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch"
           prompt: |
