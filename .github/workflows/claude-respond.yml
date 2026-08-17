@@ -6,16 +6,20 @@ on:
 
 jobs:
   respond:
-    # Only respond on FPL brief/deadline issues, and only to human comments
+    # Only respond to human comments on FPL issues.
+    # Filter out: bot comments, app comments, and the github-actions actor.
     if: |
       (contains(github.event.issue.labels.*.name, 'daily-brief') ||
        contains(github.event.issue.labels.*.name, 'deadline-pack') ||
        contains(github.event.issue.labels.*.name, 'scout-report')) &&
-      !github.event.comment.performed_via_github_app
+      !github.event.comment.performed_via_github_app &&
+      github.event.comment.user.type != 'Bot' &&
+      github.event.comment.user.login != 'github-actions[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: read
       issues: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
 
@@ -24,9 +28,7 @@ jobs:
         run: |
           REPORT=$(ls -t data/reports/league-*.md 2>/dev/null | head -1)
           if [ -n "$REPORT" ] && [ -f "$REPORT" ]; then
-            # Truncate to 15k chars to stay within prompt limits
             BODY=$(head -c 15000 "$REPORT")
-            # Use a delimiter to safely pass multiline content
             echo "report<<LEAGUE_EOF" >> "$GITHUB_OUTPUT"
             echo "$BODY" >> "$GITHUB_OUTPUT"
             echo "LEAGUE_EOF" >> "$GITHUB_OUTPUT"
@@ -38,7 +40,7 @@ jobs:
         with:
           trigger_phrase: ""
           use_bedrock: false
-          direct_prompt: |
+          prompt: |
             You are the FPL backroom staff. The user has commented on an FPL brief issue from their phone. They may be asking you to:
 
             - Scout a specific player ("scout Palmer", "is Shaw fit?")
@@ -75,6 +77,3 @@ jobs:
 
             The issue body (brief/report):
             ${{ github.event.issue.body }}
-          allowed_tools: "WebSearch,WebFetch,Read,Grep,Glob"
-          model: "sonnet"
-          timeout_minutes: 10

@@ -12,6 +12,7 @@ jobs:
     permissions:
       contents: read
       issues: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
 
@@ -19,14 +20,14 @@ jobs:
         with:
           trigger_phrase: ""
           use_bedrock: false
-          direct_prompt: |
+          prompt: |
             You are the FPL manager's autonomous scout. A daily brief has just been posted as a GitHub Issue. Read the issue body carefully and decide what's worth investigating.
 
             ## Your job
 
             Read the brief below and look for:
 
-            1. **Flagged players** — anyone in the squad with an injury flag (⚠️, yellow, red). If found, search the web for their current status and expected return.
+            1. **Flagged players** — anyone in the squad with an injury flag. If found, search the web for their current status and expected return.
             2. **Price watch** — anyone about to rise or fall in price. If a target is rising tonight, flag urgency.
             3. **Deadline proximity** — if the deadline is <24h away, be more thorough. If it's 4+ days away, be brief.
             4. **Transfer proposals** — if the brief suggests replacements, quickly scout the top candidate (fitness, nailed status).
@@ -39,7 +40,7 @@ jobs:
             - If you scout a player via web search, cite what you found.
             - End with a clear **Action needed: Yes/No** line.
             - On deadline day (deadline <24h), add a captain recommendation and any last-minute intel.
-            - If there's genuinely nothing to report, just comment: "✅ Squad clean, no flags, no urgent moves. Next check tomorrow."
+            - If there's genuinely nothing to report, just comment: "Squad clean, no flags, no urgent moves. Next check tomorrow."
 
             ## Context
 
@@ -50,6 +51,3 @@ jobs:
             Here is the brief:
 
             ${{ github.event.issue.body }}
-          allowed_tools: "WebSearch,WebFetch,Read,Grep,Glob"
-          model: "sonnet"
-          timeout_minutes: 10
