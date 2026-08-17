@@ -7,7 +7,7 @@ on:
 jobs:
   respond:
     if: |
-      startsWith(github.event.comment.body, '@coach') && (
+      startsWith(github.event.comment.body, '/coach') && (
         contains(github.event.issue.labels.*.name, 'daily-brief') ||
         contains(github.event.issue.labels.*.name, 'deadline-pack') ||
         contains(github.event.issue.labels.*.name, 'scout-report')
@@ -44,7 +44,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
-          trigger_phrase: "@coach"
+          trigger_phrase: "/coach"
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ steps.app-token.outputs.token }}
           claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch --model sonnet"

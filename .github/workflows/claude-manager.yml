@@ -7,7 +7,7 @@ on:
 jobs:
   manager:
     if: |
-      startsWith(github.event.comment.body, '@gaffer') && (
+      startsWith(github.event.comment.body, '/gaffer') && (
         contains(github.event.issue.labels.*.name, 'daily-brief') ||
         contains(github.event.issue.labels.*.name, 'deadline-pack') ||
         contains(github.event.issue.labels.*.name, 'scout-report')
@@ -44,7 +44,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
-          trigger_phrase: "@gaffer"
+          trigger_phrase: "/gaffer"
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ steps.app-token.outputs.token }}
           claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch --model sonnet"
@@ -81,7 +81,7 @@ jobs:
   # @claude catch-all defaults to the Gaffer
   claude-catchall:
     if: |
-      startsWith(github.event.comment.body, '@claude') && (
+      startsWith(github.event.comment.body, '/claude') && (
         contains(github.event.issue.labels.*.name, 'daily-brief') ||
         contains(github.event.issue.labels.*.name, 'deadline-pack') ||
         contains(github.event.issue.labels.*.name, 'scout-report')
@@ -118,7 +118,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
-          trigger_phrase: "@claude"
+          trigger_phrase: "/claude"
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ steps.app-token.outputs.token }}
           claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch --model sonnet"
@@ -131,8 +131,8 @@ jobs:
 
             Then a blank line, then your answer.
 
-            If the question is clearly about scouting, mention they can try `@scout` for a direct line to Radar.
-            Similarly: `@coach` for team selection, `@analyst` for rival intel, `@quant` for model questions.
+            If the question is clearly about scouting, mention they can try `/scout` for a direct line to Radar.
+            Similarly: `/coach` for team selection, `/analyst` for rival intel, `/quant` for model questions.
 
             ## What you do
 
