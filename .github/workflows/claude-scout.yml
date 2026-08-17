@@ -67,6 +67,7 @@ jobs:
             Config is in config.json. xPts data in data/xpts_predictions.json.
 
             Be concise — the user is on their phone. Cite sources. No hedging.
+            IMPORTANT: Do not second-guess or "correct" sources on factual claims like manager names, transfer details, or club roles. Your training data may be outdated — trust current sources over your prior knowledge. If sources conflict with each other, note the conflict rather than picking the one that matches your assumptions.
 
             The user's comment:
             ${{ github.event.comment.body }}
