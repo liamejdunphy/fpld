@@ -52,8 +52,8 @@ jobs:
         run: |
           # --predict is cheap (uses existing model + fresh bootstrap data).
           # --pull and --train only run on Mondays (after GWs are scored).
-          DOW=$(date +%u)  # 1=Monday
-          if [ "$DOW" = "1" ]; then
+          DOW=$(date +%u)  # 2=Tuesday
+          if [ "$DOW" = "2" ]; then
             python3 fpld_xpts.py --pull --train --predict --league
           elif [ -f data/xpts_model.json ]; then
             python3 fpld_xpts.py --predict --league
