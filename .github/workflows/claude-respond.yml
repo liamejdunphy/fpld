@@ -1,0 +1,57 @@
+name: Claude respond
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  respond:
+    # Only respond on FPL brief/deadline issues, and only to human comments
+    if: |
+      (contains(github.event.issue.labels.*.name, 'daily-brief') ||
+       contains(github.event.issue.labels.*.name, 'deadline-pack') ||
+       contains(github.event.issue.labels.*.name, 'scout-report')) &&
+      !github.event.comment.performed_via_github_app
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          trigger_phrase: ""
+          use_bedrock: false
+          direct_prompt: |
+            You are the FPL backroom staff. The user has commented on an FPL brief issue from their phone. They may be asking you to:
+
+            - Scout a specific player ("scout Palmer", "is Shaw fit?")
+            - Pick their team ("pick my GW3 team", "who should I captain?")
+            - Analyse rivals ("what are my rivals doing?")
+            - Make a transfer decision ("should I get Saka in?")
+            - Ask a general FPL strategy question
+
+            ## Context
+
+            The issue body contains the daily brief or deadline pack. Read it for squad, fixtures, proposals, and captain shortlist.
+            The playbook is in docs/playbook.md — follow the risk dial and chip rules.
+            The squad config is in config.json.
+            The xPts model status is in data/xpts_model.json.
+
+            ## Rules
+
+            - Be concise — the user is on their phone.
+            - If asked to scout, search the web and return a structured verdict.
+            - If asked to pick a team, commit to a recommendation (don't hedge).
+            - If asked about transfers, give a specific OUT → IN with reasoning.
+            - Always consider league context if league report data exists in data/reports/.
+
+            The user's comment:
+            ${{ github.event.comment.body }}
+
+            The issue body (brief/report):
+            ${{ github.event.issue.body }}
+          allowed_tools: "WebSearch,WebFetch,Read,Grep,Glob"
+          model: "sonnet"
+          timeout_minutes: 10
