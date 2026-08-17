@@ -83,6 +83,18 @@ jobs:
           git diff --cached --quiet || git commit -m "Daily brief $(date +%Y-%m-%d)"
           git push
 
+      - name: Close previous issues
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Close ALL open daily-brief issues (new one replaces them)
+          gh issue list --label "daily-brief" --state open --json number --jq '.[].number' \
+            | xargs -I {} gh issue close {} --comment "Superseded by new brief." 2>/dev/null || true
+          # Close deadline-pack issues older than 3 days
+          gh issue list --label "deadline-pack" --state open --json number,createdAt \
+            --jq '.[] | select(.createdAt < (now - 259200 | strftime("%Y-%m-%dT%H:%M:%SZ"))) | .number' \
+            | xargs -I {} gh issue close {} --comment "Deadline passed." 2>/dev/null || true
+
       - name: Create GitHub Issue with brief
         env:
           GH_TOKEN: ${{ github.token }}
@@ -116,16 +128,3 @@ jobs:
               --body "$BODY" \
               --label "$LABEL"
           fi
-
-      - name: Close old issues
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          # Close daily-brief issues older than today
-          gh issue list --label "daily-brief" --state open --json number,createdAt \
-            --jq '.[] | select(.createdAt < (now - 86400 | strftime("%Y-%m-%dT%H:%M:%SZ"))) | .number' \
-            | xargs -I {} gh issue close {} --comment "Superseded by today's brief." 2>/dev/null || true
-          # Close deadline-pack issues older than 3 days
-          gh issue list --label "deadline-pack" --state open --json number,createdAt \
-            --jq '.[] | select(.createdAt < (now - 259200 | strftime("%Y-%m-%dT%H:%M:%SZ"))) | .number' \
-            | xargs -I {} gh issue close {} --comment "Deadline passed." 2>/dev/null || true
