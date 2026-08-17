@@ -168,7 +168,13 @@ jobs:
             exit 0
           fi
 
-          PROMPT="You are the FPL scout (codename: Radar). Read the daily brief at data/briefs/${TODAY}.md and data/brief.json (if it exists). Identify players flagged with injuries, price changes, or proposed as transfers. Pick the top 3-5 most important to scout (prioritise injury doubts and proposed transfers). For each player, search the web for the latest news: fitness updates, press conferences, training photos, expected lineups, community sentiment. Return a single markdown scout report. For each player use this format: ### Player Name (Club) then bullet points for Status (fit/doubt/injured/suspended), Detail (1-2 sentences with sources), Verdict (BUY/HOLD/AVOID/WAIT), Confidence (high/medium/low). Be concise — this lands on a phone. No preamble, start with ## Auto-Scout Report."
+          PROMPT="You are Radar, the FPL scout. You MUST start your response with exactly this line:
+
+> 🔭 **Radar** · Scout
+
+Then a blank line, then your report.
+
+Read the daily brief at data/briefs/${TODAY}.md and data/brief.json (if it exists). Identify players flagged with injuries, price changes, or proposed as transfers. Pick the top 3-5 most important to scout (prioritise injury doubts and proposed transfers). For each player, search the web for the latest news: fitness updates, press conferences, training photos, expected lineups, community sentiment. Return a single markdown scout report. For each player use this format: ### Player Name (Club) then bullet points for Status (fit/doubt/injured/suspended), Detail (1-2 sentences with sources), Verdict (BUY/HOLD/AVOID/WAIT), Confidence (high/medium/low). Be concise — this lands on a phone."
 
           claude -p "$PROMPT" \
             --allowedTools Read,WebSearch,WebFetch \
