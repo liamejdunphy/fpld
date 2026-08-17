@@ -14,7 +14,6 @@ const C = {
   yellow: "#f4a300",
   text: "#1a1a2e",
   dim: "#6c757d",
-  badge: "#37003c",
 };
 
 const SANS = 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
@@ -46,6 +45,34 @@ const blankGW = () => ({ moves: [], captain: "", chip: "", note: "" });
 const SEED_PLAN = [blankGW(), blankGW(), blankGW(), blankGW(), blankGW()];
 
 const KEY = "fpl:planner:v2";
+const TUTORIAL_KEY = "fpl:planner:tutorial_seen";
+
+const TUTORIAL_STEPS = [
+  {
+    title: "Your risk dial",
+    body: "Enter how many points you're behind the league leader and how many gameweeks are left. The mode tells you how aggressive to be with transfers and captaincy.",
+  },
+  {
+    title: "Set your starting position",
+    body: "Enter the first gameweek you're planning from, your bank balance, and how many free transfers you have. These carry forward through your 5-GW plan.",
+  },
+  {
+    title: "Edit your squad",
+    body: "Tap the Squad button to expand it. Your squad auto-populates from the daily brief pipeline. Edit names, clubs, and prices if anything is wrong.",
+  },
+  {
+    title: "Plan transfers",
+    body: "Each card is a gameweek. Tap '+ Add transfer' to plan a move. Pick who goes out from the dropdown, type who comes in. FTs roll automatically \u2014 extra moves cost \u22124 pts each.",
+  },
+  {
+    title: "Captain & chips",
+    body: "Set your captain and activate a chip for each GW. The planner validates budget, club limits, and position counts \u2014 errors show in red.",
+  },
+  {
+    title: "Export your plan",
+    body: "Hit 'Build summary' to get a text block you can paste into a GitHub issue comment. Claude reads it and gives you feedback.",
+  },
+];
 
 function load() {
   try { const raw = localStorage.getItem(KEY); return raw ? JSON.parse(raw) : null; }
@@ -66,6 +93,76 @@ function modeCalc(behind, left) {
   return { label: "SWING", color: C.red, gloss: "Contrarian captain, low ownership, chips on max-variance weeks." };
 }
 
+/* ─── Tutorial overlay ─── */
+function Tutorial({ onClose }) {
+  const [step, setStep] = useState(0);
+  const s = TUTORIAL_STEPS[step];
+  return (
+    <div style={{
+      position: "fixed", inset: 0, background: "rgba(0,0,0,.55)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      zIndex: 1000, padding: 20,
+    }} onClick={onClose}>
+      <div style={{
+        background: "#fff", borderRadius: 16, padding: "28px 24px 20px",
+        maxWidth: 380, width: "100%", boxShadow: "0 20px 60px rgba(0,0,0,.3)",
+      }} onClick={e => e.stopPropagation()}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+          <span style={{ fontSize: 11, fontWeight: 700, color: C.accent, textTransform: "uppercase", letterSpacing: "0.08em" }}>
+            Step {step + 1} of {TUTORIAL_STEPS.length}
+          </span>
+          <button onClick={onClose} style={{ background: "none", border: "none", color: C.dim, fontSize: 18, cursor: "pointer", padding: 0 }}>
+            {"×"}
+          </button>
+        </div>
+        <h3 style={{ fontSize: 18, fontWeight: 700, color: C.text, margin: "8px 0 8px", fontFamily: SANS }}>{s.title}</h3>
+        <p style={{ fontSize: 14, color: C.dim, lineHeight: 1.6, margin: "0 0 20px" }}>{s.body}</p>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <button
+            onClick={() => setStep(Math.max(0, step - 1))}
+            disabled={step === 0}
+            style={{
+              background: "none", border: "none", color: step === 0 ? C.border : C.accent,
+              fontSize: 13, fontWeight: 600, cursor: step === 0 ? "default" : "pointer", padding: 0,
+            }}
+          >
+            {"← Back"}
+          </button>
+          <div style={{ display: "flex", gap: 5 }}>
+            {TUTORIAL_STEPS.map((_, i) => (
+              <div key={i} style={{
+                width: 8, height: 8, borderRadius: "50%",
+                background: i === step ? C.accent : C.border,
+              }} />
+            ))}
+          </div>
+          {step < TUTORIAL_STEPS.length - 1 ? (
+            <button
+              onClick={() => setStep(step + 1)}
+              style={{
+                background: C.accent, color: "#fff", border: "none", borderRadius: 6,
+                padding: "8px 16px", fontSize: 13, fontWeight: 600, cursor: "pointer",
+              }}
+            >
+              {"Next →"}
+            </button>
+          ) : (
+            <button
+              onClick={onClose}
+              style={{
+                background: C.greenDark, color: "#fff", border: "none", borderRadius: 6,
+                padding: "8px 16px", fontSize: 13, fontWeight: 600, cursor: "pointer",
+              }}
+            >
+              Got it
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [squad, setSquad] = useState(FALLBACK_SQUAD);
   const [bank, setBank] = useState(0.5);
@@ -75,9 +172,21 @@ export default function App() {
   const [behind, setBehind] = useState(0);
   const [left, setLeft] = useState(38);
   const [showSquad, setShowSquad] = useState(false);
-  const [status, setStatus] = useState("Loading\u2026");
+  const [status, setStatus] = useState("Loading...");
   const [ready, setReady] = useState(false);
   const [exportText, setExportText] = useState("");
+  const [showTutorial, setShowTutorial] = useState(false);
+
+  useEffect(() => {
+    if (!localStorage.getItem(TUTORIAL_KEY)) {
+      setShowTutorial(true);
+    }
+  }, []);
+
+  const closeTutorial = () => {
+    setShowTutorial(false);
+    localStorage.setItem(TUTORIAL_KEY, "1");
+  };
 
   useEffect(() => {
     const d = load();
@@ -103,10 +212,10 @@ export default function App() {
             setLeft(brief.dial?.left ?? 38);
             setStatus(`Auto-populated from brief (${brief.date})`);
           } else {
-            setStatus("New plan \u2014 using fallback squad");
+            setStatus("New plan — using fallback squad");
           }
         })
-        .catch(() => setStatus("New plan \u2014 using fallback squad"))
+        .catch(() => setStatus("New plan — using fallback squad"))
         .finally(() => setReady(true));
     }
   }, []);
@@ -142,10 +251,10 @@ export default function App() {
       cur[idx] = { id: `n${i}-${idx}-${m.inName}`, name: m.inName || "?", pos: m.inPos || out.pos, club: (m.inClub || "").toUpperCase(), price };
       if (m.inPos && m.inPos !== out.pos) errs.push(`${m.inName || "?"} is ${m.inPos}, replaces ${out.pos}`);
     });
-    if (money < -0.001) errs.push(`Over budget by \u00a3${Math.abs(money).toFixed(1)}m`);
+    if (money < -0.001) errs.push(`Over budget by £${Math.abs(money).toFixed(1)}m`);
     const clubs = {};
     cur.forEach(p => { if (p.club) clubs[p.club] = (clubs[p.club] || 0) + 1; });
-    Object.entries(clubs).forEach(([c, n]) => { if (n > 3) errs.push(`${n}\u00d7 ${c} (max 3)`); });
+    Object.entries(clubs).forEach(([c, n]) => { if (n > 3) errs.push(`${n}× ${c} (max 3)`); });
     POS.forEach(p => {
       const n = cur.filter(x => x.pos === p).length;
       if (n !== LIMITS[p]) errs.push(`${n} ${p}, need ${LIMITS[p]}`);
@@ -165,25 +274,25 @@ export default function App() {
 
   const buildExport = () => {
     const L = [];
-    L.push(`FPL PLAN \u2014 GW${startGW}\u2013GW${Number(startGW) + 4}`);
+    L.push(`FPL PLAN — GW${startGW}–GW${Number(startGW) + 4}`);
     L.push(`Mode: ${md.label} (${behind} behind, ${left} GWs left)`);
-    L.push(`Bank \u00a3${Number(bank).toFixed(1)}m \u00b7 FTs ${startFT} \u00b7 Hits ${totalHits} (${totalHits * -4} pts)`);
+    L.push(`Bank £${Number(bank).toFixed(1)}m · FTs ${startFT} · Hits ${totalHits} (${totalHits * -4} pts)`);
     L.push("");
     L.push("SQUAD");
     POS.forEach(p => {
-      const l = squad.filter(x => x.pos === p).map(x => `${x.name} (${x.club}) \u00a3${x.price.toFixed(1)}`).join(" \u00b7 ");
+      const l = squad.filter(x => x.pos === p).map(x => `${x.name} (${x.club}) £${x.price.toFixed(1)}`).join(" · ");
       L.push(`${p}: ${l}`);
     });
     L.push("");
     plan.forEach((g, i) => {
       const s = steps[i];
-      L.push(`GW${s.gw} \u2014 FT ${s.avail}, using ${s.used}${s.hits ? `, ${s.hits} hit(s)` : ""}, bank \u00a3${s.money.toFixed(1)}m`);
-      if (g.moves.length) g.moves.forEach(m => L.push(`  OUT ${m.outName} \u2192 IN ${m.inName || "?"} (${m.inClub || "?"}) \u00a3${Number(m.inPrice || 0).toFixed(1)}`));
+      L.push(`GW${s.gw} — FT ${s.avail}, using ${s.used}${s.hits ? `, ${s.hits} hit(s)` : ""}, bank £${s.money.toFixed(1)}m`);
+      if (g.moves.length) g.moves.forEach(m => L.push(`  OUT ${m.outName} → IN ${m.inName || "?"} (${m.inClub || "?"}) £${Number(m.inPrice || 0).toFixed(1)}`));
       else L.push("  Roll FT");
       if (g.captain) L.push(`  Captain: ${g.captain}`);
       if (g.chip) L.push(`  Chip: ${g.chip}`);
       if (g.note) L.push(`  Note: ${g.note}`);
-      if (s.errs.length) L.push(`  \u26a0 ${s.errs.join("; ")}`);
+      if (s.errs.length) L.push(`  ⚠ ${s.errs.join("; ")}`);
     });
     setExportText(L.join("\n"));
   };
@@ -224,6 +333,8 @@ export default function App() {
         ::selection{background:${C.accentLight}}
       `}</style>
 
+      {showTutorial && <Tutorial onClose={closeTutorial} />}
+
       {/* header bar */}
       <div style={{ background: C.accent, padding: "14px 16px", marginBottom: 20 }}>
         <div style={{ maxWidth: 540, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -231,7 +342,13 @@ export default function App() {
             <span style={{ fontSize: 20, fontWeight: 800, color: C.green, letterSpacing: "-0.02em" }}>fpld</span>
             <span style={{ fontSize: 14, fontWeight: 500, color: "rgba(255,255,255,.7)" }}>planner</span>
           </div>
-          <span style={{ fontSize: 11, color: "rgba(255,255,255,.5)", fontFamily: MONO }}>{status.toUpperCase()}</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <button
+              onClick={() => setShowTutorial(true)}
+              style={{ background: "rgba(255,255,255,.15)", border: "none", color: "rgba(255,255,255,.7)", fontSize: 12, fontWeight: 600, cursor: "pointer", padding: "4px 10px", borderRadius: 6 }}
+            >?</button>
+            <span style={{ fontSize: 11, color: "rgba(255,255,255,.5)", fontFamily: MONO }}>{status.toUpperCase()}</span>
+          </div>
         </div>
       </div>
 
@@ -259,7 +376,7 @@ export default function App() {
 
         {/* settings row */}
         <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
-          {[["First GW", startGW, setStartGW], ["Bank \u00a3m", bank, setBank], ["Free transfers", startFT, setStartFT]].map(([l, v, s]) => (
+          {[["First GW", startGW, setStartGW], ["Bank £m", bank, setBank], ["Free transfers", startFT, setStartFT]].map(([l, v, s]) => (
             <div key={l} style={{ flex: 1 }}>
               <label style={lbl}>{l}</label>
               <input style={inp} type="number" step="0.1" value={v} onChange={e => s(e.target.value)} />
@@ -272,8 +389,8 @@ export default function App() {
           style={{ ...btnOutline, width: "100%", marginBottom: 16, textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center" }}
           onClick={() => setShowSquad(!showSquad)}
         >
-          <span>{showSquad ? "\u25be" : "\u25b8"} Squad ({squad.length})</span>
-          <span style={{ fontFamily: MONO, fontSize: 12, opacity: 0.7 }}>\u00a3{squad.reduce((a, p) => a + p.price, 0).toFixed(1)}m</span>
+          <span>{showSquad ? "▾" : "▸"} Squad ({squad.length})</span>
+          <span style={{ fontFamily: MONO, fontSize: 12, opacity: 0.7 }}>{"£"}{squad.reduce((a, p) => a + p.price, 0).toFixed(1)}m</span>
         </button>
 
         {showSquad && (
@@ -315,19 +432,17 @@ export default function App() {
             }}>
               {/* GW header */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <span style={{
-                    background: C.accent, color: C.green, fontFamily: MONO,
-                    fontSize: 13, fontWeight: 800, padding: "3px 10px", borderRadius: 6,
-                  }}>GW{s.gw}</span>
-                </div>
+                <span style={{
+                  background: C.accent, color: C.green, fontFamily: MONO,
+                  fontSize: 13, fontWeight: 800, padding: "3px 10px", borderRadius: 6,
+                }}>GW{s.gw}</span>
                 <div style={{ fontFamily: MONO, fontSize: 12, color: C.dim, display: "flex", gap: 8, alignItems: "center" }}>
                   <span>FT <b style={{ color: C.text }}>{s.avail}</b></span>
-                  <span>\u00b7</span>
+                  <span>{"·"}</span>
                   <span>Using <b style={{ color: C.text }}>{s.used}</b></span>
-                  {s.hits > 0 && <><span>\u00b7</span><span style={{ color: C.red, fontWeight: 700 }}>{s.hits * -4}pts</span></>}
-                  <span>\u00b7</span>
-                  <span>\u00a3<b style={{ color: s.money < 0 ? C.red : C.greenDark }}>{s.money.toFixed(1)}</b></span>
+                  {s.hits > 0 && <><span>{"·"}</span><span style={{ color: C.red, fontWeight: 700 }}>{s.hits * -4}pts</span></>}
+                  <span>{"·"}</span>
+                  <span>{"£"}<b style={{ color: s.money < 0 ? C.red : C.greenDark }}>{s.money.toFixed(1)}</b></span>
                 </div>
               </div>
 
@@ -343,18 +458,18 @@ export default function App() {
                       const p = s.snapshot.find(x => String(x.id) === e.target.value) || squad.find(x => String(x.id) === e.target.value);
                       setMove(i, k, { outId: p ? p.id : e.target.value, outName: p ? p.name : "", inPos: m.inPos || (p ? p.pos : "") });
                     }}>
-                    {s.snapshot.map(p => <option key={p.id} value={p.id}>{p.pos} \u00b7 {p.name} ({p.club}) \u00a3{p.price.toFixed(1)}</option>)}
+                    {s.snapshot.map(p => <option key={p.id} value={p.id}>{p.pos} {"·"} {p.name} ({p.club}) {"£"}{p.price.toFixed(1)}</option>)}
                   </select>
                   <label style={lbl}>In</label>
                   <div style={{ display: "flex", gap: 6 }}>
                     <input style={{ ...inp, flex: 3 }} placeholder="Name" value={m.inName} onChange={e => setMove(i, k, { inName: e.target.value })} />
                     <input style={{ ...inp, flex: 1, textTransform: "uppercase", textAlign: "center" }} placeholder="CLUB" value={m.inClub}
                       onChange={e => setMove(i, k, { inClub: e.target.value.toUpperCase() })} />
-                    <input style={{ ...inp, flex: 1, textAlign: "right" }} type="number" step="0.1" placeholder="\u00a3" value={m.inPrice}
+                    <input style={{ ...inp, flex: 1, textAlign: "right" }} type="number" step="0.1" placeholder="£" value={m.inPrice}
                       onChange={e => setMove(i, k, { inPrice: e.target.value })} />
                   </div>
                   <button style={{ background: "none", border: "none", color: C.red, fontSize: 11, fontWeight: 600, cursor: "pointer", marginTop: 8, padding: 0 }}
-                    onClick={() => dropMove(i, k)}>\u2715 Remove</button>
+                    onClick={() => dropMove(i, k)}>{"✕ Remove"}</button>
                 </div>
               ))}
 
@@ -366,24 +481,24 @@ export default function App() {
                 <div style={{ flex: 2 }}>
                   <label style={lbl}>Captain</label>
                   <select style={inp} value={g.captain} onChange={e => setGW(i, { captain: e.target.value })}>
-                    <option value="">\u2014</option>
+                    <option value="">{"—"}</option>
                     {s.snapshot.map(p => <option key={p.id} value={p.name}>{p.name}</option>)}
                   </select>
                 </div>
                 <div style={{ flex: 2 }}>
                   <label style={lbl}>Chip</label>
                   <select style={inp} value={g.chip} onChange={e => setGW(i, { chip: e.target.value })}>
-                    <option value="">\u2014</option>
+                    <option value="">{"—"}</option>
                     {["Wildcard", "Free Hit", "Bench Boost", "Triple Captain"].map(c => <option key={c}>{c}</option>)}
                   </select>
                 </div>
               </div>
 
-              <input style={inp} placeholder="Notes\u2026" value={g.note} onChange={e => setGW(i, { note: e.target.value })} />
+              <input style={inp} placeholder="Notes..." value={g.note} onChange={e => setGW(i, { note: e.target.value })} />
 
               {bad && (
                 <div style={{ marginTop: 10, background: "#fef2f2", borderRadius: 6, padding: 8 }}>
-                  {s.errs.map((e, j) => <div key={j} style={{ fontSize: 12, color: C.red, fontWeight: 500, marginBottom: 2 }}>\u26a0 {e}</div>)}
+                  {s.errs.map((e, j) => <div key={j} style={{ fontSize: 12, color: C.red, fontWeight: 500, marginBottom: 2 }}>{"⚠"} {e}</div>)}
                 </div>
               )}
             </div>
