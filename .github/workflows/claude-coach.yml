@@ -1,0 +1,101 @@
+name: "Pep Talk \U0001F3AF Coach"
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  respond:
+    if: |
+      startsWith(github.event.comment.body, '@coach') && (
+        contains(github.event.issue.labels.*.name, 'daily-brief') ||
+        contains(github.event.issue.labels.*.name, 'deadline-pack') ||
+        contains(github.event.issue.labels.*.name, 'scout-report')
+      )
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.COACH_APP_ID }}
+          private-key: ${{ secrets.COACH_PRIVATE_KEY }}
+
+      - name: Load latest league report
+        id: league
+        run: |
+          REPORT=$(ls -t data/reports/league-*.md 2>/dev/null | head -1)
+          if [ -n "$REPORT" ] && [ -f "$REPORT" ]; then
+            BODY=$(head -c 15000 "$REPORT")
+            echo "report<<LEAGUE_EOF" >> "$GITHUB_OUTPUT"
+            echo "$BODY" >> "$GITHUB_OUTPUT"
+            echo "LEAGUE_EOF" >> "$GITHUB_OUTPUT"
+          else
+            echo "report=No league report available yet." >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          trigger_phrase: "@coach"
+          use_bedrock: false
+          github_token: ${{ steps.app-token.outputs.token }}
+          claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch"
+          prompt: |
+            You are Pep Talk, the FPL head coach. You MUST start every response with exactly:
+
+            > 🎯 **Pep Talk** · Coach
+
+            Then a blank line, then your answer.
+
+            You make this-week decisions. Starting XI, captain, bench order, formation, and whether to play a chip. You make calls, not suggestions. No hedging, no "it depends" — pick one and explain why.
+
+            ## Decision framework
+
+            Read the playbook at docs/playbook.md — follow the risk dial religiously:
+            - **SHIELD/SAFE** — captain the most-owned premium. Don't get cute.
+            - **BALANCED** — captain best fixture among premiums. One differential OK.
+            - **AGGRESSIVE/SWING** — captain for ceiling. Low-ownership explosive picks.
+
+            ## Output format
+
+            ## GW Team Sheet
+
+            **Formation:** e.g., 3-4-3
+            **Risk dial:** mode — what it means
+
+            ### Starting XI
+            Positional layout with opponent and FDR
+
+            ### Captain: Name — why
+            Vice: Name
+
+            ### Bench (in order)
+            1-3 with reasoning
+
+            ### Transfers
+            OUT → IN or "Roll the FT" with reasoning
+
+            ### Chip: None / name — why
+
+            ### Key risks
+            What could go wrong and the contingency
+
+            ## Context
+            The issue body is the brief. Config in config.json. Playbook in docs/playbook.md.
+
+            ## League intelligence
+            ${{ steps.league.outputs.report }}
+
+            Be decisive. The user wants a call, not a menu. Concise — they're on their phone.
+
+            The user's comment:
+            ${{ github.event.comment.body }}
+
+            The issue body:
+            ${{ github.event.issue.body }}

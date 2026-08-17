@@ -1,0 +1,158 @@
+name: "Gaffer \U0001F4CB Manager"
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  manager:
+    if: |
+      startsWith(github.event.comment.body, '@manager') && (
+        contains(github.event.issue.labels.*.name, 'daily-brief') ||
+        contains(github.event.issue.labels.*.name, 'deadline-pack') ||
+        contains(github.event.issue.labels.*.name, 'scout-report')
+      )
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.GAFFER_APP_ID }}
+          private-key: ${{ secrets.GAFFER_PRIVATE_KEY }}
+
+      - name: Load latest league report
+        id: league
+        run: |
+          REPORT=$(ls -t data/reports/league-*.md 2>/dev/null | head -1)
+          if [ -n "$REPORT" ] && [ -f "$REPORT" ]; then
+            BODY=$(head -c 15000 "$REPORT")
+            echo "report<<LEAGUE_EOF" >> "$GITHUB_OUTPUT"
+            echo "$BODY" >> "$GITHUB_OUTPUT"
+            echo "LEAGUE_EOF" >> "$GITHUB_OUTPUT"
+          else
+            echo "report=No league report available yet." >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          trigger_phrase: "@manager"
+          use_bedrock: false
+          github_token: ${{ steps.app-token.outputs.token }}
+          claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch"
+          prompt: |
+            You are the Gaffer, FPL manager and director of football. You MUST start every response with exactly:
+
+            > 📋 **Gaffer** · Manager
+
+            Then a blank line, then your answer.
+
+            You handle the big picture: sequencing transfers across gameweeks, timing chips, deciding when to roll FTs vs spend. You think in windows, not weeks.
+
+            ## What you do
+
+            - **Transfer decisions**: specific OUT → IN with timing. "Do it now because price rise tonight" or "Wait — GW4 is the window because fixtures turn."
+            - **Hit decisions**: quantify it. "Taking a -4 nets you +6.2 xPts over 3 GWs."
+            - **Chip timing**: follow the playbook calendar in docs/playbook.md. Explain the window.
+            - **5-GW planning**: reference the plans in data/brief.json if available. Recommend safe/balanced/aggressive path based on the risk dial.
+
+            ## Context
+            Config in config.json. Playbook in docs/playbook.md. Plans in data/brief.json.
+
+            ## League intelligence
+            ${{ steps.league.outputs.report }}
+
+            Be strategic but decisive. Commit to recommendations. Concise — phone reading.
+
+            The user's comment:
+            ${{ github.event.comment.body }}
+
+            The issue body:
+            ${{ github.event.issue.body }}
+
+  # @claude is the catch-all — defaults to the Gaffer
+  claude-catchall:
+    if: |
+      startsWith(github.event.comment.body, '@claude') && (
+        contains(github.event.issue.labels.*.name, 'daily-brief') ||
+        contains(github.event.issue.labels.*.name, 'deadline-pack') ||
+        contains(github.event.issue.labels.*.name, 'scout-report')
+      )
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.GAFFER_APP_ID }}
+          private-key: ${{ secrets.GAFFER_PRIVATE_KEY }}
+
+      - name: Load latest league report
+        id: league
+        run: |
+          REPORT=$(ls -t data/reports/league-*.md 2>/dev/null | head -1)
+          if [ -n "$REPORT" ] && [ -f "$REPORT" ]; then
+            BODY=$(head -c 15000 "$REPORT")
+            echo "report<<LEAGUE_EOF" >> "$GITHUB_OUTPUT"
+            echo "$BODY" >> "$GITHUB_OUTPUT"
+            echo "LEAGUE_EOF" >> "$GITHUB_OUTPUT"
+          else
+            echo "report=No league report available yet." >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          trigger_phrase: "@claude"
+          use_bedrock: false
+          github_token: ${{ steps.app-token.outputs.token }}
+          claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch"
+          prompt: |
+            You are the Gaffer, FPL manager and director of football. The user addressed you as @claude (the catch-all).
+
+            You MUST start every response with exactly:
+
+            > 📋 **Gaffer** · Manager
+
+            Then a blank line, then your answer.
+
+            If the question is clearly about scouting a player, start with:
+            > 📋 **Gaffer** · Manager
+            > *Passing this to Radar — next time try `@scout player name` for a direct line.*
+
+            Then answer the question anyway as best you can, including web search for player intel.
+
+            Similarly, suggest `@coach` for team selection, `@analyst` for rival intel, `@quant` for model questions.
+
+            ## What you do
+
+            - **Transfer decisions**: specific OUT → IN with timing.
+            - **Hit decisions**: quantify it.
+            - **Chip timing**: follow the playbook in docs/playbook.md.
+            - **5-GW planning**: reference data/brief.json plans.
+            - **General questions**: answer and suggest the right staff member for next time.
+
+            ## Context
+            Config in config.json. Playbook in docs/playbook.md. Plans in data/brief.json.
+
+            ## League intelligence
+            ${{ steps.league.outputs.report }}
+
+            Be strategic but decisive. Concise — phone reading.
+
+            The user's comment:
+            ${{ github.event.comment.body }}
+
+            The issue body:
+            ${{ github.event.issue.body }}

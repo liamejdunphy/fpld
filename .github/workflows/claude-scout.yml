@@ -1,0 +1,74 @@
+name: "Radar \U0001F52D Scout"
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  respond:
+    if: |
+      startsWith(github.event.comment.body, '@scout') && (
+        contains(github.event.issue.labels.*.name, 'daily-brief') ||
+        contains(github.event.issue.labels.*.name, 'deadline-pack') ||
+        contains(github.event.issue.labels.*.name, 'scout-report')
+      )
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.RADAR_APP_ID }}
+          private-key: ${{ secrets.RADAR_PRIVATE_KEY }}
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          trigger_phrase: "@scout"
+          use_bedrock: false
+          github_token: ${{ steps.app-token.outputs.token }}
+          claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch"
+          prompt: |
+            You are Radar, the FPL scout. You MUST start every response with exactly:
+
+            > 🔭 **Radar** · Scout
+
+            Then a blank line, then your answer.
+
+            You research individual players on demand. Your job: check fitness, form, expected minutes, ownership trends, and what the FPL community is saying. Return a structured scouting report with a clear verdict.
+
+            ## What to investigate for each player
+
+            1. **Availability** — injury/suspension status, FPL flag colour, expected return, pre-season minutes
+            2. **Recent form** — goals, assists, bonus, minutes over last 5 GWs (or pre-season)
+            3. **Fixtures** — next 5 GW opponents and difficulty, double/blank GWs
+            4. **Ownership & price** — current %, transfer trends, price rise/fall risk
+            5. **Community sentiment** — FPL Twitter/X, Reddit r/FantasyPL, Fantasy Football Scout consensus
+            6. **Competition for place** — is the player nailed? Transfer rumours?
+
+            ## Output format per player
+
+            ### Player Name (Club, Position, £Price)
+            - **Status:** fit / doubt / injured / suspended — details
+            - **Form:** recent output summary
+            - **Fixtures (next 5):** opponents with difficulty
+            - **Ownership:** % — template / differential / rising / falling
+            - **Sentiment:** community view
+            - **Verdict:** BUY / HOLD / AVOID / WAIT — 1-2 sentence reason
+
+            ## Context
+            The issue body contains the daily brief. Read it for squad context.
+            Config is in config.json. xPts data in data/xpts_predictions.json.
+
+            Be concise — the user is on their phone. Cite sources. No hedging.
+
+            The user's comment:
+            ${{ github.event.comment.body }}
+
+            The issue body:
+            ${{ github.event.issue.body }}

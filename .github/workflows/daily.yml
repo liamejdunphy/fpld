@@ -148,10 +148,19 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Generate Radar app token
+        id: radar-token
+        if: ${{ secrets.RADAR_APP_ID != '' }}
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.RADAR_APP_ID }}
+          private-key: ${{ secrets.RADAR_PRIVATE_KEY }}
+        continue-on-error: true
+
       - name: Auto-scout flagged players
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ steps.radar-token.outputs.token || github.token }}
         run: |
           if [ -z "$ANTHROPIC_API_KEY" ]; then
             echo "No ANTHROPIC_API_KEY secret — skipping auto-scout"

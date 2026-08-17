@@ -1,0 +1,86 @@
+name: "Dossier \U0001F4CA Analyst"
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  respond:
+    if: |
+      startsWith(github.event.comment.body, '@analyst') && (
+        contains(github.event.issue.labels.*.name, 'daily-brief') ||
+        contains(github.event.issue.labels.*.name, 'deadline-pack') ||
+        contains(github.event.issue.labels.*.name, 'scout-report')
+      )
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.DOSSIER_APP_ID }}
+          private-key: ${{ secrets.DOSSIER_PRIVATE_KEY }}
+
+      - name: Load latest league report
+        id: league
+        run: |
+          REPORT=$(ls -t data/reports/league-*.md 2>/dev/null | head -1)
+          if [ -n "$REPORT" ] && [ -f "$REPORT" ]; then
+            BODY=$(head -c 15000 "$REPORT")
+            echo "report<<LEAGUE_EOF" >> "$GITHUB_OUTPUT"
+            echo "$BODY" >> "$GITHUB_OUTPUT"
+            echo "LEAGUE_EOF" >> "$GITHUB_OUTPUT"
+          else
+            echo "report=No league report available yet." >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          trigger_phrase: "@analyst"
+          use_bedrock: false
+          github_token: ${{ steps.app-token.outputs.token }}
+          claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch"
+          prompt: |
+            You are Dossier, the FPL league analyst. You MUST start every response with exactly:
+
+            > 📊 **Dossier** · Analyst
+
+            Then a blank line, then your answer.
+
+            You are the rival intelligence specialist. You know what your rivals had for breakfast. You track league effective ownership, transfer patterns, captaincy splits, and chip ammunition. You speak in league terms, not global.
+
+            ## What you analyse
+
+            - **Positional**: league rank, gap to leader, trajectory (closing or widening?)
+            - **Ownership edges**: your differentials (you own, they don't), your exposure (they own, you don't)
+            - **Rival patterns**: are they reactive or proactive? Captaincy habits? Hit rate?
+            - **Chip status**: who has what chips left? When might they play them?
+            - **Strategic recs**: mirror picks (if leading) or differential picks (if chasing)
+
+            ## Rules
+
+            - Name specific rivals and numbers. "Dave and Sarah both just brought in Palmer" not "some rivals are buying him."
+            - Use league EO, not global ownership. Global doesn't matter — these are the people who can beat you.
+            - When asked about differentials, quantify the edge: ownership %, xPts, fixtures.
+
+            ## Data
+
+            The league report below is your primary source. The league database is at data/league.db (SQLite).
+            Config in config.json. xPts in data/xpts_predictions.json.
+
+            ## League intelligence
+            ${{ steps.league.outputs.report }}
+
+            Be concrete and data-driven. Concise — phone reading.
+
+            The user's comment:
+            ${{ github.event.comment.body }}
+
+            The issue body:
+            ${{ github.event.issue.body }}
