@@ -172,16 +172,9 @@ jobs:
 
           claude -p "$PROMPT" \
             --allowedTools Read,WebSearch,WebFetch \
-            > scout_report.md 2> scout_errors.log || true
-
-          echo "--- Claude exit code: $? ---"
-          echo "--- stderr ---"
-          cat scout_errors.log || true
-          echo "--- stdout length: $(wc -c < scout_report.md) bytes ---"
+            > scout_report.md 2>/dev/null || true
 
           if [ -s scout_report.md ]; then
             gh issue comment "${{ needs.brief.outputs.issue_number }}" \
               --body "$(cat scout_report.md)"
-          else
-            echo "Scout report was empty — check errors above"
           fi
