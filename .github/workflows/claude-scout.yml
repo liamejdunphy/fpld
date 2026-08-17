@@ -81,20 +81,48 @@ jobs:
         run: |
           # claude-code-action has a known bug where it doesn't post issue comments.
           # Extract the result from its output file and post manually.
-          python3 -c "
-          import json, sys
-          try:
-              with open('/home/runner/work/_temp/claude-execution-output.json') as f:
-                  for line in reversed(f.read().strip().split('\n')):
+          OUTFILE="/home/runner/work/_temp/claude-execution-output.json"
+          echo "Looking for output at: $OUTFILE"
+          ls -la "$OUTFILE" 2>/dev/null || echo "File not found"
+          echo "First 500 chars:"
+          head -c 500 "$OUTFILE" 2>/dev/null || true
+          echo ""
+          echo "Last 500 chars:"
+          tail -c 500 "$OUTFILE" 2>/dev/null || true
+
+          python3 << 'PYEOF'
+          import json, sys, glob, os
+
+          # Try known path first, then search for any JSON output
+          candidates = [
+              "/home/runner/work/_temp/claude-execution-output.json",
+          ] + glob.glob("/home/runner/work/_temp/*.json")
+
+          for path in candidates:
+              if not os.path.exists(path):
+                  continue
+              print(f"Trying: {path} ({os.path.getsize(path)} bytes)")
+              with open(path) as f:
+                  content = f.read().strip()
+              if not content:
+                  continue
+              for line in reversed(content.split('\n')):
+                  line = line.strip()
+                  if not line:
+                      continue
+                  try:
                       obj = json.loads(line)
-                      if obj.get('type') == 'result' and obj.get('result'):
+                      if isinstance(obj, dict) and obj.get('type') == 'result' and obj.get('result'):
                           with open('comment.md', 'w') as out:
                               out.write(obj['result'])
+                          print(f"Found result ({len(obj['result'])} chars)")
                           sys.exit(0)
-          except Exception as e:
-              print(f'Failed to extract result: {e}')
+                  except json.JSONDecodeError:
+                      continue
+
+          print("No result found in any file")
           sys.exit(1)
-          " || exit 0
+          PYEOF
 
           if [ -s comment.md ]; then
             gh issue comment ${{ github.event.issue.number }} --body-file comment.md
