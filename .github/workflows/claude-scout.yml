@@ -79,50 +79,17 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
-          # claude-code-action has a known bug where it doesn't post issue comments.
-          # Extract the result from its output file and post manually.
-          OUTFILE="/home/runner/work/_temp/claude-execution-output.json"
-          echo "Looking for output at: $OUTFILE"
-          ls -la "$OUTFILE" 2>/dev/null || echo "File not found"
-          echo "First 500 chars:"
-          head -c 500 "$OUTFILE" 2>/dev/null || true
-          echo ""
-          echo "Last 500 chars:"
-          tail -c 500 "$OUTFILE" 2>/dev/null || true
-
-          python3 << 'PYEOF'
-          import json, sys, glob, os
-
-          # Try known path first, then search for any JSON output
-          candidates = [
-              "/home/runner/work/_temp/claude-execution-output.json",
-          ] + glob.glob("/home/runner/work/_temp/*.json")
-
-          for path in candidates:
-              if not os.path.exists(path):
-                  continue
-              print(f"Trying: {path} ({os.path.getsize(path)} bytes)")
-              with open(path) as f:
-                  content = f.read().strip()
-              if not content:
-                  continue
-              for line in reversed(content.split('\n')):
-                  line = line.strip()
-                  if not line:
-                      continue
-                  try:
-                      obj = json.loads(line)
-                      if isinstance(obj, dict) and obj.get('type') == 'result' and obj.get('result'):
-                          with open('comment.md', 'w') as out:
-                              out.write(obj['result'])
-                          print(f"Found result ({len(obj['result'])} chars)")
-                          sys.exit(0)
-                  except json.JSONDecodeError:
-                      continue
-
-          print("No result found in any file")
+          python3 -c "
+          import json, sys
+          with open('/home/runner/work/_temp/claude-execution-output.json') as f:
+              entries = json.load(f)
+          for entry in reversed(entries):
+              if entry.get('type') == 'result' and entry.get('result'):
+                  with open('comment.md', 'w') as out:
+                      out.write(entry['result'])
+                  sys.exit(0)
           sys.exit(1)
-          PYEOF
+          " || exit 0
 
           if [ -s comment.md ]; then
             gh issue comment ${{ github.event.issue.number }} --body-file comment.md
