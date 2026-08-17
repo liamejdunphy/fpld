@@ -40,6 +40,7 @@ jobs:
         with:
           trigger_phrase: ""
           use_bedrock: false
+          claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch"
           prompt: |
             You are the FPL backroom staff. The user has commented on an FPL brief issue from their phone. They may be asking you to:
 

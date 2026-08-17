@@ -20,6 +20,7 @@ jobs:
         with:
           trigger_phrase: ""
           use_bedrock: false
+          claude_args: "--allowedTools Bash,Read,Grep,Glob,WebSearch,WebFetch"
           prompt: |
             You are the FPL manager's autonomous scout. A daily brief has just been posted as a GitHub Issue. Read the issue body carefully and decide what's worth investigating.
 
