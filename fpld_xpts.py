@@ -108,10 +108,15 @@ def pull(conn, boot, full=False, verbose=True):
     season_start = first_event.get("deadline_time", "")[:4] or str(datetime.now().year)
     season = f"{season_start}/{int(season_start) + 1}"
 
-    # Update player metadata
+    # Update player metadata (preserve last_pulled date)
     for e in elements:
-        conn.execute("""INSERT OR REPLACE INTO player_meta
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?)""",
+        conn.execute("""INSERT INTO player_meta
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
+            ON CONFLICT(element) DO UPDATE SET
+              name=excluded.name, pos=excluded.pos, club=excluded.club,
+              price=excluded.price, form=excluded.form, ppg=excluded.ppg,
+              minutes=excluded.minutes, status=excluded.status,
+              xgi90=excluded.xgi90, selected=excluded.selected""",
             (e["id"], e.get("web_name", "?"), POS.get(e.get("element_type"), "?"),
              teams.get(e["team"], "?"), num(e.get("now_cost")) / 10,
              num(e.get("form")), num(e.get("points_per_game")),
