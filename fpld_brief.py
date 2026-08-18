@@ -852,6 +852,203 @@ def brief(cfg, model, squad, source, d, standings):
     return "\n".join(L)
 
 
+# ---------------------------------------------------------------- post-GW review
+
+def review(cfg, boot, fixtures):
+    """Generate a post-GW review comparing what happened vs what was planned."""
+    events = boot.get("events", [])
+    cur = next((e for e in events if e.get("is_current")), None)
+    if not cur or not cur.get("finished"):
+        return None  # no scored GW yet
+
+    gw = cur["id"]
+    teams = {t["id"]: t["short_name"] for t in boot["teams"]}
+
+    # Load the previous brief.json to see what was planned
+    brief_file = HOME / "brief.json"
+    prev_brief = None
+    if brief_file.exists():
+        try:
+            prev_brief = json.loads(brief_file.read_text())
+        except Exception:
+            pass
+
+    # Fetch scored picks for this GW
+    tid = cfg["team_id"]
+    picks_data = get(f"entry/{tid}/event/{gw}/picks/", optional=True)
+    if not picks_data:
+        return None
+
+    picks = picks_data.get("picks", [])
+    entry_history = picks_data.get("entry_history", {})
+    points = entry_history.get("points", 0)
+    bench_pts = entry_history.get("points_on_bench", 0)
+    transfers_cost = entry_history.get("event_transfers_cost", 0)
+    transfers_made = entry_history.get("event_transfers", 0)
+
+    # Map element IDs to player data from bootstrap
+    elements = {e["id"]: e for e in boot["elements"]}
+
+    # Build scored squad
+    captain_id = next((p["element"] for p in picks if p["is_captain"]), None)
+    vice_id = next((p["element"] for p in picks if p["is_vice_captain"]), None)
+    starters = [p for p in picks if p["position"] <= 11]
+    bench = [p for p in picks if p["position"] > 11]
+
+    def player_gw_points(element_id):
+        el = elements.get(element_id)
+        if not el:
+            return 0
+        return num(el.get("event_points", 0))
+
+    captain_pts = player_gw_points(captain_id) * 2 if captain_id else 0
+    vice_pts = player_gw_points(vice_id) * 2 if vice_id else 0
+    captain_el = elements.get(captain_id, {})
+    vice_el = elements.get(vice_id, {})
+
+    L = [f"## GW{gw} Review", ""]
+    L.append(f"**{points} pts** (bench {bench_pts}, hits {transfers_cost})")
+    L.append("")
+
+    # Captain review
+    L.append(f"**Captain:** {captain_el.get('web_name', '?')} — "
+             f"{player_gw_points(captain_id)}pts (x2 = {captain_pts}pts)")
+    if vice_id:
+        L.append(f"**Vice:** {vice_el.get('web_name', '?')} — "
+                 f"{player_gw_points(vice_id)}pts")
+
+    # Best captain among squad
+    squad_pts = [(p["element"], player_gw_points(p["element"])) for p in picks]
+    best_cap = max(squad_pts, key=lambda x: x[1])
+    best_el = elements.get(best_cap[0], {})
+    if best_cap[0] != captain_id:
+        L.append(f"**Best captain would have been:** {best_el.get('web_name', '?')} "
+                 f"({best_cap[1]}pts, +{best_cap[1] * 2 - captain_pts}pts swing)")
+    else:
+        L.append("**Captain call: nailed it.**")
+    L.append("")
+
+    # Bench review
+    if bench_pts > 0:
+        L.append(f"**Bench leak:** {bench_pts}pts left on the bench")
+        for p in bench:
+            pts = player_gw_points(p["element"])
+            if pts > 0:
+                el = elements.get(p["element"], {})
+                L.append(f"- {el.get('web_name', '?')}: {pts}pts (bench {p['position'] - 11})")
+        L.append("")
+
+    # Transfers review
+    if transfers_made > 0:
+        transfers_data = get(f"entry/{tid}/transfers/", optional=True) or []
+        gw_transfers = [t for t in transfers_data if t.get("event") == gw]
+        if gw_transfers:
+            L.append(f"**Transfers:** {transfers_made} made"
+                     + (f" ({transfers_cost}pt hit)" if transfers_cost else " (free)"))
+            for t in gw_transfers:
+                in_el = elements.get(t["element_in"], {})
+                out_el = elements.get(t["element_out"], {})
+                in_pts = player_gw_points(t["element_in"])
+                out_pts = player_gw_points(t["element_out"])
+                delta = in_pts - out_pts
+                L.append(f"- {out_el.get('web_name', '?')} ({out_pts}pts) → "
+                         f"{in_el.get('web_name', '?')} ({in_pts}pts) "
+                         f"{'📈' if delta > 0 else '📉' if delta < 0 else '➡️'} {delta:+d}pts")
+            L.append("")
+
+    # Compare against planned captain from previous brief
+    if prev_brief and prev_brief.get("gw") == gw:
+        caps = prev_brief.get("captain_shortlist", [])
+        if caps:
+            rec = caps[0]  # top recommendation
+            rec_id = rec.get("id")
+            if rec_id and rec_id != captain_id:
+                rec_pts = player_gw_points(rec_id)
+                L.append(f"**Brief recommended:** {rec['name']} as captain "
+                         f"({rec_pts}pts vs your {player_gw_points(captain_id)}pts)")
+                L.append("")
+
+    return "\n".join(L)
+
+
+# ---------------------------------------------------------------- price alert
+
+def price_alert(cfg, model):
+    """Check price-change pressure for squad, watchlist, and global movers.
+    Returns markdown alert text, or None if nothing to report."""
+    # Thresholds: lower than the daily brief's to catch earlier movement
+    ALERT_RISE = 80000
+    ALERT_FALL = -80000
+    # Global movers need a higher bar — only the biggest swings
+    GLOBAL_RISE = 150000
+    GLOBAL_FALL = -150000
+
+    squad_data = None
+    try:
+        tid, gw = cfg["team_id"], model["gw"]
+        for g in (gw - 1, gw - 2):
+            if g < 1:
+                continue
+            data = get(f"entry/{tid}/event/{g}/picks/", optional=True)
+            if data:
+                squad_data = {p["element"] for p in data.get("picks", [])}
+                break
+    except Exception:
+        pass
+
+    watch = {norm(w) for w in cfg.get("watchlist", [])}
+    squad_alerts = []
+    global_alerts = []
+
+    for p in model["players"].values():
+        net = p["net_transfers"]
+        is_squad = squad_data and p["id"] in squad_data
+        is_watch = any(w in norm(p["name"]) for w in watch)
+
+        direction = "rise" if net > 0 else "fall"
+        emoji = "📈" if net > 0 else "📉"
+
+        if is_squad or is_watch:
+            if net >= ALERT_RISE or net <= ALERT_FALL:
+                tag = "squad" if is_squad else "watchlist"
+                squad_alerts.append((abs(net),
+                    f"- {emoji} **{p['name']}** ({p['club']}, £{p['price']:.1f}m) — "
+                    f"{net:+,.0f} net transfers, likely to **{direction}** *({tag})*"))
+        else:
+            if net >= GLOBAL_RISE or net <= GLOBAL_FALL:
+                # Flag reason hint from player status
+                hint = ""
+                if p["status"] != "a":
+                    hint = f" — {STATUS.get(p['status'], p['status'])}"
+                    if p.get("news"):
+                        hint = f" — {p['news']}"
+                global_alerts.append((abs(net),
+                    f"- {emoji} **{p['name']}** ({p['club']}, {p['pos']}, £{p['price']:.1f}m, "
+                    f"{p['owned']:.1f}% owned) — {net:+,.0f} net transfers{hint}"))
+
+    if not squad_alerts and not global_alerts:
+        return None
+
+    L = ["## Price Alert", ""]
+
+    if squad_alerts:
+        squad_alerts.sort(reverse=True)
+        L.append("**Your squad and watchlist** — act before ~02:30 UTC if needed:")
+        L.append("")
+        L.extend(line for _, line in squad_alerts)
+        L.append("")
+
+    if global_alerts:
+        global_alerts.sort(reverse=True)
+        L.append("**Biggest global movers** — large swings suggest news (injury, "
+                 "press conference, or a bandwagon forming):")
+        L.append("")
+        L.extend(line for _, line in global_alerts[:8])
+        L.append("")
+
+    return "\n".join(L)
+
+
 # ---------------------------------------------------------------- main
 
 def main():
@@ -861,6 +1058,8 @@ def main():
     ap.add_argument("--find", metavar="NAME", help="look up how FPL spells a player")
     ap.add_argument("--json", action="store_true", help="write structured brief.json for the planner")
     ap.add_argument("--fixtures", action="store_true", help="full-season fixture difficulty grid")
+    ap.add_argument("--review", action="store_true", help="post-GW review: captain, bench, transfers")
+    ap.add_argument("--price-alert", action="store_true", help="evening price-change alert")
     ap.add_argument("--home", help="override the data directory")
     a = ap.parse_args()
 
@@ -982,6 +1181,32 @@ def main():
         print(f"Player map updated: {added} new player(s) added to FPL.")
     fixtures = get("fixtures/")
     model = build(boot, fixtures, cfg["horizon"])
+
+    # Standalone price alert mode
+    if a.price_alert:
+        alert = price_alert(cfg, model)
+        if alert:
+            alert_file = HOME / "price-alert.md"
+            alert_file.write_text(alert)
+            print(alert)
+            print(f"\nWrote {alert_file}")
+        else:
+            print("No squad or watchlist players near a price change tonight.")
+        return
+
+    # Post-GW review (can run standalone or alongside the brief)
+    if a.review:
+        rev = review(cfg, boot, fixtures)
+        if rev:
+            review_file = HOME / "review-latest.md"
+            review_file.write_text(rev)
+            print(rev)
+            print(f"\nWrote {review_file}")
+        else:
+            print("No scored GW to review yet.")
+        if not a.show and not a.json:
+            return  # standalone review mode
+
     squad, source = squad_of(cfg, model)
 
     standings = []

@@ -2,11 +2,12 @@ name: FPL daily brief
 
 on:
   schedule:
-    - cron: '0 7 * * *'   # 07:00 UTC daily
+    - cron: '0 7 * * *'   # 07:00 UTC daily (morning brief)
+    - cron: '0 21 * * *'  # 21:00 UTC daily (evening price alert)
   workflow_dispatch:
     inputs:
-      deadline:
-        description: 'Deadline pack (richer output for decision day)'
+      force_deadline:
+        description: 'Force deadline-pack label (normally auto-detected from FPL API)'
         type: boolean
         default: false
 
@@ -16,9 +17,11 @@ permissions:
 
 jobs:
   brief:
+    if: github.event.schedule != '0 21 * * *'
     runs-on: ubuntu-latest
     outputs:
       issue_number: ${{ steps.create_issue.outputs.issue_number }}
+      is_deadline: ${{ steps.deadline_check.outputs.is_deadline }}
     steps:
       - uses: actions/checkout@v4
 
@@ -46,6 +49,34 @@ jobs:
       - name: Run daily brief
         run: python3 fpld_brief.py --print --json
 
+      - name: Check deadline proximity
+        id: deadline_check
+        run: |
+          python3 -c "
+          import json, sys
+          from datetime import datetime, timezone
+          try:
+              brief = json.load(open('data/brief.json') if __import__('os').path.exists('data/brief.json') else open(__import__('os').path.expanduser('~/.fpld/brief.json')))
+              dl = brief.get('deadline', '')
+              if not dl:
+                  sys.exit(0)
+              deadline = datetime.fromisoformat(dl.replace('Z', '+00:00'))
+              hours = (deadline - datetime.now(timezone.utc)).total_seconds() / 3600
+              print(f'Next deadline: {deadline}, {hours:.1f}h away')
+              if 0 < hours <= 24:
+                  print('DEADLINE DETECTED — within 24h')
+                  with open(__import__('os').environ['GITHUB_OUTPUT'], 'a') as f:
+                      f.write('is_deadline=true\n')
+                      f.write(f'hours_left={hours:.0f}\n')
+              else:
+                  print(f'Not deadline day ({hours:.0f}h away)')
+          except Exception as e:
+              print(f'Deadline check skipped: {e}')
+          "
+
+      - name: Post-GW review
+        run: python3 fpld_brief.py --review || true
+
       - name: Sync league data
         run: python3 fpld_league.py --sync --report --quiet || true
         # || true: league sync fails pre-GW1 (no scored data yet)
@@ -68,8 +99,9 @@ jobs:
           mkdir -p data/briefs data/reports
           DOW=$(date +%u)  # 1=Monday
 
-          # Always copy briefs and reports
+          # Always copy briefs, reviews, and reports
           cp -f ~/.fpld/briefs/*.md data/briefs/ 2>/dev/null || true
+          cp -f ~/.fpld/review-latest.md data/briefs/review-latest.md 2>/dev/null || true
           cp -f ~/.fpld/reports/*.md data/reports/ 2>/dev/null || true
 
           # Persist databases — must survive between runs (runners are ephemeral)
@@ -107,12 +139,23 @@ jobs:
           REPORT_FILE=$(ls -t data/reports/league-*.md 2>/dev/null | head -1)
           LABEL="daily-brief"
 
-          if [ "${{ inputs.deadline }}" = "true" ]; then
+          if [ "${{ inputs.force_deadline }}" = "true" ] || [ "${{ steps.deadline_check.outputs.is_deadline }}" = "true" ]; then
             LABEL="deadline-pack"
           fi
 
+          REVIEW_FILE="data/briefs/review-latest.md"
+
           if [ -f "$BRIEF_FILE" ]; then
-            BODY=$(head -c 30000 "$BRIEF_FILE")
+            BODY=$(head -c 25000 "$BRIEF_FILE")
+
+            # Prepend review if it exists (shows what happened last GW)
+            if [ -f "$REVIEW_FILE" ]; then
+              BODY="$(head -c 5000 "$REVIEW_FILE")
+
+          ---
+
+          ${BODY}"
+            fi
 
             # Append league report if it exists (deadline pack or daily)
             if [ -n "$REPORT_FILE" ] && [ -f "$REPORT_FILE" ]; then
@@ -120,7 +163,7 @@ jobs:
 
           ---
 
-          $(head -c 30000 "$REPORT_FILE")"
+          $(head -c 25000 "$REPORT_FILE")"
             fi
 
             # Truncate to GitHub's 65000 char limit
@@ -183,4 +226,114 @@ jobs:
           if [ -s scout_report.md ]; then
             gh issue comment "${{ needs.brief.outputs.issue_number }}" \
               --body "$(cat scout_report.md)"
+          fi
+
+  coach:
+    needs: [brief, scout]
+    if: needs.brief.outputs.is_deadline == 'true' && needs.brief.outputs.issue_number != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate Coach app token
+        id: coach-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.COACH_APP_ID }}
+          private-key: ${{ secrets.COACH_PRIVATE_KEY }}
+        continue-on-error: true
+
+      - name: Auto team sheet
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GH_TOKEN: ${{ steps.coach-token.outputs.token || github.token }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "No ANTHROPIC_API_KEY secret — skipping auto coach"
+            exit 0
+          fi
+
+          npm install -g @anthropic-ai/claude-code
+
+          TODAY=$(date +%Y-%m-%d)
+          BRIEF="data/briefs/${TODAY}.md"
+
+          if [ ! -f "$BRIEF" ]; then
+            echo "No brief found — skipping coach"
+            exit 0
+          fi
+
+          PROMPT="You are Pep Talk, the FPL head coach. Start your response with a blockquote header line: the blockquote marker followed by the direct hit emoji then bold Pep Talk then a dot then Coach. Then a blank line, then your team sheet. This is deadline day. Read the daily brief at data/briefs/${TODAY}.md, data/brief.json, config.json, and docs/playbook.md. Also read the latest league report from data/reports/ if one exists. Produce a complete team sheet for the upcoming GW. Format: ## GW Team Sheet, then Formation, Risk dial mode, Starting XI (positional layout with opponent and FDR), Captain and Vice with reasoning, Bench order 1-3, Transfer recommendation (OUT to IN or Roll the FT), Chip decision, Key risks and contingencies. Follow the risk dial from the playbook religiously. Be decisive — pick one captain, one formation. No hedging. Concise — this lands on a phone. IMPORTANT: Do not second-guess or correct sources on factual claims. Trust current sources over your prior knowledge."
+
+          claude -p "$PROMPT" --allowedTools Read,WebSearch,WebFetch > team_sheet.md 2>/dev/null || true
+
+          if [ -s team_sheet.md ]; then
+            gh issue comment "${{ needs.brief.outputs.issue_number }}" \
+              --body "$(cat team_sheet.md)"
+          fi
+
+  price-alert:
+    if: github.event.schedule == '0 21 * * *'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate Dossier app token
+        id: dossier-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.DOSSIER_APP_ID }}
+          private-key: ${{ secrets.DOSSIER_PRIVATE_KEY }}
+        continue-on-error: true
+
+      - name: Copy config and restore databases
+        run: |
+          mkdir -p ~/.fpld
+          cp config.json ~/.fpld/
+          cp -f data/state.json ~/.fpld/state.json 2>/dev/null || true
+          cp -f data/players.json ~/.fpld/players.json 2>/dev/null || true
+
+      - name: Check price changes
+        id: check
+        run: |
+          python3 fpld_brief.py --price-alert > alert.md 2>&1 || true
+          if grep -q "Price Alert" alert.md 2>/dev/null; then
+            echo "has_alert=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Post alert on open issue
+        if: steps.check.outputs.has_alert == 'true'
+        env:
+          GH_TOKEN: ${{ steps.dossier-token.outputs.token || github.token }}
+        run: |
+          # Find the open daily-brief or deadline-pack issue
+          ISSUE=$(gh issue list --label "daily-brief" --state open --json number --jq '.[0].number' 2>/dev/null)
+          if [ -z "$ISSUE" ]; then
+            ISSUE=$(gh issue list --label "deadline-pack" --state open --json number --jq '.[0].number' 2>/dev/null)
+          fi
+
+          if [ -n "$ISSUE" ] && [ -s alert.md ]; then
+            # Strip the "Wrote ..." line from the output
+            sed -i '/^Wrote /d' alert.md
+            sed -i '/^No squad/d' alert.md
+            # Prepend Dossier header
+            BODY=$(printf '> \xf0\x9f\x93\x8a **Dossier** \xc2\xb7 Price Alert\n\n%s' "$(cat alert.md)")
+            gh issue comment "$ISSUE" --body "$BODY"
+            echo "Posted price alert on issue #$ISSUE"
+          else
+            echo "No open issue to post alert on"
           fi

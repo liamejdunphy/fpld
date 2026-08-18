@@ -77,7 +77,26 @@ A GitHub Issue appears on your phone with the full brief. Claude reads it and sc
 
 ### Before each deadline
 
-The manager chains the full staff: quant checks model health, scout verifies fitness, analyst pulls rival intel, then the coach delivers a team sheet. Or you just comment on the Issue — "pick my team", "scout Palmer", "should I take a hit?" — and get an answer.
+The daily pipeline auto-detects when the next GW deadline is within 24h. It labels the issue as a **deadline-pack**, the scout runs deeper checks, and the coach auto-posts a recommended team sheet. No hardcoded crons — it handles midweek GWs, rescheduled deadlines, everything.
+
+### Every evening at 21:00 UTC
+
+A price alert checks if any squad or watchlist player is near a price rise or fall. If so, Dossier comments on the open issue: *"Saka about to rise (net +185k transfers). Act before ~02:30."*
+
+### Talk to your staff
+
+Comment on any daily-brief or deadline-pack issue to get a response from the right staff member:
+
+| Command | Who answers | What they do |
+|---|---|---|
+| `/scout Palmer` | Radar | Web research — fitness, form, community sentiment, verdict |
+| `/coach pick my team` | Pep Talk | Starting XI, captain, bench order, chip decision |
+| `/gaffer should I take a hit?` | Gaffer | Transfer sequencing, 5-GW planning, chip timing |
+| `/analyst who's gaining on me?` | Dossier | Rival intel, league EO, differential edges |
+| `/quant compare Salah vs Palmer` | Moneyball | xPts side-by-side, model health, value picks |
+| `/claude anything` | Gaffer (catch-all) | Routes to the right person or answers directly |
+
+Each command triggers a GitHub Action that runs Claude with web access. Responses appear as comments from the staff member's bot identity (`fpld-radar[bot]`, `fpld-coach[bot]`, etc).
 
 ### The planner
 

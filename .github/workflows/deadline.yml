@@ -1,109 +1,22 @@
-name: FPL deadline pack
+name: FPL deadline pack (manual)
 
-# Runs 6 hours before each GW deadline.
-# FPL deadlines are typically Saturday 11:00 UTC or Friday 18:30 UTC.
-# This schedule covers both — the brief itself shows the exact countdown.
-# Adjust times as the actual deadline schedule is published.
+# Dynamic deadline detection runs in daily.yml automatically.
+# This workflow is a manual fallback — it dispatches the daily workflow
+# with force_deadline=true, so the full pipeline runs and labels the
+# issue as a deadline-pack.
 
 on:
-  schedule:
-    - cron: '30 12 * * 5'   # Friday 12:30 UTC (6h before 18:30 deadline)
-    - cron: '0 5 * * 6'     # Saturday 05:00 UTC (6h before 11:00 deadline)
   workflow_dispatch:
 
-permissions:
-  contents: write
-  issues: write
-
 jobs:
-  deadline:
+  trigger:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Configure git
-        run: |
-          git config user.name "fpld-bot"
-          git config user.email "fpld-bot@users.noreply.github.com"
-
-      - name: Copy config and restore databases
-        run: |
-          mkdir -p ~/.fpld
-          cp config.json ~/.fpld/
-          cp -f data/league.db ~/.fpld/league.db 2>/dev/null || true
-          cp -f data/xpts.db ~/.fpld/xpts.db 2>/dev/null || true
-          cp -f data/xpts_model.json ~/.fpld/xpts_model.json 2>/dev/null || true
-          cp -f data/xpts_predictions.json ~/.fpld/xpts_predictions.json 2>/dev/null || true
-          cp -f data/state.json ~/.fpld/state.json 2>/dev/null || true
-          cp -f data/players.json ~/.fpld/players.json 2>/dev/null || true
-
-      - name: Fresh data pull
-        run: |
-          python3 fpld_brief.py --print
-          python3 fpld_league.py --sync --report --quiet || true
-          # Predict only — pull+train happen on Monday's daily run
-          if [ -f data/xpts_model.json ]; then
-            python3 fpld_xpts.py --predict --league
-          fi
-
-      - name: Persist databases and commit
-        run: |
-          mkdir -p data/briefs data/reports
-          cp -f ~/.fpld/briefs/*.md data/briefs/ 2>/dev/null || true
-          cp -f ~/.fpld/reports/*.md data/reports/ 2>/dev/null || true
-          cp -f ~/.fpld/league.db data/league.db 2>/dev/null || true
-          cp -f ~/.fpld/xpts.db data/xpts.db 2>/dev/null || true
-          cp -f ~/.fpld/xpts_model.json data/xpts_model.json 2>/dev/null || true
-          cp -f ~/.fpld/xpts_predictions.json data/xpts_predictions.json 2>/dev/null || true
-          cp -f ~/.fpld/state.json data/state.json 2>/dev/null || true
-          cp -f ~/.fpld/players.json data/players.json 2>/dev/null || true
-          git add data/
-          git diff --cached --quiet || git commit -m "Deadline pack $(date +%Y-%m-%d)"
-          git push
-
-      - name: Create deadline pack issue
+      - name: Dispatch daily workflow as deadline
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          TODAY=$(date +%Y-%m-%d)
-          BRIEF_FILE="data/briefs/${TODAY}.md"
-          REPORT_FILE=$(ls -t data/reports/league-*.md 2>/dev/null | head -1)
-
-          BODY="# Deadline Pack — ${TODAY}
-
-          _Auto-generated 6h before deadline. Open Claude and paste this for coaching._
-
-          ---
-
-          "
-
-          if [ -f "$BRIEF_FILE" ]; then
-            BODY="${BODY}$(head -c 28000 "$BRIEF_FILE")"
-          fi
-
-          if [ -n "$REPORT_FILE" ] && [ -f "$REPORT_FILE" ]; then
-            BODY="${BODY}
-
-          ---
-
-          $(head -c 28000 "$REPORT_FILE")"
-          fi
-
-          BODY=$(echo "$BODY" | head -c 65000)
-
-          gh issue create \
-            --title "Deadline pack — ${TODAY}" \
-            --body "$BODY" \
-            --label "deadline-pack"
-
-      - name: Close old deadline packs
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh issue list --label "deadline-pack" --state open --json number,createdAt \
-            --jq '.[] | select(.createdAt < (now - 259200 | strftime("%Y-%m-%dT%H:%M:%SZ"))) | .number' \
-            | xargs -I {} gh issue close {} --comment "Deadline passed." 2>/dev/null || true
+          gh workflow run "FPL daily brief" \
+            --repo "${{ github.repository }}" \
+            -f force_deadline=true
+          echo "Dispatched daily workflow with force_deadline=true"
