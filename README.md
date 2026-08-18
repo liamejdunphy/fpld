@@ -98,6 +98,8 @@ Comment on any daily-brief or deadline-pack issue to get a response from the rig
 
 Each command triggers a GitHub Action that runs Claude with web access. Responses appear as comments from the staff member's bot identity (`fpld-radar[bot]`, `fpld-coach[bot]`, etc).
 
+Commands work on any issue labelled `daily-brief`, `deadline-pack`, or `scout-report`. To make any issue staff-interactive, add one of these labels.
+
 ### The planner
 
 A web app at your GitHub Pages URL that shows the auto-generated transfer plans. Toggle between Safe / Balanced / Aggressive paths, tweak moves you disagree with, set captains and chips, then export the confirmed plan back to the Issue for the staff to review.
@@ -124,10 +126,34 @@ python3 fpld_xpts.py --predict --league
 
 ### Run it on GitHub
 
-1. Push this repo (private is fine — `config.json` holds only public IDs)
-2. Settings > Actions > General > Workflow permissions > **Read and write**
-3. Settings > Pages > Source > **GitHub Actions**
-4. Actions tab > *FPL daily brief* > **Run workflow**
+1. Fork or push this repo (private is fine — `config.json` holds only public IDs)
+2. **Update `config.json`** with your own `team_id` and `league_id` (from your FPL URLs)
+3. Settings > Actions > General > Workflow permissions > **Read and write**
+4. Settings > Pages > Source > **GitHub Actions**
+5. Add the `ANTHROPIC_API_KEY` secret (Settings > Secrets and variables > Actions)
+6. Actions tab > *FPL daily brief* > **Run workflow**
+
+This gives you the full daily pipeline (brief, league sync, xPts, scout). The slash commands will work with `github-actions[bot]` as the commenter.
+
+### Staff bot identities (optional)
+
+To have each persona comment as its own bot (`fpld-radar[bot]`, `fpld-coach[bot]`, etc), create a GitHub App per persona:
+
+1. Go to Settings > Developer settings > GitHub Apps > **New GitHub App**
+2. Name it (e.g. `fpld-radar`), give it **Issues: Read & write** permission
+3. Install it on your repo
+4. Note the **App ID** and generate a **Private Key**
+5. Add both as repo secrets:
+
+| Persona | App ID secret | Private Key secret |
+|---|---|---|
+| Radar (scout) | `RADAR_APP_ID` | `RADAR_PRIVATE_KEY` |
+| Pep Talk (coach) | `COACH_APP_ID` | `COACH_PRIVATE_KEY` |
+| Gaffer (manager) | `GAFFER_APP_ID` | `GAFFER_PRIVATE_KEY` |
+| Dossier (analyst) | `DOSSIER_APP_ID` | `DOSSIER_PRIVATE_KEY` |
+| Moneyball (quant) | `QUANT_APP_ID` | `QUANT_PRIVATE_KEY` |
+
+Without these, everything still works — comments just come from `github-actions[bot]` instead.
 
 Every run commits to `data/`, so you get a permanent history. By March you can `git log data/` and see exactly what your squad looked like in GW12.
 

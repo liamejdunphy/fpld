@@ -330,19 +330,30 @@ def diff(model, prev):
     return {"price": price, "flags": flags, "cleared": cleared}
 
 
-def dial(behind, left):
+def dial(behind, left, gw=1):
     if left <= 0:
         return "SEASON OVER", "No gameweeks remain."
     if behind < 0:
         return "SHIELD", "You lead. Mirror the chasers, match their captain, avoid unique picks."
     p = behind / left
     if p <= 0.5:
-        return "SAFE", "Template core, template captain, no hits."
-    if p <= 1.5:
-        return "BALANCED", "One calculated differential. Template captain unless the gap is tiny."
-    if p <= 3:
-        return "AGGRESSIVE", "Two or three sub-10% picks. Off-template captain when close."
-    return "SWING", "Contrarian captain, low ownership, chips on maximum-variance weeks."
+        mode, gloss = "SAFE", "Template core, template captain, no hits."
+    elif p <= 1.5:
+        mode, gloss = "BALANCED", "One calculated differential. Template captain unless the gap is tiny."
+    elif p <= 3:
+        mode, gloss = "AGGRESSIVE", "Two or three sub-10% picks. Off-template captain when close."
+    else:
+        mode, gloss = "SWING", "Contrarian captain, low ownership, chips on maximum-variance weeks."
+    # Playbook rule: before GW10, cap at BALANCED (early gaps are noise)
+    RANK = ["SAFE", "BALANCED", "AGGRESSIVE", "SWING"]
+    if gw < 10 and mode in ("AGGRESSIVE", "SWING"):
+        mode = "BALANCED"
+        gloss += " (capped — before GW10, early gaps are noise.)"
+    # Playbook rule: after GW30, shift one band more aggressive
+    if gw > 30 and RANK.index(mode) < len(RANK) - 1:
+        mode = RANK[RANK.index(mode) + 1]
+        gloss += " (shifted aggressive — fewer GWs left for variance to work.)"
+    return mode, gloss
 
 
 # ---------------------------------------------------------------- 5-GW plan generation
@@ -601,7 +612,7 @@ def brief(cfg, model, squad, source, d, standings):
         if me and top:
             behind = top["total"] - me["total"]
             left = 38 - model["finished"]
-            mode, gloss = dial(behind, left)
+            mode, gloss = dial(behind, left, gw=model["gw"])
             L += ["## Where you stand", "",
                   f"- Mini-league: **{me['rank']} of {len(standings)}**, {behind} behind {top['entry_name']}",
                   f"- Gameweeks left: {left}",
@@ -1257,7 +1268,7 @@ def main():
         leader = standings[0] if standings else None
         if me and leader:
             behind = leader.get("total", 0) - me.get("total", 0)
-        mode, gloss = dial(behind, left)
+        mode, gloss = dial(behind, left, gw=gw)
 
         # Captain shortlist
         caps = sorted([p for p in squad if p["status"] == "a"],
