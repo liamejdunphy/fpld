@@ -19,7 +19,7 @@
    "form": 0.0,
    "ppg": 2.9,
    "xgi90": 0.0,
-   "owned": 20.5,
+   "owned": 20.7,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -166,7 +166,7 @@
    "form": 0.0,
    "ppg": 3.0,
    "xgi90": 0.08,
-   "owned": 22.7,
+   "owned": 22.6,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -362,7 +362,7 @@
    "form": 0.0,
    "ppg": 6.7,
    "xgi90": 0.68,
-   "owned": 48.8,
+   "owned": 48.9,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -411,7 +411,7 @@
    "form": 0.0,
    "ppg": 4.5,
    "xgi90": 0.58,
-   "owned": 30.2,
+   "owned": 30.6,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -509,7 +509,7 @@
    "form": 0.0,
    "ppg": 3.1,
    "xgi90": 0.32,
-   "owned": 5.1,
+   "owned": 5.3,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -607,7 +607,7 @@
    "form": 0.0,
    "ppg": 6.8,
    "xgi90": 0.86,
-   "owned": 70.9,
+   "owned": 70.6,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -656,7 +656,7 @@
    "form": 0.0,
    "ppg": 5.1,
    "xgi90": 0.57,
-   "owned": 59.6,
+   "owned": 59.8,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -705,7 +705,7 @@
    "form": 0.0,
    "ppg": 4.1,
    "xgi90": 0.55,
-   "owned": 27.0,
+   "owned": 27.2,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -756,7 +756,7 @@
    "form": 0.0,
    "ppg": 6.8,
    "xgi90": 0.86,
-   "owned": 70.9,
+   "owned": 70.6,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -805,7 +805,7 @@
    "form": 0.0,
    "ppg": 6.7,
    "xgi90": 0.68,
-   "owned": 48.8,
+   "owned": 48.9,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -854,7 +854,7 @@
    "form": 0.0,
    "ppg": 4.5,
    "xgi90": 0.58,
-   "owned": 30.2,
+   "owned": 30.6,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -903,7 +903,7 @@
    "form": 0.0,
    "ppg": 5.1,
    "xgi90": 0.57,
-   "owned": 59.6,
+   "owned": 59.8,
    "status": "a",
    "fdr": 3,
    "fixtures": [
