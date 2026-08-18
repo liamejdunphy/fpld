@@ -1,5 +1,5 @@
 {
- "date": "2026-08-17",
+ "date": "2026-08-18",
  "gw": 1,
  "deadline": "2026-08-21T17:30:00Z",
  "dial": {
@@ -19,7 +19,7 @@
    "form": 0.0,
    "ppg": 2.9,
    "xgi90": 0.0,
-   "owned": 20.4,
+   "owned": 20.5,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -117,7 +117,7 @@
    "form": 0.0,
    "ppg": 6.5,
    "xgi90": 0.16,
-   "owned": 28.5,
+   "owned": 28.7,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -166,7 +166,7 @@
    "form": 0.0,
    "ppg": 3.0,
    "xgi90": 0.08,
-   "owned": 22.9,
+   "owned": 22.7,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -264,7 +264,7 @@
    "form": 0.0,
    "ppg": 0.0,
    "xgi90": 0.0,
-   "owned": 7.9,
+   "owned": 7.8,
    "status": "a",
    "fdr": 3.4,
    "fixtures": [
@@ -362,7 +362,7 @@
    "form": 0.0,
    "ppg": 6.7,
    "xgi90": 0.68,
-   "owned": 48.6,
+   "owned": 48.8,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -411,7 +411,7 @@
    "form": 0.0,
    "ppg": 4.5,
    "xgi90": 0.58,
-   "owned": 29.8,
+   "owned": 30.2,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -509,7 +509,7 @@
    "form": 0.0,
    "ppg": 3.1,
    "xgi90": 0.32,
-   "owned": 4.9,
+   "owned": 5.1,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -607,7 +607,7 @@
    "form": 0.0,
    "ppg": 6.8,
    "xgi90": 0.86,
-   "owned": 71.1,
+   "owned": 70.9,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -656,7 +656,7 @@
    "form": 0.0,
    "ppg": 5.1,
    "xgi90": 0.57,
-   "owned": 59.2,
+   "owned": 59.6,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -705,7 +705,7 @@
    "form": 0.0,
    "ppg": 4.1,
    "xgi90": 0.55,
-   "owned": 26.7,
+   "owned": 27.0,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -756,7 +756,7 @@
    "form": 0.0,
    "ppg": 6.8,
    "xgi90": 0.86,
-   "owned": 71.1,
+   "owned": 70.9,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -805,7 +805,7 @@
    "form": 0.0,
    "ppg": 6.7,
    "xgi90": 0.68,
-   "owned": 48.6,
+   "owned": 48.8,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -854,7 +854,7 @@
    "form": 0.0,
    "ppg": 4.5,
    "xgi90": 0.58,
-   "owned": 29.8,
+   "owned": 30.2,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -903,7 +903,7 @@
    "form": 0.0,
    "ppg": 5.1,
    "xgi90": 0.57,
-   "owned": 59.2,
+   "owned": 59.6,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -2180,13 +2180,6 @@
    "price": 5.0,
    "score": 33.4
   },
-  "341": {
-   "name": "Gnonto",
-   "pos": "MID",
-   "club": "LEE",
-   "price": 5.0,
-   "score": 26.7
-  },
   "343": {
    "name": "James",
    "pos": "MID",
@@ -2844,13 +2837,6 @@
    "club": "NFO",
    "price": 5.0,
    "score": 32.6
-  },
-  "489": {
-   "name": "Yates",
-   "pos": "MID",
-   "club": "NFO",
-   "price": 4.5,
-   "score": 24.5
   },
   "490": {
    "name": "Wood",
