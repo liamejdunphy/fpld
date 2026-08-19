@@ -1441,6 +1441,13 @@
   "pos": "FWD",
   "price": 4.5
  },
+ "492": {
+  "web_name": "Awoniyi",
+  "full_name": "Taiwo Awoniyi",
+  "club": "COV",
+  "pos": "FWD",
+  "price": 5.5
+ },
  "575": {
   "web_name": "Yirenkyi",
   "full_name": "Caleb Yirenkyi",
@@ -2469,6 +2476,20 @@
   "club": "IPS",
   "pos": "MID",
   "price": 5.0
+ },
+ "591": {
+  "web_name": "Enciso",
+  "full_name": "Julio Enciso",
+  "club": "IPS",
+  "pos": "MID",
+  "price": 5.5
+ },
+ "592": {
+  "web_name": "Ouattara",
+  "full_name": "Abdoul Ouattara",
+  "club": "IPS",
+  "pos": "DEF",
+  "price": 4.0
  },
  "260": {
   "web_name": "Wilson",
@@ -3666,13 +3687,6 @@
   "club": "NFO",
   "pos": "FWD",
   "price": 6.0
- },
- "492": {
-  "web_name": "Awoniyi",
-  "full_name": "Taiwo Awoniyi",
-  "club": "NFO",
-  "pos": "FWD",
-  "price": 5.5
  },
  "493": {
   "web_name": "Kalimuendo",

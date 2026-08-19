@@ -1,5 +1,5 @@
 {
- "date": "2026-08-18",
+ "date": "2026-08-19",
  "gw": 1,
  "deadline": "2026-08-21T17:30:00Z",
  "dial": {
@@ -19,7 +19,7 @@
    "form": 0.0,
    "ppg": 2.9,
    "xgi90": 0.0,
-   "owned": 20.7,
+   "owned": 21.3,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -117,7 +117,7 @@
    "form": 0.0,
    "ppg": 6.5,
    "xgi90": 0.16,
-   "owned": 28.7,
+   "owned": 28.9,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -166,7 +166,7 @@
    "form": 0.0,
    "ppg": 3.0,
    "xgi90": 0.08,
-   "owned": 22.6,
+   "owned": 22.1,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -215,7 +215,7 @@
    "form": 0.0,
    "ppg": 3.1,
    "xgi90": 0.12,
-   "owned": 3.5,
+   "owned": 3.4,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -313,7 +313,7 @@
    "form": 0.0,
    "ppg": 0.0,
    "xgi90": 0.0,
-   "owned": 1.9,
+   "owned": 1.8,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -362,7 +362,7 @@
    "form": 0.0,
    "ppg": 6.7,
    "xgi90": 0.68,
-   "owned": 48.9,
+   "owned": 49.2,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -411,7 +411,7 @@
    "form": 0.0,
    "ppg": 4.5,
    "xgi90": 0.58,
-   "owned": 30.6,
+   "owned": 31.8,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -509,7 +509,7 @@
    "form": 0.0,
    "ppg": 3.1,
    "xgi90": 0.32,
-   "owned": 5.3,
+   "owned": 5.8,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -558,7 +558,7 @@
    "form": 0.0,
    "ppg": 0.0,
    "xgi90": 0.0,
-   "owned": 2.4,
+   "owned": 2.5,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -607,7 +607,7 @@
    "form": 0.0,
    "ppg": 6.8,
    "xgi90": 0.86,
-   "owned": 70.6,
+   "owned": 70.1,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -656,7 +656,7 @@
    "form": 0.0,
    "ppg": 5.1,
    "xgi90": 0.57,
-   "owned": 59.8,
+   "owned": 60.6,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -705,7 +705,7 @@
    "form": 0.0,
    "ppg": 4.1,
    "xgi90": 0.55,
-   "owned": 27.2,
+   "owned": 27.9,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -756,7 +756,7 @@
    "form": 0.0,
    "ppg": 6.8,
    "xgi90": 0.86,
-   "owned": 70.6,
+   "owned": 70.1,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -805,7 +805,7 @@
    "form": 0.0,
    "ppg": 6.7,
    "xgi90": 0.68,
-   "owned": 48.9,
+   "owned": 49.2,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -854,7 +854,7 @@
    "form": 0.0,
    "ppg": 4.5,
    "xgi90": 0.58,
-   "owned": 30.6,
+   "owned": 31.8,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -903,7 +903,7 @@
    "form": 0.0,
    "ppg": 5.1,
    "xgi90": 0.57,
-   "owned": 59.8,
+   "owned": 60.6,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -1431,13 +1431,6 @@
    "price": 5.0,
    "score": 32.9
   },
-  "100": {
-   "name": "Carvalho",
-   "pos": "MID",
-   "club": "BRE",
-   "price": 5.0,
-   "score": 39.6
-  },
   "102": {
    "name": "Yarmoliuk",
    "pos": "MID",
@@ -1717,6 +1710,13 @@
    "club": "COV",
    "price": 5.0,
    "score": 29.3
+  },
+  "492": {
+   "name": "Awoniyi",
+   "pos": "FWD",
+   "club": "COV",
+   "price": 5.5,
+   "score": 40.3
   },
   "42": {
    "name": "Guessand",
@@ -2390,13 +2390,6 @@
    "price": 5.5,
    "score": 38.5
   },
-  "394": {
-   "name": "Alleyne",
-   "pos": "DEF",
-   "club": "MCI",
-   "price": 5.0,
-   "score": 28.4
-  },
   "395": {
    "name": "Lewis",
    "pos": "DEF",
@@ -2424,13 +2417,6 @@
    "club": "MCI",
    "price": 7.5,
    "score": 43.8
-  },
-  "400": {
-   "name": "Doku",
-   "pos": "MID",
-   "club": "MCI",
-   "price": 7.5,
-   "score": 38.6
   },
   "401": {
    "name": "Marmoush",
@@ -2852,13 +2838,6 @@
    "price": 6.0,
    "score": 33.4
   },
-  "492": {
-   "name": "Awoniyi",
-   "pos": "FWD",
-   "club": "NFO",
-   "price": 5.5,
-   "score": 43.1
-  },
   "493": {
    "name": "Kalimuendo",
    "pos": "FWD",
@@ -2935,13 +2914,6 @@
    "club": "TOT",
    "price": 5.0,
    "score": 46.8
-  },
-  "505": {
-   "name": "Spence",
-   "pos": "DEF",
-   "club": "TOT",
-   "price": 4.5,
-   "score": 37.9
   },
   "506": {
    "name": "Udogie",
