@@ -1,5 +1,5 @@
 {
- "date": "2026-08-19",
+ "date": "2026-08-20",
  "gw": 1,
  "deadline": "2026-08-21T17:30:00Z",
  "dial": {
@@ -19,7 +19,7 @@
    "form": 0.0,
    "ppg": 2.9,
    "xgi90": 0.0,
-   "owned": 21.3,
+   "owned": 21.8,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -117,7 +117,7 @@
    "form": 0.0,
    "ppg": 6.5,
    "xgi90": 0.16,
-   "owned": 28.9,
+   "owned": 29.4,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -166,7 +166,7 @@
    "form": 0.0,
    "ppg": 3.0,
    "xgi90": 0.08,
-   "owned": 22.1,
+   "owned": 21.8,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -313,7 +313,7 @@
    "form": 0.0,
    "ppg": 0.0,
    "xgi90": 0.0,
-   "owned": 1.8,
+   "owned": 1.7,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -362,7 +362,7 @@
    "form": 0.0,
    "ppg": 6.7,
    "xgi90": 0.68,
-   "owned": 49.2,
+   "owned": 49.8,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -411,7 +411,7 @@
    "form": 0.0,
    "ppg": 4.5,
    "xgi90": 0.58,
-   "owned": 31.8,
+   "owned": 33.3,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -460,7 +460,7 @@
    "form": 0.0,
    "ppg": 4.9,
    "xgi90": 0.33,
-   "owned": 3.5,
+   "owned": 3.4,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -509,7 +509,7 @@
    "form": 0.0,
    "ppg": 3.1,
    "xgi90": 0.32,
-   "owned": 5.9,
+   "owned": 6.3,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -607,7 +607,7 @@
    "form": 0.0,
    "ppg": 6.8,
    "xgi90": 0.86,
-   "owned": 70.1,
+   "owned": 69.5,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -656,7 +656,7 @@
    "form": 0.0,
    "ppg": 5.1,
    "xgi90": 0.57,
-   "owned": 60.7,
+   "owned": 61.6,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -705,7 +705,7 @@
    "form": 0.0,
    "ppg": 4.1,
    "xgi90": 0.55,
-   "owned": 27.9,
+   "owned": 28.6,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -756,7 +756,7 @@
    "form": 0.0,
    "ppg": 6.8,
    "xgi90": 0.86,
-   "owned": 70.1,
+   "owned": 69.5,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -805,7 +805,7 @@
    "form": 0.0,
    "ppg": 6.7,
    "xgi90": 0.68,
-   "owned": 49.2,
+   "owned": 49.8,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -854,7 +854,7 @@
    "form": 0.0,
    "ppg": 4.5,
    "xgi90": 0.58,
-   "owned": 31.8,
+   "owned": 33.3,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -903,7 +903,7 @@
    "form": 0.0,
    "ppg": 5.1,
    "xgi90": 0.57,
-   "owned": 60.7,
+   "owned": 61.6,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -2138,13 +2138,6 @@
    "price": 4.5,
    "score": 46.0
   },
-  "333": {
-   "name": "Bornauw",
-   "pos": "DEF",
-   "club": "LEE",
-   "price": 4.5,
-   "score": 30.3
-  },
   "335": {
    "name": "Stach",
    "pos": "MID",
@@ -2207,13 +2200,6 @@
    "club": "LEE",
    "price": 5.5,
    "score": 42.7
-  },
-  "348": {
-   "name": "Piroe",
-   "pos": "FWD",
-   "club": "LEE",
-   "price": 5.0,
-   "score": 29.3
   },
   "385": {
    "name": "Trafford",
@@ -2858,13 +2844,6 @@
    "club": "TOT",
    "price": 5.5,
    "score": 29.2
-  },
-  "494": {
-   "name": "Vicario",
-   "pos": "GK",
-   "club": "TOT",
-   "price": 4.5,
-   "score": 31.2
   },
   "496": {
    "name": "Kinsky",

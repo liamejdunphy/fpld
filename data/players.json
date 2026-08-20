@@ -972,6 +972,13 @@
   "pos": "DEF",
   "price": 5.0
  },
+ "594": {
+  "web_name": "David",
+  "full_name": "Promise David",
+  "club": "BHA",
+  "pos": "FWD",
+  "price": 6.0
+ },
  "40": {
   "web_name": "Rogers",
   "full_name": "Morgan Rogers",
@@ -1677,6 +1684,13 @@
   "full_name": "Anan Khalaili",
   "club": "CRY",
   "pos": "DEF",
+  "price": 5.0
+ },
+ "595": {
+  "web_name": "Gozo",
+  "full_name": "Zavier Gozo",
+  "club": "CRY",
+  "pos": "MID",
   "price": 5.0
  },
  "21": {
@@ -3519,6 +3533,13 @@
   "club": "NEW",
   "pos": "GK",
   "price": 5.0
+ },
+ "593": {
+  "web_name": "Dedić",
+  "full_name": "Amar Dedic",
+  "club": "NEW",
+  "pos": "DEF",
+  "price": 4.5
  },
  "467": {
   "web_name": "Sels",
