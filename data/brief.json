@@ -1,5 +1,5 @@
 {
- "date": "2026-08-20",
+ "date": "2026-08-21",
  "gw": 1,
  "deadline": "2026-08-21T17:30:00Z",
  "dial": {
@@ -19,7 +19,7 @@
    "form": 0.0,
    "ppg": 2.9,
    "xgi90": 0.0,
-   "owned": 21.8,
+   "owned": 23.2,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -117,7 +117,7 @@
    "form": 0.0,
    "ppg": 6.5,
    "xgi90": 0.16,
-   "owned": 29.4,
+   "owned": 29.7,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -166,7 +166,7 @@
    "form": 0.0,
    "ppg": 3.0,
    "xgi90": 0.08,
-   "owned": 21.8,
+   "owned": 21.5,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -215,7 +215,7 @@
    "form": 0.0,
    "ppg": 3.1,
    "xgi90": 0.12,
-   "owned": 3.4,
+   "owned": 3.3,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -264,7 +264,7 @@
    "form": 0.0,
    "ppg": 0.0,
    "xgi90": 0.0,
-   "owned": 7.8,
+   "owned": 7.9,
    "status": "a",
    "fdr": 3.4,
    "fixtures": [
@@ -313,7 +313,7 @@
    "form": 0.0,
    "ppg": 0.0,
    "xgi90": 0.0,
-   "owned": 1.7,
+   "owned": 1.6,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -362,7 +362,7 @@
    "form": 0.0,
    "ppg": 6.7,
    "xgi90": 0.68,
-   "owned": 49.8,
+   "owned": 50.9,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -411,7 +411,7 @@
    "form": 0.0,
    "ppg": 4.5,
    "xgi90": 0.58,
-   "owned": 33.3,
+   "owned": 36.2,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -460,7 +460,7 @@
    "form": 0.0,
    "ppg": 4.9,
    "xgi90": 0.33,
-   "owned": 3.4,
+   "owned": 3.3,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -509,7 +509,7 @@
    "form": 0.0,
    "ppg": 3.1,
    "xgi90": 0.32,
-   "owned": 6.3,
+   "owned": 7.2,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -558,7 +558,7 @@
    "form": 0.0,
    "ppg": 0.0,
    "xgi90": 0.0,
-   "owned": 2.5,
+   "owned": 2.8,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -607,7 +607,7 @@
    "form": 0.0,
    "ppg": 6.8,
    "xgi90": 0.86,
-   "owned": 69.5,
+   "owned": 69.4,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -656,7 +656,7 @@
    "form": 0.0,
    "ppg": 5.1,
    "xgi90": 0.57,
-   "owned": 61.6,
+   "owned": 63.2,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -705,7 +705,7 @@
    "form": 0.0,
    "ppg": 4.1,
    "xgi90": 0.55,
-   "owned": 28.6,
+   "owned": 30.1,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -756,7 +756,7 @@
    "form": 0.0,
    "ppg": 6.8,
    "xgi90": 0.86,
-   "owned": 69.5,
+   "owned": 69.4,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -805,7 +805,7 @@
    "form": 0.0,
    "ppg": 6.7,
    "xgi90": 0.68,
-   "owned": 49.8,
+   "owned": 50.9,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -854,7 +854,7 @@
    "form": 0.0,
    "ppg": 4.5,
    "xgi90": 0.58,
-   "owned": 33.3,
+   "owned": 36.2,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -903,7 +903,7 @@
    "form": 0.0,
    "ppg": 5.1,
    "xgi90": 0.57,
-   "owned": 61.6,
+   "owned": 63.2,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -1115,13 +1115,6 @@
    "club": "ARS",
    "price": 6.0,
    "score": 33.9
-  },
-  "452": {
-   "name": "Bruno G.",
-   "pos": "MID",
-   "club": "ARS",
-   "price": 7.0,
-   "score": 39.7
   },
   "28": {
    "name": "Martinez",
@@ -1550,19 +1543,19 @@
    "price": 5.5,
    "score": 36.9
   },
+  "328": {
+   "name": "Struijk",
+   "pos": "DEF",
+   "club": "BHA",
+   "price": 5.0,
+   "score": 47.6
+  },
   "40": {
    "name": "Rogers",
    "pos": "MID",
    "club": "CHE",
    "price": 7.5,
    "score": 36.0
-  },
-  "136": {
-   "name": "Welbeck",
-   "pos": "FWD",
-   "club": "CHE",
-   "price": 6.0,
-   "score": 40.2
   },
   "140": {
    "name": "S\u00e1nchez",
@@ -1724,13 +1717,6 @@
    "club": "CRY",
    "price": 5.5,
    "score": 28.5
-  },
-  "198": {
-   "name": "Henderson",
-   "pos": "GK",
-   "club": "CRY",
-   "price": 5.0,
-   "score": 31.1
   },
   "199": {
    "name": "Benitez",
@@ -2418,13 +2404,6 @@
    "price": 6.5,
    "score": 32.5
   },
-  "404": {
-   "name": "Reijnders",
-   "pos": "MID",
-   "club": "MCI",
-   "price": 6.0,
-   "score": 37.6
-  },
   "405": {
    "name": "N.Gonzalez",
    "pos": "MID",
@@ -2999,12 +2978,26 @@
    "price": 5.0,
    "score": 50.2
   },
+  "533": {
+   "name": "Mukiele",
+   "pos": "DEF",
+   "club": "SUN",
+   "price": 5.5,
+   "score": 51.5
+  },
   "534": {
    "name": "Hume",
    "pos": "DEF",
    "club": "SUN",
    "price": 4.5,
    "score": 43.0
+  },
+  "535": {
+   "name": "Alderete",
+   "pos": "DEF",
+   "club": "SUN",
+   "price": 5.0,
+   "score": 49.2
   },
   "536": {
    "name": "Reinildo",
@@ -3054,13 +3047,6 @@
    "club": "SUN",
    "price": 5.0,
    "score": 26.4
-  },
-  "546": {
-   "name": "Adingra",
-   "pos": "MID",
-   "club": "SUN",
-   "price": 5.0,
-   "score": 27.5
   },
   "547": {
    "name": "Mundle",

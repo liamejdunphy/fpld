@@ -391,6 +391,20 @@
   "pos": "FWD",
   "price": 5.5
  },
+ "596": {
+  "web_name": "Ruggeri",
+  "full_name": "Matteo Ruggeri",
+  "club": "AVL",
+  "pos": "DEF",
+  "price": 4.5
+ },
+ "597": {
+  "web_name": "Suzuki",
+  "full_name": "Zion Suzuki",
+  "club": "AVL",
+  "pos": "GK",
+  "price": 5.0
+ },
  "57": {
   "web_name": "Petrović",
   "full_name": "Đorđe Petrović",
@@ -1468,6 +1482,13 @@
   "club": "COV",
   "pos": "MID",
   "price": 5.5
+ },
+ "599": {
+  "web_name": "Cherif",
+  "full_name": "Sidiki Cherif",
+  "club": "COV",
+  "pos": "FWD",
+  "price": 5.0
  },
  "42": {
   "web_name": "Guessand",
@@ -2672,6 +2693,13 @@
   "club": "LEE",
   "pos": "GK",
   "price": 5.0
+ },
+ "598": {
+  "web_name": "Elvedi",
+  "full_name": "Nico Elvedi",
+  "club": "LEE",
+  "pos": "DEF",
+  "price": 4.5
  },
  "350": {
   "web_name": "A.Becker",
