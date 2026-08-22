@@ -181,6 +181,13 @@
   "pos": "FWD",
   "price": 6.0
  },
+ "31": {
+  "web_name": "Konsa",
+  "full_name": "Ezri Konsa Ngoyo",
+  "club": "ARS",
+  "pos": "DEF",
+  "price": 4.5
+ },
  "452": {
   "web_name": "Bruno G.",
   "full_name": "Bruno Guimarães Rodriguez Moura",
@@ -212,13 +219,6 @@
  "30": {
   "web_name": "Digne",
   "full_name": "Lucas Digne",
-  "club": "AVL",
-  "pos": "DEF",
-  "price": 4.5
- },
- "31": {
-  "web_name": "Konsa",
-  "full_name": "Ezri Konsa Ngoyo",
   "club": "AVL",
   "pos": "DEF",
   "price": 4.5
@@ -770,7 +770,7 @@
   "price": 5.5
  },
  "565": {
-  "web_name": "Sangaré",
+  "web_name": "M.Sangaré",
   "full_name": "Mamadou Sangaré",
   "club": "BRE",
   "pos": "MID",
@@ -992,6 +992,13 @@
   "club": "BHA",
   "pos": "FWD",
   "price": 6.0
+ },
+ "600": {
+  "web_name": "Osman",
+  "full_name": "Ibrahim Osman",
+  "club": "BHA",
+  "pos": "MID",
+  "price": 5.0
  },
  "40": {
   "web_name": "Rogers",
@@ -3710,7 +3717,7 @@
   "price": 5.0
  },
  "488": {
-  "web_name": "Sangaré",
+  "web_name": "I.Sangaré",
   "full_name": "Ibrahim Sangaré",
   "club": "NFO",
   "pos": "MID",
