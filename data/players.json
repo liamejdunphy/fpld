@@ -2533,6 +2533,13 @@
   "pos": "DEF",
   "price": 4.0
  },
+ "602": {
+  "web_name": "Humphreys",
+  "full_name": "Cameron Humphreys",
+  "club": "IPS",
+  "pos": "MID",
+  "price": 4.5
+ },
  "260": {
   "web_name": "Wilson",
   "full_name": "Harry Wilson",
@@ -2706,6 +2713,20 @@
   "full_name": "Nico Elvedi",
   "club": "LEE",
   "pos": "DEF",
+  "price": 4.5
+ },
+ "603": {
+  "web_name": "Lienou",
+  "full_name": "Jayden Lienou",
+  "club": "LEE",
+  "pos": "DEF",
+  "price": 4.0
+ },
+ "604": {
+  "web_name": "Cresswell",
+  "full_name": "Alfie Cresswell",
+  "club": "LEE",
+  "pos": "MID",
   "price": 4.5
  },
  "350": {
@@ -4022,6 +4043,13 @@
   "full_name": "Dane Scarlett",
   "club": "TOT",
   "pos": "FWD",
+  "price": 4.5
+ },
+ "601": {
+  "web_name": "Williams-Barnett",
+  "full_name": "Luca Williams-Barnett",
+  "club": "TOT",
+  "pos": "MID",
   "price": 4.5
  },
  "529": {
