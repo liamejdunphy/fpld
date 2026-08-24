@@ -405,6 +405,20 @@
   "pos": "GK",
   "price": 5.0
  },
+ "606": {
+  "web_name": "Rowe",
+  "full_name": "Triston Rowe",
+  "club": "AVL",
+  "pos": "DEF",
+  "price": 4.0
+ },
+ "607": {
+  "web_name": "Lynch",
+  "full_name": "Luka Lynch",
+  "club": "AVL",
+  "pos": "MID",
+  "price": 4.5
+ },
  "57": {
   "web_name": "Petrović",
   "full_name": "Đorđe Petrović",
@@ -593,6 +607,13 @@
   "club": "BOU",
   "pos": "DEF",
   "price": 4.5
+ },
+ "608": {
+  "web_name": "Jebbison",
+  "full_name": "Daniel Jebbison",
+  "club": "BOU",
+  "pos": "FWD",
+  "price": 5.0
  },
  "82": {
   "web_name": "Kelleher",
@@ -999,6 +1020,13 @@
   "club": "BHA",
   "pos": "MID",
   "price": 5.0
+ },
+ "605": {
+  "web_name": "Yalcouyé",
+  "full_name": "Malick Yalcouyé",
+  "club": "BHA",
+  "pos": "MID",
+  "price": 4.5
  },
  "40": {
   "web_name": "Rogers",
@@ -3596,6 +3624,13 @@
   "club": "NEW",
   "pos": "DEF",
   "price": 4.5
+ },
+ "609": {
+  "web_name": "Shahar",
+  "full_name": "Leo Shahar",
+  "club": "NEW",
+  "pos": "DEF",
+  "price": 4.0
  },
  "467": {
   "web_name": "Sels",
