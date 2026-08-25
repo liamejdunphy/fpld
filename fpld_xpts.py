@@ -162,7 +162,7 @@ def pull(conn, boot, full=False, verbose=True):
         # Current season per-GW
         for h in d.get("history", []):
             conn.execute("""INSERT OR REPLACE INTO player_gw_detail
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
                 (eid, h.get("round", 0), season,
                  int(num(h.get("minutes"))), int(num(h.get("total_points"))),
                  int(num(h.get("goals_scored"))), int(num(h.get("assists"))),
