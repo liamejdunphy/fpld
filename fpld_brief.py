@@ -910,7 +910,7 @@ def review(cfg, boot, fixtures):
         el = elements.get(element_id)
         if not el:
             return 0
-        return num(el.get("event_points", 0))
+        return int(num(el.get("event_points", 0)))
 
     captain_pts = player_gw_points(captain_id) * 2 if captain_id else 0
     vice_pts = player_gw_points(vice_id) * 2 if vice_id else 0
