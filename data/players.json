@@ -123,7 +123,7 @@
   "full_name": "Gabriel Martinelli Silva",
   "club": "ARS",
   "pos": "MID",
-  "price": 6.5
+  "price": 6.4
  },
  "19": {
   "web_name": "Zubimendi",
@@ -165,7 +165,7 @@
   "full_name": "Viktor Gyökeres",
   "club": "ARS",
   "pos": "FWD",
-  "price": 7.5
+  "price": 7.4
  },
  "26": {
   "web_name": "Havertz",
@@ -417,6 +417,13 @@
   "full_name": "Luka Lynch",
   "club": "AVL",
   "pos": "MID",
+  "price": 4.5
+ },
+ "611": {
+  "web_name": "Wan-Bissaka",
+  "full_name": "Aaron Wan-Bissaka",
+  "club": "AVL",
+  "pos": "DEF",
   "price": 4.5
  },
  "57": {
@@ -795,7 +802,7 @@
   "full_name": "Mamadou Sangaré",
   "club": "BRE",
   "pos": "MID",
-  "price": 5.5
+  "price": 5.6
  },
  "109": {
   "web_name": "Verbruggen",
@@ -830,7 +837,7 @@
   "full_name": "Maxim De Cuyper",
   "club": "BHA",
   "pos": "DEF",
-  "price": 4.5
+  "price": 4.6
  },
  "116": {
   "web_name": "Dunk",
@@ -3142,13 +3149,6 @@
   "pos": "MID",
   "price": 6.5
  },
- "403": {
-  "web_name": "Savinho",
-  "full_name": "Sávio Moreira de Oliveira",
-  "club": "MCI",
-  "pos": "MID",
-  "price": 6.5
- },
  "404": {
   "web_name": "Reijnders",
   "full_name": "Tijjani Reijnders",
@@ -3842,6 +3842,13 @@
   "pos": "DEF",
   "price": 5.0
  },
+ "403": {
+  "web_name": "Savinho",
+  "full_name": "Sávio Moreira de Oliveira",
+  "club": "TOT",
+  "pos": "MID",
+  "price": 6.5
+ },
  "455": {
   "web_name": "Tonali",
   "full_name": "Sandro Tonali",
@@ -4268,5 +4275,12 @@
   "club": "SUN",
   "pos": "FWD",
   "price": 5.5
+ },
+ "612": {
+  "web_name": "Methalie",
+  "full_name": "Dayann Méthalie",
+  "club": "SUN",
+  "pos": "DEF",
+  "price": 4.5
  }
 }
