@@ -1,5 +1,5 @@
 {
- "date": "2026-08-26",
+ "date": "2026-08-27",
  "gw": 2,
  "deadline": "2026-08-28T17:30:00Z",
  "dial": {
@@ -19,7 +19,7 @@
    "form": 2.0,
    "ppg": 2.0,
    "xgi90": 0.0,
-   "owned": 23.1,
+   "owned": 22.9,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -56,7 +56,7 @@
    ],
    "score": 32.9,
    "captain_score": 10.9,
-   "xpts": 1.7,
+   "xpts": 1.71,
    "xpts_horizon": 8.9
   },
   {
@@ -68,7 +68,7 @@
    "form": 5.0,
    "ppg": 5.0,
    "xgi90": 0.06,
-   "owned": 29.4,
+   "owned": 29.2,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -113,11 +113,11 @@
    "name": "Kayode",
    "pos": "DEF",
    "club": "BRE",
-   "price": 4.5,
+   "price": 4.6,
    "form": 13.0,
    "ppg": 13.0,
    "xgi90": 0.6,
-   "owned": 6.2,
+   "owned": 7.0,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -154,8 +154,8 @@
    ],
    "score": 66.9,
    "captain_score": 20.0,
-   "xpts": 9.49,
-   "xpts_horizon": 47.63
+   "xpts": 9.51,
+   "xpts_horizon": 47.71
   },
   {
    "id": 423,
@@ -166,7 +166,7 @@
    "form": 1.0,
    "ppg": 1.0,
    "xgi90": 0.26,
-   "owned": 20.1,
+   "owned": 19.8,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -203,8 +203,8 @@
    ],
    "score": 23.7,
    "captain_score": 17.4,
-   "xpts": 1.54,
-   "xpts_horizon": 7.1
+   "xpts": 1.53,
+   "xpts_horizon": 7.07
   },
   {
    "id": 426,
@@ -215,7 +215,7 @@
    "form": 2.0,
    "ppg": 2.0,
    "xgi90": 0.34,
-   "owned": 49.3,
+   "owned": 48.7,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -252,8 +252,8 @@
    ],
    "score": 33.7,
    "captain_score": 45.8,
-   "xpts": 0.24,
-   "xpts_horizon": 1.29
+   "xpts": 0.23,
+   "xpts_horizon": 1.24
   },
   {
    "id": 427,
@@ -264,7 +264,7 @@
    "form": 2.0,
    "ppg": 2.0,
    "xgi90": 0.73,
-   "owned": 36.7,
+   "owned": 36.2,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -301,8 +301,8 @@
    ],
    "score": 44.5,
    "captain_score": 64.4,
-   "xpts": 1.36,
-   "xpts_horizon": 6.84
+   "xpts": 1.35,
+   "xpts_horizon": 6.81
   },
   {
    "id": 236,
@@ -313,7 +313,7 @@
    "form": 11.0,
    "ppg": 11.0,
    "xgi90": 0.29,
-   "owned": 4.3,
+   "owned": 4.5,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -350,8 +350,8 @@
    ],
    "score": 75.9,
    "captain_score": 43.5,
-   "xpts": 10.08,
-   "xpts_horizon": 49.82
+   "xpts": 10.09,
+   "xpts_horizon": 49.83
   },
   {
    "id": 15,
@@ -362,7 +362,7 @@
    "form": 11.0,
    "ppg": 11.0,
    "xgi90": 0.37,
-   "owned": 10.8,
+   "owned": 11.3,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -400,7 +400,7 @@
    "score": 74.9,
    "captain_score": 39.5,
    "xpts": 10.32,
-   "xpts_horizon": 51.4
+   "xpts_horizon": 51.44
   },
   {
    "id": 346,
@@ -411,7 +411,7 @@
    "form": 1.0,
    "ppg": 1.0,
    "xgi90": 0.13,
-   "owned": 29.5,
+   "owned": 29.0,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -448,8 +448,8 @@
    ],
    "score": 23.6,
    "captain_score": 26.5,
-   "xpts": 0.25,
-   "xpts_horizon": 2.15
+   "xpts": 0.23,
+   "xpts_horizon": 2.06
   },
   {
    "id": 411,
@@ -460,7 +460,7 @@
    "form": 2.0,
    "ppg": 2.0,
    "xgi90": 0.76,
-   "owned": 68.3,
+   "owned": 68.0,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -505,11 +505,11 @@
    "name": "Jo\u00e3o Pedro",
    "pos": "FWD",
    "club": "CHE",
-   "price": 7.5,
+   "price": 7.6,
    "form": 11.0,
    "ppg": 11.0,
    "xgi90": 0.69,
-   "owned": 66.4,
+   "owned": 67.3,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -607,7 +607,7 @@
    "form": 8.0,
    "ppg": 8.0,
    "xgi90": 0.0,
-   "owned": 1.9,
+   "owned": 2.0,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -656,7 +656,7 @@
    "form": 3.0,
    "ppg": 3.0,
    "xgi90": 0.03,
-   "owned": 8.0,
+   "owned": 7.9,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -705,7 +705,7 @@
    "form": 6.0,
    "ppg": 6.0,
    "xgi90": 0.44,
-   "owned": 3.6,
+   "owned": 3.7,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -743,7 +743,7 @@
    "score": 69.9,
    "captain_score": 52.9,
    "xpts": 7.93,
-   "xpts_horizon": 38.19
+   "xpts_horizon": 38.2
   }
  ],
  "captain_shortlist": [
@@ -752,11 +752,11 @@
    "name": "Jo\u00e3o Pedro",
    "pos": "FWD",
    "club": "CHE",
-   "price": 7.5,
+   "price": 7.6,
    "form": 11.0,
    "ppg": 11.0,
    "xgi90": 0.69,
-   "owned": 66.4,
+   "owned": 67.3,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -805,7 +805,7 @@
    "form": 2.0,
    "ppg": 2.0,
    "xgi90": 0.73,
-   "owned": 36.7,
+   "owned": 36.2,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -842,8 +842,8 @@
    ],
    "score": 44.5,
    "captain_score": 64.4,
-   "xpts": 1.36,
-   "xpts_horizon": 6.84
+   "xpts": 1.35,
+   "xpts_horizon": 6.81
   },
   {
    "id": 411,
@@ -854,7 +854,7 @@
    "form": 2.0,
    "ppg": 2.0,
    "xgi90": 0.76,
-   "owned": 68.3,
+   "owned": 68.0,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -903,7 +903,7 @@
    "form": 6.0,
    "ppg": 6.0,
    "xgi90": 0.44,
-   "owned": 3.6,
+   "owned": 3.7,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -941,7 +941,7 @@
    "score": 69.9,
    "captain_score": 52.9,
    "xpts": 7.93,
-   "xpts_horizon": 38.19
+   "xpts_horizon": 38.2
   }
  ],
  "plans": {
@@ -964,8 +964,8 @@
       "pos": "GK",
       "club": "HUL",
       "price": 4.5,
-      "xpts": 43.92,
-      "owned": 2.0
+      "xpts": 43.91,
+      "owned": 2.5
      },
      "reason": "upgrade on Kinsky",
      "is_hit": false
@@ -987,8 +987,8 @@
       "pos": "DEF",
       "club": "HUL",
       "price": 4.0,
-      "xpts": 4.66,
-      "owned": 2.3
+      "xpts": 46.63,
+      "owned": 3.2
      },
      "reason": "upgrade on Gabriel",
      "is_hit": false
@@ -1062,8 +1062,8 @@
       "pos": "GK",
       "club": "HUL",
       "price": 4.5,
-      "xpts": 43.92,
-      "owned": 2.0
+      "xpts": 43.91,
+      "owned": 2.5
      },
      "reason": "upgrade on Kinsky",
      "is_hit": false
@@ -1085,8 +1085,8 @@
       "pos": "DEF",
       "club": "HUL",
       "price": 4.0,
-      "xpts": 4.66,
-      "owned": 2.3
+      "xpts": 46.63,
+      "owned": 3.2
      },
      "reason": "upgrade on Gabriel",
      "is_hit": false
@@ -1098,18 +1098,18 @@
       "name": "Kayode",
       "pos": "DEF",
       "club": "BRE",
-      "price": 4.5,
-      "xpts": 47.63,
+      "price": 4.6,
+      "xpts": 47.71,
       "status": "a"
      },
      "in": {
-      "id": 115,
-      "name": "De Cuyper",
+      "id": 279,
+      "name": "Ajayi",
       "pos": "DEF",
-      "club": "BHA",
-      "price": 4.6,
-      "xpts": 52.21,
-      "owned": 6.1
+      "club": "HUL",
+      "price": 4.0,
+      "xpts": 4.92,
+      "owned": 1.6
      },
      "reason": "upgrade on Kayode",
      "is_hit": false
@@ -1174,7 +1174,7 @@
       "pos": "MID",
       "club": "MUN",
       "price": 12.0,
-      "xpts": 1.29,
+      "xpts": 1.24,
       "status": "a"
      },
      "in": {
@@ -1183,8 +1183,8 @@
       "pos": "MID",
       "club": "LIV",
       "price": 7.0,
-      "xpts": 53.91,
-      "owned": 42.8
+      "xpts": 53.93,
+      "owned": 43.0
      },
      "reason": "upgrade on B.Fernandes",
      "is_hit": false
@@ -1206,8 +1206,8 @@
       "pos": "GK",
       "club": "HUL",
       "price": 4.5,
-      "xpts": 43.92,
-      "owned": 2.0
+      "xpts": 43.91,
+      "owned": 2.5
      },
      "reason": "upgrade on Kinsky",
      "is_hit": false
@@ -1229,8 +1229,8 @@
       "pos": "DEF",
       "club": "HUL",
       "price": 4.0,
-      "xpts": 4.66,
-      "owned": 2.3
+      "xpts": 46.63,
+      "owned": 3.2
      },
      "reason": "upgrade on Gabriel",
      "is_hit": false
@@ -1242,18 +1242,18 @@
       "name": "Kayode",
       "pos": "DEF",
       "club": "BRE",
-      "price": 4.5,
-      "xpts": 47.63,
+      "price": 4.6,
+      "xpts": 47.71,
       "status": "a"
      },
      "in": {
-      "id": 115,
-      "name": "De Cuyper",
+      "id": 279,
+      "name": "Ajayi",
       "pos": "DEF",
-      "club": "BHA",
-      "price": 4.6,
-      "xpts": 52.21,
-      "owned": 6.1
+      "club": "HUL",
+      "price": 4.0,
+      "xpts": 4.92,
+      "owned": 1.6
      },
      "reason": "upgrade on Kayode",
      "is_hit": false
@@ -1266,17 +1266,17 @@
       "pos": "DEF",
       "club": "MUN",
       "price": 4.5,
-      "xpts": 7.1,
+      "xpts": 7.07,
       "status": "a"
      },
      "in": {
-      "id": 327,
-      "name": "Bijol",
+      "id": 115,
+      "name": "De Cuyper",
       "pos": "DEF",
-      "club": "LEE",
-      "price": 5.0,
-      "xpts": 42.76,
-      "owned": 0.8
+      "club": "BHA",
+      "price": 4.6,
+      "xpts": 52.23,
+      "owned": 7.1
      },
      "reason": "upgrade on Shaw",
      "is_hit": false
@@ -1358,7 +1358,7 @@
    "name": "Calafiori",
    "pos": "DEF",
    "club": "ARS",
-   "price": 5.5,
+   "price": 5.6,
    "score": 67.0
   },
   "10": {
@@ -1589,7 +1589,7 @@
    "name": "Kayode",
    "pos": "DEF",
    "club": "BRE",
-   "price": 4.5,
+   "price": 4.6,
    "score": 66.9
   },
   "94": {
@@ -1675,13 +1675,6 @@
    "club": "BHA",
    "price": 5.5,
    "score": 37.0
-  },
-  "125": {
-   "name": "Georginio",
-   "pos": "FWD",
-   "club": "BHA",
-   "price": 5.5,
-   "score": 67.7
   },
   "127": {
    "name": "Gomez",
@@ -1778,7 +1771,7 @@
    "name": "Jo\u00e3o Pedro",
    "pos": "FWD",
    "club": "CHE",
-   "price": 7.5,
+   "price": 7.6,
    "score": 83.5
   },
   "200": {
@@ -1984,13 +1977,6 @@
    "price": 5.0,
    "score": 43.4
   },
-  "247": {
-   "name": "Hackney",
-   "pos": "MID",
-   "club": "EVE",
-   "price": 5.5,
-   "score": 41.2
-  },
   "249": {
    "name": "Barry",
    "pos": "FWD",
@@ -2081,6 +2067,20 @@
    "club": "HUL",
    "price": 4.0,
    "score": 69.5
+  },
+  "279": {
+   "name": "Ajayi",
+   "pos": "DEF",
+   "club": "HUL",
+   "price": 4.0,
+   "score": 68.5
+  },
+  "280": {
+   "name": "Coyle",
+   "pos": "DEF",
+   "club": "HUL",
+   "price": 4.0,
+   "score": 60.1
   },
   "282": {
    "name": "Giles",
@@ -2431,6 +2431,13 @@
    "club": "MCI",
    "price": 15.5,
    "score": 42.3
+  },
+  "481": {
+   "name": "Anderson",
+   "pos": "MID",
+   "club": "MCI",
+   "price": 6.5,
+   "score": 37.6
   },
   "43": {
    "name": "Tielemans",
