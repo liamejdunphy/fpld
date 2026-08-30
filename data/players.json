@@ -144,7 +144,7 @@
   "full_name": "Ethan Nwaneri",
   "club": "ARS",
   "pos": "MID",
-  "price": 5.5
+  "price": 5.4
  },
  "23": {
   "web_name": "Fábio Vieira",
@@ -354,7 +354,7 @@
   "full_name": "Johan Manzambi",
   "club": "AVL",
   "pos": "MID",
-  "price": 6.0
+  "price": 5.9
  },
  "54": {
   "web_name": "Gomes",
@@ -1166,7 +1166,7 @@
   "full_name": "Marco Palestra",
   "club": "CHE",
   "pos": "DEF",
-  "price": 5.5
+  "price": 5.4
  },
  "154": {
   "web_name": "Palmer",
@@ -1180,7 +1180,7 @@
   "full_name": "Enzo Fernández",
   "club": "CHE",
   "pos": "MID",
-  "price": 7.0
+  "price": 6.9
  },
  "156": {
   "web_name": "Neto",
@@ -1208,7 +1208,7 @@
   "full_name": "Moisés Caicedo Corozo",
   "club": "CHE",
   "pos": "MID",
-  "price": 5.5
+  "price": 5.4
  },
  "161": {
   "web_name": "Lavia",
@@ -1538,6 +1538,13 @@
   "club": "COV",
   "pos": "FWD",
   "price": 5.0
+ },
+ "623": {
+  "web_name": "Bentley",
+  "full_name": "Dan Bentley",
+  "club": "COV",
+  "pos": "GK",
+  "price": 4.0
  },
  "42": {
   "web_name": "Guessand",
@@ -2685,7 +2692,7 @@
   "full_name": "Noah Okafor",
   "club": "LEE",
   "pos": "MID",
-  "price": 6.0
+  "price": 5.9
  },
  "337": {
   "web_name": "Aaronson",
@@ -3098,7 +3105,7 @@
   "full_name": "Joško Gvardiol",
   "club": "MCI",
   "pos": "DEF",
-  "price": 5.5
+  "price": 5.6
  },
  "392": {
   "web_name": "Aït-Nouri",
@@ -3546,7 +3553,7 @@
   "full_name": "Dan Burn",
   "club": "NEW",
   "pos": "DEF",
-  "price": 5.0
+  "price": 4.9
  },
  "449": {
   "web_name": "Hall",
@@ -3623,7 +3630,7 @@
   "full_name": "Bazoumana Touré",
   "club": "NEW",
   "pos": "MID",
-  "price": 6.0
+  "price": 5.9
  },
  "462": {
   "web_name": "Steur",
@@ -3854,7 +3861,7 @@
   "full_name": "Chris Wood",
   "club": "NFO",
   "pos": "FWD",
-  "price": 6.0
+  "price": 5.9
  },
  "491": {
   "web_name": "Igor Jesus",
