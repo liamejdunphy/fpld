@@ -2,12 +2,16 @@ name: FPL daily brief
 
 on:
   schedule:
-    - cron: '0 7 * * *'   # 07:00 UTC daily (morning brief)
-    - cron: '0 21 * * *'  # 21:00 UTC daily (evening price alert)
+    - cron: '0 7 * * *'
+    - cron: '0 21 * * *'
   workflow_dispatch:
     inputs:
       force_deadline:
         description: 'Force deadline-pack label (normally auto-detected from FPL API)'
+        type: boolean
+        default: false
+      force_retrain:
+        description: 'Force xPts retrain regardless of day'
         type: boolean
         default: false
 
