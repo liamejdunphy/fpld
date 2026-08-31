@@ -869,8 +869,11 @@ def review(cfg, boot, fixtures):
     """Generate a post-GW review comparing what happened vs what was planned."""
     events = boot.get("events", [])
     cur = next((e for e in events if e.get("is_current")), None)
-    if not cur or not cur.get("finished"):
-        return None  # no scored GW yet
+    if not cur:
+        return None
+    gw_fixtures = [f for f in fixtures if f.get("event") == cur["id"]]
+    if not gw_fixtures or not all(f.get("finished_provisional") for f in gw_fixtures):
+        return None  # this gameweek's matches haven't all been played yet
 
     gw = cur["id"]
     teams = {t["id"]: t["short_name"] for t in boot["teams"]}
