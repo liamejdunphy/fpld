@@ -1,12 +1,12 @@
-## GW1 Review
+## GW2 Review
 
-**63 pts** (bench 17, hits 0)
+**95 pts** (bench 19, hits 0)
 
-**Captain:** Haaland — 2pts (x2 = 4pts)
-**Vice:** B.Fernandes — 2pts
-**Best captain would have been:** Kayode (13pts, +22pts swing)
+**Captain:** Haaland — 13pts (x2 = 26pts)
+**Vice:** João Pedro — 9pts
+**Best captain would have been:** B.Fernandes (23pts, +20pts swing)
 
-**Bench leak:** 17pts left on the bench
-- Egan: 8pts (bench 2)
-- Thomas: 3pts (bench 3)
-- Slater: 6pts (bench 4)
+**Bench leak:** 19pts left on the bench
+- Egan: 9pts (bench 2)
+- Thomas: 8pts (bench 3)
+- Slater: 2pts (bench 4)
