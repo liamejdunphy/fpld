@@ -85,12 +85,11 @@ jobs:
         run: python3 fpld_league.py --sync --report --quiet || true
         # || true: league sync fails pre-GW1 (no scored data yet)
 
+
       - name: Update xPts predictions
         run: |
-          # --predict is cheap (uses existing model + fresh bootstrap data).
-          # --pull and --train only run on Mondays (after GWs are scored).
-          DOW=$(date +%u)  # 2=Tuesday
-          if [ "$DOW" = "2" ]; then
+          DOW=$(date +%u)
+          if [ "$DOW" = "2" ] || [ "${{ inputs.force_retrain }}" = "true" ]; then
             python3 fpld_xpts.py --pull --train --predict --league
           elif [ -f data/xpts_model.json ]; then
             python3 fpld_xpts.py --predict --league
