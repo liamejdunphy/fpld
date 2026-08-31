@@ -122,7 +122,17 @@ def sync(conn, cfg, verbose=True):
     boot = get("bootstrap-static/")
     teams = {t["id"]: t["short_name"] for t in boot["teams"]}
     events = boot.get("events", [])
-    finished = [e["id"] for e in events if e.get("finished")]
+    fixtures = get("fixtures/")
+    time.sleep(PAUSE)
+    by_event = {}
+    for f in fixtures:
+        ev = f.get("event")
+        if ev is not None:
+            by_event.setdefault(ev, []).append(f)
+    # A GW counts as played once every fixture in it is finished_provisional —
+    # that flips at full-time, well before event.finished/data_checked
+    # (which waits on FPL's official bonus confirmation).
+    finished = [ev for ev, fx in by_event.items() if fx and all(f.get("finished_provisional") for f in fx)]
     current = max(finished) if finished else 0
 
     rows = [(e["id"], e.get("web_name", "?"), teams.get(e["team"], "?"),
