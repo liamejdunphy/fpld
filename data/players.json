@@ -53,7 +53,7 @@
   "full_name": "Riccardo Calafiori",
   "club": "ARS",
   "pos": "DEF",
-  "price": 5.6
+  "price": 5.7
  },
  "9": {
   "web_name": "Hincapie",
@@ -109,7 +109,7 @@
   "full_name": "Noni Madueke",
   "club": "ARS",
   "pos": "MID",
-  "price": 6.4
+  "price": 6.3
  },
  "17": {
   "web_name": "Merino",
@@ -291,7 +291,7 @@
   "full_name": "John McGinn",
   "club": "AVL",
   "pos": "MID",
-  "price": 5.5
+  "price": 5.4
  },
  "46": {
   "web_name": "Barkley",
@@ -781,7 +781,7 @@
   "full_name": "Yehor Yarmoliuk",
   "club": "BRE",
   "pos": "MID",
-  "price": 5.0
+  "price": 4.9
  },
  "103": {
   "web_name": "Dasilva",
@@ -963,7 +963,7 @@
   "full_name": "Yasin Ayari",
   "club": "BHA",
   "pos": "MID",
-  "price": 5.5
+  "price": 5.4
  },
  "130": {
   "web_name": "Wieffer",
@@ -1073,6 +1073,13 @@
  "639": {
   "web_name": "Andrés",
   "full_name": "José María Andrés Baixauli",
+  "club": "BHA",
+  "pos": "MID",
+  "price": 5.5
+ },
+ "652": {
+  "web_name": "Azeez",
+  "full_name": "Femi Azeez",
   "club": "BHA",
   "pos": "MID",
   "price": 5.5
@@ -1439,7 +1446,7 @@
   "full_name": "Ephron Mason-Clark",
   "club": "COV",
   "pos": "MID",
-  "price": 5.5
+  "price": 5.4
  },
  "187": {
   "web_name": "Eccles",
@@ -1453,7 +1460,7 @@
   "full_name": "Victor Torp",
   "club": "COV",
   "pos": "MID",
-  "price": 5.5
+  "price": 5.4
  },
  "189": {
   "web_name": "Shepherd",
@@ -2314,7 +2321,7 @@
   "full_name": "Abdülkadir Ömür",
   "club": "HUL",
   "pos": "MID",
-  "price": 5.0
+  "price": 4.9
  },
  "293": {
   "web_name": "Kamara",
@@ -2685,7 +2692,7 @@
   "full_name": "Florentino Ibrain Morris Luís",
   "club": "IPS",
   "pos": "MID",
-  "price": 5.0
+  "price": 4.9
  },
  "591": {
   "web_name": "Enciso",
@@ -3063,7 +3070,7 @@
   "full_name": "Cody Gakpo",
   "club": "LIV",
   "pos": "MID",
-  "price": 7.0
+  "price": 7.1
  },
  "368": {
   "web_name": "Szoboszlai",
@@ -3238,7 +3245,7 @@
   "full_name": "Matheus Nunes",
   "club": "MCI",
   "pos": "DEF",
-  "price": 6.0
+  "price": 5.9
  },
  "390": {
   "web_name": "Rúben",
@@ -3574,7 +3581,7 @@
   "full_name": "Mason Mount",
   "club": "MUN",
   "pos": "MID",
-  "price": 5.5
+  "price": 5.4
  },
  "431": {
   "web_name": "Amad",
@@ -4043,7 +4050,7 @@
   "full_name": "Arnaud Kalimuendo",
   "club": "NFO",
   "pos": "FWD",
-  "price": 5.5
+  "price": 5.4
  },
  "558": {
   "web_name": "Schlager",
@@ -4057,7 +4064,7 @@
   "full_name": "Ousmane Diomande",
   "club": "NFO",
   "pos": "DEF",
-  "price": 5.5
+  "price": 5.4
  },
  "590": {
   "web_name": "Benda",
@@ -4274,7 +4281,7 @@
   "full_name": "Lucas Bergvall",
   "club": "TOT",
   "pos": "MID",
-  "price": 5.5
+  "price": 5.4
  },
  "521": {
   "web_name": "Kulusevski",
