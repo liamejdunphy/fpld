@@ -1,12 +1,12 @@
-## GW2 Review
+## GW3 Review
 
-**95 pts** (bench 19, hits 0)
+**64 pts** (bench 13, hits 0)
 
-**Captain:** Haaland — 13pts (x2 = 26pts)
-**Vice:** João Pedro — 9pts
-**Best captain would have been:** B.Fernandes (23pts, +20pts swing)
+**Captain:** Haaland — 9pts (x2 = 18pts)
+**Vice:** João Pedro — 1pts
+**Best captain would have been:** Ødegaard (10pts, +2pts swing)
 
-**Bench leak:** 19pts left on the bench
-- Egan: 9pts (bench 2)
-- Thomas: 8pts (bench 3)
-- Slater: 2pts (bench 4)
+**Bench leak:** 13pts left on the bench
+- Egan: 6pts (bench 2)
+- Thomas: 4pts (bench 3)
+- Slater: 3pts (bench 4)
