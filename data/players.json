@@ -39,7 +39,7 @@
   "full_name": "William Saliba",
   "club": "ARS",
   "pos": "DEF",
-  "price": 6.0
+  "price": 5.9
  },
  "7": {
   "web_name": "Lewis-Skelly",
@@ -1103,7 +1103,7 @@
   "full_name": "Jordan Henderson",
   "club": "CHE",
   "pos": "MID",
-  "price": 5.0
+  "price": 4.9
  },
  "136": {
   "web_name": "Welbeck",
@@ -2034,7 +2034,7 @@
   "full_name": "Kenny Tete",
   "club": "FUL",
   "pos": "DEF",
-  "price": 4.5
+  "price": 4.4
  },
  "257": {
   "web_name": "Bassey",
@@ -2741,7 +2741,7 @@
   "full_name": "Harry Wilson",
   "club": "LEE",
   "pos": "MID",
-  "price": 6.4
+  "price": 6.3
  },
  "326": {
   "web_name": "Perri",
@@ -4253,14 +4253,14 @@
   "full_name": "Mathys Tel",
   "club": "TOT",
   "pos": "MID",
-  "price": 5.9
+  "price": 5.8
  },
  "515": {
   "web_name": "Maddison",
   "full_name": "James Maddison",
   "club": "TOT",
   "pos": "MID",
-  "price": 6.4
+  "price": 6.3
  },
  "516": {
   "web_name": "Bentancur",
