@@ -928,7 +928,7 @@
   "full_name": "Pascal Groß",
   "club": "BHA",
   "pos": "MID",
-  "price": 5.5
+  "price": 5.6
  },
  "125": {
   "web_name": "Georginio",
@@ -1705,7 +1705,7 @@
   "full_name": "Jesurun Rak-Sakyi",
   "club": "CRY",
   "pos": "MID",
-  "price": 5.0
+  "price": 4.9
  },
  "220": {
   "web_name": "Cardines",
@@ -2157,7 +2157,7 @@
  },
  "626": {
   "web_name": "Zepa",
-  "full_name": "Macauley Zepa",
+  "full_name": "Macaulay Zepa",
   "club": "FUL",
   "pos": "MID",
   "price": 4.5
@@ -3539,7 +3539,7 @@
   "full_name": "Noussair Mazraoui",
   "club": "MUN",
   "pos": "DEF",
-  "price": 4.5
+  "price": 4.4
  },
  "423": {
   "web_name": "Shaw",
@@ -3623,7 +3623,7 @@
   "full_name": "Jack Fletcher",
   "club": "MUN",
   "pos": "MID",
-  "price": 5.0
+  "price": 4.9
  },
  "435": {
   "web_name": "Lacey",
@@ -3805,7 +3805,7 @@
   "full_name": "Bazoumana Touré",
   "club": "NEW",
   "pos": "MID",
-  "price": 5.9
+  "price": 5.8
  },
  "462": {
   "web_name": "Steur",
@@ -4330,7 +4330,7 @@
   "full_name": "Mateus Fernandes",
   "club": "TOT",
   "pos": "MID",
-  "price": 5.9
+  "price": 5.8
  },
  "526": {
   "web_name": "Solanke",
@@ -4491,7 +4491,7 @@
   "full_name": "Noah Sadiki",
   "club": "SUN",
   "pos": "MID",
-  "price": 5.0
+  "price": 4.9
  },
  "546": {
   "web_name": "Adingra",

@@ -42,7 +42,7 @@
   "price": 8.0,
   "xpts": 4.64,
   "xpts_horizon": 23.54,
-  "owned": 24.7,
+  "owned": 24.6,
   "league_eo": 66.7,
   "diff_xpts": 3.09,
   "diff_xpts_horizon": 15.69
@@ -90,7 +90,7 @@
   "price": 5.7,
   "xpts": 7.44,
   "xpts_horizon": 37.54,
-  "owned": 47.7,
+  "owned": 48.0,
   "league_eo": 33.3,
   "diff_xpts": 6.2,
   "diff_xpts_horizon": 31.28
@@ -126,7 +126,7 @@
   "price": 5.4,
   "xpts": 0.56,
   "xpts_horizon": 2.85,
-  "owned": 3.4,
+  "owned": 3.3,
   "league_eo": 0.0,
   "diff_xpts": 0.56,
   "diff_xpts_horizon": 2.85
@@ -150,7 +150,7 @@
   "price": 7.4,
   "xpts": 3.78,
   "xpts_horizon": 18.71,
-  "owned": 13.6,
+  "owned": 13.5,
   "league_eo": 16.7,
   "diff_xpts": 3.46,
   "diff_xpts_horizon": 17.15
@@ -172,12 +172,12 @@
   "pos": "MID",
   "club": "ARS",
   "price": 6.6,
-  "xpts": 9.68,
-  "xpts_horizon": 48.22,
-  "owned": 13.7,
+  "xpts": 9.67,
+  "xpts_horizon": 48.17,
+  "owned": 14.7,
   "league_eo": 33.3,
-  "diff_xpts": 8.07,
-  "diff_xpts_horizon": 40.18
+  "diff_xpts": 8.06,
+  "diff_xpts_horizon": 40.14
  },
  "16": {
   "name": "Madueke",
@@ -316,12 +316,12 @@
   "pos": "DEF",
   "club": "ARS",
   "price": 4.4,
-  "xpts": 2.32,
-  "xpts_horizon": 11.93,
-  "owned": 13.4,
+  "xpts": 2.31,
+  "xpts_horizon": 11.91,
+  "owned": 13.9,
   "league_eo": 0.0,
-  "diff_xpts": 2.32,
-  "diff_xpts_horizon": 11.93
+  "diff_xpts": 2.31,
+  "diff_xpts_horizon": 11.91
  },
  "452": {
   "name": "Bruno G.",
@@ -340,12 +340,12 @@
   "pos": "MID",
   "club": "ARS",
   "price": 6.4,
-  "xpts": 3.5,
-  "xpts_horizon": 17.34,
-  "owned": 17.4,
+  "xpts": 3.51,
+  "xpts_horizon": 17.36,
+  "owned": 17.1,
   "league_eo": 0.0,
-  "diff_xpts": 3.5,
-  "diff_xpts_horizon": 17.34
+  "diff_xpts": 3.51,
+  "diff_xpts_horizon": 17.36
  },
  "29": {
   "name": "M.Bizot",
@@ -376,12 +376,12 @@
   "pos": "DEF",
   "club": "AVL",
   "price": 4.5,
-  "xpts": 2.42,
-  "xpts_horizon": 11.73,
-  "owned": 6.8,
+  "xpts": 0.24,
+  "xpts_horizon": 1.17,
+  "owned": 6.7,
   "league_eo": 0.0,
-  "diff_xpts": 2.42,
-  "diff_xpts_horizon": 11.73
+  "diff_xpts": 0.24,
+  "diff_xpts_horizon": 1.17
  },
  "33": {
   "name": "Mings",
@@ -618,7 +618,7 @@
   "price": 7.8,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 3.4,
+  "owned": 3.3,
   "league_eo": 0.0,
   "diff_xpts": 0.0,
   "diff_xpts_horizon": 0.0
@@ -690,7 +690,7 @@
   "price": 5.0,
   "xpts": 5.47,
   "xpts_horizon": 28.01,
-  "owned": 1.5,
+  "owned": 1.6,
   "league_eo": 0.0,
   "diff_xpts": 5.47,
   "diff_xpts_horizon": 28.01
@@ -738,7 +738,7 @@
   "price": 6.0,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 0.1,
+  "owned": 0.0,
   "league_eo": 0.0,
   "diff_xpts": 0.0,
   "diff_xpts_horizon": 0.0
@@ -904,11 +904,11 @@
   "pos": "MID",
   "club": "BOU",
   "price": 6.0,
-  "xpts": 8.27,
+  "xpts": 8.26,
   "xpts_horizon": 41.42,
-  "owned": 3.2,
+  "owned": 3.3,
   "league_eo": 0.0,
-  "diff_xpts": 8.27,
+  "diff_xpts": 8.26,
   "diff_xpts_horizon": 41.42
  },
  "69": {
@@ -917,11 +917,11 @@
   "club": "BOU",
   "price": 6.0,
   "xpts": 8.76,
-  "xpts_horizon": 43.91,
-  "owned": 4.4,
+  "xpts_horizon": 43.89,
+  "owned": 4.7,
   "league_eo": 0.0,
   "diff_xpts": 8.76,
-  "diff_xpts_horizon": 43.91
+  "diff_xpts_horizon": 43.89
  },
  "70": {
   "name": "Kluivert",
@@ -1037,11 +1037,11 @@
   "club": "BOU",
   "price": 6.0,
   "xpts": 3.88,
-  "xpts_horizon": 18.46,
-  "owned": 3.3,
+  "xpts_horizon": 18.47,
+  "owned": 3.2,
   "league_eo": 0.0,
   "diff_xpts": 3.88,
-  "diff_xpts_horizon": 18.46
+  "diff_xpts_horizon": 18.47
  },
  "80": {
   "name": "Enes \u00dcnal",
@@ -1122,7 +1122,7 @@
   "price": 5.0,
   "xpts": 3.93,
   "xpts_horizon": 19.0,
-  "owned": 6.8,
+  "owned": 6.7,
   "league_eo": 0.0,
   "diff_xpts": 3.93,
   "diff_xpts_horizon": 19.0
@@ -1146,7 +1146,7 @@
   "price": 5.5,
   "xpts": 0.36,
   "xpts_horizon": 1.84,
-  "owned": 1.8,
+  "owned": 1.7,
   "league_eo": 0.0,
   "diff_xpts": 0.36,
   "diff_xpts_horizon": 1.84
@@ -1168,12 +1168,12 @@
   "pos": "MID",
   "club": "BRE",
   "price": 5.5,
-  "xpts": 7.29,
-  "xpts_horizon": 36.08,
-  "owned": 2.2,
+  "xpts": 7.3,
+  "xpts_horizon": 36.09,
+  "owned": 2.1,
   "league_eo": 0.0,
-  "diff_xpts": 7.29,
-  "diff_xpts_horizon": 36.08
+  "diff_xpts": 7.3,
+  "diff_xpts_horizon": 36.09
  },
  "87": {
   "name": "Ajer",
@@ -1182,7 +1182,7 @@
   "price": 4.5,
   "xpts": 4.05,
   "xpts_horizon": 20.75,
-  "owned": 4.9,
+  "owned": 4.8,
   "league_eo": 33.3,
   "diff_xpts": 3.37,
   "diff_xpts_horizon": 17.29
@@ -1193,11 +1193,11 @@
   "club": "BRE",
   "price": 4.6,
   "xpts": 5.65,
-  "xpts_horizon": 28.74,
-  "owned": 9.1,
+  "xpts_horizon": 28.75,
+  "owned": 9.0,
   "league_eo": 33.3,
   "diff_xpts": 4.71,
-  "diff_xpts_horizon": 23.95
+  "diff_xpts_horizon": 23.96
  },
  "89": {
   "name": "Henry",
@@ -1301,11 +1301,11 @@
   "club": "BRE",
   "price": 5.0,
   "xpts": 8.16,
-  "xpts_horizon": 40.43,
-  "owned": 1.6,
+  "xpts_horizon": 40.42,
+  "owned": 1.7,
   "league_eo": 0.0,
   "diff_xpts": 8.16,
-  "diff_xpts_horizon": 40.43
+  "diff_xpts_horizon": 40.42
  },
  "99": {
   "name": "Milambo",
@@ -1373,11 +1373,11 @@
   "club": "BRE",
   "price": 7.9,
   "xpts": 0.36,
-  "xpts_horizon": 2.63,
-  "owned": 11.9,
+  "xpts_horizon": 2.64,
+  "owned": 11.7,
   "league_eo": 0.0,
   "diff_xpts": 0.36,
-  "diff_xpts_horizon": 2.63
+  "diff_xpts_horizon": 2.64
  },
  "107": {
   "name": "Furo",
@@ -1408,12 +1408,12 @@
   "pos": "MID",
   "club": "BRE",
   "price": 5.7,
-  "xpts": 6.71,
-  "xpts_horizon": 33.17,
-  "owned": 14.0,
+  "xpts": 6.72,
+  "xpts_horizon": 33.18,
+  "owned": 13.8,
   "league_eo": 0.0,
-  "diff_xpts": 6.71,
-  "diff_xpts_horizon": 33.17
+  "diff_xpts": 6.72,
+  "diff_xpts_horizon": 33.18
  },
  "620": {
   "name": "Diouf",
@@ -1481,11 +1481,11 @@
   "club": "BHA",
   "price": 4.8,
   "xpts": 8.05,
-  "xpts_horizon": 40.95,
-  "owned": 19.8,
+  "xpts_horizon": 40.94,
+  "owned": 20.2,
   "league_eo": 16.7,
   "diff_xpts": 7.38,
-  "diff_xpts_horizon": 37.54
+  "diff_xpts_horizon": 37.53
  },
  "116": {
   "name": "Dunk",
@@ -1578,7 +1578,7 @@
   "price": 6.0,
   "xpts": 1.13,
   "xpts_horizon": 5.58,
-  "owned": 1.1,
+  "owned": 1.0,
   "league_eo": 0.0,
   "diff_xpts": 1.13,
   "diff_xpts_horizon": 5.58
@@ -1587,13 +1587,13 @@
   "name": "Gro\u00df",
   "pos": "MID",
   "club": "BHA",
-  "price": 5.5,
-  "xpts": 6.13,
-  "xpts_horizon": 29.96,
-  "owned": 16.2,
+  "price": 5.6,
+  "xpts": 6.1,
+  "xpts_horizon": 29.79,
+  "owned": 16.3,
   "league_eo": 16.7,
-  "diff_xpts": 5.62,
-  "diff_xpts_horizon": 27.46
+  "diff_xpts": 5.59,
+  "diff_xpts_horizon": 27.31
  },
  "125": {
   "name": "Georginio",
@@ -1769,11 +1769,11 @@
   "club": "BHA",
   "price": 5.0,
   "xpts": 5.77,
-  "xpts_horizon": 29.55,
-  "owned": 2.9,
+  "xpts_horizon": 29.54,
+  "owned": 3.0,
   "league_eo": 0.0,
   "diff_xpts": 5.77,
-  "diff_xpts_horizon": 29.55
+  "diff_xpts_horizon": 29.54
  },
  "594": {
   "name": "David",
@@ -1806,7 +1806,7 @@
   "price": 4.5,
   "xpts": 4.88,
   "xpts_horizon": 23.73,
-  "owned": 2.8,
+  "owned": 2.9,
   "league_eo": 0.0,
   "diff_xpts": 4.88,
   "diff_xpts_horizon": 23.73
@@ -1866,7 +1866,7 @@
   "price": 5.0,
   "xpts": 2.01,
   "xpts_horizon": 10.68,
-  "owned": 4.9,
+  "owned": 5.0,
   "league_eo": 0.0,
   "diff_xpts": 2.01,
   "diff_xpts_horizon": 10.68
@@ -1876,12 +1876,12 @@
   "pos": "MID",
   "club": "CHE",
   "price": 7.6,
-  "xpts": 7.06,
-  "xpts_horizon": 35.26,
-  "owned": 28.6,
+  "xpts": 7.05,
+  "xpts_horizon": 35.21,
+  "owned": 29.6,
   "league_eo": 0.0,
-  "diff_xpts": 7.06,
-  "diff_xpts_horizon": 35.26
+  "diff_xpts": 7.05,
+  "diff_xpts_horizon": 35.21
  },
  "101": {
   "name": "Henderson",
@@ -1998,7 +1998,7 @@
   "price": 4.5,
   "xpts": 2.74,
   "xpts_horizon": 13.52,
-  "owned": 0.8,
+  "owned": 0.9,
   "league_eo": 0.0,
   "diff_xpts": 2.74,
   "diff_xpts_horizon": 13.52
@@ -2056,12 +2056,12 @@
   "pos": "MID",
   "club": "CHE",
   "price": 9.6,
-  "xpts": 6.74,
-  "xpts_horizon": 33.64,
-  "owned": 22.3,
+  "xpts": 6.73,
+  "xpts_horizon": 33.59,
+  "owned": 23.2,
   "league_eo": 33.3,
-  "diff_xpts": 5.62,
-  "diff_xpts_horizon": 28.03
+  "diff_xpts": 5.61,
+  "diff_xpts_horizon": 27.99
  },
  "156": {
   "name": "Neto",
@@ -2154,7 +2154,7 @@
   "price": 7.7,
   "xpts": 7.79,
   "xpts_horizon": 38.01,
-  "owned": 72.4,
+  "owned": 72.6,
   "league_eo": 66.7,
   "diff_xpts": 5.19,
   "diff_xpts_horizon": 25.34
@@ -2201,11 +2201,11 @@
   "club": "CHE",
   "price": 6.0,
   "xpts": 2.94,
-  "xpts_horizon": 14.49,
-  "owned": 8.2,
+  "xpts_horizon": 14.5,
+  "owned": 8.1,
   "league_eo": 0.0,
   "diff_xpts": 2.94,
-  "diff_xpts_horizon": 14.49
+  "diff_xpts_horizon": 14.5
  },
  "560": {
   "name": "Penders",
@@ -2321,11 +2321,11 @@
   "club": "COV",
   "price": 4.0,
   "xpts": 5.11,
-  "xpts_horizon": 25.27,
-  "owned": 8.7,
+  "xpts_horizon": 25.26,
+  "owned": 8.8,
   "league_eo": 0.0,
   "diff_xpts": 5.11,
-  "diff_xpts_horizon": 25.27
+  "diff_xpts_horizon": 25.26
  },
  "174": {
   "name": "Kitching",
@@ -2334,7 +2334,7 @@
   "price": 4.0,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 0.5,
+  "owned": 0.4,
   "league_eo": 0.0,
   "diff_xpts": 0.0,
   "diff_xpts_horizon": 0.0
@@ -2346,7 +2346,7 @@
   "price": 4.0,
   "xpts": 2.18,
   "xpts_horizon": 10.59,
-  "owned": 11.1,
+  "owned": 11.0,
   "league_eo": 0.0,
   "diff_xpts": 2.18,
   "diff_xpts_horizon": 10.59
@@ -2514,7 +2514,7 @@
   "price": 4.5,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 0.3,
+  "owned": 0.2,
   "league_eo": 0.0,
   "diff_xpts": 0.0,
   "diff_xpts_horizon": 0.0
@@ -2706,7 +2706,7 @@
   "price": 5.0,
   "xpts": 1.4,
   "xpts_horizon": 7.64,
-  "owned": 1.9,
+  "owned": 2.0,
   "league_eo": 0.0,
   "diff_xpts": 1.4,
   "diff_xpts_horizon": 7.64
@@ -2753,11 +2753,11 @@
   "club": "CRY",
   "price": 4.5,
   "xpts": 5.82,
-  "xpts_horizon": 28.87,
-  "owned": 5.7,
+  "xpts_horizon": 28.86,
+  "owned": 5.9,
   "league_eo": 0.0,
   "diff_xpts": 5.82,
-  "diff_xpts_horizon": 28.87
+  "diff_xpts_horizon": 28.86
  },
  "205": {
   "name": "Sosa",
@@ -2838,7 +2838,7 @@
   "price": 4.5,
   "xpts": 0.05,
   "xpts_horizon": 0.27,
-  "owned": 8.9,
+  "owned": 8.8,
   "league_eo": 0.0,
   "diff_xpts": 0.05,
   "diff_xpts_horizon": 0.27
@@ -2919,7 +2919,7 @@
   "name": "J.Rak-Sakyi",
   "pos": "MID",
   "club": "CRY",
-  "price": 5.0,
+  "price": 4.9,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
   "owned": 0.0,
@@ -3078,7 +3078,7 @@
   "price": 4.5,
   "xpts": 0.8,
   "xpts_horizon": 3.98,
-  "owned": 0.3,
+  "owned": 0.4,
   "league_eo": 0.0,
   "diff_xpts": 0.8,
   "diff_xpts_horizon": 3.98
@@ -3294,7 +3294,7 @@
   "price": 5.5,
   "xpts": 5.41,
   "xpts_horizon": 26.72,
-  "owned": 0.4,
+  "owned": 0.5,
   "league_eo": 0.0,
   "diff_xpts": 5.41,
   "diff_xpts_horizon": 26.72
@@ -3342,7 +3342,7 @@
   "price": 5.0,
   "xpts": 1.83,
   "xpts_horizon": 8.81,
-  "owned": 0.1,
+  "owned": 0.0,
   "league_eo": 0.0,
   "diff_xpts": 1.83,
   "diff_xpts_horizon": 8.81
@@ -3378,7 +3378,7 @@
   "price": 5.6,
   "xpts": 4.49,
   "xpts_horizon": 23.31,
-  "owned": 5.6,
+  "owned": 5.7,
   "league_eo": 0.0,
   "diff_xpts": 4.49,
   "diff_xpts_horizon": 23.31
@@ -3390,7 +3390,7 @@
   "price": 4.5,
   "xpts": 0.62,
   "xpts_horizon": 3.17,
-  "owned": 0.1,
+  "owned": 0.2,
   "league_eo": 0.0,
   "diff_xpts": 0.62,
   "diff_xpts_horizon": 3.17
@@ -3510,7 +3510,7 @@
   "price": 4.5,
   "xpts": 4.93,
   "xpts_horizon": 24.75,
-  "owned": 0.9,
+  "owned": 0.8,
   "league_eo": 0.0,
   "diff_xpts": 4.93,
   "diff_xpts_horizon": 24.75
@@ -3832,12 +3832,12 @@
   "pos": "DEF",
   "club": "HUL",
   "price": 4.1,
-  "xpts": 7.87,
-  "xpts_horizon": 39.52,
-  "owned": 11.2,
+  "xpts": 7.86,
+  "xpts_horizon": 39.51,
+  "owned": 11.5,
   "league_eo": 0.0,
-  "diff_xpts": 7.87,
-  "diff_xpts_horizon": 39.52
+  "diff_xpts": 7.86,
+  "diff_xpts_horizon": 39.51
  },
  "280": {
   "name": "Coyle",
@@ -3845,11 +3845,11 @@
   "club": "HUL",
   "price": 4.0,
   "xpts": 3.79,
-  "xpts_horizon": 19.13,
-  "owned": 0.5,
+  "xpts_horizon": 19.12,
+  "owned": 0.6,
   "league_eo": 0.0,
   "diff_xpts": 3.79,
-  "diff_xpts_horizon": 19.13
+  "diff_xpts_horizon": 19.12
  },
  "281": {
   "name": "Drameh",
@@ -3917,11 +3917,11 @@
   "club": "HUL",
   "price": 5.0,
   "xpts": 5.01,
-  "xpts_horizon": 25.12,
-  "owned": 0.9,
+  "xpts_horizon": 25.11,
+  "owned": 1.0,
   "league_eo": 0.0,
   "diff_xpts": 5.01,
-  "diff_xpts_horizon": 25.12
+  "diff_xpts_horizon": 25.11
  },
  "287": {
   "name": "Millar",
@@ -3942,7 +3942,7 @@
   "price": 4.5,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 0.4,
+  "owned": 0.3,
   "league_eo": 0.0,
   "diff_xpts": 0.0,
   "diff_xpts_horizon": 0.0
@@ -4122,7 +4122,7 @@
   "price": 4.6,
   "xpts": 8.71,
   "xpts_horizon": 42.95,
-  "owned": 9.3,
+  "owned": 9.5,
   "league_eo": 0.0,
   "diff_xpts": 8.71,
   "diff_xpts_horizon": 42.95
@@ -4168,12 +4168,12 @@
   "pos": "DEF",
   "club": "HUL",
   "price": 4.0,
-  "xpts": 7.8,
-  "xpts_horizon": 39.17,
-  "owned": 7.2,
+  "xpts": 7.79,
+  "xpts_horizon": 39.16,
+  "owned": 7.5,
   "league_eo": 0.0,
-  "diff_xpts": 7.8,
-  "diff_xpts_horizon": 39.17
+  "diff_xpts": 7.79,
+  "diff_xpts_horizon": 39.16
  },
  "589": {
   "name": "Gourna-Douath",
@@ -4230,7 +4230,7 @@
   "price": 4.0,
   "xpts": 0.04,
   "xpts_horizon": 0.21,
-  "owned": 0.2,
+  "owned": 0.3,
   "league_eo": 0.0,
   "diff_xpts": 0.04,
   "diff_xpts_horizon": 0.21
@@ -4266,7 +4266,7 @@
   "price": 4.0,
   "xpts": 2.08,
   "xpts_horizon": 10.87,
-  "owned": 14.8,
+  "owned": 14.7,
   "league_eo": 0.0,
   "diff_xpts": 2.08,
   "diff_xpts_horizon": 10.87
@@ -4530,7 +4530,7 @@
   "price": 5.0,
   "xpts": 3.62,
   "xpts_horizon": 18.95,
-  "owned": 1.1,
+  "owned": 1.2,
   "league_eo": 0.0,
   "diff_xpts": 3.62,
   "diff_xpts_horizon": 18.95
@@ -4697,11 +4697,11 @@
   "club": "LEE",
   "price": 6.3,
   "xpts": 0.44,
-  "xpts_horizon": 1.94,
-  "owned": 3.3,
+  "xpts_horizon": 1.95,
+  "owned": 3.2,
   "league_eo": 0.0,
   "diff_xpts": 0.44,
-  "diff_xpts_horizon": 1.94
+  "diff_xpts_horizon": 1.95
  },
  "326": {
   "name": "Perri",
@@ -4734,7 +4734,7 @@
   "price": 4.4,
   "xpts": 0.36,
   "xpts_horizon": 1.8,
-  "owned": 1.7,
+  "owned": 1.6,
   "league_eo": 0.0,
   "diff_xpts": 0.36,
   "diff_xpts_horizon": 1.8
@@ -4745,11 +4745,11 @@
   "club": "LEE",
   "price": 4.5,
   "xpts": 7.82,
-  "xpts_horizon": 39.07,
-  "owned": 1.5,
+  "xpts_horizon": 39.06,
+  "owned": 1.6,
   "league_eo": 0.0,
   "diff_xpts": 7.82,
-  "diff_xpts_horizon": 39.07
+  "diff_xpts_horizon": 39.06
  },
  "331": {
   "name": "Gudmundsson",
@@ -4842,7 +4842,7 @@
   "price": 5.5,
   "xpts": 2.77,
   "xpts_horizon": 13.56,
-  "owned": 1.1,
+  "owned": 1.0,
   "league_eo": 0.0,
   "diff_xpts": 2.77,
   "diff_xpts_horizon": 13.56
@@ -4924,12 +4924,12 @@
   "pos": "FWD",
   "club": "LEE",
   "price": 6.0,
-  "xpts": 3.49,
-  "xpts_horizon": 16.45,
-  "owned": 23.8,
+  "xpts": 3.5,
+  "xpts_horizon": 16.46,
+  "owned": 23.5,
   "league_eo": 50.0,
   "diff_xpts": 2.62,
-  "diff_xpts_horizon": 12.34
+  "diff_xpts_horizon": 12.35
  },
  "347": {
   "name": "Nmecha",
@@ -5034,7 +5034,7 @@
   "price": 4.0,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 0.4,
+  "owned": 0.5,
   "league_eo": 0.0,
   "diff_xpts": 0.0,
   "diff_xpts_horizon": 0.0
@@ -5154,7 +5154,7 @@
   "price": 5.4,
   "xpts": 0.7,
   "xpts_horizon": 3.31,
-  "owned": 2.5,
+  "owned": 2.4,
   "league_eo": 0.0,
   "diff_xpts": 0.7,
   "diff_xpts_horizon": 3.31
@@ -5262,7 +5262,7 @@
   "price": 7.4,
   "xpts": 2.6,
   "xpts_horizon": 12.96,
-  "owned": 8.4,
+  "owned": 8.3,
   "league_eo": 50.0,
   "diff_xpts": 1.95,
   "diff_xpts_horizon": 9.72
@@ -5272,12 +5272,12 @@
   "pos": "MID",
   "club": "LIV",
   "price": 7.2,
-  "xpts": 8.94,
-  "xpts_horizon": 44.66,
-  "owned": 14.6,
+  "xpts": 0.89,
+  "xpts_horizon": 4.47,
+  "owned": 14.2,
   "league_eo": 33.3,
-  "diff_xpts": 7.45,
-  "diff_xpts_horizon": 37.22
+  "diff_xpts": 0.74,
+  "diff_xpts_horizon": 3.72
  },
  "368": {
   "name": "Szoboszlai",
@@ -5417,11 +5417,11 @@
   "club": "LIV",
   "price": 9.1,
   "xpts": 8.82,
-  "xpts_horizon": 43.15,
-  "owned": 20.7,
+  "xpts_horizon": 43.13,
+  "owned": 21.2,
   "league_eo": 33.3,
   "diff_xpts": 7.35,
-  "diff_xpts_horizon": 35.96
+  "diff_xpts_horizon": 35.94
  },
  "380": {
   "name": "Ekitik\u00e9",
@@ -5478,7 +5478,7 @@
   "price": 5.4,
   "xpts": 2.92,
   "xpts_horizon": 14.39,
-  "owned": 2.3,
+  "owned": 2.4,
   "league_eo": 0.0,
   "diff_xpts": 2.92,
   "diff_xpts_horizon": 14.39
@@ -5513,11 +5513,11 @@
   "club": "MCI",
   "price": 5.9,
   "xpts": 5.6,
-  "xpts_horizon": 28.06,
-  "owned": 10.1,
+  "xpts_horizon": 28.07,
+  "owned": 9.8,
   "league_eo": 33.3,
   "diff_xpts": 4.67,
-  "diff_xpts_horizon": 23.38
+  "diff_xpts_horizon": 23.39
  },
  "384": {
   "name": "Donnarumma",
@@ -5550,7 +5550,7 @@
   "price": 6.5,
   "xpts": 0.25,
   "xpts_horizon": 1.26,
-  "owned": 15.0,
+  "owned": 14.5,
   "league_eo": 0.0,
   "diff_xpts": 0.25,
   "diff_xpts_horizon": 1.26
@@ -5669,11 +5669,11 @@
   "club": "MCI",
   "price": 8.4,
   "xpts": 3.73,
-  "xpts_horizon": 18.68,
-  "owned": 17.9,
+  "xpts_horizon": 18.7,
+  "owned": 17.6,
   "league_eo": 33.3,
   "diff_xpts": 3.11,
-  "diff_xpts_horizon": 15.57
+  "diff_xpts_horizon": 15.58
  },
  "398": {
   "name": "Foden",
@@ -5681,11 +5681,11 @@
   "club": "MCI",
   "price": 7.0,
   "xpts": 4.93,
-  "xpts_horizon": 24.69,
-  "owned": 4.7,
+  "xpts_horizon": 24.7,
+  "owned": 4.6,
   "league_eo": 0.0,
   "diff_xpts": 4.93,
-  "diff_xpts_horizon": 24.69
+  "diff_xpts_horizon": 24.7
  },
  "399": {
   "name": "Cherki",
@@ -5693,11 +5693,11 @@
   "club": "MCI",
   "price": 7.8,
   "xpts": 9.3,
-  "xpts_horizon": 46.56,
-  "owned": 30.3,
+  "xpts_horizon": 46.57,
+  "owned": 30.1,
   "league_eo": 66.7,
   "diff_xpts": 6.2,
-  "diff_xpts_horizon": 31.04
+  "diff_xpts_horizon": 31.05
  },
  "400": {
   "name": "Doku",
@@ -5802,7 +5802,7 @@
   "price": 15.5,
   "xpts": 7.28,
   "xpts_horizon": 37.35,
-  "owned": 71.2,
+  "owned": 71.3,
   "league_eo": 150.0,
   "diff_xpts": 1.82,
   "diff_xpts_horizon": 9.34
@@ -5814,7 +5814,7 @@
   "price": 6.3,
   "xpts": 2.48,
   "xpts_horizon": 12.45,
-  "owned": 4.6,
+  "owned": 4.5,
   "league_eo": 0.0,
   "diff_xpts": 2.48,
   "diff_xpts_horizon": 12.45
@@ -5946,7 +5946,7 @@
   "price": 5.0,
   "xpts": 1.39,
   "xpts_horizon": 7.58,
-  "owned": 12.3,
+  "owned": 12.1,
   "league_eo": 0.0,
   "diff_xpts": 1.39,
   "diff_xpts_horizon": 7.58
@@ -6017,11 +6017,11 @@
   "club": "MUN",
   "price": 4.9,
   "xpts": 2.66,
-  "xpts_horizon": 12.68,
-  "owned": 12.3,
+  "xpts_horizon": 12.69,
+  "owned": 12.1,
   "league_eo": 0.0,
   "diff_xpts": 2.66,
-  "diff_xpts_horizon": 12.68
+  "diff_xpts_horizon": 12.69
  },
  "419": {
   "name": "Martinez",
@@ -6063,13 +6063,13 @@
   "name": "Mazraoui",
   "pos": "DEF",
   "club": "MUN",
-  "price": 4.5,
-  "xpts": 1.81,
-  "xpts_horizon": 8.44,
+  "price": 4.4,
+  "xpts": 1.82,
+  "xpts_horizon": 8.48,
   "owned": 0.6,
   "league_eo": 0.0,
-  "diff_xpts": 1.81,
-  "diff_xpts_horizon": 8.44
+  "diff_xpts": 1.82,
+  "diff_xpts_horizon": 8.48
  },
  "423": {
   "name": "Shaw",
@@ -6077,11 +6077,11 @@
   "club": "MUN",
   "price": 4.4,
   "xpts": 2.76,
-  "xpts_horizon": 13.21,
-  "owned": 13.9,
+  "xpts_horizon": 13.22,
+  "owned": 13.7,
   "league_eo": 16.7,
   "diff_xpts": 2.53,
-  "diff_xpts_horizon": 12.11
+  "diff_xpts_horizon": 12.12
  },
  "424": {
   "name": "Amass",
@@ -6113,23 +6113,23 @@
   "club": "MUN",
   "price": 12.0,
   "xpts": 7.69,
-  "xpts_horizon": 38.98,
-  "owned": 46.1,
+  "xpts_horizon": 39.01,
+  "owned": 45.5,
   "league_eo": 50.0,
   "diff_xpts": 5.77,
-  "diff_xpts_horizon": 29.23
+  "diff_xpts_horizon": 29.26
  },
  "427": {
   "name": "Mbeumo",
   "pos": "MID",
   "club": "MUN",
   "price": 7.9,
-  "xpts": 7.89,
-  "xpts_horizon": 40.0,
-  "owned": 25.5,
+  "xpts": 7.9,
+  "xpts_horizon": 40.02,
+  "owned": 25.2,
   "league_eo": 33.3,
-  "diff_xpts": 6.57,
-  "diff_xpts_horizon": 33.33
+  "diff_xpts": 6.58,
+  "diff_xpts_horizon": 33.35
  },
  "428": {
   "name": "Cunha",
@@ -6138,7 +6138,7 @@
   "price": 7.9,
   "xpts": 4.32,
   "xpts_horizon": 22.16,
-  "owned": 7.0,
+  "owned": 6.9,
   "league_eo": 0.0,
   "diff_xpts": 4.32,
   "diff_xpts_horizon": 22.16
@@ -6207,7 +6207,7 @@
   "name": "J.Fletcher",
   "pos": "MID",
   "club": "MUN",
-  "price": 5.0,
+  "price": 4.9,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
   "owned": 0.0,
@@ -6318,7 +6318,7 @@
   "price": 4.9,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 1.1,
+  "owned": 1.0,
   "league_eo": 0.0,
   "diff_xpts": 0.0,
   "diff_xpts_horizon": 0.0
@@ -6401,11 +6401,11 @@
   "club": "NEW",
   "price": 5.1,
   "xpts": 5.99,
-  "xpts_horizon": 30.23,
-  "owned": 11.8,
+  "xpts_horizon": 30.22,
+  "owned": 12.2,
   "league_eo": 0.0,
   "diff_xpts": 5.99,
-  "diff_xpts_horizon": 30.23
+  "diff_xpts_horizon": 30.22
  },
  "450": {
   "name": "Livramento",
@@ -6436,12 +6436,12 @@
   "pos": "MID",
   "club": "NEW",
   "price": 6.0,
-  "xpts": 5.95,
-  "xpts_horizon": 29.63,
-  "owned": 2.0,
+  "xpts": 5.94,
+  "xpts_horizon": 29.62,
+  "owned": 2.1,
   "league_eo": 0.0,
-  "diff_xpts": 5.95,
-  "diff_xpts_horizon": 29.63
+  "diff_xpts": 5.94,
+  "diff_xpts_horizon": 29.62
  },
  "454": {
   "name": "Elanga",
@@ -6461,11 +6461,11 @@
   "club": "NEW",
   "price": 4.9,
   "xpts": 2.79,
-  "xpts_horizon": 13.84,
-  "owned": 0.3,
+  "xpts_horizon": 13.83,
+  "owned": 0.4,
   "league_eo": 0.0,
   "diff_xpts": 2.79,
-  "diff_xpts_horizon": 13.84
+  "diff_xpts_horizon": 13.83
  },
  "457": {
   "name": "J.Murphy",
@@ -6519,13 +6519,13 @@
   "name": "Tour\u00e9",
   "pos": "MID",
   "club": "NEW",
-  "price": 5.9,
+  "price": 5.8,
   "xpts": 0.02,
-  "xpts_horizon": 0.08,
+  "xpts_horizon": 0.09,
   "owned": 0.1,
   "league_eo": 0.0,
   "diff_xpts": 0.02,
-  "diff_xpts_horizon": 0.08
+  "diff_xpts_horizon": 0.09
  },
  "462": {
   "name": "Steur",
@@ -6557,11 +6557,11 @@
   "club": "NEW",
   "price": 6.2,
   "xpts": 4.21,
-  "xpts_horizon": 21.96,
-  "owned": 17.0,
+  "xpts_horizon": 21.95,
+  "owned": 17.2,
   "league_eo": 16.7,
   "diff_xpts": 3.86,
-  "diff_xpts_horizon": 20.13
+  "diff_xpts_horizon": 20.12
  },
  "465": {
   "name": "Osula",
@@ -6616,12 +6616,12 @@
   "pos": "DEF",
   "club": "NEW",
   "price": 4.5,
-  "xpts": 4.13,
-  "xpts_horizon": 20.96,
-  "owned": 3.6,
+  "xpts": 0.41,
+  "xpts_horizon": 2.1,
+  "owned": 3.4,
   "league_eo": 0.0,
-  "diff_xpts": 4.13,
-  "diff_xpts_horizon": 20.96
+  "diff_xpts": 0.41,
+  "diff_xpts_horizon": 2.1
  },
  "609": {
   "name": "Shahar",
@@ -7014,7 +7014,7 @@
   "price": 4.9,
   "xpts": 3.38,
   "xpts_horizon": 16.57,
-  "owned": 7.0,
+  "owned": 6.9,
   "league_eo": 0.0,
   "diff_xpts": 3.38,
   "diff_xpts_horizon": 16.57
@@ -7061,11 +7061,11 @@
   "club": "TOT",
   "price": 5.4,
   "xpts": 2.73,
-  "xpts_horizon": 13.8,
-  "owned": 2.7,
+  "xpts_horizon": 13.81,
+  "owned": 2.6,
   "league_eo": 0.0,
   "diff_xpts": 2.73,
-  "diff_xpts_horizon": 13.8
+  "diff_xpts_horizon": 13.81
  },
  "494": {
   "name": "Vicario",
@@ -7098,7 +7098,7 @@
   "price": 4.5,
   "xpts": 2.86,
   "xpts_horizon": 14.93,
-  "owned": 18.7,
+  "owned": 18.6,
   "league_eo": 16.7,
   "diff_xpts": 2.62,
   "diff_xpts_horizon": 13.69
@@ -7110,7 +7110,7 @@
   "price": 4.0,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 17.8,
+  "owned": 17.9,
   "league_eo": 0.0,
   "diff_xpts": 0.0,
   "diff_xpts_horizon": 0.0
@@ -7419,13 +7419,13 @@
   "name": "Fernandes",
   "pos": "MID",
   "club": "TOT",
-  "price": 5.9,
-  "xpts": 0.35,
-  "xpts_horizon": 1.94,
+  "price": 5.8,
+  "xpts": 0.39,
+  "xpts_horizon": 2.11,
   "owned": 1.0,
   "league_eo": 0.0,
-  "diff_xpts": 0.35,
-  "diff_xpts_horizon": 1.94
+  "diff_xpts": 0.39,
+  "diff_xpts_horizon": 2.11
  },
  "526": {
   "name": "Solanke",
@@ -7446,7 +7446,7 @@
   "price": 5.9,
   "xpts": 0.12,
   "xpts_horizon": 0.53,
-  "owned": 1.2,
+  "owned": 1.1,
   "league_eo": 0.0,
   "diff_xpts": 0.12,
   "diff_xpts_horizon": 0.53
@@ -7458,7 +7458,7 @@
   "price": 4.5,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 1.5,
+  "owned": 1.4,
   "league_eo": 0.0,
   "diff_xpts": 0.0,
   "diff_xpts_horizon": 0.0
@@ -7566,7 +7566,7 @@
   "price": 4.5,
   "xpts": 3.36,
   "xpts_horizon": 16.17,
-  "owned": 4.5,
+  "owned": 4.4,
   "league_eo": 16.7,
   "diff_xpts": 3.08,
   "diff_xpts_horizon": 14.82
@@ -7662,7 +7662,7 @@
   "price": 5.9,
   "xpts": 4.78,
   "xpts_horizon": 24.44,
-  "owned": 5.1,
+  "owned": 5.0,
   "league_eo": 0.0,
   "diff_xpts": 4.78,
   "diff_xpts_horizon": 24.44
@@ -7695,13 +7695,13 @@
   "name": "Sadiki",
   "pos": "MID",
   "club": "SUN",
-  "price": 5.0,
-  "xpts": 1.87,
-  "xpts_horizon": 9.88,
+  "price": 4.9,
+  "xpts": 1.9,
+  "xpts_horizon": 10.05,
   "owned": 0.3,
   "league_eo": 0.0,
-  "diff_xpts": 1.87,
-  "diff_xpts_horizon": 9.88
+  "diff_xpts": 1.9,
+  "diff_xpts_horizon": 10.05
  },
  "546": {
   "name": "Adingra",
@@ -7781,11 +7781,11 @@
   "club": "SUN",
   "price": 5.9,
   "xpts": 1.54,
-  "xpts_horizon": 6.9,
-  "owned": 7.9,
+  "xpts_horizon": 6.91,
+  "owned": 7.7,
   "league_eo": 0.0,
   "diff_xpts": 1.54,
-  "diff_xpts_horizon": 6.9
+  "diff_xpts_horizon": 6.91
  },
  "553": {
   "name": "Isidor",
@@ -7818,7 +7818,7 @@
   "price": 4.5,
   "xpts": 0.0,
   "xpts_horizon": 0.0,
-  "owned": 0.2,
+  "owned": 0.3,
   "league_eo": 0.0,
   "diff_xpts": 0.0,
   "diff_xpts_horizon": 0.0
