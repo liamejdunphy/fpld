@@ -109,7 +109,7 @@
   "full_name": "Noni Madueke",
   "club": "ARS",
   "pos": "MID",
-  "price": 6.3
+  "price": 6.2
  },
  "17": {
   "web_name": "Merino",
@@ -781,7 +781,7 @@
   "full_name": "Yehor Yarmoliuk",
   "club": "BRE",
   "pos": "MID",
-  "price": 4.9
+  "price": 4.8
  },
  "103": {
   "web_name": "Dasilva",
@@ -1033,7 +1033,7 @@
   "full_name": "Pascal Struijk",
   "club": "BHA",
   "pos": "DEF",
-  "price": 5.0
+  "price": 4.9
  },
  "504": {
   "web_name": "Vuskovic",
@@ -1243,7 +1243,7 @@
   "full_name": "Moisés Caicedo Corozo",
   "club": "CHE",
   "pos": "MID",
-  "price": 5.4
+  "price": 5.3
  },
  "161": {
   "web_name": "Lavia",
@@ -1320,7 +1320,7 @@
   "full_name": "Valentín Barco",
   "club": "CHE",
   "pos": "MID",
-  "price": 5.5
+  "price": 5.4
  },
  "583": {
   "web_name": "Chavarria",
@@ -1684,7 +1684,7 @@
   "full_name": "Will Hughes",
   "club": "CRY",
   "pos": "MID",
-  "price": 4.5
+  "price": 4.4
  },
  "213": {
   "web_name": "Lerma",
@@ -2594,7 +2594,7 @@
   "full_name": "Marcelino Núñez",
   "club": "IPS",
   "pos": "MID",
-  "price": 5.0
+  "price": 4.9
  },
  "310": {
   "web_name": "Matusiwa",
@@ -3182,7 +3182,7 @@
   "full_name": "James McConnell",
   "club": "LIV",
   "pos": "MID",
-  "price": 4.5
+  "price": 4.4
  },
  "379": {
   "web_name": "Isak",
@@ -3469,7 +3469,7 @@
   "full_name": "Youri Tielemans",
   "club": "MUN",
   "pos": "MID",
-  "price": 5.9
+  "price": 5.8
  },
  "131": {
   "web_name": "Baleba",
@@ -3905,6 +3905,13 @@
   "pos": "FWD",
   "price": 6.0
  },
+ "659": {
+  "web_name": "Miley",
+  "full_name": "Mason Miley",
+  "club": "NEW",
+  "pos": "MID",
+  "price": 4.5
+ },
  "167": {
   "web_name": "Delap",
   "full_name": "Liam Delap",
@@ -4225,7 +4232,7 @@
   "full_name": "Destiny Udogie",
   "club": "TOT",
   "pos": "DEF",
-  "price": 4.5
+  "price": 4.4
  },
  "507": {
   "web_name": "Phillips",
@@ -4365,7 +4372,7 @@
   "full_name": "Dominic Solanke-Mitchell",
   "club": "TOT",
   "pos": "FWD",
-  "price": 5.9
+  "price": 5.8
  },
  "527": {
   "web_name": "Richarlison",
