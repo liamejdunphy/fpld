@@ -1,14 +1,11 @@
-## GW4 Review
+## GW5 Review
 
-**64 pts** (bench 2, hits 0)
+**43 pts** (bench 20, hits 0)
 
-**Captain:** Palmer — 5pts (x2 = 10pts)
-**Vice:** João Pedro — 12pts
-**Best captain would have been:** João Pedro (12pts, +14pts swing)
+**Captain:** Haaland — 6pts (x2 = 12pts)
+**Vice:** Gibbs-White — 2pts
+**Best captain would have been:** Groß (14pts, +16pts swing)
 
-**Bench leak:** 2pts left on the bench
-- Slater: 2pts (bench 4)
-
-**Transfers:** 2 made (free)
-- Gabriel (9pts) → Konsa (6pts) 📉 -3pts
-- Mbeumo (2pts) → Palmer (5pts) 📈 +3pts
+**Bench leak:** 20pts left on the bench
+- De Cuyper: 6pts (bench 3)
+- Groß: 14pts (bench 4)

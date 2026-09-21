@@ -4,7 +4,7 @@
   "full_name": "David Raya Martín",
   "club": "ARS",
   "pos": "GK",
-  "price": 6.0
+  "price": 6.1
  },
  "2": {
   "web_name": "Arrizabalaga",
@@ -60,7 +60,7 @@
   "full_name": "Piero Hincapié",
   "club": "ARS",
   "pos": "DEF",
-  "price": 5.3
+  "price": 5.2
  },
  "10": {
   "web_name": "White",
@@ -494,7 +494,7 @@
   "full_name": "Bafodé Diakité",
   "club": "BOU",
   "pos": "DEF",
-  "price": 5.0
+  "price": 4.9
  },
  "63": {
   "web_name": "Milosavljević",
@@ -1040,7 +1040,7 @@
   "full_name": "Charalampos Kostoulas",
   "club": "BHA",
   "pos": "FWD",
-  "price": 5.5
+  "price": 5.6
  },
  "139": {
   "web_name": "Ferguson",
@@ -1257,7 +1257,7 @@
   "full_name": "Jamie Bynoe-Gittens",
   "club": "CHE",
   "pos": "MID",
-  "price": 5.9
+  "price": 5.8
  },
  "159": {
   "web_name": "Caicedo",
@@ -1579,7 +1579,7 @@
   "full_name": "Caleb Yirenkyi",
   "club": "COV",
   "pos": "MID",
-  "price": 4.9
+  "price": 4.8
  },
  "584": {
   "web_name": "Hamer",
@@ -1929,7 +1929,7 @@
   "full_name": "Jake O'Brien",
   "club": "EVE",
   "pos": "DEF",
-  "price": 4.9
+  "price": 4.8
  },
  "233": {
   "web_name": "Mykolenko",
@@ -2013,7 +2013,7 @@
   "full_name": "Hayden Hackney",
   "club": "EVE",
   "pos": "MID",
-  "price": 5.5
+  "price": 5.4
  },
  "248": {
   "web_name": "Beto",
@@ -2160,7 +2160,7 @@
   "full_name": "Ryan Sessegnon",
   "club": "FUL",
   "pos": "DEF",
-  "price": 4.4
+  "price": 4.3
  },
  "270": {
   "web_name": "Reed",
@@ -2755,7 +2755,7 @@
   "full_name": "Florentino Ibrain Morris Luís",
   "club": "IPS",
   "pos": "MID",
-  "price": 4.9
+  "price": 4.8
  },
  "591": {
   "web_name": "Enciso",
@@ -2874,7 +2874,7 @@
   "full_name": "Brenden Aaronson",
   "club": "LEE",
   "pos": "MID",
-  "price": 5.4
+  "price": 5.3
  },
  "338": {
   "web_name": "Ampadu",
@@ -3784,7 +3784,7 @@
   "full_name": "Dan Burn",
   "club": "NEW",
   "pos": "DEF",
-  "price": 4.9
+  "price": 4.8
  },
  "449": {
   "web_name": "Hall",
@@ -4421,7 +4421,7 @@
   "full_name": "Mateus Fernandes",
   "club": "TOT",
   "pos": "MID",
-  "price": 5.8
+  "price": 5.7
  },
  "526": {
   "web_name": "Solanke",
