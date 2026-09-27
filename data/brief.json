@@ -1,5 +1,5 @@
 {
- "date": "2026-09-26",
+ "date": "2026-09-27",
  "gw": 6,
  "deadline": "2026-10-10T10:00:00Z",
  "dial": {
@@ -411,7 +411,7 @@
    "form": 9.0,
    "ppg": 7.8,
    "xgi90": 0.37,
-   "owned": 11.2,
+   "owned": 11.3,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -547,7 +547,7 @@
    "score": 64.8,
    "captain_score": 40.5,
    "xpts": 4.89,
-   "xpts_horizon": 24.5
+   "xpts_horizon": 24.51
   },
   {
    "id": 58,
@@ -656,7 +656,7 @@
    "form": 5.2,
    "ppg": 7.6,
    "xgi90": 0.47,
-   "owned": 27.6,
+   "owned": 27.7,
    "status": "a",
    "fdr": 3.4,
    "fixtures": [
@@ -694,7 +694,7 @@
    "score": 55.2,
    "captain_score": 16.7,
    "xpts": 8.34,
-   "xpts_horizon": 41.93
+   "xpts_horizon": 41.92
   },
   {
    "id": 124,
@@ -705,7 +705,7 @@
    "form": 11.2,
    "ppg": 9.4,
    "xgi90": 0.52,
-   "owned": 28.5,
+   "owned": 28.6,
    "status": "a",
    "fdr": 3.4,
    "fixtures": [
@@ -903,7 +903,7 @@
    "form": 11.2,
    "ppg": 9.4,
    "xgi90": 0.52,
-   "owned": 28.5,
+   "owned": 28.6,
    "status": "a",
    "fdr": 3.4,
    "fixtures": [
@@ -2697,13 +2697,6 @@
    "club": "LIV",
    "price": 6.5,
    "score": 40.2
-  },
-  "379": {
-   "name": "Isak",
-   "pos": "FWD",
-   "club": "LIV",
-   "price": 9.1,
-   "score": 77.9
   },
   "579": {
    "name": "Araujo",
