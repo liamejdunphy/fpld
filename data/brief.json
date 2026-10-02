@@ -1,5 +1,5 @@
 {
- "date": "2026-10-01",
+ "date": "2026-10-02",
  "gw": 6,
  "deadline": "2026-10-10T10:00:00Z",
  "dial": {
@@ -252,8 +252,8 @@
    ],
    "score": 49.3,
    "captain_score": 15.8,
-   "xpts": 6.01,
-   "xpts_horizon": 30.0
+   "xpts": 6.09,
+   "xpts_horizon": 30.37
   },
   {
    "id": 480,
@@ -350,8 +350,8 @@
    ],
    "score": 67.9,
    "captain_score": 56.0,
-   "xpts": 6.47,
-   "xpts_horizon": 32.36
+   "xpts": 6.45,
+   "xpts_horizon": 32.26
   },
   {
    "id": 40,
@@ -411,7 +411,7 @@
    "form": 8.7,
    "ppg": 7.8,
    "xgi90": 0.37,
-   "owned": 11.5,
+   "owned": 11.6,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -705,7 +705,7 @@
    "form": 10.7,
    "ppg": 9.4,
    "xgi90": 0.52,
-   "owned": 28.9,
+   "owned": 29.0,
    "status": "a",
    "fdr": 3.4,
    "fixtures": [
@@ -891,8 +891,8 @@
    ],
    "score": 67.9,
    "captain_score": 56.0,
-   "xpts": 6.47,
-   "xpts_horizon": 32.36
+   "xpts": 6.45,
+   "xpts_horizon": 32.26
   },
   {
    "id": 124,
@@ -903,7 +903,7 @@
    "form": 10.7,
    "ppg": 9.4,
    "xgi90": 0.52,
-   "owned": 28.9,
+   "owned": 29.0,
    "status": "a",
    "fdr": 3.4,
    "fixtures": [
@@ -2117,13 +2117,6 @@
    "price": 5.5,
    "score": 61.3
   },
-  "233": {
-   "name": "Mykolenko",
-   "pos": "DEF",
-   "club": "EVE",
-   "price": 4.6,
-   "score": 60.2
-  },
   "236": {
    "name": "Dewsbury-Hall",
    "pos": "MID",
@@ -2726,13 +2719,6 @@
    "price": 5.5,
    "score": 52.1
   },
-  "387": {
-   "name": "O'Reilly",
-   "pos": "DEF",
-   "club": "MCI",
-   "price": 6.3,
-   "score": 23.0
-  },
   "388": {
    "name": "Gu\u00e9hi",
    "pos": "DEF",
@@ -2914,13 +2900,6 @@
    "club": "NEW",
    "price": 5.9,
    "score": 25.4
-  },
-  "459": {
-   "name": "L.Miley",
-   "pos": "MID",
-   "club": "NEW",
-   "price": 5.5,
-   "score": 35.0
   },
   "460": {
    "name": "Willock",
