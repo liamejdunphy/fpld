@@ -1,5 +1,5 @@
 {
- "date": "2026-10-02",
+ "date": "2026-10-03",
  "gw": 6,
  "deadline": "2026-10-10T10:00:00Z",
  "dial": {
@@ -411,7 +411,7 @@
    "form": 8.7,
    "ppg": 7.8,
    "xgi90": 0.37,
-   "owned": 11.6,
+   "owned": 11.7,
    "status": "a",
    "fdr": 3.2,
    "fixtures": [
@@ -607,7 +607,7 @@
    "form": 4.3,
    "ppg": 8.2,
    "xgi90": 0.59,
-   "owned": 65.1,
+   "owned": 65.0,
    "status": "d",
    "fdr": 3,
    "fixtures": [
@@ -705,7 +705,7 @@
    "form": 10.7,
    "ppg": 9.4,
    "xgi90": 0.52,
-   "owned": 29.0,
+   "owned": 29.2,
    "status": "a",
    "fdr": 3.4,
    "fixtures": [
@@ -743,7 +743,7 @@
    "score": 76.9,
    "captain_score": 53.1,
    "xpts": 8.99,
-   "xpts_horizon": 44.85
+   "xpts_horizon": 44.84
   }
  ],
  "captain_shortlist": [
@@ -903,7 +903,7 @@
    "form": 10.7,
    "ppg": 9.4,
    "xgi90": 0.52,
-   "owned": 29.0,
+   "owned": 29.2,
    "status": "a",
    "fdr": 3.4,
    "fixtures": [
@@ -941,7 +941,7 @@
    "score": 76.9,
    "captain_score": 53.1,
    "xpts": 8.99,
-   "xpts_horizon": 44.85
+   "xpts_horizon": 44.84
   }
  ],
  "plans": {
@@ -965,7 +965,7 @@
       "club": "BHA",
       "price": 5.6,
       "xpts": 30.85,
-      "owned": 4.2
+      "owned": 4.3
      },
      "reason": "Jo\u00e3o Pedro flagged (Knee injury - 75% chance of playing)",
      "is_hit": false
@@ -1063,7 +1063,7 @@
       "club": "BHA",
       "price": 5.6,
       "xpts": 30.85,
-      "owned": 4.2
+      "owned": 4.3
      },
      "reason": "Jo\u00e3o Pedro flagged (Knee injury - 75% chance of playing)",
      "is_hit": false
@@ -1109,7 +1109,7 @@
       "club": "LEE",
       "price": 4.6,
       "xpts": 41.5,
-      "owned": 7.2
+      "owned": 7.3
      },
      "reason": "upgrade on Gvardiol",
      "is_hit": false
@@ -1184,7 +1184,7 @@
       "club": "BHA",
       "price": 5.6,
       "xpts": 30.85,
-      "owned": 4.2
+      "owned": 4.3
      },
      "reason": "Jo\u00e3o Pedro flagged (Knee injury - 75% chance of playing)",
      "is_hit": false
@@ -1253,7 +1253,7 @@
       "club": "LEE",
       "price": 4.6,
       "xpts": 41.5,
-      "owned": 7.2
+      "owned": 7.3
      },
      "reason": "upgrade on Gvardiol",
      "is_hit": false
@@ -1423,13 +1423,6 @@
    "club": "ARS",
    "price": 6.7,
    "score": 40.0
-  },
-  "557": {
-   "name": "Tzolis",
-   "pos": "MID",
-   "club": "ARS",
-   "price": 6.3,
-   "score": 43.9
   },
   "32": {
    "name": "Cash",
@@ -2653,8 +2646,8 @@
    "name": "Szoboszlai",
    "pos": "MID",
    "club": "LIV",
-   "price": 7.0,
-   "score": 46.3
+   "price": 6.9,
+   "score": 46.5
   },
   "369": {
    "name": "Ngumoha",
@@ -3010,8 +3003,8 @@
    "name": "I.Sangar\u00e9",
    "pos": "MID",
    "club": "NFO",
-   "price": 4.9,
-   "score": 24.1
+   "price": 4.8,
+   "score": 24.3
   },
   "490": {
    "name": "Wood",
