@@ -956,7 +956,7 @@
   "full_name": "Pascal Groß",
   "club": "BHA",
   "pos": "MID",
-  "price": 5.8
+  "price": 5.9
  },
  "125": {
   "web_name": "Georginio",
@@ -1166,7 +1166,7 @@
   "full_name": "Reece James",
   "club": "CHE",
   "pos": "DEF",
-  "price": 5.4
+  "price": 5.3
  },
  "143": {
   "web_name": "Chalobah",
@@ -1446,7 +1446,7 @@
   "full_name": "Luke Woolfenden",
   "club": "COV",
   "pos": "DEF",
-  "price": 4.0
+  "price": 3.9
  },
  "181": {
   "web_name": "Brau",
@@ -1810,7 +1810,7 @@
   "full_name": "Dwight McNeil",
   "club": "CRY",
   "pos": "MID",
-  "price": 5.4
+  "price": 5.3
  },
  "555": {
   "web_name": "Matthews",
@@ -2356,7 +2356,7 @@
   "full_name": "Kieran Dowell",
   "club": "HUL",
   "pos": "MID",
-  "price": 4.5
+  "price": 4.4
  },
  "289": {
   "web_name": "Crooks",
@@ -3406,7 +3406,7 @@
   "full_name": "Mateo Kovačić",
   "club": "MCI",
   "pos": "MID",
-  "price": 5.4
+  "price": 5.3
  },
  "407": {
   "web_name": "Echeverri",
@@ -3574,7 +3574,7 @@
   "full_name": "Lisandro Martínez",
   "club": "MUN",
   "pos": "DEF",
-  "price": 5.0
+  "price": 4.9
  },
  "420": {
   "web_name": "Yoro",
