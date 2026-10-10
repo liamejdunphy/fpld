@@ -67,7 +67,7 @@
   "full_name": "Benjamin White",
   "club": "ARS",
   "pos": "DEF",
-  "price": 5.5
+  "price": 5.4
  },
  "11": {
   "web_name": "Mosquera",
@@ -550,7 +550,7 @@
   "full_name": "Justin Kluivert",
   "club": "BOU",
   "pos": "MID",
-  "price": 6.0
+  "price": 5.9
  },
  "71": {
   "web_name": "Cook",
@@ -1019,7 +1019,7 @@
   "full_name": "Nehemiah Oriola",
   "club": "BHA",
   "pos": "MID",
-  "price": 4.5
+  "price": 4.4
  },
  "135": {
   "web_name": "Yohanna",
@@ -1516,7 +1516,7 @@
   "full_name": "Loum Tchaouna",
   "club": "COV",
   "pos": "MID",
-  "price": 5.4
+  "price": 5.3
  },
  "191": {
   "web_name": "Borges Rodrigues",
@@ -1586,7 +1586,7 @@
   "full_name": "Gustavo Hamer",
   "club": "COV",
   "pos": "MID",
-  "price": 5.4
+  "price": 5.3
  },
  "599": {
   "web_name": "Cherif",
@@ -2188,7 +2188,7 @@
   "full_name": "Gonzalo García",
   "club": "FUL",
   "pos": "FWD",
-  "price": 6.0
+  "price": 6.1
  },
  "570": {
   "web_name": "Palacios",
@@ -2650,7 +2650,7 @@
   "full_name": "Jack Clarke",
   "club": "IPS",
   "pos": "MID",
-  "price": 5.4
+  "price": 5.3
  },
  "314": {
   "web_name": "Ogbene",
@@ -2671,7 +2671,7 @@
   "full_name": "Emersonn Correia da Silva",
   "club": "IPS",
   "pos": "FWD",
-  "price": 5.5
+  "price": 5.6
  },
  "317": {
   "web_name": "Hirst",
@@ -3189,7 +3189,7 @@
   "full_name": "Trey Nyoni",
   "club": "LIV",
   "pos": "MID",
-  "price": 4.9
+  "price": 4.8
  },
  "376": {
   "web_name": "Bajcetic",
@@ -4596,7 +4596,7 @@
   "full_name": "Romaine Mundle",
   "club": "SUN",
   "pos": "MID",
-  "price": 4.9
+  "price": 4.8
  },
  "548": {
   "web_name": "Rigg",
@@ -4617,7 +4617,7 @@
   "full_name": "Djiamgone Jocelin Ta Bi",
   "club": "SUN",
   "pos": "MID",
-  "price": 5.0
+  "price": 4.9
  },
  "551": {
   "web_name": "N.Angulo",
