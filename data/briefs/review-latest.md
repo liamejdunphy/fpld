@@ -1,11 +1,12 @@
-## GW5 Review
+## GW6 Review
 
-**43 pts** (bench 20, hits 0)
+**57 pts** (bench 22, hits 0)
 
 **Captain:** Haaland — 6pts (x2 = 12pts)
 **Vice:** Gibbs-White — 2pts
-**Best captain would have been:** Groß (14pts, +16pts swing)
+**Best captain would have been:** De Cuyper (15pts, +18pts swing)
 
-**Bench leak:** 20pts left on the bench
-- De Cuyper: 6pts (bench 3)
-- Groß: 14pts (bench 4)
+**Bench leak:** 22pts left on the bench
+- Schade: 1pts (bench 2)
+- De Cuyper: 15pts (bench 3)
+- Groß: 6pts (bench 4)
