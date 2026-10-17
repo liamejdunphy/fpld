@@ -74,7 +74,7 @@
   "full_name": "Cristhian Mosquera",
   "club": "ARS",
   "pos": "DEF",
-  "price": 5.3
+  "price": 5.2
  },
  "12": {
   "web_name": "Saka",
@@ -340,7 +340,7 @@
   "full_name": "Alysson Edward Franco da Rocha dos Santos",
   "club": "AVL",
   "pos": "MID",
-  "price": 5.0
+  "price": 4.9
  },
  "53": {
   "web_name": "Manzambi",
@@ -606,14 +606,14 @@
   "full_name": "Junior Kroupi",
   "club": "BOU",
   "pos": "MID",
-  "price": 7.4
+  "price": 7.3
  },
  "79": {
   "web_name": "Evanilson",
   "full_name": "Francisco Evanilson de Lima Barbosa",
   "club": "BOU",
   "pos": "FWD",
-  "price": 6.0
+  "price": 6.1
  },
  "80": {
   "web_name": "Enes Ünal",
@@ -669,7 +669,7 @@
   "full_name": "Hákon Rafn Valdimarsson",
   "club": "BRE",
   "pos": "GK",
-  "price": 4.5
+  "price": 4.4
  },
  "84": {
   "web_name": "Collins",
@@ -753,7 +753,7 @@
   "full_name": "Mikkel Damsgaard",
   "club": "BRE",
   "pos": "MID",
-  "price": 5.4
+  "price": 5.3
  },
  "97": {
   "web_name": "Jensen",
@@ -830,7 +830,7 @@
   "full_name": "Mamadou Sangaré",
   "club": "BRE",
   "pos": "MID",
-  "price": 5.6
+  "price": 5.5
  },
  "620": {
   "web_name": "Diouf",
@@ -893,7 +893,7 @@
   "full_name": "Maxim De Cuyper",
   "club": "BHA",
   "pos": "DEF",
-  "price": 5.1
+  "price": 5.2
  },
  "116": {
   "web_name": "Dunk",
@@ -956,7 +956,7 @@
   "full_name": "Pascal Groß",
   "club": "BHA",
   "pos": "MID",
-  "price": 6.0
+  "price": 6.1
  },
  "125": {
   "web_name": "Georginio",
@@ -1439,7 +1439,7 @@
   "full_name": "Joel Latibeaudiere",
   "club": "COV",
   "pos": "DEF",
-  "price": 4.0
+  "price": 3.9
  },
  "180": {
   "web_name": "Woolfenden",
@@ -2447,7 +2447,7 @@
   "full_name": "Matt Targett",
   "club": "HUL",
   "pos": "DEF",
-  "price": 4.0
+  "price": 3.9
  },
  "563": {
   "web_name": "Morita",
@@ -2622,7 +2622,7 @@
   "full_name": "Marcelino Núñez",
   "club": "IPS",
   "pos": "MID",
-  "price": 4.9
+  "price": 4.8
  },
  "310": {
   "web_name": "Matusiwa",
@@ -3063,7 +3063,7 @@
   "full_name": "Jeremie Frimpong",
   "club": "LIV",
   "pos": "DEF",
-  "price": 5.3
+  "price": 5.2
  },
  "358": {
   "web_name": "Kerkez",
@@ -3126,7 +3126,7 @@
   "full_name": "Florian Wirtz",
   "club": "LIV",
   "pos": "MID",
-  "price": 7.3
+  "price": 7.2
  },
  "367": {
   "web_name": "Gakpo",
@@ -3140,7 +3140,7 @@
   "full_name": "Dominik Szoboszlai",
   "club": "LIV",
   "pos": "MID",
-  "price": 6.9
+  "price": 6.8
  },
  "369": {
   "web_name": "Ngumoha",
@@ -3441,7 +3441,7 @@
   "full_name": "Erling Haaland",
   "club": "MCI",
   "pos": "FWD",
-  "price": 15.6
+  "price": 15.7
  },
  "481": {
   "web_name": "Anderson",
@@ -3497,7 +3497,7 @@
   "full_name": "Youri Tielemans",
   "club": "MUN",
   "pos": "MID",
-  "price": 5.8
+  "price": 5.7
  },
  "131": {
   "web_name": "Baleba",
@@ -3623,14 +3623,14 @@
   "full_name": "Bruno Borges Fernandes",
   "club": "MUN",
   "pos": "MID",
-  "price": 11.9
+  "price": 11.8
  },
  "427": {
   "web_name": "Mbeumo",
   "full_name": "Bryan Mbeumo",
   "club": "MUN",
   "pos": "MID",
-  "price": 7.9
+  "price": 7.8
  },
  "428": {
   "web_name": "Cunha",
@@ -3819,7 +3819,7 @@
   "full_name": "Anthony Elanga",
   "club": "NEW",
   "pos": "MID",
-  "price": 6.1
+  "price": 6.0
  },
  "456": {
   "web_name": "J.Ramsey",
@@ -3868,7 +3868,7 @@
   "full_name": "Sean Steur",
   "club": "NEW",
   "pos": "MID",
-  "price": 4.9
+  "price": 4.8
  },
  "463": {
   "web_name": "Woltemade",
@@ -3882,7 +3882,7 @@
   "full_name": "Yoane Wissa",
   "club": "NEW",
   "pos": "FWD",
-  "price": 6.3
+  "price": 6.2
  },
  "465": {
   "web_name": "Osula",
@@ -3973,7 +3973,7 @@
   "full_name": "Liam Delap",
   "club": "NFO",
   "pos": "FWD",
-  "price": 5.6
+  "price": 5.5
  },
  "201": {
   "web_name": "Muñoz",
@@ -3994,7 +3994,7 @@
   "full_name": "John Victor Maciel Furtado",
   "club": "NFO",
   "pos": "GK",
-  "price": 4.5
+  "price": 4.4
  },
  "469": {
   "web_name": "N.Williams",
@@ -4036,7 +4036,7 @@
   "full_name": "Jair Paula da Cunha Filho",
   "club": "NFO",
   "pos": "DEF",
-  "price": 4.5
+  "price": 4.4
  },
  "475": {
   "web_name": "Savona",
@@ -4050,7 +4050,7 @@
   "full_name": "Omar Richards",
   "club": "NFO",
   "pos": "DEF",
-  "price": 4.0
+  "price": 3.9
  },
  "477": {
   "web_name": "Abbott",
@@ -4351,7 +4351,7 @@
   "full_name": "James Maddison",
   "club": "TOT",
   "pos": "MID",
-  "price": 6.3
+  "price": 6.2
  },
  "516": {
   "web_name": "Bentancur",
