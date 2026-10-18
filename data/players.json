@@ -53,7 +53,7 @@
   "full_name": "Riccardo Calafiori",
   "club": "ARS",
   "pos": "DEF",
-  "price": 5.9
+  "price": 6.0
  },
  "9": {
   "web_name": "Hincapie",
@@ -347,7 +347,7 @@
   "full_name": "Johan Manzambi",
   "club": "AVL",
   "pos": "MID",
-  "price": 5.9
+  "price": 6.0
  },
  "54": {
   "web_name": "Gomes",
@@ -2076,7 +2076,7 @@
   "full_name": "Antonee Robinson",
   "club": "FUL",
   "pos": "DEF",
-  "price": 4.5
+  "price": 4.4
  },
  "255": {
   "web_name": "J.Cuenca",
@@ -2545,7 +2545,7 @@
   "full_name": "Issa Diop",
   "club": "IPS",
   "pos": "DEF",
-  "price": 4.0
+  "price": 3.9
  },
  "267": {
   "web_name": "Lukić",
@@ -3336,7 +3336,7 @@
   "full_name": "Abdukodir Khusanov",
   "club": "MCI",
   "pos": "DEF",
-  "price": 5.4
+  "price": 5.3
  },
  "394": {
   "web_name": "Alleyne",
@@ -3378,7 +3378,7 @@
   "full_name": "Rayan Cherki",
   "club": "MCI",
   "pos": "MID",
-  "price": 7.9
+  "price": 8.0
  },
  "400": {
   "web_name": "Doku",
@@ -3861,7 +3861,7 @@
   "full_name": "Bazoumana Touré",
   "club": "NEW",
   "pos": "MID",
-  "price": 5.8
+  "price": 5.7
  },
  "462": {
   "web_name": "Steur",
@@ -4029,7 +4029,7 @@
   "full_name": "Ola Aina",
   "club": "NFO",
   "pos": "DEF",
-  "price": 4.4
+  "price": 4.3
  },
  "474": {
   "web_name": "Jair Cunha",
@@ -4344,7 +4344,7 @@
   "full_name": "Mathys Tel",
   "club": "TOT",
   "pos": "MID",
-  "price": 5.7
+  "price": 5.6
  },
  "515": {
   "web_name": "Maddison",
@@ -4358,7 +4358,7 @@
   "full_name": "Rodrigo Bentancur",
   "club": "TOT",
   "pos": "MID",
-  "price": 5.5
+  "price": 5.4
  },
  "517": {
   "web_name": "Odobert",
