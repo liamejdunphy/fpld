@@ -130,7 +130,7 @@
   "full_name": "Martín Zubimendi Ibáñez",
   "club": "ARS",
   "pos": "MID",
-  "price": 5.3
+  "price": 5.2
  },
  "20": {
   "web_name": "Dowman",
@@ -536,7 +536,7 @@
   "full_name": "Marcus Tavernier",
   "club": "BOU",
   "pos": "MID",
-  "price": 6.1
+  "price": 6.2
  },
  "69": {
   "web_name": "Scott",
@@ -1292,7 +1292,7 @@
   "full_name": "João Pedro Junqueira de Jesus",
   "club": "CHE",
   "pos": "FWD",
-  "price": 7.8
+  "price": 7.9
  },
  "168": {
   "web_name": "Marc Guiu",
@@ -1796,7 +1796,7 @@
   "full_name": "Eddie Nketiah",
   "club": "CRY",
   "pos": "FWD",
-  "price": 5.5
+  "price": 5.4
  },
  "225": {
   "web_name": "Uche",
@@ -1922,7 +1922,7 @@
   "full_name": "Michael Keane",
   "club": "EVE",
   "pos": "DEF",
-  "price": 4.8
+  "price": 4.7
  },
  "232": {
   "web_name": "O'Brien",
@@ -2083,7 +2083,7 @@
   "full_name": "Jorge Cuenca Barreno",
   "club": "FUL",
   "pos": "DEF",
-  "price": 4.5
+  "price": 4.4
  },
  "256": {
   "web_name": "Tete",
@@ -2524,7 +2524,7 @@
   "full_name": "Brooke Norton-Cuffy",
   "club": "HUL",
   "pos": "DEF",
-  "price": 4.0
+  "price": 3.9
  },
  "642": {
   "web_name": "Thomas",
@@ -3056,7 +3056,7 @@
   "full_name": "Virgil van Dijk",
   "club": "LIV",
   "pos": "DEF",
-  "price": 6.5
+  "price": 6.4
  },
  "357": {
   "web_name": "Frimpong",
@@ -3476,7 +3476,7 @@
   "full_name": "Kaden Braithwaite",
   "club": "MCI",
   "pos": "DEF",
-  "price": 4.0
+  "price": 3.9
  },
  "628": {
   "web_name": "Allan",
@@ -3490,7 +3490,7 @@
   "full_name": "Floyd Samba",
   "club": "MCI",
   "pos": "MID",
-  "price": 4.5
+  "price": 4.4
  },
  "43": {
   "web_name": "Tielemans",
@@ -3882,7 +3882,7 @@
   "full_name": "Yoane Wissa",
   "club": "NEW",
   "pos": "FWD",
-  "price": 6.2
+  "price": 6.1
  },
  "465": {
   "web_name": "Osula",
@@ -4078,7 +4078,7 @@
   "full_name": "Morgan Gibbs-White",
   "club": "NFO",
   "pos": "MID",
-  "price": 8.0
+  "price": 7.9
  },
  "482": {
   "web_name": "Hudson-Odoi",
@@ -4141,7 +4141,7 @@
   "full_name": "Chris Wood",
   "club": "NFO",
   "pos": "FWD",
-  "price": 5.8
+  "price": 5.7
  },
  "491": {
   "web_name": "Igor Jesus",
@@ -4667,5 +4667,12 @@
   "club": "SUN",
   "pos": "FWD",
   "price": 4.5
+ },
+ "668": {
+  "web_name": "Tutierov",
+  "full_name": "Tymur Tutierov",
+  "club": "SUN",
+  "pos": "MID",
+  "price": 5.0
  }
 }
