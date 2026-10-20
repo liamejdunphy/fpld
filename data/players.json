@@ -893,7 +893,7 @@
   "full_name": "Maxim De Cuyper",
   "club": "BHA",
   "pos": "DEF",
-  "price": 5.2
+  "price": 5.3
  },
  "116": {
   "web_name": "Dunk",
@@ -956,7 +956,7 @@
   "full_name": "Pascal Groß",
   "club": "BHA",
   "pos": "MID",
-  "price": 6.1
+  "price": 6.2
  },
  "125": {
   "web_name": "Georginio",
@@ -998,7 +998,7 @@
   "full_name": "Mats Wieffer",
   "club": "BHA",
   "pos": "DEF",
-  "price": 4.9
+  "price": 4.8
  },
  "132": {
   "web_name": "Howell",
@@ -1131,7 +1131,7 @@
   "full_name": "Morgan Rogers",
   "club": "CHE",
   "pos": "MID",
-  "price": 7.9
+  "price": 8.0
  },
  "101": {
   "web_name": "Henderson",
@@ -1145,7 +1145,7 @@
   "full_name": "Danny Welbeck",
   "club": "CHE",
   "pos": "FWD",
-  "price": 5.9
+  "price": 5.8
  },
  "140": {
   "web_name": "Sánchez",
@@ -1369,7 +1369,7 @@
   "full_name": "Frank Onyeka",
   "club": "COV",
   "pos": "MID",
-  "price": 4.9
+  "price": 4.8
  },
  "110": {
   "web_name": "Rushworth",
@@ -1474,7 +1474,7 @@
   "full_name": "Matt Grimes",
   "club": "COV",
   "pos": "MID",
-  "price": 4.9
+  "price": 4.8
  },
  "185": {
   "web_name": "Sakamoto",
@@ -1985,7 +1985,7 @@
   "full_name": "Carlos Alcaraz Durán",
   "club": "EVE",
   "pos": "MID",
-  "price": 4.9
+  "price": 4.8
  },
  "244": {
   "web_name": "Armstrong",
@@ -2475,7 +2475,7 @@
   "full_name": "Elliot Stroud",
   "club": "HUL",
   "pos": "MID",
-  "price": 5.0
+  "price": 4.9
  },
  "585": {
   "web_name": "Herrington",
@@ -3385,7 +3385,7 @@
   "full_name": "Jérémy Doku",
   "club": "MCI",
   "pos": "MID",
-  "price": 7.4
+  "price": 7.5
  },
  "402": {
   "web_name": "Rodrigo",
