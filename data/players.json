@@ -165,7 +165,7 @@
   "full_name": "Viktor Gyökeres",
   "club": "ARS",
   "pos": "FWD",
-  "price": 7.1
+  "price": 7.0
  },
  "26": {
   "web_name": "Havertz",
@@ -396,7 +396,7 @@
   "full_name": "Matteo Ruggeri",
   "club": "AVL",
   "pos": "DEF",
-  "price": 4.5
+  "price": 4.4
  },
  "597": {
   "web_name": "Suzuki",
@@ -1712,7 +1712,7 @@
   "full_name": "Will Hughes",
   "club": "CRY",
   "pos": "MID",
-  "price": 4.4
+  "price": 4.3
  },
  "213": {
   "web_name": "Lerma",
@@ -2174,7 +2174,7 @@
   "full_name": "Rodrigo Muniz Carvalho",
   "club": "FUL",
   "pos": "FWD",
-  "price": 5.4
+  "price": 5.3
  },
  "272": {
   "web_name": "Kusi-Asare",
@@ -2937,7 +2937,7 @@
   "full_name": "Lukas Nmecha",
   "club": "LEE",
   "pos": "FWD",
-  "price": 5.4
+  "price": 5.3
  },
  "348": {
   "web_name": "Piroe",
@@ -3098,7 +3098,7 @@
   "full_name": "Jeremy Jacquet",
   "club": "LIV",
   "pos": "DEF",
-  "price": 5.0
+  "price": 5.1
  },
  "363": {
   "web_name": "Leoni",
@@ -3182,7 +3182,7 @@
   "full_name": "Endo Wataru",
   "club": "LIV",
   "pos": "MID",
-  "price": 4.9
+  "price": 4.8
  },
  "375": {
   "web_name": "Nyoni",
@@ -4085,7 +4085,7 @@
   "full_name": "Callum Hudson-Odoi",
   "club": "NFO",
   "pos": "MID",
-  "price": 5.8
+  "price": 5.7
  },
  "483": {
   "web_name": "Ndoye",
