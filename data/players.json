@@ -88,7 +88,7 @@
   "full_name": "Declan Rice",
   "club": "ARS",
   "pos": "MID",
-  "price": 7.3
+  "price": 7.4
  },
  "14": {
   "web_name": "Eze",
@@ -382,7 +382,7 @@
   "full_name": "Nicolas Jackson",
   "club": "AVL",
   "pos": "FWD",
-  "price": 6.6
+  "price": 6.7
  },
  "582": {
   "web_name": "Madjo",
@@ -1357,6 +1357,13 @@
   "pos": "MID",
   "price": 4.5
  },
+ "669": {
+  "web_name": "Sharman-Lowe",
+  "full_name": "Teddy Sharman-Lowe",
+  "club": "CHE",
+  "pos": "GK",
+  "price": 4.0
+ },
  "91": {
   "web_name": "Pinnock",
   "full_name": "Ethan Pinnock",
@@ -2013,7 +2020,7 @@
   "full_name": "Hayden Hackney",
   "club": "EVE",
   "pos": "MID",
-  "price": 5.4
+  "price": 5.3
  },
  "248": {
   "web_name": "Beto",
@@ -2188,7 +2195,7 @@
   "full_name": "Gonzalo García",
   "club": "FUL",
   "pos": "FWD",
-  "price": 6.1
+  "price": 6.0
  },
  "570": {
   "web_name": "Palacios",
@@ -2874,7 +2881,7 @@
   "full_name": "Brenden Aaronson",
   "club": "LEE",
   "pos": "MID",
-  "price": 5.3
+  "price": 5.2
  },
  "338": {
   "web_name": "Ampadu",
@@ -3140,7 +3147,7 @@
   "full_name": "Dominik Szoboszlai",
   "club": "LIV",
   "pos": "MID",
-  "price": 6.8
+  "price": 6.7
  },
  "369": {
   "web_name": "Ngumoha",
@@ -4127,7 +4134,7 @@
   "full_name": "Ibrahim Sangaré",
   "club": "NFO",
   "pos": "MID",
-  "price": 4.8
+  "price": 4.7
  },
  "489": {
   "web_name": "Yates",
@@ -4505,7 +4512,7 @@
   "full_name": "Trai Hume",
   "club": "SUN",
   "pos": "DEF",
-  "price": 4.3
+  "price": 4.2
  },
  "535": {
   "web_name": "Alderete",
