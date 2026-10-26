@@ -1,14 +1,10 @@
-## GW7 Review
+## GW8 Review
 
-**65 pts** (bench 9, hits 0)
+**43 pts** (bench 2, hits 0)
 
-**Captain:** Haaland — 13pts (x2 = 26pts)
-**Vice:** Semenyo — 1pts
-**Captain call: nailed it.**
+**Captain:** Haaland — 8pts (x2 = 16pts)
+**Vice:** Semenyo — 0pts
+**Best captain would have been:** Muharemović (9pts, +2pts swing)
 
-**Bench leak:** 9pts left on the bench
-- Calvert-Lewin: 9pts (bench 3)
-
-**Transfers:** 2 made (free)
-- Muñoz (2pts) → Dasilva (0pts) 📉 -2pts
-- Gibbs-White (0pts) → Semenyo (1pts) 📈 +1pts
+**Bench leak:** 2pts left on the bench
+- Schade: 2pts (bench 4)
