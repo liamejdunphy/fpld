@@ -382,7 +382,7 @@
   "full_name": "Nicolas Jackson",
   "club": "AVL",
   "pos": "FWD",
-  "price": 6.7
+  "price": 6.8
  },
  "582": {
   "web_name": "Madjo",
@@ -1061,7 +1061,7 @@
   "full_name": "Luka Vušković",
   "club": "BHA",
   "pos": "DEF",
-  "price": 5.1
+  "price": 5.2
  },
  "594": {
   "web_name": "David",
@@ -1292,7 +1292,7 @@
   "full_name": "João Pedro Junqueira de Jesus",
   "club": "CHE",
   "pos": "FWD",
-  "price": 7.9
+  "price": 7.8
  },
  "168": {
   "web_name": "Marc Guiu",
@@ -3224,7 +3224,7 @@
   "full_name": "Alexander Isak",
   "club": "LIV",
   "pos": "FWD",
-  "price": 9.0
+  "price": 9.1
  },
  "380": {
   "web_name": "Ekitiké",
@@ -3448,7 +3448,7 @@
   "full_name": "Erling Haaland",
   "club": "MCI",
   "pos": "FWD",
-  "price": 15.7
+  "price": 15.8
  },
  "481": {
   "web_name": "Anderson",
@@ -3644,14 +3644,14 @@
   "full_name": "Matheus Santos Carneiro da Cunha",
   "club": "MUN",
   "pos": "MID",
-  "price": 7.9
+  "price": 7.8
  },
  "429": {
   "web_name": "Rashford",
   "full_name": "Marcus Rashford",
   "club": "MUN",
   "pos": "MID",
-  "price": 6.9
+  "price": 6.8
  },
  "430": {
   "web_name": "Mount",
@@ -4176,7 +4176,7 @@
   "full_name": "Ousmane Diomande",
   "club": "NFO",
   "pos": "DEF",
-  "price": 5.4
+  "price": 5.3
  },
  "590": {
   "web_name": "Benda",
