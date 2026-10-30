@@ -53,7 +53,7 @@
   "full_name": "Riccardo Calafiori",
   "club": "ARS",
   "pos": "DEF",
-  "price": 6.0
+  "price": 5.9
  },
  "9": {
   "web_name": "Hincapie",
@@ -172,7 +172,7 @@
   "full_name": "Kai Havertz",
   "club": "ARS",
   "pos": "FWD",
-  "price": 7.5
+  "price": 7.4
  },
  "27": {
   "web_name": "G.Jesus",
@@ -200,7 +200,7 @@
   "full_name": "Christos Tzolis",
   "club": "ARS",
   "pos": "MID",
-  "price": 6.2
+  "price": 6.1
  },
  "29": {
   "web_name": "M.Bizot",
@@ -613,7 +613,7 @@
   "full_name": "Francisco Evanilson de Lima Barbosa",
   "club": "BOU",
   "pos": "FWD",
-  "price": 6.2
+  "price": 6.3
  },
  "80": {
   "web_name": "Enes Ünal",
@@ -1831,7 +1831,7 @@
   "full_name": "Takehiro Tomiyasu",
   "club": "CRY",
   "pos": "DEF",
-  "price": 4.4
+  "price": 4.3
  },
  "588": {
   "web_name": "Khalaili",
