@@ -25,7 +25,7 @@
   "full_name": "Gabriel dos Santos Magalhães",
   "club": "ARS",
   "pos": "DEF",
-  "price": 7.9
+  "price": 8.0
  },
  "5": {
   "web_name": "J.Timber",
@@ -333,7 +333,7 @@
   "full_name": "George Hemmings",
   "club": "AVL",
   "pos": "MID",
-  "price": 4.5
+  "price": 4.4
  },
  "52": {
   "web_name": "Alysson",
@@ -382,7 +382,7 @@
   "full_name": "Nicolas Jackson",
   "club": "AVL",
   "pos": "FWD",
-  "price": 6.8
+  "price": 6.9
  },
  "582": {
   "web_name": "Madjo",
@@ -536,7 +536,7 @@
   "full_name": "Marcus Tavernier",
   "club": "BOU",
   "pos": "MID",
-  "price": 6.4
+  "price": 6.5
  },
  "69": {
   "web_name": "Scott",
@@ -788,7 +788,7 @@
   "full_name": "Yehor Yarmoliuk",
   "club": "BRE",
   "pos": "MID",
-  "price": 4.8
+  "price": 4.7
  },
  "103": {
   "web_name": "Dasilva",
@@ -1047,7 +1047,7 @@
   "full_name": "Evan Ferguson",
   "club": "BHA",
   "pos": "FWD",
-  "price": 5.0
+  "price": 4.9
  },
  "328": {
   "web_name": "Struijk",
@@ -1124,14 +1124,14 @@
   "full_name": "Emiliano Martínez Romero",
   "club": "CHE",
   "pos": "GK",
-  "price": 5.0
+  "price": 4.9
  },
  "40": {
   "web_name": "Rogers",
   "full_name": "Morgan Rogers",
   "club": "CHE",
   "pos": "MID",
-  "price": 8.0
+  "price": 8.1
  },
  "101": {
   "web_name": "Henderson",
@@ -2125,7 +2125,7 @@
   "full_name": "Emile Smith Rowe",
   "club": "FUL",
   "pos": "MID",
-  "price": 5.3
+  "price": 5.2
  },
  "263": {
   "web_name": "Kevin",
@@ -3938,7 +3938,7 @@
   "full_name": "Matias Fernandez-Pardo",
   "club": "NEW",
   "pos": "FWD",
-  "price": 6.0
+  "price": 5.9
  },
  "659": {
   "web_name": "Miley",
@@ -3980,7 +3980,7 @@
   "full_name": "Liam Delap",
   "club": "NFO",
   "pos": "FWD",
-  "price": 5.5
+  "price": 5.4
  },
  "201": {
   "web_name": "Muñoz",
@@ -4463,7 +4463,7 @@
   "full_name": "Luca Williams-Barnett",
   "club": "TOT",
   "pos": "MID",
-  "price": 4.5
+  "price": 4.4
  },
  "501": {
   "web_name": "Danso",
