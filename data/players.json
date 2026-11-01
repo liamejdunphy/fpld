@@ -382,7 +382,7 @@
   "full_name": "Nicolas Jackson",
   "club": "AVL",
   "pos": "FWD",
-  "price": 6.9
+  "price": 7.0
  },
  "582": {
   "web_name": "Madjo",
@@ -536,7 +536,7 @@
   "full_name": "Marcus Tavernier",
   "club": "BOU",
   "pos": "MID",
-  "price": 6.5
+  "price": 6.6
  },
  "69": {
   "web_name": "Scott",
@@ -613,7 +613,7 @@
   "full_name": "Francisco Evanilson de Lima Barbosa",
   "club": "BOU",
   "pos": "FWD",
-  "price": 6.3
+  "price": 6.4
  },
  "80": {
   "web_name": "Enes Ünal",
@@ -816,7 +816,7 @@
   "full_name": "Kaye Furo",
   "club": "BRE",
   "pos": "FWD",
-  "price": 4.5
+  "price": 4.4
  },
  "108": {
   "web_name": "Wilson",
@@ -893,7 +893,7 @@
   "full_name": "Maxim De Cuyper",
   "club": "BHA",
   "pos": "DEF",
-  "price": 5.3
+  "price": 5.4
  },
  "116": {
   "web_name": "Dunk",
@@ -1292,7 +1292,7 @@
   "full_name": "João Pedro Junqueira de Jesus",
   "club": "CHE",
   "pos": "FWD",
-  "price": 7.8
+  "price": 7.7
  },
  "168": {
   "web_name": "Marc Guiu",
@@ -1362,6 +1362,13 @@
   "full_name": "Teddy Sharman-Lowe",
   "club": "CHE",
   "pos": "GK",
+  "price": 4.0
+ },
+ "670": {
+  "web_name": "Subuloye",
+  "full_name": "Olutayo Subuloye",
+  "club": "CHE",
+  "pos": "DEF",
   "price": 4.0
  },
  "91": {
@@ -2160,7 +2167,7 @@
   "full_name": "Josh King",
   "club": "FUL",
   "pos": "MID",
-  "price": 5.6
+  "price": 5.5
  },
  "269": {
   "web_name": "Sessegnon",
@@ -2349,7 +2356,7 @@
   "full_name": "Mohamed Belloumi",
   "club": "HUL",
   "pos": "MID",
-  "price": 5.2
+  "price": 5.3
  },
  "287": {
   "web_name": "Millar",
@@ -3224,7 +3231,7 @@
   "full_name": "Alexander Isak",
   "club": "LIV",
   "pos": "FWD",
-  "price": 9.1
+  "price": 9.2
  },
  "380": {
   "web_name": "Ekitiké",
@@ -3385,7 +3392,7 @@
   "full_name": "Rayan Cherki",
   "club": "MCI",
   "pos": "MID",
-  "price": 8.0
+  "price": 7.9
  },
  "400": {
   "web_name": "Doku",
@@ -4008,7 +4015,7 @@
   "full_name": "Neco Williams",
   "club": "NFO",
   "pos": "DEF",
-  "price": 5.0
+  "price": 4.9
  },
  "470": {
   "web_name": "Morato",
@@ -4155,7 +4162,7 @@
   "full_name": "Igor Jesus Maciel da Cruz",
   "club": "NFO",
   "pos": "FWD",
-  "price": 5.7
+  "price": 5.6
  },
  "493": {
   "web_name": "Kalimuendo",
@@ -4190,7 +4197,7 @@
   "full_name": "Jan Paul van Hecke",
   "club": "TOT",
   "pos": "DEF",
-  "price": 4.9
+  "price": 5.0
  },
  "147": {
   "web_name": "Tosin",
@@ -4498,7 +4505,7 @@
   "full_name": "Daniel Ballard",
   "club": "SUN",
   "pos": "DEF",
-  "price": 4.8
+  "price": 4.7
  },
  "533": {
   "web_name": "Mukiele",
