@@ -1,10 +1,17 @@
-## GW8 Review
+## GW9 Review
 
-**43 pts** (bench 2, hits 0)
+**51 pts** (bench 11, hits 0)
 
-**Captain:** Haaland — 8pts (x2 = 16pts)
-**Vice:** Semenyo — 0pts
-**Best captain would have been:** Muharemović (9pts, +2pts swing)
+**Captain:** Haaland — 2pts (x2 = 4pts)
+**Vice:** Isak — 2pts
+**Best captain would have been:** De Cuyper (9pts, +14pts swing)
 
-**Bench leak:** 2pts left on the bench
-- Schade: 2pts (bench 4)
+**Bench leak:** 11pts left on the bench
+- Schade: 3pts (bench 2)
+- Calafiori: 6pts (bench 3)
+- Dasilva: 2pts (bench 4)
+
+**Transfers:** 3 made (free)
+- Calvert-Lewin (2pts) → N.Jackson (9pts) 📈 +7pts
+- João Pedro (0pts) → Isak (2pts) 📈 +2pts
+- Semenyo (0pts) → Tavernier (3pts) 📈 +3pts
