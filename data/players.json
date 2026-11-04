@@ -186,7 +186,7 @@
   "full_name": "Ezri Konsa Ngoyo",
   "club": "ARS",
   "pos": "DEF",
-  "price": 4.7
+  "price": 4.8
  },
  "452": {
   "web_name": "Bruno G.",
@@ -634,7 +634,7 @@
   "full_name": "António João Pereira de Albuquerque Tavares da Silva",
   "club": "BOU",
   "pos": "DEF",
-  "price": 5.0
+  "price": 5.1
  },
  "573": {
   "web_name": "Sanchez",
@@ -704,7 +704,7 @@
   "full_name": "Michael Kayode",
   "club": "BRE",
   "pos": "DEF",
-  "price": 4.6
+  "price": 4.5
  },
  "89": {
   "web_name": "Henry",
@@ -1131,7 +1131,7 @@
   "full_name": "Morgan Rogers",
   "club": "CHE",
   "pos": "MID",
-  "price": 8.1
+  "price": 8.2
  },
  "101": {
   "web_name": "Henderson",
@@ -1635,7 +1635,7 @@
   "full_name": "Evann Guessand",
   "club": "CRY",
   "pos": "MID",
-  "price": 5.4
+  "price": 5.3
  },
  "153": {
   "web_name": "Disasi",
@@ -2398,7 +2398,7 @@
   "full_name": "Abdülkadir Ömür",
   "club": "HUL",
   "pos": "MID",
-  "price": 4.9
+  "price": 4.8
  },
  "293": {
   "web_name": "Kamara",
@@ -2734,7 +2734,7 @@
   "full_name": "Kasey McAteer",
   "club": "IPS",
   "pos": "MID",
-  "price": 4.4
+  "price": 4.3
  },
  "324": {
   "web_name": "Mehmeti",
@@ -3777,7 +3777,7 @@
   "full_name": "Malick Thiaw",
   "club": "NEW",
   "pos": "DEF",
-  "price": 5.0
+  "price": 4.9
  },
  "446": {
   "web_name": "Schär",
@@ -4043,7 +4043,7 @@
   "full_name": "Ola Aina",
   "club": "NFO",
   "pos": "DEF",
-  "price": 4.3
+  "price": 4.2
  },
  "474": {
   "web_name": "Jair Cunha",
@@ -4218,7 +4218,7 @@
   "full_name": "Sávio Moreira de Oliveira",
   "club": "TOT",
   "pos": "MID",
-  "price": 6.5
+  "price": 6.4
  },
  "455": {
   "web_name": "Tonali",
@@ -4344,7 +4344,7 @@
   "full_name": "Mohammed Kudus",
   "club": "TOT",
   "pos": "MID",
-  "price": 6.5
+  "price": 6.6
  },
  "513": {
   "web_name": "Xavi",
@@ -4673,7 +4673,7 @@
   "full_name": "Malick Fofana",
   "club": "SUN",
   "pos": "MID",
-  "price": 5.5
+  "price": 5.4
  },
  "651": {
   "web_name": "J.Angulo",
