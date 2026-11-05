@@ -2832,7 +2832,7 @@
   "full_name": "Joe Rodon",
   "club": "LEE",
   "pos": "DEF",
-  "price": 4.3
+  "price": 4.2
  },
  "330": {
   "web_name": "Bogle",
@@ -3581,7 +3581,7 @@
   "full_name": "Harry Maguire",
   "club": "MUN",
   "pos": "DEF",
-  "price": 4.7
+  "price": 4.6
  },
  "419": {
   "web_name": "Martinez",
@@ -4092,7 +4092,7 @@
   "full_name": "Morgan Gibbs-White",
   "club": "NFO",
   "pos": "MID",
-  "price": 7.9
+  "price": 7.8
  },
  "482": {
   "web_name": "Hudson-Odoi",
@@ -4687,6 +4687,6 @@
   "full_name": "Tymur Tutierov",
   "club": "SUN",
   "pos": "MID",
-  "price": 5.0
+  "price": 4.9
  }
 }
