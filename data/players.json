@@ -81,7 +81,7 @@
   "full_name": "Bukayo Saka",
   "club": "ARS",
   "pos": "MID",
-  "price": 9.5
+  "price": 9.4
  },
  "13": {
   "web_name": "Rice",
@@ -382,7 +382,7 @@
   "full_name": "Nicolas Jackson",
   "club": "AVL",
   "pos": "FWD",
-  "price": 7.0
+  "price": 7.1
  },
  "582": {
   "web_name": "Madjo",
@@ -536,7 +536,7 @@
   "full_name": "Marcus Tavernier",
   "club": "BOU",
   "pos": "MID",
-  "price": 6.6
+  "price": 6.7
  },
  "69": {
   "web_name": "Scott",
@@ -1320,7 +1320,7 @@
   "full_name": "Maxence Lacroix",
   "club": "CHE",
   "pos": "DEF",
-  "price": 5.9
+  "price": 5.8
  },
  "560": {
   "web_name": "Penders",
@@ -2496,7 +2496,7 @@
   "full_name": "Lucas Herrington",
   "club": "HUL",
   "pos": "DEF",
-  "price": 4.0
+  "price": 3.9
  },
  "586": {
   "web_name": "Mendy",
@@ -2965,7 +2965,7 @@
   "full_name": "Mateo Joseph Fernández-Regatillo",
   "club": "LEE",
   "pos": "FWD",
-  "price": 4.5
+  "price": 4.4
  },
  "385": {
   "web_name": "Trafford",
@@ -3574,7 +3574,7 @@
   "full_name": "Diogo Dalot Teixeira",
   "club": "MUN",
   "pos": "DEF",
-  "price": 4.8
+  "price": 4.7
  },
  "418": {
   "web_name": "Maguire",
@@ -3637,7 +3637,7 @@
   "full_name": "Bruno Borges Fernandes",
   "club": "MUN",
   "pos": "MID",
-  "price": 11.7
+  "price": 11.6
  },
  "427": {
   "web_name": "Mbeumo",
@@ -3756,7 +3756,7 @@
   "full_name": "Nick Pope",
   "club": "NEW",
   "pos": "GK",
-  "price": 4.9
+  "price": 4.8
  },
  "443": {
   "web_name": "Gillespie",
@@ -3945,7 +3945,7 @@
   "full_name": "Matias Fernandez-Pardo",
   "club": "NEW",
   "pos": "FWD",
-  "price": 5.9
+  "price": 5.8
  },
  "659": {
   "web_name": "Miley",
@@ -3994,7 +3994,7 @@
   "full_name": "Daniel Muñoz Mejía",
   "club": "NFO",
   "pos": "DEF",
-  "price": 5.3
+  "price": 5.2
  },
  "467": {
   "web_name": "Sels",
@@ -4471,6 +4471,13 @@
   "club": "TOT",
   "pos": "MID",
   "price": 4.4
+ },
+ "671": {
+  "web_name": "Gunter",
+  "full_name": "Luca Gunter",
+  "club": "TOT",
+  "pos": "GK",
+  "price": 4.0
  },
  "501": {
   "web_name": "Danso",
