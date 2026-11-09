@@ -454,6 +454,13 @@
   "pos": "GK",
   "price": 4.0
  },
+ "672": {
+  "web_name": "Cissé",
+  "full_name": "Modou Kéba Cissé",
+  "club": "AVL",
+  "pos": "DEF",
+  "price": 4.5
+ },
  "57": {
   "web_name": "Petrović",
   "full_name": "Đorđe Petrović",
@@ -578,7 +585,7 @@
   "full_name": "David Brooks",
   "club": "BOU",
   "pos": "MID",
-  "price": 5.0
+  "price": 4.9
  },
  "75": {
   "web_name": "Christie",
@@ -879,7 +886,7 @@
   "full_name": "Ferdi Kadıoğlu",
   "club": "BHA",
   "pos": "DEF",
-  "price": 4.4
+  "price": 4.3
  },
  "114": {
   "web_name": "Boscagli",
@@ -893,7 +900,7 @@
   "full_name": "Maxim De Cuyper",
   "club": "BHA",
   "pos": "DEF",
-  "price": 5.4
+  "price": 5.5
  },
  "116": {
   "web_name": "Dunk",
@@ -1061,7 +1068,7 @@
   "full_name": "Luka Vušković",
   "club": "BHA",
   "pos": "DEF",
-  "price": 5.2
+  "price": 5.3
  },
  "594": {
   "web_name": "David",
@@ -1082,7 +1089,7 @@
   "full_name": "Malick Yalcouyé",
   "club": "BHA",
   "pos": "MID",
-  "price": 4.5
+  "price": 4.4
  },
  "614": {
   "web_name": "Hadjam",
@@ -1292,7 +1299,7 @@
   "full_name": "João Pedro Junqueira de Jesus",
   "club": "CHE",
   "pos": "FWD",
-  "price": 7.7
+  "price": 7.6
  },
  "168": {
   "web_name": "Marc Guiu",
@@ -2153,7 +2160,7 @@
   "full_name": "Sander Berge",
   "club": "FUL",
   "pos": "MID",
-  "price": 4.9
+  "price": 4.8
  },
  "266": {
   "web_name": "Cairney",
@@ -2370,7 +2377,7 @@
   "full_name": "Kieran Dowell",
   "club": "HUL",
   "pos": "MID",
-  "price": 4.4
+  "price": 4.3
  },
  "289": {
   "web_name": "Crooks",
@@ -2412,7 +2419,7 @@
   "full_name": "Óscar Zambrano",
   "club": "HUL",
   "pos": "MID",
-  "price": 4.5
+  "price": 4.4
  },
  "295": {
   "web_name": "McBurnie",
@@ -2685,7 +2692,7 @@
   "full_name": "Emersonn Correia da Silva",
   "club": "IPS",
   "pos": "FWD",
-  "price": 5.5
+  "price": 5.4
  },
  "317": {
   "web_name": "Hirst",
@@ -2741,7 +2748,7 @@
   "full_name": "Anis Mehmeti",
   "club": "IPS",
   "pos": "MID",
-  "price": 4.8
+  "price": 4.7
  },
  "554": {
   "web_name": "Van Oevelen",
@@ -3231,7 +3238,7 @@
   "full_name": "Alexander Isak",
   "club": "LIV",
   "pos": "FWD",
-  "price": 9.2
+  "price": 9.3
  },
  "380": {
   "web_name": "Ekitiké",
@@ -3294,7 +3301,7 @@
   "full_name": "Gianluigi Donnarumma",
   "club": "MCI",
   "pos": "GK",
-  "price": 5.5
+  "price": 5.4
  },
  "386": {
   "web_name": "Bettinelli",
@@ -3336,14 +3343,14 @@
   "full_name": "Joško Gvardiol",
   "club": "MCI",
   "pos": "DEF",
-  "price": 5.7
+  "price": 5.6
  },
  "392": {
   "web_name": "Aït-Nouri",
   "full_name": "Rayan Aït-Nouri",
   "club": "MCI",
   "pos": "DEF",
-  "price": 5.2
+  "price": 5.1
  },
  "393": {
   "web_name": "Khusanov",
@@ -4197,7 +4204,7 @@
   "full_name": "Jan Paul van Hecke",
   "club": "TOT",
   "pos": "DEF",
-  "price": 5.0
+  "price": 5.1
  },
  "147": {
   "web_name": "Tosin",
@@ -4694,6 +4701,6 @@
   "full_name": "Tymur Tutierov",
   "club": "SUN",
   "pos": "MID",
-  "price": 4.9
+  "price": 4.8
  }
 }
