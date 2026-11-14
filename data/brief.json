@@ -1,5 +1,5 @@
 {
- "date": "2026-11-13",
+ "date": "2026-11-14",
  "gw": 11,
  "deadline": "2026-11-21T11:00:00Z",
  "dial": {
@@ -19,7 +19,7 @@
    "form": 6.8,
    "ppg": 6.0,
    "xgi90": 0.0,
-   "owned": 47.5,
+   "owned": 47.6,
    "status": "a",
    "fdr": 3.4,
    "fixtures": [
@@ -68,7 +68,7 @@
    "form": 7.5,
    "ppg": 5.7,
    "xgi90": 0.24,
-   "owned": 14.7,
+   "owned": 14.8,
    "status": "a",
    "fdr": 2.6,
    "fixtures": [
@@ -166,7 +166,7 @@
    "form": 5.5,
    "ppg": 7.5,
    "xgi90": 0.43,
-   "owned": 47.8,
+   "owned": 47.9,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -460,7 +460,7 @@
    "form": 8.8,
    "ppg": 6.0,
    "xgi90": 0.54,
-   "owned": 31.2,
+   "owned": 31.3,
    "status": "a",
    "fdr": 2.2,
    "fixtures": [
@@ -498,7 +498,7 @@
    "score": 84.4,
    "captain_score": 73.2,
    "xpts": 6.34,
-   "xpts_horizon": 30.65
+   "xpts_horizon": 30.64
   },
   {
    "id": 379,
@@ -547,7 +547,7 @@
    "score": 73.8,
    "captain_score": 66.0,
    "xpts": 7.22,
-   "xpts_horizon": 34.98
+   "xpts_horizon": 34.97
   },
   {
    "id": 58,
@@ -607,7 +607,7 @@
    "form": 0.8,
    "ppg": 4.4,
    "xgi90": 0.23,
-   "owned": 22.6,
+   "owned": 22.5,
    "status": "d",
    "fdr": 3.6,
    "fixtures": [
@@ -656,7 +656,7 @@
    "form": 1.5,
    "ppg": 4.6,
    "xgi90": 0.32,
-   "owned": 12.9,
+   "owned": 12.8,
    "status": "a",
    "fdr": 3.4,
    "fixtures": [
@@ -805,7 +805,7 @@
    "form": 8.8,
    "ppg": 6.0,
    "xgi90": 0.54,
-   "owned": 31.2,
+   "owned": 31.3,
    "status": "a",
    "fdr": 2.2,
    "fixtures": [
@@ -843,7 +843,7 @@
    "score": 84.4,
    "captain_score": 73.2,
    "xpts": 6.34,
-   "xpts_horizon": 30.65
+   "xpts_horizon": 30.64
   },
   {
    "id": 379,
@@ -892,7 +892,7 @@
    "score": 73.8,
    "captain_score": 66.0,
    "xpts": 7.22,
-   "xpts_horizon": 34.98
+   "xpts_horizon": 34.97
   },
   {
    "id": 68,
@@ -965,7 +965,7 @@
       "club": "BHA",
       "price": 5.3,
       "xpts": 33.09,
-      "owned": 9.3
+      "owned": 9.4
      },
      "reason": "Gvardiol flagged (Unspecified injury - 75% chance of playing)",
      "is_hit": false
@@ -1063,7 +1063,7 @@
       "club": "BHA",
       "price": 5.3,
       "xpts": 33.09,
-      "owned": 9.3
+      "owned": 9.4
      },
      "reason": "Gvardiol flagged (Unspecified injury - 75% chance of playing)",
      "is_hit": false
@@ -1184,7 +1184,7 @@
       "club": "BHA",
       "price": 5.3,
       "xpts": 33.09,
-      "owned": 9.3
+      "owned": 9.4
      },
      "reason": "Gvardiol flagged (Unspecified injury - 75% chance of playing)",
      "is_hit": false
@@ -3139,13 +3139,6 @@
    "price": 4.8,
    "score": 34.1
   },
-  "415": {
-   "name": "Dorgu",
-   "pos": "MID",
-   "club": "MUN",
-   "price": 5.7,
-   "score": 56.0
-  },
   "417": {
    "name": "Dalot",
    "pos": "DEF",
@@ -3612,8 +3605,8 @@
    "name": "Roefs",
    "pos": "GK",
    "club": "SUN",
-   "price": 4.9,
-   "score": 49.9
+   "price": 4.8,
+   "score": 50.2
   },
   "533": {
    "name": "Mukiele",
