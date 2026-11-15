@@ -1,5 +1,5 @@
 {
- "date": "2026-11-14",
+ "date": "2026-11-15",
  "gw": 11,
  "deadline": "2026-11-21T11:00:00Z",
  "dial": {
@@ -215,7 +215,7 @@
    "form": 4.2,
    "ppg": 7.0,
    "xgi90": 0.54,
-   "owned": 48.1,
+   "owned": 48.2,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -362,7 +362,7 @@
    "form": 6.5,
    "ppg": 5.8,
    "xgi90": 0.61,
-   "owned": 31.4,
+   "owned": 31.5,
    "status": "a",
    "fdr": 3.4,
    "fixtures": [
@@ -460,7 +460,7 @@
    "form": 8.8,
    "ppg": 6.0,
    "xgi90": 0.54,
-   "owned": 31.3,
+   "owned": 31.4,
    "status": "a",
    "fdr": 2.2,
    "fixtures": [
@@ -498,7 +498,7 @@
    "score": 84.4,
    "captain_score": 73.2,
    "xpts": 6.34,
-   "xpts_horizon": 30.64
+   "xpts_horizon": 30.63
   },
   {
    "id": 379,
@@ -509,7 +509,7 @@
    "form": 7.0,
    "ppg": 6.8,
    "xgi90": 0.62,
-   "owned": 25.1,
+   "owned": 25.2,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -694,7 +694,7 @@
    "score": 42.8,
    "captain_score": 35.4,
    "xpts": 5.11,
-   "xpts_horizon": 25.31
+   "xpts_horizon": 25.32
   },
   {
    "id": 176,
@@ -805,7 +805,7 @@
    "form": 8.8,
    "ppg": 6.0,
    "xgi90": 0.54,
-   "owned": 31.3,
+   "owned": 31.4,
    "status": "a",
    "fdr": 2.2,
    "fixtures": [
@@ -843,7 +843,7 @@
    "score": 84.4,
    "captain_score": 73.2,
    "xpts": 6.34,
-   "xpts_horizon": 30.64
+   "xpts_horizon": 30.63
   },
   {
    "id": 379,
@@ -854,7 +854,7 @@
    "form": 7.0,
    "ppg": 6.8,
    "xgi90": 0.62,
-   "owned": 25.1,
+   "owned": 25.2,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -903,7 +903,7 @@
    "form": 6.5,
    "ppg": 5.8,
    "xgi90": 0.61,
-   "owned": 31.4,
+   "owned": 31.5,
    "status": "a",
    "fdr": 3.4,
    "fixtures": [
@@ -965,7 +965,7 @@
       "club": "BHA",
       "price": 5.3,
       "xpts": 33.09,
-      "owned": 9.4
+      "owned": 9.5
      },
      "reason": "Gvardiol flagged (Unspecified injury - 75% chance of playing)",
      "is_hit": false
@@ -1063,7 +1063,7 @@
       "club": "BHA",
       "price": 5.3,
       "xpts": 33.09,
-      "owned": 9.4
+      "owned": 9.5
      },
      "reason": "Gvardiol flagged (Unspecified injury - 75% chance of playing)",
      "is_hit": false
@@ -1184,7 +1184,7 @@
       "club": "BHA",
       "price": 5.3,
       "xpts": 33.09,
-      "owned": 9.4
+      "owned": 9.5
      },
      "reason": "Gvardiol flagged (Unspecified injury - 75% chance of playing)",
      "is_hit": false
@@ -1449,7 +1449,7 @@
    "name": "Konsa",
    "pos": "DEF",
    "club": "ARS",
-   "price": 4.8,
+   "price": 4.9,
    "score": 70.0
   },
   "452": {
@@ -1472,13 +1472,6 @@
    "club": "AVL",
    "price": 4.5,
    "score": 25.0
-  },
-  "32": {
-   "name": "Cash",
-   "pos": "DEF",
-   "club": "AVL",
-   "price": 4.3,
-   "score": 47.9
   },
   "33": {
    "name": "Mings",
@@ -1927,13 +1920,6 @@
    "club": "BHA",
    "price": 4.4,
    "score": 46.3
-  },
-  "639": {
-   "name": "Andr\u00e9s",
-   "pos": "MID",
-   "club": "BHA",
-   "price": 5.5,
-   "score": 36.9
   },
   "40": {
    "name": "Rogers",
