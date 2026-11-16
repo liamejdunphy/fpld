@@ -1,5 +1,5 @@
 {
- "date": "2026-11-15",
+ "date": "2026-11-16",
  "gw": 11,
  "deadline": "2026-11-21T11:00:00Z",
  "dial": {
@@ -68,7 +68,7 @@
    "form": 7.5,
    "ppg": 5.7,
    "xgi90": 0.24,
-   "owned": 14.8,
+   "owned": 14.9,
    "status": "a",
    "fdr": 2.6,
    "fixtures": [
@@ -166,7 +166,7 @@
    "form": 5.5,
    "ppg": 7.5,
    "xgi90": 0.43,
-   "owned": 47.9,
+   "owned": 48.0,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -252,8 +252,8 @@
    ],
    "score": 66.3,
    "captain_score": 53.3,
-   "xpts": 7.25,
-   "xpts_horizon": 36.58
+   "xpts": 7.24,
+   "xpts_horizon": 36.57
   },
   {
    "id": 40,
@@ -261,7 +261,7 @@
    "pos": "MID",
    "club": "CHE",
    "price": 8.2,
-   "form": 3.5,
+   "form": 4.0,
    "ppg": 5.2,
    "xgi90": 0.46,
    "owned": 54.0,
@@ -299,8 +299,8 @@
      "fdr": 5
     }
    ],
-   "score": 52.5,
-   "captain_score": 46.8,
+   "score": 54.5,
+   "captain_score": 48.0,
    "xpts": 5.01,
    "xpts_horizon": 24.82
   },
@@ -399,8 +399,8 @@
    ],
    "score": 72.1,
    "captain_score": 61.0,
-   "xpts": 6.39,
-   "xpts_horizon": 31.69
+   "xpts": 6.38,
+   "xpts_horizon": 31.68
   },
   {
    "id": 411,
@@ -408,7 +408,7 @@
    "pos": "FWD",
    "club": "MCI",
    "price": 15.8,
-   "form": 6.2,
+   "form": 4.0,
    "ppg": 7.0,
    "xgi90": 0.8,
    "owned": 78.8,
@@ -446,8 +446,8 @@
      "fdr": 4
     }
    ],
-   "score": 63.4,
-   "captain_score": 81.8,
+   "score": 54.6,
+   "captain_score": 76.2,
    "xpts": 6.5,
    "xpts_horizon": 31.92
   },
@@ -460,7 +460,7 @@
    "form": 8.8,
    "ppg": 6.0,
    "xgi90": 0.54,
-   "owned": 31.4,
+   "owned": 31.5,
    "status": "a",
    "fdr": 2.2,
    "fixtures": [
@@ -498,7 +498,7 @@
    "score": 84.4,
    "captain_score": 73.2,
    "xpts": 6.34,
-   "xpts_horizon": 30.63
+   "xpts_horizon": 30.62
   },
   {
    "id": 379,
@@ -506,7 +506,7 @@
    "pos": "FWD",
    "club": "LIV",
    "price": 9.3,
-   "form": 7.0,
+   "form": 6.3,
    "ppg": 6.8,
    "xgi90": 0.62,
    "owned": 25.2,
@@ -544,8 +544,8 @@
      "fdr": 3
     }
    ],
-   "score": 73.8,
-   "captain_score": 66.0,
+   "score": 71.0,
+   "captain_score": 64.2,
    "xpts": 7.22,
    "xpts_horizon": 34.97
   },
@@ -558,7 +558,7 @@
    "form": 0.0,
    "ppg": 0.0,
    "xgi90": 0.0,
-   "owned": 3.4,
+   "owned": 3.3,
    "status": "a",
    "fdr": 3.4,
    "fixtures": [
@@ -604,10 +604,10 @@
    "pos": "DEF",
    "club": "MCI",
    "price": 5.6,
-   "form": 0.8,
+   "form": 1.0,
    "ppg": 4.4,
    "xgi90": 0.23,
-   "owned": 22.5,
+   "owned": 22.4,
    "status": "d",
    "fdr": 3.6,
    "fixtures": [
@@ -653,7 +653,7 @@
    "pos": "MID",
    "club": "BRE",
    "price": 6.1,
-   "form": 1.5,
+   "form": 2.0,
    "ppg": 4.6,
    "xgi90": 0.32,
    "owned": 12.8,
@@ -691,8 +691,8 @@
      "fdr": 3
     }
    ],
-   "score": 42.8,
-   "captain_score": 35.4,
+   "score": 44.8,
+   "captain_score": 36.6,
    "xpts": 5.11,
    "xpts_horizon": 25.32
   },
@@ -753,7 +753,7 @@
    "pos": "FWD",
    "club": "MCI",
    "price": 15.8,
-   "form": 6.2,
+   "form": 4.0,
    "ppg": 7.0,
    "xgi90": 0.8,
    "owned": 78.8,
@@ -791,8 +791,8 @@
      "fdr": 4
     }
    ],
-   "score": 63.4,
-   "captain_score": 81.8,
+   "score": 54.6,
+   "captain_score": 76.2,
    "xpts": 6.5,
    "xpts_horizon": 31.92
   },
@@ -805,7 +805,7 @@
    "form": 8.8,
    "ppg": 6.0,
    "xgi90": 0.54,
-   "owned": 31.4,
+   "owned": 31.5,
    "status": "a",
    "fdr": 2.2,
    "fixtures": [
@@ -843,7 +843,7 @@
    "score": 84.4,
    "captain_score": 73.2,
    "xpts": 6.34,
-   "xpts_horizon": 30.63
+   "xpts_horizon": 30.62
   },
   {
    "id": 379,
@@ -851,7 +851,7 @@
    "pos": "FWD",
    "club": "LIV",
    "price": 9.3,
-   "form": 7.0,
+   "form": 6.3,
    "ppg": 6.8,
    "xgi90": 0.62,
    "owned": 25.2,
@@ -889,8 +889,8 @@
      "fdr": 3
     }
    ],
-   "score": 73.8,
-   "captain_score": 66.0,
+   "score": 71.0,
+   "captain_score": 64.2,
    "xpts": 7.22,
    "xpts_horizon": 34.97
   },
@@ -940,8 +940,8 @@
    ],
    "score": 72.1,
    "captain_score": 61.0,
-   "xpts": 6.39,
-   "xpts_horizon": 31.69
+   "xpts": 6.38,
+   "xpts_horizon": 31.68
   }
  ],
  "plans": {
@@ -1702,49 +1702,49 @@
    "pos": "GK",
    "club": "BRE",
    "price": 5.0,
-   "score": 41.1
+   "score": 43.1
   },
   "84": {
    "name": "Collins",
    "pos": "DEF",
    "club": "BRE",
    "price": 5.4,
-   "score": 26.3
+   "score": 26.7
   },
   "85": {
    "name": "Van den Berg",
    "pos": "DEF",
    "club": "BRE",
    "price": 4.9,
-   "score": 45.0
+   "score": 48.2
   },
   "86": {
    "name": "Lewis-Potter",
    "pos": "MID",
    "club": "BRE",
    "price": 5.5,
-   "score": 50.0
+   "score": 42.8
   },
   "87": {
    "name": "Ajer",
    "pos": "DEF",
    "club": "BRE",
    "price": 4.5,
-   "score": 55.9
+   "score": 56.7
   },
   "88": {
    "name": "Kayode",
    "pos": "DEF",
    "club": "BRE",
    "price": 4.5,
-   "score": 44.5
+   "score": 46.5
   },
   "90": {
    "name": "Hickey",
    "pos": "DEF",
    "club": "BRE",
    "price": 4.5,
-   "score": 22.0
+   "score": 21.6
   },
   "93": {
    "name": "Schuster",
@@ -1758,63 +1758,63 @@
    "pos": "MID",
    "club": "BRE",
    "price": 6.1,
-   "score": 42.8
+   "score": 44.8
   },
   "95": {
    "name": "O.Dango",
    "pos": "MID",
    "club": "BRE",
    "price": 6.2,
-   "score": 48.0
+   "score": 52.8
   },
   "96": {
    "name": "Damsgaard",
    "pos": "MID",
    "club": "BRE",
    "price": 5.3,
-   "score": 32.4
+   "score": 32.0
   },
   "97": {
    "name": "Jensen",
    "pos": "MID",
    "club": "BRE",
    "price": 5.4,
-   "score": 33.3
+   "score": 34.1
   },
   "98": {
    "name": "Janelt",
    "pos": "MID",
    "club": "BRE",
    "price": 5.0,
-   "score": 40.2
+   "score": 43.4
   },
   "102": {
    "name": "Yarmoliuk",
    "pos": "MID",
    "club": "BRE",
    "price": 4.7,
-   "score": 23.7
+   "score": 25.7
   },
   "105": {
    "name": "Anthony",
    "pos": "MID",
    "club": "BRE",
    "price": 5.9,
-   "score": 41.4
+   "score": 41.0
   },
   "565": {
    "name": "M.Sangar\u00e9",
    "pos": "MID",
    "club": "BRE",
    "price": 5.4,
-   "score": 38.5
+   "score": 40.5
   },
   "620": {
    "name": "Diouf",
    "pos": "DEF",
    "club": "BRE",
    "price": 4.4,
-   "score": 21.1
+   "score": 20.7
   },
   "109": {
    "name": "Verbruggen",
@@ -1926,14 +1926,14 @@
    "pos": "MID",
    "club": "CHE",
    "price": 8.2,
-   "score": 52.5
+   "score": 54.5
   },
   "101": {
    "name": "Henderson",
    "pos": "MID",
    "club": "CHE",
    "price": 4.9,
-   "score": 46.8
+   "score": 44.8
   },
   "136": {
    "name": "Welbeck",
@@ -1947,91 +1947,91 @@
    "pos": "DEF",
    "club": "CHE",
    "price": 4.8,
-   "score": 21.0
+   "score": 21.8
   },
   "145": {
    "name": "Fofana",
    "pos": "DEF",
    "club": "CHE",
    "price": 5.0,
-   "score": 45.3
+   "score": 49.3
   },
   "149": {
    "name": "Colwill",
    "pos": "DEF",
    "club": "CHE",
    "price": 4.8,
-   "score": 43.4
+   "score": 40.2
   },
   "152": {
    "name": "Palestra",
    "pos": "DEF",
    "club": "CHE",
    "price": 5.3,
-   "score": 31.3
+   "score": 33.3
   },
   "154": {
    "name": "Palmer",
    "pos": "MID",
    "club": "CHE",
    "price": 9.8,
-   "score": 44.1
+   "score": 44.9
   },
   "156": {
    "name": "Neto",
    "pos": "MID",
    "club": "CHE",
    "price": 6.6,
-   "score": 57.4
+   "score": 44.6
   },
   "157": {
    "name": "Est\u00eav\u00e3o",
    "pos": "MID",
    "club": "CHE",
    "price": 6.3,
-   "score": 34.2
+   "score": 36.2
   },
   "159": {
    "name": "Caicedo",
    "pos": "MID",
    "club": "CHE",
    "price": 5.3,
-   "score": 35.1
+   "score": 34.7
   },
   "161": {
    "name": "Lavia",
    "pos": "MID",
    "club": "CHE",
    "price": 5.0,
-   "score": 42.0
+   "score": 44.0
   },
   "164": {
    "name": "Quenda",
    "pos": "MID",
    "club": "CHE",
    "price": 5.2,
-   "score": 26.5
+   "score": 27.3
   },
   "560": {
    "name": "Penders",
    "pos": "GK",
    "club": "CHE",
    "price": 4.4,
-   "score": 33.6
+   "score": 35.6
   },
   "568": {
    "name": "Barco",
    "pos": "MID",
    "club": "CHE",
    "price": 5.3,
-   "score": 29.7
+   "score": 30.1
   },
   "583": {
    "name": "Chavarria",
    "pos": "DEF",
    "club": "CHE",
    "price": 4.9,
-   "score": 25.9
+   "score": 26.7
   },
   "91": {
    "name": "Pinnock",
@@ -2283,119 +2283,119 @@
    "pos": "GK",
    "club": "EVE",
    "price": 5.5,
-   "score": 41.3
+   "score": 43.3
   },
   "229": {
    "name": "Tarkowski",
    "pos": "DEF",
    "club": "EVE",
    "price": 6.2,
-   "score": 50.3
+   "score": 53.5
   },
   "230": {
    "name": "Branthwaite",
    "pos": "DEF",
    "club": "EVE",
    "price": 5.5,
-   "score": 51.8
+   "score": 55.0
   },
   "231": {
    "name": "Keane",
    "pos": "DEF",
    "club": "EVE",
    "price": 4.7,
-   "score": 19.0
+   "score": 19.8
   },
   "232": {
    "name": "O'Brien",
    "pos": "DEF",
    "club": "EVE",
    "price": 4.8,
-   "score": 33.9
+   "score": 37.1
   },
   "233": {
    "name": "Mykolenko",
    "pos": "DEF",
    "club": "EVE",
    "price": 4.6,
-   "score": 53.2
+   "score": 56.8
   },
   "236": {
    "name": "Dewsbury-Hall",
    "pos": "MID",
    "club": "EVE",
    "price": 6.7,
-   "score": 53.4
+   "score": 56.6
   },
   "238": {
    "name": "Grealish",
    "pos": "MID",
    "club": "EVE",
    "price": 6.5,
-   "score": 25.7
+   "score": 23.7
   },
   "239": {
    "name": "Garner",
    "pos": "MID",
    "club": "EVE",
    "price": 6.0,
-   "score": 34.5
+   "score": 35.3
   },
   "242": {
    "name": "George",
    "pos": "MID",
    "club": "EVE",
    "price": 5.5,
-   "score": 40.2
+   "score": 42.2
   },
   "244": {
    "name": "Armstrong",
    "pos": "MID",
    "club": "EVE",
    "price": 5.0,
-   "score": 38.7
+   "score": 40.7
   },
   "245": {
    "name": "Dibling",
    "pos": "MID",
    "club": "EVE",
    "price": 5.3,
-   "score": 33.4
+   "score": 34.2
   },
   "246": {
    "name": "R\u00f6hl",
    "pos": "MID",
    "club": "EVE",
    "price": 4.9,
-   "score": 31.8
+   "score": 32.2
   },
   "247": {
    "name": "Hackney",
    "pos": "MID",
    "club": "EVE",
    "price": 5.3,
-   "score": 24.9
+   "score": 25.7
   },
   "249": {
    "name": "Barry",
    "pos": "FWD",
    "club": "EVE",
    "price": 5.7,
-   "score": 80.0
+   "score": 83.2
   },
   "649": {
    "name": "Maitland-Niles",
    "pos": "DEF",
    "club": "EVE",
    "price": 4.5,
-   "score": 35.5
+   "score": 34.7
   },
   "250": {
    "name": "Leno",
    "pos": "GK",
    "club": "FUL",
    "price": 4.5,
-   "score": 51.6
+   "score": 49.6
   },
   "253": {
    "name": "Andersen",
@@ -2409,7 +2409,7 @@
    "pos": "DEF",
    "club": "FUL",
    "price": 4.4,
-   "score": 55.9
+   "score": 53.1
   },
   "255": {
    "name": "J.Cuenca",
@@ -2423,28 +2423,28 @@
    "pos": "DEF",
    "club": "FUL",
    "price": 4.4,
-   "score": 20.1
+   "score": 20.9
   },
   "257": {
    "name": "Bassey",
    "pos": "DEF",
    "club": "FUL",
    "price": 4.5,
-   "score": 55.2
+   "score": 50.8
   },
   "258": {
    "name": "Castagne",
    "pos": "DEF",
    "club": "FUL",
    "price": 4.5,
-   "score": 60.9
+   "score": 58.1
   },
   "261": {
    "name": "Iwobi",
    "pos": "MID",
    "club": "FUL",
    "price": 5.4,
-   "score": 61.9
+   "score": 54.7
   },
   "263": {
    "name": "Kevin",
@@ -2458,35 +2458,35 @@
    "pos": "MID",
    "club": "FUL",
    "price": 5.5,
-   "score": 55.9
+   "score": 57.9
   },
   "265": {
    "name": "Berge",
    "pos": "MID",
    "club": "FUL",
    "price": 4.8,
-   "score": 38.2
+   "score": 35.4
   },
   "268": {
    "name": "King",
    "pos": "MID",
    "club": "FUL",
    "price": 5.5,
-   "score": 49.7
+   "score": 51.7
   },
   "269": {
    "name": "Sessegnon",
    "pos": "DEF",
    "club": "FUL",
    "price": 4.3,
-   "score": 19.8
+   "score": 21.8
   },
   "271": {
    "name": "Muniz",
    "pos": "FWD",
    "club": "FUL",
    "price": 5.3,
-   "score": 40.2
+   "score": 43.4
   },
   "569": {
    "name": "Gonzalo",
@@ -2500,84 +2500,84 @@
    "pos": "MID",
    "club": "FUL",
    "price": 5.3,
-   "score": 37.3
+   "score": 38.1
   },
   "580": {
    "name": "Charles",
    "pos": "MID",
    "club": "FUL",
    "price": 5.0,
-   "score": 35.8
+   "score": 35.0
   },
   "635": {
    "name": "Larsson",
    "pos": "MID",
    "club": "FUL",
    "price": 5.0,
-   "score": 29.9
+   "score": 31.1
   },
   "650": {
    "name": "Affengruber",
    "pos": "DEF",
    "club": "FUL",
    "price": 4.5,
-   "score": 55.5
+   "score": 53.5
   },
   "240": {
    "name": "Iroegbunam",
    "pos": "MID",
    "club": "HUL",
    "price": 5.0,
-   "score": 50.6
+   "score": 55.8
   },
   "277": {
    "name": "Egan",
    "pos": "DEF",
    "club": "HUL",
    "price": 4.1,
-   "score": 53.1
+   "score": 51.1
   },
   "279": {
    "name": "Ajayi",
    "pos": "DEF",
    "club": "HUL",
    "price": 4.2,
-   "score": 53.8
+   "score": 55.8
   },
   "280": {
    "name": "Coyle",
    "pos": "DEF",
    "club": "HUL",
    "price": 4.0,
-   "score": 40.0
+   "score": 40.8
   },
   "282": {
    "name": "Giles",
    "pos": "DEF",
    "club": "HUL",
    "price": 4.0,
-   "score": 39.0
+   "score": 39.4
   },
   "289": {
    "name": "Crooks",
    "pos": "MID",
    "club": "HUL",
    "price": 4.4,
-   "score": 20.8
+   "score": 18.8
   },
   "290": {
    "name": "Slater",
    "pos": "MID",
    "club": "HUL",
    "price": 4.5,
-   "score": 35.5
+   "score": 36.3
   },
   "295": {
    "name": "McBurnie",
    "pos": "FWD",
    "club": "HUL",
    "price": 5.5,
-   "score": 59.3
+   "score": 64.5
   },
   "340": {
    "name": "Gelhardt",
@@ -2591,63 +2591,63 @@
    "pos": "GK",
    "club": "HUL",
    "price": 4.7,
-   "score": 47.4
+   "score": 47.8
   },
   "576": {
    "name": "Stroud",
    "pos": "MID",
    "club": "HUL",
    "price": 4.9,
-   "score": 28.5
+   "score": 30.5
   },
   "585": {
    "name": "Herrington",
    "pos": "DEF",
    "club": "HUL",
    "price": 3.9,
-   "score": 27.9
+   "score": 29.9
   },
   "586": {
    "name": "Mendy",
    "pos": "DEF",
    "club": "HUL",
    "price": 4.1,
-   "score": 46.0
+   "score": 48.0
   },
   "589": {
    "name": "Gourna-Douath",
    "pos": "MID",
    "club": "HUL",
    "price": 4.9,
-   "score": 20.1
+   "score": 20.5
   },
   "617": {
    "name": "Cho",
    "pos": "MID",
    "club": "HUL",
    "price": 5.0,
-   "score": 42.1
+   "score": 42.9
   },
   "638": {
    "name": "Norton-Cuffy",
    "pos": "DEF",
    "club": "HUL",
    "price": 3.9,
-   "score": 22.3
+   "score": 21.1
   },
   "642": {
    "name": "Thomas",
    "pos": "MID",
    "club": "HUL",
    "price": 5.5,
-   "score": 32.5
+   "score": 30.5
   },
   "259": {
    "name": "Diop",
    "pos": "DEF",
    "club": "IPS",
    "price": 3.9,
-   "score": 42.0
+   "score": 40.0
   },
   "267": {
    "name": "Luki\u0107",
@@ -2668,21 +2668,21 @@
    "pos": "DEF",
    "club": "IPS",
    "price": 4.0,
-   "score": 46.6
+   "score": 44.6
   },
   "305": {
    "name": "Davis",
    "pos": "DEF",
    "club": "IPS",
    "price": 4.0,
-   "score": 38.7
+   "score": 39.5
   },
   "306": {
    "name": "Greaves",
    "pos": "DEF",
    "club": "IPS",
    "price": 3.9,
-   "score": 23.9
+   "score": 23.1
   },
   "309": {
    "name": "N\u00fa\u00f1ez",
@@ -2696,28 +2696,28 @@
    "pos": "MID",
    "club": "IPS",
    "price": 5.2,
-   "score": 51.5
+   "score": 53.5
   },
   "315": {
    "name": "Fatawu",
    "pos": "MID",
    "club": "IPS",
    "price": 5.4,
-   "score": 39.1
+   "score": 37.1
   },
   "316": {
    "name": "Emersonn",
    "pos": "FWD",
    "club": "IPS",
    "price": 5.4,
-   "score": 45.8
+   "score": 45.0
   },
   "318": {
    "name": "Philogene",
    "pos": "MID",
    "club": "IPS",
    "price": 5.4,
-   "score": 29.2
+   "score": 31.2
   },
   "320": {
    "name": "Akpom",
@@ -2731,7 +2731,7 @@
    "pos": "MID",
    "club": "IPS",
    "price": 5.3,
-   "score": 41.2
+   "score": 35.2
   },
   "564": {
    "name": "Scherpen",
@@ -2745,35 +2745,35 @@
    "pos": "MID",
    "club": "IPS",
    "price": 4.8,
-   "score": 48.2
+   "score": 51.0
   },
   "591": {
    "name": "Enciso",
    "pos": "MID",
    "club": "IPS",
    "price": 5.5,
-   "score": 63.4
+   "score": 67.8
   },
   "592": {
    "name": "Ouattara",
    "pos": "DEF",
    "club": "IPS",
    "price": 4.0,
-   "score": 48.6
+   "score": 49.0
   },
   "619": {
    "name": "Palacios",
    "pos": "MID",
    "club": "IPS",
    "price": 5.0,
-   "score": 46.4
+   "score": 46.0
   },
   "640": {
    "name": "Flemming",
    "pos": "FWD",
    "club": "IPS",
    "price": 5.5,
-   "score": 48.6
+   "score": 44.2
   },
   "260": {
    "name": "Wilson",
@@ -2899,49 +2899,49 @@
    "pos": "GK",
    "club": "LIV",
    "price": 5.5,
-   "score": 46.7
+   "score": 48.7
   },
   "358": {
    "name": "Kerkez",
    "pos": "DEF",
    "club": "LIV",
    "price": 5.3,
-   "score": 41.0
+   "score": 41.8
   },
   "362": {
    "name": "Jacquet",
    "pos": "DEF",
    "club": "LIV",
    "price": 5.1,
-   "score": 58.5
+   "score": 60.5
   },
   "364": {
    "name": "Tsimikas",
    "pos": "DEF",
    "club": "LIV",
    "price": 4.9,
-   "score": 21.4
+   "score": 22.2
   },
   "366": {
    "name": "Wirtz",
    "pos": "MID",
    "club": "LIV",
    "price": 7.2,
-   "score": 63.5
+   "score": 65.5
   },
   "367": {
    "name": "Gakpo",
    "pos": "MID",
    "club": "LIV",
    "price": 7.1,
-   "score": 50.0
+   "score": 52.8
   },
   "368": {
    "name": "Szoboszlai",
    "pos": "MID",
    "club": "LIV",
    "price": 6.7,
-   "score": 47.0
+   "score": 49.0
   },
   "369": {
    "name": "Ngumoha",
@@ -2955,7 +2955,7 @@
    "pos": "MID",
    "club": "LIV",
    "price": 5.4,
-   "score": 45.6
+   "score": 48.8
   },
   "375": {
    "name": "Nyoni",
@@ -2969,14 +2969,14 @@
    "pos": "MID",
    "club": "LIV",
    "price": 6.5,
-   "score": 40.7
+   "score": 31.9
   },
   "379": {
    "name": "Isak",
    "pos": "FWD",
    "club": "LIV",
    "price": 9.3,
-   "score": 73.8
+   "score": 71.0
   },
   "381": {
    "name": "Koumas",
@@ -2990,7 +2990,7 @@
    "pos": "DEF",
    "club": "LIV",
    "price": 5.5,
-   "score": 60.3
+   "score": 66.3
   },
   "627": {
    "name": "Barcola",
@@ -3004,105 +3004,105 @@
    "pos": "MID",
    "club": "MCI",
    "price": 6.9,
-   "score": 36.1
+   "score": 36.9
   },
   "237": {
    "name": "Ndiaye",
    "pos": "MID",
    "club": "MCI",
    "price": 5.8,
-   "score": 46.8
+   "score": 44.8
   },
   "384": {
    "name": "Donnarumma",
    "pos": "GK",
    "club": "MCI",
    "price": 5.4,
-   "score": 29.5
+   "score": 29.9
   },
   "387": {
    "name": "O'Reilly",
    "pos": "DEF",
    "club": "MCI",
    "price": 6.2,
-   "score": 22.3
+   "score": 21.1
   },
   "389": {
    "name": "Matheus N.",
    "pos": "DEF",
    "club": "MCI",
    "price": 5.9,
-   "score": 30.3
+   "score": 29.5
   },
   "390": {
    "name": "R\u00faben",
    "pos": "DEF",
    "club": "MCI",
    "price": 5.5,
-   "score": 30.4
+   "score": 30.8
   },
   "393": {
    "name": "Khusanov",
    "pos": "DEF",
    "club": "MCI",
    "price": 5.3,
-   "score": 34.1
+   "score": 36.1
   },
   "395": {
    "name": "Lewis",
    "pos": "DEF",
    "club": "MCI",
    "price": 4.3,
-   "score": 16.5
+   "score": 16.9
   },
   "398": {
    "name": "Foden",
    "pos": "MID",
    "club": "MCI",
    "price": 6.8,
-   "score": 49.1
+   "score": 41.1
   },
   "399": {
    "name": "Cherki",
    "pos": "MID",
    "club": "MCI",
    "price": 7.9,
-   "score": 52.1
+   "score": 55.3
   },
   "400": {
    "name": "Doku",
    "pos": "MID",
    "club": "MCI",
    "price": 7.5,
-   "score": 48.8
+   "score": 44.8
   },
   "406": {
    "name": "Kova\u010di\u0107",
    "pos": "MID",
    "club": "MCI",
    "price": 5.3,
-   "score": 29.5
+   "score": 24.7
   },
   "411": {
    "name": "Haaland",
    "pos": "FWD",
    "club": "MCI",
    "price": 15.8,
-   "score": 63.4
+   "score": 54.6
   },
   "481": {
    "name": "Anderson",
    "pos": "MID",
    "club": "MCI",
    "price": 6.2,
-   "score": 33.7
+   "score": 34.9
   },
   "616": {
    "name": "Bouaddi",
    "pos": "MID",
    "club": "MCI",
    "price": 5.5,
-   "score": 19.7
+   "score": 17.7
   },
   "43": {
    "name": "Tielemans",
@@ -3446,13 +3446,6 @@
    "club": "NFO",
    "price": 5.6,
    "score": 30.3
-  },
-  "558": {
-   "name": "Schlager",
-   "pos": "MID",
-   "club": "NFO",
-   "price": 5.0,
-   "score": 44.4
   },
   "581": {
    "name": "Diomande",
