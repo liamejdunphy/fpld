@@ -1,5 +1,5 @@
 {
- "date": "2026-11-17",
+ "date": "2026-11-18",
  "gw": 11,
  "deadline": "2026-11-21T11:00:00Z",
  "dial": {
@@ -57,7 +57,7 @@
    "score": 57.2,
    "captain_score": 10.0,
    "xpts": 6.12,
-   "xpts_horizon": 30.09
+   "xpts_horizon": 30.06
   },
   {
    "id": 112,
@@ -68,7 +68,7 @@
    "form": 7.5,
    "ppg": 5.7,
    "xgi90": 0.24,
-   "owned": 15.0,
+   "owned": 15.2,
    "status": "a",
    "fdr": 2.6,
    "fixtures": [
@@ -105,8 +105,8 @@
    ],
    "score": 74.9,
    "captain_score": 30.8,
-   "xpts": 5.78,
-   "xpts_horizon": 28.71
+   "xpts": 5.82,
+   "xpts_horizon": 28.95
   },
   {
    "id": 8,
@@ -154,8 +154,8 @@
    ],
    "score": 53.4,
    "captain_score": 16.6,
-   "xpts": 5.81,
-   "xpts_horizon": 29.82
+   "xpts": 5.83,
+   "xpts_horizon": 29.92
   },
   {
    "id": 115,
@@ -166,7 +166,7 @@
    "form": 5.3,
    "ppg": 7.5,
    "xgi90": 0.43,
-   "owned": 48.0,
+   "owned": 48.1,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -204,7 +204,7 @@
    "score": 61.0,
    "captain_score": 22.2,
    "xpts": 7.61,
-   "xpts_horizon": 39.08
+   "xpts_horizon": 39.06
   },
   {
    "id": 124,
@@ -215,7 +215,7 @@
    "form": 4.0,
    "ppg": 7.0,
    "xgi90": 0.54,
-   "owned": 48.2,
+   "owned": 48.3,
    "status": "a",
    "fdr": 2.8,
    "fixtures": [
@@ -252,8 +252,8 @@
    ],
    "score": 65.5,
    "captain_score": 52.9,
-   "xpts": 7.24,
-   "xpts_horizon": 36.57
+   "xpts": 7.23,
+   "xpts_horizon": 36.52
   },
   {
    "id": 40,
@@ -301,8 +301,8 @@
    ],
    "score": 54.5,
    "captain_score": 48.0,
-   "xpts": 5.0,
-   "xpts_horizon": 24.74
+   "xpts": 5.02,
+   "xpts_horizon": 24.85
   },
   {
    "id": 15,
@@ -350,8 +350,8 @@
    ],
    "score": 64.2,
    "captain_score": 48.7,
-   "xpts": 5.5,
-   "xpts_horizon": 27.81
+   "xpts": 5.51,
+   "xpts_horizon": 27.86
   },
   {
    "id": 68,
@@ -399,8 +399,8 @@
    ],
    "score": 67.3,
    "captain_score": 58.2,
-   "xpts": 6.38,
-   "xpts_horizon": 31.68
+   "xpts": 6.44,
+   "xpts_horizon": 31.95
   },
   {
    "id": 411,
@@ -448,8 +448,8 @@
    ],
    "score": 54.6,
    "captain_score": 76.2,
-   "xpts": 6.56,
-   "xpts_horizon": 32.27
+   "xpts": 6.53,
+   "xpts_horizon": 32.1
   },
   {
    "id": 166,
@@ -460,7 +460,7 @@
    "form": 11.0,
    "ppg": 6.0,
    "xgi90": 0.54,
-   "owned": 31.7,
+   "owned": 31.9,
    "status": "a",
    "fdr": 2.2,
    "fixtures": [
@@ -497,8 +497,8 @@
    ],
    "score": 84.4,
    "captain_score": 73.2,
-   "xpts": 6.33,
-   "xpts_horizon": 30.62
+   "xpts": 6.27,
+   "xpts_horizon": 30.31
   },
   {
    "id": 379,
@@ -509,7 +509,7 @@
    "form": 6.3,
    "ppg": 6.8,
    "xgi90": 0.62,
-   "owned": 25.2,
+   "owned": 25.3,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -546,8 +546,8 @@
    ],
    "score": 71.0,
    "captain_score": 64.2,
-   "xpts": 7.24,
-   "xpts_horizon": 35.08
+   "xpts": 7.22,
+   "xpts_horizon": 34.96
   },
   {
    "id": 58,
@@ -607,7 +607,7 @@
    "form": 1.0,
    "ppg": 4.4,
    "xgi90": 0.23,
-   "owned": 22.3,
+   "owned": 22.1,
    "status": "d",
    "fdr": 3.6,
    "fixtures": [
@@ -644,8 +644,8 @@
    ],
    "score": 0.0,
    "captain_score": 0.0,
-   "xpts": 0.49,
-   "xpts_horizon": 2.48
+   "xpts": 0.48,
+   "xpts_horizon": 2.45
   },
   {
    "id": 94,
@@ -656,7 +656,7 @@
    "form": 2.0,
    "ppg": 4.6,
    "xgi90": 0.32,
-   "owned": 12.8,
+   "owned": 12.7,
    "status": "a",
    "fdr": 3.4,
    "fixtures": [
@@ -693,8 +693,8 @@
    ],
    "score": 44.8,
    "captain_score": 36.6,
-   "xpts": 5.1,
-   "xpts_horizon": 25.25
+   "xpts": 5.06,
+   "xpts_horizon": 25.07
   },
   {
    "id": 176,
@@ -742,8 +742,8 @@
    ],
    "score": 43.2,
    "captain_score": 19.6,
-   "xpts": 3.43,
-   "xpts_horizon": 17.01
+   "xpts": 3.41,
+   "xpts_horizon": 16.86
   }
  ],
  "captain_shortlist": [
@@ -793,8 +793,8 @@
    ],
    "score": 54.6,
    "captain_score": 76.2,
-   "xpts": 6.56,
-   "xpts_horizon": 32.27
+   "xpts": 6.53,
+   "xpts_horizon": 32.1
   },
   {
    "id": 166,
@@ -805,7 +805,7 @@
    "form": 11.0,
    "ppg": 6.0,
    "xgi90": 0.54,
-   "owned": 31.7,
+   "owned": 31.9,
    "status": "a",
    "fdr": 2.2,
    "fixtures": [
@@ -842,8 +842,8 @@
    ],
    "score": 84.4,
    "captain_score": 73.2,
-   "xpts": 6.33,
-   "xpts_horizon": 30.62
+   "xpts": 6.27,
+   "xpts_horizon": 30.31
   },
   {
    "id": 379,
@@ -854,7 +854,7 @@
    "form": 6.3,
    "ppg": 6.8,
    "xgi90": 0.62,
-   "owned": 25.2,
+   "owned": 25.3,
    "status": "a",
    "fdr": 3,
    "fixtures": [
@@ -891,8 +891,8 @@
    ],
    "score": 71.0,
    "captain_score": 64.2,
-   "xpts": 7.24,
-   "xpts_horizon": 35.08
+   "xpts": 7.22,
+   "xpts_horizon": 34.96
   },
   {
    "id": 68,
@@ -940,8 +940,8 @@
    ],
    "score": 67.3,
    "captain_score": 58.2,
-   "xpts": 6.38,
-   "xpts_horizon": 31.68
+   "xpts": 6.44,
+   "xpts_horizon": 31.95
   }
  ],
  "plans": {
@@ -955,7 +955,7 @@
       "pos": "DEF",
       "club": "MCI",
       "price": 5.6,
-      "xpts": 2.48,
+      "xpts": 2.45,
       "status": "d"
      },
      "in": {
@@ -964,8 +964,8 @@
       "pos": "DEF",
       "club": "BHA",
       "price": 5.3,
-      "xpts": 33.09,
-      "owned": 9.6
+      "xpts": 33.29,
+      "owned": 9.8
      },
      "reason": "Gvardiol flagged (Unspecified injury - 75% chance of playing)",
      "is_hit": false
@@ -978,7 +978,7 @@
       "pos": "GK",
       "club": "ARS",
       "price": 6.2,
-      "xpts": 30.09,
+      "xpts": 30.06,
       "status": "a"
      },
      "in": {
@@ -987,7 +987,7 @@
       "pos": "GK",
       "club": "BHA",
       "price": 4.7,
-      "xpts": 28.48,
+      "xpts": 28.49,
       "owned": 24.0
      },
      "reason": "upgrade on Raya",
@@ -1053,7 +1053,7 @@
       "pos": "DEF",
       "club": "MCI",
       "price": 5.6,
-      "xpts": 2.48,
+      "xpts": 2.45,
       "status": "d"
      },
      "in": {
@@ -1062,8 +1062,8 @@
       "pos": "DEF",
       "club": "BHA",
       "price": 5.3,
-      "xpts": 33.09,
-      "owned": 9.6
+      "xpts": 33.29,
+      "owned": 9.8
      },
      "reason": "Gvardiol flagged (Unspecified injury - 75% chance of playing)",
      "is_hit": false
@@ -1076,7 +1076,7 @@
       "pos": "GK",
       "club": "ARS",
       "price": 6.2,
-      "xpts": 30.09,
+      "xpts": 30.06,
       "status": "a"
      },
      "in": {
@@ -1085,7 +1085,7 @@
       "pos": "GK",
       "club": "BHA",
       "price": 4.7,
-      "xpts": 28.48,
+      "xpts": 28.49,
       "owned": 24.0
      },
      "reason": "upgrade on Raya",
@@ -1099,7 +1099,7 @@
       "pos": "DEF",
       "club": "TOT",
       "price": 5.1,
-      "xpts": 28.71,
+      "xpts": 28.95,
       "status": "a"
      },
      "in": {
@@ -1108,7 +1108,7 @@
       "pos": "DEF",
       "club": "LEE",
       "price": 4.8,
-      "xpts": 30.62,
+      "xpts": 30.44,
       "owned": 11.2
      },
      "reason": "upgrade on Van Hecke",
@@ -1174,7 +1174,7 @@
       "pos": "DEF",
       "club": "MCI",
       "price": 5.6,
-      "xpts": 2.48,
+      "xpts": 2.45,
       "status": "d"
      },
      "in": {
@@ -1183,8 +1183,8 @@
       "pos": "DEF",
       "club": "BHA",
       "price": 5.3,
-      "xpts": 33.09,
-      "owned": 9.6
+      "xpts": 33.29,
+      "owned": 9.8
      },
      "reason": "Gvardiol flagged (Unspecified injury - 75% chance of playing)",
      "is_hit": false
@@ -1197,17 +1197,17 @@
       "pos": "DEF",
       "club": "BHA",
       "price": 5.5,
-      "xpts": 39.08,
+      "xpts": 39.06,
       "status": "a"
      },
      "in": {
-      "id": 10,
-      "name": "White",
+      "id": 31,
+      "name": "Konsa",
       "pos": "DEF",
       "club": "ARS",
-      "price": 5.4,
-      "xpts": 29.93,
-      "owned": 4.2
+      "price": 4.9,
+      "xpts": 30.02,
+      "owned": 24.9
      },
      "reason": "upgrade on De Cuyper",
      "is_hit": true
@@ -1220,7 +1220,7 @@
       "pos": "GK",
       "club": "ARS",
       "price": 6.2,
-      "xpts": 30.09,
+      "xpts": 30.06,
       "status": "a"
      },
      "in": {
@@ -1229,7 +1229,7 @@
       "pos": "GK",
       "club": "BHA",
       "price": 4.7,
-      "xpts": 28.48,
+      "xpts": 28.49,
       "owned": 24.0
      },
      "reason": "upgrade on Raya",
@@ -1243,7 +1243,7 @@
       "pos": "DEF",
       "club": "TOT",
       "price": 5.1,
-      "xpts": 28.71,
+      "xpts": 28.95,
       "status": "a"
      },
      "in": {
@@ -1252,7 +1252,7 @@
       "pos": "DEF",
       "club": "LEE",
       "price": 4.8,
-      "xpts": 30.62,
+      "xpts": 30.44,
       "owned": 11.2
      },
      "reason": "upgrade on Van Hecke",
@@ -1266,7 +1266,7 @@
       "pos": "DEF",
       "club": "ARS",
       "price": 5.9,
-      "xpts": 29.82,
+      "xpts": 29.92,
       "status": "a"
      },
      "in": {
@@ -1275,7 +1275,7 @@
       "pos": "DEF",
       "club": "BRE",
       "price": 4.5,
-      "xpts": 29.11,
+      "xpts": 28.59,
       "owned": 0.4
      },
      "reason": "upgrade on Calafiori",
@@ -3227,8 +3227,8 @@
    "name": "Barnes",
    "pos": "MID",
    "club": "NEW",
-   "price": 6.1,
-   "score": 54.8
+   "price": 6.0,
+   "score": 55.1
   },
   "454": {
    "name": "Elanga",
