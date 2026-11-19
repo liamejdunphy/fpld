@@ -291,7 +291,7 @@
   "full_name": "John McGinn",
   "club": "AVL",
   "pos": "MID",
-  "price": 5.4
+  "price": 5.5
  },
  "46": {
   "web_name": "Barkley",
@@ -403,7 +403,7 @@
   "full_name": "Zion Suzuki",
   "club": "AVL",
   "pos": "GK",
-  "price": 5.0
+  "price": 5.1
  },
  "606": {
   "web_name": "Rowe",
@@ -970,7 +970,7 @@
   "full_name": "Georginio Rutter",
   "club": "BHA",
   "pos": "FWD",
-  "price": 5.3
+  "price": 5.2
  },
  "126": {
   "web_name": "O'Riley",
@@ -984,7 +984,7 @@
   "full_name": "Diego Gómez Amarilla",
   "club": "BHA",
   "pos": "MID",
-  "price": 5.0
+  "price": 5.1
  },
  "128": {
   "web_name": "Buonanotte",
@@ -2209,7 +2209,7 @@
   "full_name": "Gonzalo García",
   "club": "FUL",
   "pos": "FWD",
-  "price": 5.9
+  "price": 5.8
  },
  "570": {
   "web_name": "Palacios",
@@ -3231,7 +3231,7 @@
   "full_name": "James McConnell",
   "club": "LIV",
   "pos": "MID",
-  "price": 4.4
+  "price": 4.3
  },
  "379": {
   "web_name": "Isak",
