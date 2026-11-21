@@ -4,7 +4,7 @@
   "full_name": "David Raya Martín",
   "club": "ARS",
   "pos": "GK",
-  "price": 6.2
+  "price": 6.3
  },
  "2": {
   "web_name": "Arrizabalaga",
@@ -137,7 +137,7 @@
   "full_name": "Max Dowman",
   "club": "ARS",
   "pos": "MID",
-  "price": 5.3
+  "price": 5.2
  },
  "22": {
   "web_name": "Nwaneri",
@@ -298,7 +298,7 @@
   "full_name": "Ross Barkley",
   "club": "AVL",
   "pos": "MID",
-  "price": 5.0
+  "price": 4.9
  },
  "47": {
   "web_name": "Kamara",
@@ -1572,7 +1572,7 @@
   "full_name": "Ellis Simms",
   "club": "COV",
   "pos": "FWD",
-  "price": 4.9
+  "price": 4.8
  },
  "196": {
   "web_name": "Markelo",
@@ -2174,7 +2174,7 @@
   "full_name": "Josh King",
   "club": "FUL",
   "pos": "MID",
-  "price": 5.5
+  "price": 5.4
  },
  "269": {
   "web_name": "Sessegnon",
@@ -2489,7 +2489,7 @@
   "full_name": "Jens Hjertø-Dahl",
   "club": "HUL",
   "pos": "MID",
-  "price": 4.8
+  "price": 4.7
  },
  "576": {
   "web_name": "Stroud",
@@ -3147,7 +3147,7 @@
   "full_name": "Florian Wirtz",
   "club": "LIV",
   "pos": "MID",
-  "price": 7.2
+  "price": 7.3
  },
  "367": {
   "web_name": "Gakpo",
@@ -3322,7 +3322,7 @@
   "full_name": "Marc Guéhi",
   "club": "MCI",
   "pos": "DEF",
-  "price": 6.0
+  "price": 5.9
  },
  "389": {
   "web_name": "Matheus N.",
@@ -3651,7 +3651,7 @@
   "full_name": "Bryan Mbeumo",
   "club": "MUN",
   "pos": "MID",
-  "price": 7.9
+  "price": 7.8
  },
  "428": {
   "web_name": "Cunha",
@@ -3728,7 +3728,7 @@
   "full_name": "Tyler Fletcher",
   "club": "MUN",
   "pos": "MID",
-  "price": 4.4
+  "price": 4.3
  },
  "439": {
   "web_name": "Šeško",
@@ -4260,7 +4260,7 @@
   "full_name": "Martin Dubravka",
   "club": "TOT",
   "pos": "GK",
-  "price": 4.0
+  "price": 3.9
  },
  "498": {
   "web_name": "Senesi",
