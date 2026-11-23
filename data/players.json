@@ -67,7 +67,7 @@
   "full_name": "Benjamin White",
   "club": "ARS",
   "pos": "DEF",
-  "price": 5.4
+  "price": 5.3
  },
  "11": {
   "web_name": "Mosquera",
@@ -277,7 +277,7 @@
   "full_name": "Emiliano Buendía Stati",
   "club": "AVL",
   "pos": "MID",
-  "price": 5.9
+  "price": 5.8
  },
  "44": {
   "web_name": "Bailey",
@@ -382,7 +382,7 @@
   "full_name": "Nicolas Jackson",
   "club": "AVL",
   "pos": "FWD",
-  "price": 7.2
+  "price": 7.3
  },
  "582": {
   "web_name": "Madjo",
@@ -760,7 +760,7 @@
   "full_name": "Mikkel Damsgaard",
   "club": "BRE",
   "pos": "MID",
-  "price": 5.3
+  "price": 5.2
  },
  "97": {
   "web_name": "Jensen",
@@ -1047,7 +1047,7 @@
   "full_name": "Charalampos Kostoulas",
   "club": "BHA",
   "pos": "FWD",
-  "price": 5.8
+  "price": 5.7
  },
  "139": {
   "web_name": "Ferguson",
@@ -1208,7 +1208,7 @@
   "full_name": "Jorrel Hato",
   "club": "CHE",
   "pos": "DEF",
-  "price": 4.5
+  "price": 4.4
  },
  "149": {
   "web_name": "Colwill",
@@ -1859,7 +1859,7 @@
   "full_name": "Zavier Gozo",
   "club": "CRY",
   "pos": "MID",
-  "price": 4.9
+  "price": 4.8
  },
  "633": {
   "web_name": "Ahanor",
@@ -2594,7 +2594,7 @@
   "full_name": "Alex Palmer",
   "club": "IPS",
   "pos": "GK",
-  "price": 4.0
+  "price": 3.9
  },
  "302": {
   "web_name": "Button",
@@ -2769,7 +2769,7 @@
   "full_name": "Daizen Maeda",
   "club": "IPS",
   "pos": "MID",
-  "price": 5.3
+  "price": 5.2
  },
  "564": {
   "web_name": "Scherpen",
@@ -3140,7 +3140,7 @@
   "full_name": "Kostas Tsimikas",
   "club": "LIV",
   "pos": "DEF",
-  "price": 4.9
+  "price": 4.8
  },
  "365": {
   "web_name": "Ramsay",
@@ -3154,7 +3154,7 @@
   "full_name": "Florian Wirtz",
   "club": "LIV",
   "pos": "MID",
-  "price": 7.3
+  "price": 7.4
  },
  "367": {
   "web_name": "Gakpo",
@@ -3350,7 +3350,7 @@
   "full_name": "Joško Gvardiol",
   "club": "MCI",
   "pos": "DEF",
-  "price": 5.6
+  "price": 5.5
  },
  "392": {
   "web_name": "Aït-Nouri",
@@ -3406,7 +3406,7 @@
   "full_name": "Rayan Cherki",
   "club": "MCI",
   "pos": "MID",
-  "price": 7.9
+  "price": 7.8
  },
  "400": {
   "web_name": "Doku",
@@ -3595,7 +3595,7 @@
   "full_name": "Harry Maguire",
   "club": "MUN",
   "pos": "DEF",
-  "price": 4.6
+  "price": 4.5
  },
  "419": {
   "web_name": "Martinez",
@@ -3616,7 +3616,7 @@
   "full_name": "Ayden Heaven",
   "club": "MUN",
   "pos": "DEF",
-  "price": 4.3
+  "price": 4.2
  },
  "422": {
   "web_name": "Mazraoui",
@@ -4029,7 +4029,7 @@
   "full_name": "Neco Williams",
   "club": "NFO",
   "pos": "DEF",
-  "price": 4.9
+  "price": 4.8
  },
  "470": {
   "web_name": "Morato",
