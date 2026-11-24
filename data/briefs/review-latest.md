@@ -1,10 +1,11 @@
-## GW10 Review
+## GW11 Review
 
-**73 pts** (bench 0, hits 0)
+**42 pts** (bench 2, hits 0)
 
 **Captain:** Haaland — 2pts (x2 = 4pts)
-**Vice:** Isak — 8pts
-**Best captain would have been:** Ødegaard (11pts, +18pts swing)
+**Vice:** Isak — 5pts
+**Best captain would have been:** Tavernier (8pts, +12pts swing)
 
-**Transfers:** 1 made (free)
-- Muharemović (10pts) → Van Hecke (4pts) 📉 -6pts
+**Bench leak:** 2pts left on the bench
+- Gvardiol: 1pts (bench 2)
+- Schade: 1pts (bench 3)
